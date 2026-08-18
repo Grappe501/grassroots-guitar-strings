@@ -28,6 +28,7 @@ const EVENT_CONFIG = {
     "September 17 is Constitution Day — the anniversary of the signing of the U.S. Constitution in 1787.",
   campaignEventUrl:
     "https://kgrappe.netlify.app/events/grassroots-guitar-strings-sherwood-2026-09-17",
+  publicSiteUrl: "https://grassrootsguitarstrings.netlify.app",
 };
 
 /**
