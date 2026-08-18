@@ -1,0 +1,62 @@
+[
+  {
+    "filename": "shared-history/farm-festival-one/01.jpg",
+    "approximateDate": "TBD — Steve to confirm",
+    "location": "Forevermost Farms",
+    "peopleShown": ["David Adam Byrnes"],
+    "event": "Grappe family farm festival — first summer",
+    "caption": "David Adam Byrnes performing at the Grappe family farm festival.",
+    "photographer": "TBD",
+    "publicationPermission": "pending",
+    "altText": "David Adam Byrnes performing with guitar at an outdoor farm gathering",
+    "featured": true
+  },
+  {
+    "filename": "shared-history/farm-festival-two/01.jpg",
+    "approximateDate": "TBD — Steve to confirm",
+    "location": "Forevermost Farms",
+    "peopleShown": ["David Adam Byrnes"],
+    "event": "Grappe family farm festival — second summer",
+    "caption": "David returned for another summer at the farm — a friendship that continued.",
+    "photographer": "TBD",
+    "publicationPermission": "pending",
+    "altText": "David Adam Byrnes on stage at the farm festival a second summer",
+    "featured": true
+  },
+  {
+    "filename": "shared-history/rose-bud-festival/01.jpg",
+    "approximateDate": "TBD — Steve to confirm",
+    "location": "Rose Bud, Arkansas",
+    "peopleShown": ["David Adam Byrnes"],
+    "event": "Rose Bud hometown festival",
+    "caption": "Rose Bud heard the music — Kelly and Steve's hometown.",
+    "photographer": "TBD",
+    "publicationPermission": "pending",
+    "altText": "David Adam Byrnes performing at the Rose Bud hometown festival",
+    "featured": true
+  },
+  {
+    "filename": "shared-history/kelly-and-david/01.jpg",
+    "approximateDate": "TBD",
+    "location": "Arkansas",
+    "peopleShown": ["Kelly Grappe", "Steve Grappe", "David Adam Byrnes"],
+    "event": "Shared history",
+    "caption": "Years of friendship before this campaign moment.",
+    "photographer": "TBD",
+    "publicationPermission": "pending",
+    "altText": "Kelly, Steve, and David together at a community gathering",
+    "featured": true
+  },
+  {
+    "filename": "event-poster.jpg",
+    "approximateDate": "2026",
+    "location": "N/A",
+    "peopleShown": ["Kelly Grappe", "David Adam Byrnes"],
+    "event": "Grassroots and Guitar Strings artwork",
+    "caption": "Placeholder from campaign photos — replace with GoodChange / approved poster art.",
+    "photographer": "Campaign",
+    "publicationPermission": "pending",
+    "altText": "Grassroots and Guitar Strings event artwork",
+    "featured": true
+  }
+]

@@ -1,0 +1,24 @@
+:root {
+  --ggs-blue: #17466b;
+  --ggs-blue-deep: #0f3048;
+  --ggs-gold: #f3c979;
+  --ggs-gold-deep: #d4a85a;
+  --ggs-cream: #f7f1df;
+  --ggs-white: #fffdf8;
+  --ggs-ink: #183042;
+  --ggs-muted: #4a6278;
+  --ggs-border: rgba(23, 70, 107, 0.18);
+  --ggs-shadow: 0 12px 40px rgba(15, 48, 72, 0.12);
+  --ggs-radius: 14px;
+  --ggs-font-display: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --ggs-font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ggs-font-ui: "Segoe UI", system-ui, sans-serif;
+  --ggs-max: 1120px;
+  --ggs-header-h: 4.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ggs-motion: 0;
+  }
+}
