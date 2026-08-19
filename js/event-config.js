@@ -93,8 +93,13 @@ const TICKET_TIERS = [
   },
 ];
 
-/** Official YouTube IDs from David Adam Byrnes official channel */
-const MUSIC_VIDEOS = [
+/** Official YouTube releases — David Adam Byrnes official channel / Topic */
+const RECENT_RELEASES = [
+  {
+    youtubeId: "hLAZ4xgMmws",
+    title: "Ring in My Wranglers",
+    subtitle: "2026 single · Official audio",
+  },
   {
     youtubeId: "ySVq3eCKygg",
     title: "Keep Up with a Cowgirl",
@@ -108,9 +113,11 @@ const MUSIC_VIDEOS = [
   {
     youtubeId: "krLeI9ivyO0",
     title: "Last Cowboy Standing",
-    subtitle: "Official release",
+    subtitle: "2025 release · Official audio",
   },
 ];
+
+const MUSIC_VIDEOS = RECENT_RELEASES;
 
 const EVENT_VIDEOS = {
   home: {
@@ -198,6 +205,7 @@ if (typeof window !== "undefined") {
   window.EVENT_CONFIG = EVENT_CONFIG;
   window.EVENT_VIDEOS = EVENT_VIDEOS;
   window.MUSIC_VIDEOS = MUSIC_VIDEOS;
+  window.RECENT_RELEASES = RECENT_RELEASES;
   window.LIVE_PHOTOS = LIVE_PHOTOS;
   window.TICKET_TIERS = TICKET_TIERS;
   window.NAV_LINKS = NAV_LINKS;

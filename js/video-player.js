@@ -92,6 +92,25 @@
     }
   }
 
+  function youtubeWatchUrl(id) {
+    return `https://www.youtube.com/watch?v=${id}`;
+  }
+
+  function appendReleaseBlock(root, item, className) {
+    if (!item?.youtubeId) return;
+    const block = document.createElement("article");
+    block.className = className;
+    const watchUrl = youtubeWatchUrl(item.youtubeId);
+    block.innerHTML = `
+      <div class="video-frame" aria-label="${item.title}"></div>
+      <h3><a href="${watchUrl}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
+      <p class="muted">${item.subtitle || ""}</p>
+      <p><a href="${watchUrl}" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></p>
+    `;
+    root.appendChild(block);
+    mountVideo(block.querySelector(".video-frame"), item);
+  }
+
   document.querySelectorAll("[data-video-slot]").forEach((slot) => {
     const key = slot.getAttribute("data-video-slot");
     mountVideo(slot, videos[key]);
@@ -100,15 +119,14 @@
   const gallery = document.querySelector("[data-video-gallery]");
   if (gallery && Array.isArray(window.MUSIC_VIDEOS)) {
     window.MUSIC_VIDEOS.forEach((item) => {
-      const block = document.createElement("article");
-      block.className = "video-gallery__item";
-      block.innerHTML = `
-        <div class="video-frame" aria-label="${item.title}"></div>
-        <h3>${item.title}</h3>
-        <p class="muted">${item.subtitle || ""}</p>
-      `;
-      gallery.appendChild(block);
-      mountVideo(block.querySelector(".video-frame"), item);
+      appendReleaseBlock(gallery, item, "video-gallery__item");
+    });
+  }
+
+  const releases = document.querySelector("[data-recent-releases]");
+  if (releases && Array.isArray(window.RECENT_RELEASES)) {
+    window.RECENT_RELEASES.forEach((item) => {
+      appendReleaseBlock(releases, item, "release-video");
     });
   }
 
