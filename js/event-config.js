@@ -8,6 +8,7 @@ const EVENT_CONFIG = {
   date: "Thursday, September 17, 2026",
   dateShort: "Sep 17, 2026",
   time: "5:30 p.m.",
+  concertTime: "7:00 p.m.",
   timezone: "Central",
   venueName: "Woody's Sherwood Forest",
   address: "Sherwood, Arkansas",
@@ -32,6 +33,55 @@ const EVENT_CONFIG = {
   brandLogoAlt: "David Adam Byrnes",
   ogImage: "/assets/images/live/live-01.jpg",
 };
+
+/** Official GoodChange ticket tiers — select on goodchange.app/donate/grass-ax */
+const TICKET_TIERS = [
+  {
+    id: "concert-only",
+    name: "David Adam Byrnes Concert Only",
+    price: 25,
+    priceLabel: "$25.00",
+    description: "Concert admission only. Show starts at 7:00 p.m.",
+    available: true,
+  },
+  {
+    id: "vip-dinner",
+    name: "VIP Dinner Only",
+    price: 25,
+    priceLabel: "$25.00",
+    description:
+      "VIP BBQ dinner provided by the Saucy Pig. Dinner served 5:30–6:30 p.m.",
+    available: true,
+  },
+  {
+    id: "dinner-concert",
+    name: "BBQ Dinner & Concert",
+    price: 50,
+    priceLabel: "$50.00",
+    description:
+      "VIP BBQ dinner from the Saucy Pig plus concert admission. Dinner 5:30–6:30 p.m. Concert starts at 7:00 p.m.",
+    available: true,
+    featured: true,
+  },
+  {
+    id: "host-committee",
+    name: "Host Committee",
+    price: 250,
+    priceLabel: "$250.00",
+    description:
+      "VIP BBQ dinner, a commemorative concert t-shirt, and concert admission. Dinner 5:30–6:30 p.m. Concert starts at 7:00 p.m.",
+    available: true,
+  },
+  {
+    id: "vip-table-8",
+    name: "Reserved seating: VIP Table for 8",
+    price: 1000,
+    priceLabel: "$1,000.00",
+    description:
+      "Dinner for 8, show admission for 8, 8 commemorative t-shirts, and 8 Regnat Populus campaign shirts.",
+    available: true,
+  },
+];
 
 /** Official YouTube IDs from David Adam Byrnes official channel */
 const MUSIC_VIDEOS = [
@@ -139,6 +189,7 @@ if (typeof window !== "undefined") {
   window.EVENT_VIDEOS = EVENT_VIDEOS;
   window.MUSIC_VIDEOS = MUSIC_VIDEOS;
   window.LIVE_PHOTOS = LIVE_PHOTOS;
+  window.TICKET_TIERS = TICKET_TIERS;
   window.NAV_LINKS = NAV_LINKS;
   window.JOIN_LINKS = JOIN_LINKS;
 }
