@@ -22,12 +22,27 @@
   text-decoration: none;
   color: inherit;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.brand-lockup__logo {
+  height: 2.5rem;
+  width: auto;
+  max-width: 7.5rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-lockup__meta {
+  min-width: 0;
 }
 
 .brand-lockup__title {
   display: block;
   font-family: var(--ggs-font-display);
-  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
   font-weight: 700;
   color: var(--ggs-blue-deep);
   line-height: 1.2;
@@ -35,9 +50,16 @@
 
 .brand-lockup__presented {
   display: block;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--ggs-muted);
-  margin-top: 0.15rem;
+  margin-top: 0.12rem;
+}
+
+.footer-logo {
+  max-width: 10rem;
+  height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
 }
 
 .site-nav {
@@ -266,12 +288,20 @@
   box-shadow: var(--ggs-shadow);
 }
 
-.video-frame iframe {
+.video-frame iframe,
+.video-frame video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
+  object-fit: cover;
+}
+
+.video-frame--vertical {
+  aspect-ratio: 9 / 16;
+  max-width: 320px;
+  margin-inline: auto;
 }
 
 .video-unmute {
@@ -472,4 +502,87 @@
   font-size: 0.92rem;
   white-space: pre-wrap;
   font-family: ui-monospace, monospace;
+}
+
+.hero--concert .display-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.hero__poster-wrap--logo {
+  background: #0a1620;
+  padding: 1.5rem;
+}
+
+.hero__poster-wrap--logo img {
+  object-fit: contain;
+  max-height: 280px;
+}
+
+.live-photo-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  margin-top: 1.25rem;
+}
+
+.live-photo-grid--compact {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.live-photo {
+  margin: 0;
+  border-radius: var(--ggs-radius);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--ggs-blue-deep);
+}
+
+.live-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-gallery {
+  display: grid;
+  gap: 1.5rem;
+  margin: 1.25rem 0 2rem;
+}
+
+@media (min-width: 700px) {
+  .video-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.video-gallery__item h3 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1rem;
+}
+
+.promo-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+@media (min-width: 600px) {
+  .promo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.promo-card {
+  text-align: center;
+}
+
+.page-hero--artist {
+  text-align: center;
+}
+
+.page-hero__logo {
+  max-width: min(420px, 90vw);
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
 }

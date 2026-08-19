@@ -5,19 +5,19 @@
 
   const templates = {
     sms:
-      "Come sit with us in Sherwood on Sep 17 — live music with David Adam Byrnes, dinner, and a hometown night with Kelly Grappe. Not a debate — just community. Tickets: " +
+      "David Adam Byrnes live in Sherwood Sep 17 — Grassroots & Guitar Strings. Concert, dinner, hometown night. Get tickets: " +
       ticket,
-    emailSubject: "Grassroots & Guitar Strings — Sherwood Homecoming (Sep 17)",
+    emailSubject: "David Adam Byrnes Live in Sherwood — Sep 17",
     emailBody:
-      "I wanted to personally invite you to Grassroots & Guitar Strings — a Sherwood homecoming with live country music (David Adam Byrnes), dinner, and a celebration of democracy with Kelly Grappe.\n\n" +
+      "I wanted to invite you to see David Adam Byrnes live at Grassroots & Guitar Strings in Sherwood.\n\n" +
       "Thursday, September 17, 2026 · Sherwood Forest · 5:30 p.m.\n\n" +
-      "This is meant to be fun — music, meal, neighbors. Not a night of partisan arguments.\n\n" +
+      "Live country concert, dinner, and a Constitution Day gathering. Watch his videos first: " +
+      site +
+      "/music/\n\n" +
       "Tickets: " +
-      ticket +
-      "\n\nLearn more: " +
-      site,
+      ticket,
     facebook:
-      "Grassroots & Guitar Strings — Sherwood homecoming Sep 17. Live music with David Adam Byrnes, dinner, and a celebration of democracy. Come sit with us. " +
+      "David Adam Byrnes live in Sherwood — Grassroots & Guitar Strings, Sep 17. Concert, dinner, hometown night. " +
       site,
   };
 

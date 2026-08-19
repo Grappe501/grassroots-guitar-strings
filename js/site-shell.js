@@ -22,12 +22,19 @@
       .map((l) => `<a href="${l.href}">${l.label}</a>`)
       .join("");
 
+    const logo = cfg.brandLogo
+      ? `<img class="brand-lockup__logo" src="${cfg.brandLogo}" alt="${cfg.brandLogoAlt || cfg.featuredArtist}" />`
+      : "";
+
     return `
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand-lockup" href="/">
-      <span class="brand-lockup__title">${cfg.name}</span>
-      <span class="brand-lockup__presented">Presented by ${cfg.candidate} for ${cfg.office}</span>
+      ${logo}
+      <span class="brand-lockup__meta">
+        <span class="brand-lockup__title">${cfg.name}</span>
+        <span class="brand-lockup__presented">${cfg.featuredArtist} · ${cfg.dateShort} · ${cfg.city}</span>
+      </span>
     </a>
     <nav class="site-nav" aria-label="Primary">
       ${navItems}
@@ -37,8 +44,8 @@
       </details>
     </nav>
     <div class="header-utils" aria-label="Related sites">
-      <a href="${cfg.kellyUrl}" target="_blank" rel="noopener noreferrer">KellyGrappe.com<span class="sr-only"> (opens in new tab)</span></a>
       <a href="${cfg.davidUrl}" target="_blank" rel="noopener noreferrer">DavidAdamByrnes.com<span class="sr-only"> (opens in new tab)</span></a>
+      <a href="${cfg.kellyUrl}" target="_blank" rel="noopener noreferrer">KellyGrappe.com<span class="sr-only"> (opens in new tab)</span></a>
     </div>
     <a class="header-cta" href="${cfg.ticketUrl}" data-track="ticket_button_clicked">Get Tickets</a>
     <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-drawer">Menu</button>
@@ -52,23 +59,23 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <h2 style="color:#fff;font-size:1.2rem;margin:0 0 .5rem">${cfg.name}</h2>
-      <p class="muted" style="color:#c5d4e4;margin:0">${cfg.subtitle} · ${cfg.date}</p>
-      <p style="margin:.75rem 0 0">${cfg.venueName}, ${cfg.city}, ${cfg.state}</p>
+      <img class="footer-logo" src="${cfg.brandLogo}" alt="${cfg.featuredArtist}" loading="lazy" />
+      <p class="muted" style="color:#c5d4e4;margin:.75rem 0 0">${cfg.subtitle} · ${cfg.date}</p>
+      <p style="margin:.5rem 0 0">${cfg.venueName}, ${cfg.city}, ${cfg.state}</p>
     </div>
     <div>
       <h3 style="color:#fff;font-size:.95rem">Explore</h3>
-      <p><a href="/kelly-and-david/">Kelly &amp; David</a></p>
-      <p><a href="/music/">Music</a></p>
+      <p><a href="/david/">The Artist</a></p>
+      <p><a href="/music/">Music &amp; Videos</a></p>
       <p><a href="/tickets/">Tickets</a></p>
       <p><a href="/details/">Event Details</a></p>
     </div>
     <div>
       <h3 style="color:#fff;font-size:.95rem">Official links</h3>
-      <p><a href="${cfg.kellyUrl}" target="_blank" rel="noopener noreferrer">Kelly Grappe for Secretary of State</a></p>
       <p><a href="${cfg.davidUrl}" target="_blank" rel="noopener noreferrer">David Adam Byrnes</a></p>
       <p><a href="${cfg.ticketUrl}" data-track="ticket_button_clicked">Tickets &amp; Contributions</a></p>
       <p><a href="${cfg.campaignEventUrl}">Campaign calendar listing</a></p>
+      <p><a href="${cfg.kellyUrl}" target="_blank" rel="noopener noreferrer">Kelly Grappe for Secretary of State</a></p>
     </div>
   </div>
   <div class="container footer-disclaimer">
@@ -84,7 +91,7 @@
 </footer>
 <div class="mobile-sticky-cta" aria-label="Quick actions">
   <a href="${cfg.ticketUrl}" data-track="ticket_button_clicked">Get Tickets</a>
-  <a href="/host-a-table/" data-track="table_button_clicked">Host a Table</a>
+  <a href="/music/">Watch Videos</a>
 </div>`;
   }
 

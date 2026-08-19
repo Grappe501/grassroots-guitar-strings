@@ -1,0 +1,141 @@
+﻿{
+    "sourceRoot":  "H:\\SOSWebsite\\RedDirt\\public\\media\\campaign-photos\\grassroot and guitars\\DAB Tour Assets",
+    "promoVideos":  [
+                        {
+                            "label":  "promo-square.mov",
+                            "source":  "Promo Video\\Square promo video.mov",
+                            "file":  "/assets/video/promo-square.mov"
+                        },
+                        {
+                            "label":  "promo-vertical.mov",
+                            "source":  "Promo Video\\Virtical promo video .mov",
+                            "file":  "/assets/video/promo-vertical.mov"
+                        },
+                        {
+                            "label":  "promo-wide.mov",
+                            "source":  "Promo Video\\Wide screen promo video.MOV",
+                            "file":  "/assets/video/promo-wide.mov"
+                        }
+                    ],
+    "syncedAt":  "2026-08-19T00:40:47",
+    "livePhotos":  [
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Live Show Images\\CBP00157.JPG",
+                           "file":  "/assets/images/live/live-01.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Live Show Images\\CBP01665.JPG",
+                           "file":  "/assets/images/live/live-02.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Live Show Images\\CBP01770.JPG",
+                           "file":  "/assets/images/live/live-03.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Live Show Images\\photo jun 06 2015, 11 29 07 pm.JPG",
+                           "file":  "/assets/images/live/live-04.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\CBP00398.JPG",
+                           "file":  "/assets/images/live/live-05.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\CBP04849.JPG",
+                           "file":  "/assets/images/live/live-06.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_2635.jpg",
+                           "file":  "/assets/images/live/live-07.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_3568.jpeg",
+                           "file":  "/assets/images/live/live-08.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_3581.jpeg",
+                           "file":  "/assets/images/live/live-09.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_3629.jpeg",
+                           "file":  "/assets/images/live/live-10.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_3638.jpeg",
+                           "file":  "/assets/images/live/live-11.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_3667.jpeg",
+                           "file":  "/assets/images/live/live-12.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_5331.JPG",
+                           "file":  "/assets/images/live/live-13.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_5332.JPG",
+                           "file":  "/assets/images/live/live-14.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_6104.jpeg",
+                           "file":  "/assets/images/live/live-15.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_6186.jpeg",
+                           "file":  "/assets/images/live/live-16.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_6192.jpeg",
+                           "file":  "/assets/images/live/live-17.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\IMG_6199.jpeg",
+                           "file":  "/assets/images/live/live-18.jpeg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\Photo Jul 19 2025, 7 51 50 PM.JPG",
+                           "file":  "/assets/images/live/live-19.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\Photo Jul 19 2025, 8 01 34 PM.JPG",
+                           "file":  "/assets/images/live/live-20.jpg"
+                       },
+                       {
+                           "alt":  "David Adam Byrnes live on stage",
+                           "source":  "Pics\\Pics\\Photo Jul 19 2025, 8 01 50 PM.JPG",
+                           "file":  "/assets/images/live/live-21.jpg"
+                       }
+                   ],
+    "brand":  [
+                  "/assets/brand/dab-logo-wide.png",
+                  "/assets/brand/dab-logo-wide-alt.png",
+                  "/assets/brand/dab-logo-square.png",
+                  "/assets/brand/dab-logo-mark.png",
+                  "/assets/brand/dab-logo-dark.png"
+              ],
+    "excluded":  [
+                     "SIDE BYRNES W9-Wire Info",
+                     "DAB- Credentials-Security",
+                     "Riders",
+                     "STAGE PLOT-INPUT LIST"
+                 ]
+}
