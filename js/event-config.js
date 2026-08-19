@@ -32,6 +32,8 @@ const EVENT_CONFIG = {
   brandLogo: "/assets/brand/dab-logo-wide.png",
   brandLogoAlt: "David Adam Byrnes",
   ogImage: "/assets/images/live/live-01.jpg",
+  saucyPigName: "The Saucy Pig",
+  saucyPigFacebookUrl: "https://www.facebook.com/p/Saucy-Pig-100094120494691/",
 };
 
 /** Official GoodChange ticket tiers — select on goodchange.app/donate/grass-ax */
