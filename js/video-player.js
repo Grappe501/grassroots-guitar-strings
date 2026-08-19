@@ -130,6 +130,25 @@
     });
   }
 
+  const releaseLinks = document.querySelector("[data-release-links]");
+  if (releaseLinks && Array.isArray(window.MUSIC_VIDEOS)) {
+    window.MUSIC_VIDEOS.forEach((item) => {
+      if (!item?.youtubeId) return;
+      const li = document.createElement("li");
+      const watchUrl = youtubeWatchUrl(item.youtubeId);
+      const label = item.subtitle ? `${item.subtitle}` : "Watch on YouTube";
+      li.innerHTML = `<a href="${watchUrl}" target="_blank" rel="noopener noreferrer"><strong>${item.title}</strong></a> — ${label}`;
+      releaseLinks.appendChild(li);
+    });
+    const channelUrl = window.YOUTUBE_CHANNEL_URL || "https://www.youtube.com/@DavidAdamByrnes";
+    const channelLi = document.createElement("li");
+    channelLi.innerHTML = `<a href="${channelUrl}" target="_blank" rel="noopener noreferrer"><strong>YouTube channel</strong></a> — subscribe for new releases`;
+    releaseLinks.appendChild(channelLi);
+    const siteLi = document.createElement("li");
+    siteLi.innerHTML = `<a href="https://www.davidadambyrnes.com" target="_blank" rel="noopener noreferrer"><strong>DavidAdamByrnes.com</strong></a> — tour dates and streaming`;
+    releaseLinks.appendChild(siteLi);
+  }
+
   const photoGrid = document.querySelector("[data-live-photo-grid]");
   if (photoGrid && Array.isArray(window.LIVE_PHOTOS)) {
     window.LIVE_PHOTOS.forEach((photo) => {

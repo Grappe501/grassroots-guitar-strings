@@ -93,8 +93,11 @@ const TICKET_TIERS = [
   },
 ];
 
-/** Official YouTube releases — David Adam Byrnes official channel / Topic */
-const RECENT_RELEASES = [
+/** Official YouTube releases — David Adam Byrnes (@DavidAdamByrnes / Topic / VEVO). */
+const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@DavidAdamByrnes";
+
+/** Full catalog for /music/ gallery and YouTube link list (newest / headline first). */
+const MUSIC_VIDEOS = [
   {
     youtubeId: "hLAZ4xgMmws",
     title: "Ring in My Wranglers",
@@ -115,9 +118,50 @@ const RECENT_RELEASES = [
     title: "Last Cowboy Standing",
     subtitle: "2025 release · Official audio",
   },
+  {
+    youtubeId: "HyD3w7jXP74",
+    title: "Drinking Games",
+    subtitle: "Official video · Country Gonna Be Alright",
+  },
+  {
+    youtubeId: "kvz0IZXL9mc",
+    title: "When In Rum",
+    subtitle: "Official audio · Country Gonna Be Alright",
+  },
+  {
+    youtubeId: "MZjiU1FFdxY",
+    title: "Country Gonna Be Alright",
+    subtitle: "Title track · Official audio",
+  },
+  {
+    youtubeId: "Rk2ys1jVZsQ",
+    title: "Old School",
+    subtitle: "Official music video",
+  },
+  {
+    youtubeId: "ebQcycV8b9c",
+    title: "Beer Bucket List",
+    subtitle: "Official video · #1 Texas radio debut single",
+  },
+  {
+    youtubeId: "4f-DjM70mqE",
+    title: "Pretty Blue View",
+    subtitle: "Official music video",
+  },
+  {
+    youtubeId: "sgc88yUY1Rw",
+    title: "Too Much Texas",
+    subtitle: "2021 single · Official audio",
+  },
+  {
+    youtubeId: "tGM7P-bPynE",
+    title: "Working On A Full House",
+    subtitle: "Live Garth Brooks cover · Two of a Kind",
+  },
 ];
 
-const MUSIC_VIDEOS = RECENT_RELEASES;
+/** Highlight reel for /david/ and home teasers — newest singles and official videos. */
+const RECENT_RELEASES = MUSIC_VIDEOS.slice(0, 6);
 
 const EVENT_VIDEOS = {
   home: {
@@ -206,6 +250,7 @@ if (typeof window !== "undefined") {
   window.EVENT_VIDEOS = EVENT_VIDEOS;
   window.MUSIC_VIDEOS = MUSIC_VIDEOS;
   window.RECENT_RELEASES = RECENT_RELEASES;
+  window.YOUTUBE_CHANNEL_URL = YOUTUBE_CHANNEL_URL;
   window.LIVE_PHOTOS = LIVE_PHOTOS;
   window.TICKET_TIERS = TICKET_TIERS;
   window.NAV_LINKS = NAV_LINKS;
