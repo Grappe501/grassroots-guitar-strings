@@ -59,8 +59,7 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <img class="footer-logo" src="${cfg.brandLogo}" alt="${cfg.featuredArtist}" loading="lazy" />
-      <p class="muted" style="color:#c5d4e4;margin:.75rem 0 0">${cfg.subtitle} · ${cfg.date}</p>
+      <p class="muted" style="color:#c5d4e4;margin:0">${cfg.subtitle} · ${cfg.date}</p>
       <p style="margin:.5rem 0 0">${cfg.venueName}, ${cfg.city}, ${cfg.state}</p>
     </div>
     <div>
