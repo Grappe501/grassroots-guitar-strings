@@ -94,10 +94,65 @@
 </div>`;
   }
 
+  function stampHtml() {
+    return `
+<div class="ink-stamp" role="img" aria-label="Family friendly. Under 25 gets into the concert free.">
+  <span class="ink-stamp__ring" aria-hidden="true"></span>
+  <span class="ink-stamp__copy">
+    <span class="ink-stamp__kicker">Family Friendly</span>
+    <span class="ink-stamp__rule" aria-hidden="true"></span>
+    <span class="ink-stamp__offer">Under 25 gets into concert</span>
+    <span class="ink-stamp__free">Free</span>
+  </span>
+</div>`;
+  }
+
+  function showLandingStamp() {
+    const seenKey = "ggs-family-stamp-seen";
+    try {
+      if (sessionStorage.getItem(seenKey) === "1") return;
+    } catch (err) {
+      /* private mode — still show the stamp */
+    }
+
+    const overlay = document.createElement("div");
+    overlay.className = "landing-stamp";
+    overlay.id = "landing-stamp";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Family friendly. Under 25 gets into the concert free.");
+    overlay.innerHTML = `${stampHtml()}<button type="button" class="landing-stamp__continue">Continue to the show</button>`;
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+
+    const continueBtn = overlay.querySelector(".landing-stamp__continue");
+    if (continueBtn) continueBtn.focus();
+
+    function closeStamp() {
+      overlay.hidden = true;
+      overlay.remove();
+      document.body.style.overflow = "";
+      try {
+        sessionStorage.setItem(seenKey, "1");
+      } catch (err) {
+        /* ignore */
+      }
+      document.removeEventListener("keydown", onKey);
+    }
+
+    function onKey(event) {
+      if (event.key === "Escape") closeStamp();
+    }
+
+    overlay.addEventListener("click", closeStamp);
+    document.addEventListener("keydown", onKey);
+  }
+
   const headerEl = document.getElementById("site-header");
   const footerEl = document.getElementById("site-footer");
   if (headerEl) headerEl.innerHTML = headerHtml();
   if (footerEl) footerEl.innerHTML = footerHtml();
+  showLandingStamp();
 
   const toggle = document.querySelector(".menu-toggle");
   const drawer = document.getElementById("mobile-drawer");

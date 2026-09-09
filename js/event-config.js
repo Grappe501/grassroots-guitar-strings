@@ -47,11 +47,21 @@ const EVENT_CONFIG = {
 /** Official GoodChange ticket tiers — select on goodchange.app/donate/grass-ax */
 const TICKET_TIERS = [
   {
+    id: "youth-concert",
+    name: "Under 25 Concert Admission",
+    price: 0,
+    priceLabel: "FREE",
+    description:
+      "Family-friendly night. Anyone under 25 gets into the David Adam Byrnes concert at no charge. Dinner and reserved tables are still ticketed.",
+    available: true,
+    featured: true,
+  },
+  {
     id: "concert-only",
     name: "David Adam Byrnes Concert Only",
     price: 25,
     priceLabel: "$25.00",
-    description: "Concert admission only. Show starts at 7:00 p.m.",
+    description: "Concert admission only. Show starts at 7:00 p.m. Under 25 gets in free.",
     available: true,
   },
   {

@@ -15,8 +15,8 @@
         ${tier.available ? '<span class="ticket-tier__badge">Available</span>' : '<span class="ticket-tier__badge ticket-tier__badge--sold">Sold out</span>'}
       </div>
       <p class="ticket-tier__desc">${tier.description}</p>
-      <p class="ticket-tier__price">${tier.priceLabel}<span class="ticket-tier__each"> each</span></p>
-      <a class="btn btn--primary ticket-tier__cta" href="${ticketUrl}" data-track="ticket_button_clicked">Select on GoodChange</a>
+      <p class="ticket-tier__price">${tier.priceLabel}${tier.price > 0 ? '<span class="ticket-tier__each"> each</span>' : ""}</p>
+      <a class="btn ${tier.price === 0 ? "btn--gold" : "btn--primary"} ticket-tier__cta" href="${tier.price === 0 ? "/details/" : ticketUrl}" data-track="${tier.price === 0 ? "youth_free_details_clicked" : "ticket_button_clicked"}">${tier.price === 0 ? "Just show up — details" : "Select on GoodChange"}</a>
     `;
     root.appendChild(card);
   });
