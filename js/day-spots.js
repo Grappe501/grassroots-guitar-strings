@@ -68,7 +68,7 @@
       why: "One body at the table. Relief 1 covers so you can watch the acoustic set. After doors, you watch the concert.",
       clock: [
         row("15:00", "arrive", "Arrive by 3:00. Earlier if you can. Event t-shirt on. Open My Night. Concert-only guests wait in cars until 6:30."),
-        row("15:05", "work", "Dress the lobby table: cash box, envelopes, pens, $25 sign, teacher/first-responder note. 10 minutes. Venue already placed the table."),
+        row("15:05", "work", "Dress the lobby table: cash box, envelopes, pens, $25 sign, teacher/first-responder note. No paper tickets. 10 minutes. Venue already placed the table."),
         row("15:20", "eat", "EAT. 15 minutes behind the table."),
         row("16:30", "work", "SOUND CHECK. Stay off the dance floor. Table can wait. You are dressed."),
         row("17:00", "work", "Dinner doors. Table is live. Dinner guests check in. Cash box never sits open and empty. Envelopes stay on you."),

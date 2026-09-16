@@ -229,7 +229,7 @@
       arrival: "3:00 PM · earlier if you can",
       owns: "Lobby, cash, envelopes, reconcile.",
       duties: [
-        "3:00 arrive. Earlier if you can. Event t-shirt on. Open My Night. Venue already placed the 4-ft lobby table.",
+        "3:00 arrive. Earlier if you can. Event t-shirt on. Open My Night. Venue already placed the 4-ft lobby table. No paper tickets.",
         "3:05 dress it: cash box, envelopes, pens, $25 sign, teacher/first-responder note. 10 minutes.",
         "3:20 eat 15 minutes behind the table.",
         "4:30 stay off the dance floor. Sound check.",

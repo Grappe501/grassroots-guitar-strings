@@ -89,7 +89,7 @@
       id: "tickets",
       title: "Tickets / money",
       inn: [
-        "Tickets",
+        "No paper tickets — door is check-in and $25 cash only",
         "Cash box / change",
         "Pens",
         "Contribution envelopes",
@@ -99,7 +99,7 @@
       out: [
         "Cash reconciled",
         "Envelopes secured",
-        "Ticket inventory counted",
+        "Door money counted — no ticket stubs",
         "Cash box with Event Captain",
       ],
     },

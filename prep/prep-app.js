@@ -75,6 +75,13 @@
     "gear:in:production:8": { done: true, owner: "Tracy", when: "He brings it" },
   };
 
+  const NO_TICKETS = {
+    "tickets:0:2": { done: true, owner: "House", when: "No paper tickets" },
+    "tickets:1:4": { done: true, owner: "House", when: "No paper tickets" },
+    "gear:in:tickets:0": { done: true, owner: "House", when: "No paper tickets" },
+    "gear:out:tickets:2": { done: true, owner: "House", when: "No stubs" },
+  };
+
   function seedFixed(map, already) {
     let wrote = false;
     Object.keys(map).forEach((k) => {
@@ -90,7 +97,8 @@
   function seedVenueLayout() {
     const venue = seedFixed(VENUE_LAYOUT, (cur) => cur.done && String(cur.owner || "").toLowerCase().includes("venue"));
     const tracy = seedFixed(TRACY_READY, (cur) => cur.done && /tracy/i.test(String(cur.owner || "")));
-    if (!venue && !tracy) return;
+    const notix = seedFixed(NO_TICKETS, (cur) => cur.done && /house|no paper/i.test(String(cur.owner || "") + String(cur.when || "")));
+    if (!venue && !tracy && !notix) return;
     restore();
     progress();
     applyFilters();
