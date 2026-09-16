@@ -9,8 +9,14 @@ body[data-mode="plan"] #packetStage,
 body[data-mode="packet"] #planStage,
 body[data-mode="packet"] #runStage,
 body[data-mode="packet"] .ops-bar,
-body[data-mode="packet"] .role-row {
+body[data-mode="packet"] .role-row,
+body[data-mode="packet"] .gates,
+body[data-mode="packet"] .radio-band {
   display: none !important;
+}
+
+body[data-mode="packet"] #packetStage {
+  display: block !important;
 }
 
 #planStage .section {

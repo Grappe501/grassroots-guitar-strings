@@ -329,6 +329,8 @@
   }
 
   function ensurePlan() {
+    const mode = document.body.dataset.mode || "plan";
+    if (mode === "packet" || mode === "run" || mode === "lists") return;
     if (window.GGSPrepV3) window.GGSPrepV3.setMode("plan");
     else {
       document.body.dataset.mode = "plan";

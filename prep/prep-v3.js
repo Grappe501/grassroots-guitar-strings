@@ -17,7 +17,7 @@
     ["2026-09-17T22:00:00", "10:00 PM", "Building cleared"],
   ];
   const packets = [
-    { id: "captain", label: "I'm Captain", match: /event captain|choose event captain|hard stop|load-out|announce teardown/i, tabs: ["overview", "volunteers", "timeline", "final"], who: /event captain/i },
+    { id: "captain", label: "I'm Event Lead", match: /event captain|event lead|choose event captain|hard stop|load-out|announce teardown/i, tabs: ["overview", "volunteers", "timeline", "final"], who: /steve|event captain|event lead/i },
     { id: "setup", label: "I'm Setup", match: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup|dress 8 guest/i, tabs: ["setup"], who: /setup/i },
     { id: "floater", label: "I'm Floater", match: /floater|relief loop|becomes floater/i, tabs: ["setup", "volunteers", "food", "tickets", "campaign"], who: /floater|relief/i },
     {
@@ -152,9 +152,12 @@
     if (run) run.hidden = prefs.mode !== "run";
     if (packet) packet.hidden = prefs.mode !== "packet";
     if (lists) lists.hidden = prefs.mode !== "lists";
-    document.querySelectorAll(".now-strip, .dashboard, .crew-band, .attention").forEach((el) => {
+    document.querySelectorAll(".now-strip, .dashboard, .crew-band, .attention, .gates, .radio-band").forEach((el) => {
       el.hidden = prefs.mode !== "plan";
     });
+    if (prefs.mode === "packet" && packet) {
+      packet.scrollIntoView({ block: "start" });
+    }
     document.querySelectorAll(".ops-bar").forEach((el) => {
       el.hidden = prefs.mode === "packet";
     });
@@ -306,6 +309,14 @@
     const roles = document.getElementById("packetRoles");
     const sheet = document.getElementById("packetSheet");
     if (!roles || !sheet) return;
+    try {
+      paintPacket(roles, sheet);
+    } catch (err) {
+      sheet.innerHTML = "<p>This packet could not load. Open My night instead.</p><p><a href=\"/v5/\">My night</a></p>";
+    }
+  }
+
+  function paintPacket(roles, sheet) {
     const slice = window.GGSCrewSlice;
     const sections = window.GGS_PREP_SECTIONS || [];
     const state = assignments();

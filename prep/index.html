@@ -15,7 +15,7 @@
 </script>
 <link rel="stylesheet" href="/css/kelly-brand.css">
 <link rel="stylesheet" href="/prep/prep.css">
-<link rel="stylesheet" href="/prep/prep-v3.css">
+<link rel="stylesheet" href="/prep/prep-v3.css?v=packet1">
 <link rel="stylesheet" href="/prep/prep-v3-run.css">
 <link rel="stylesheet" href="/prep/prep-v4.css">
 <link rel="stylesheet" href="/css/sign-in.css">
@@ -55,7 +55,7 @@
         <button type="button" class="btn btn--light is-mode" data-mode="plan">Plan</button>
         <button type="button" class="btn btn--gold is-mode" data-mode="run">Run</button>
         <button type="button" class="btn btn--light is-mode" data-mode="lists">Lists</button>
-        <button type="button" class="btn btn--light is-mode" data-mode="packet">Packet</button>
+        <button type="button" class="btn btn--light is-mode" data-mode="packet" id="packetBtn">Packet</button>
       </div>
       <a class="btn btn--gold" href="/spots/">17 phone pages</a>
       <a class="btn btn--gold" href="/leads/">11 lead jobs</a>
@@ -72,6 +72,11 @@
 </header>
 
 <main class="shell">
+  <section id="packetStage" class="packet-stage" hidden>
+    <p class="eyebrow">YOUR PACKET</p>
+    <div class="packet-roles" id="packetRoles"></div>
+    <article class="packet-sheet" id="packetSheet"></article>
+  </section>
   <section class="gates" id="gatesBand" aria-label="Readiness gates">
     <p class="eyebrow">Cannot go green until these are named</p>
     <div class="gate-grid" id="gateGrid"></div>
@@ -209,11 +214,6 @@
     <div class="gear-board" id="gearBoard"></div>
   </section>
 
-  <section id="packetStage" class="packet-stage" hidden>
-    <p class="eyebrow">I'm Tracy / I'm Ben · live from the board</p>
-    <div class="packet-roles" id="packetRoles"></div>
-    <article class="packet-sheet" id="packetSheet"></article>
-  </section>
 </main>
 </div>
 <script src="/js/prep-store.js"></script>
@@ -226,9 +226,9 @@
 <script src="/js/night-social.js"></script>
 <script src="/prep/prep-v2.js"></script>
 <script src="/js/next-action.js"></script>
-<script src="/prep/prep-app.js"></script>
+<script src="/prep/prep-app.js?v=packet1"></script>
 <script src="/prep/prep-enhancements.js"></script>
-<script src="/prep/prep-v3.js"></script>
+<script src="/prep/prep-v3.js?v=packet1"></script>
 <script src="/prep/prep-v4.js"></script>
 </body>
 </html>
