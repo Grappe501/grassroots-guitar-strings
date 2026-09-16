@@ -252,10 +252,10 @@
       id: "food",
       label: "Food + drinks",
       priority: 3,
-      test: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |plates|serving/i,
+      test: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |plates|serving|unsweet|sweetener|120 bottle/i,
       roster: /bbq|food|water|ice|cooler/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T17:30:00", place: "Buffet + $1 water / ice", do: "Receive food. Ice stocked. Water signs and money bag out." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T17:30:00", place: "Buffet + drinks / ice", do: "Receive food. 8 gal tea, 6 gal lemonade, 120 waters, 12 bags ice. Sweeteners out." },
         { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Buffet + $1 water", do: "BBQ / social hour. Sell water for a $1 cash donation. No cards." },
         { start: "2026-09-17T18:30:00", end: "2026-09-17T20:45:00", place: "Coolers · $1 water", do: "Keep ice and water up. Cash only. Money stays in the bag." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike C · food", do: "Clear food, drinks, coolers, trash." },
