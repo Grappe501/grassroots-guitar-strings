@@ -6,6 +6,13 @@
 <meta name="theme-color" content="#000066">
 <title>Kelly Grappe — Night board</title>
 <meta name="description" content="Day-of campaign night board. Thursday, September 17, 2026.">
+<script>
+(function () {
+  var q = location.search || "";
+  if (/[?&]full=1\b/.test(q) || location.hash) return;
+  location.replace("/v5/" + q);
+})();
+</script>
 <link rel="stylesheet" href="/css/kelly-brand.css">
 <link rel="stylesheet" href="/prep/prep.css">
 <link rel="stylesheet" href="/prep/prep-v3.css">
@@ -38,7 +45,7 @@
 <header class="topbar">
   <div class="topbar__inner">
     <div>
-      <p class="eyebrow">KELLY GRAPPE · NIGHT BOARD <span class="v4-mark">V4</span></p>
+      <p class="eyebrow">KELLY GRAPPE · FULL BOARD</p>
       <h1>Kelly Grappe</h1>
       <p class="subtitle">Grassroots &amp; Guitar Strings · Thursday, September 17, 2026 · Woody's Sherwood Forest</p>
       <p class="sync-status" id="syncStatus">Connecting to shared board…</p>

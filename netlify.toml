@@ -25,3 +25,13 @@
   from = "/tickets"
   to = "/tickets/"
   status = 301
+
+[[redirects]]
+  from = "/night"
+  to = "/v5/"
+  status = 302
+
+[[redirects]]
+  from = "/night/"
+  to = "/v5/"
+  status = 302
