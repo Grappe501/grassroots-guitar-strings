@@ -292,7 +292,7 @@
       id: "campaign",
       label: "Campaign + merch",
       priority: 4,
-      test: /yard sign|merch|qr|literature|regnet|campaign display|t-shirt|pull-up|push card|foldover|buttons — pack/i,
+      test: /yard sign|merch|qr|literature|regnet|campaign display|t-shirt|pull-up|push card|foldover|buttons — pack|two banners|bungee|conversation card/i,
       roster: /campaign|sign|merch|setup 3|setup person 3/i,
       day: [
         { start: "2026-09-17T08:30:00", end: "2026-09-17T10:30:00", place: "Campaign table", do: "After the 8 tables: 30 min merch set. Pull-ups, push cards, buttons, candy, foldovers, shirts." },
