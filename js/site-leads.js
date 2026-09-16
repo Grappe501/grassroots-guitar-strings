@@ -23,6 +23,7 @@
     { who: /tracy/i, id: "production" },
     { who: /kelly/i, id: "candidate" },
     { who: /debi|debbie|martin/i, id: "campaign" },
+    { who: /^paul\b|paul egan/i, id: "setup" },
   ];
 
   function match(name, other) {

@@ -217,10 +217,10 @@
       id: "setup",
       label: "Setup crew",
       priority: 5,
-      test: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup|position 8 round|dress 8 guest/i,
+      test: /setup person|setup lead|path from the gate|yard signs along|tables|chairs|horseshoe|tablecloth|lobby ticket setup|position 8 round|dress 8 guest/i,
       roster: /setup [123]|setup person/i,
       day: [
-        { start: "2026-09-17T10:00:00", end: "2026-09-17T12:30:00", place: "Main room · 8 tables", do: "Dress 8 tables (25 min), signs (15), lobby (10), drinks station (20). Setup 3 then does the 30 min merch set." },
+        { start: "2026-09-17T10:00:00", end: "2026-09-17T12:30:00", place: "Gate path + 8 tables", do: "Setup Lead plants yard signs from the gate to the door. Dressers do 8 tables (25 min), printed signs (15), lobby (10), drinks station (20). Setup 3 then does the 30 min merch set." },
         { start: "2026-09-17T12:30:00", end: "2026-09-17T15:00:00", place: "Off site unless called", do: "Room is dressed. Come back at 3:00 as Floater A, Floater B, or Campaign." },
       ],
     },

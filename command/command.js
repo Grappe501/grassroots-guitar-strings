@@ -1,7 +1,7 @@
 const milestones=[
  ['2026-09-17T08:00:00','8:00 AM','Venue open. Production load in 9:00'],
  ['2026-09-17T09:00:00','9:00 AM','Production load in'],
- ['2026-09-17T10:00:00','10:00 AM','System check. Setup Lead + dressers arrive.'],
+ ['2026-09-17T10:00:00','10:00 AM','System check. Paul + dressers arrive. Path signs next.'],
  ['2026-09-17T14:00:00','2:00 PM','DAB load in'],
  ['2026-09-17T15:00:00','3:00 PM','DAB check. Night crew on site'],
  ['2026-09-17T16:30:00','4:30 PM','Acoustic PA check'],

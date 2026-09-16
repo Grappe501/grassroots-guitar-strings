@@ -110,7 +110,7 @@
         "Kelly literature + cards",
         "Pull-up banner",
         "Campaign signs",
-        "Road / entrance signs",
+        "Road / entrance signs — Setup Lead (Paul) plants them on the path from the gate",
         "Concert T-shirts",
         "Campaign T-shirts",
         "Volunteer signs printed at HQ — 8.5 x 11",

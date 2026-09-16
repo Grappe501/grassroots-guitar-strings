@@ -16,7 +16,7 @@
 
   const VOL_SEATS = {
     event: { kind: "event", hint: /event captain/i },
-    setup: { kind: "setup", hint: /setup lead|setup captain/i, role: "Setup Lead — 10:00 room. Gather the 3 dressers." },
+    setup: { kind: "setup", hint: /setup lead|setup captain/i, role: "Setup Lead — 10:00 room. Path signs from the gate. Gather the 3 dressers." },
     tickets: { kind: "event", hint: /^tickets\b/i },
     food: { kind: "event", hint: /food service lead/i },
     campaign: { kind: "event", hint: /campaign \+ merch|^campaign\b|\bmerch\b/i },
