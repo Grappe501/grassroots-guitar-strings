@@ -26,9 +26,9 @@ const defaults = {
     "Sound/lights muscle 3 — 8:45. Carry remaining production to Tracy's vehicle.",
   ],
   grounds: [
-    "Parking — 5:00–7:00. Wave cars. Overflow if the lot fills.",
-    "Directions — 5:00–7:00. Lot to door. BBQ inside, concert under the pavilion.",
-    "Crowd / lobby — 5:00–7:00. Keep the line moving. Do not block doors. Point to tickets.",
+    "Parking — 5:00–7:00. Dinner guests go in. Concert-only stay in cars until 6:30.",
+    "Directions — 5:00–7:00. Lot to door. Everything is inside. Concert-only stay in cars until 6:30.",
+    "Crowd / lobby — 5:00–7:00. Dinner doors at 5:00. Concert-only at 6:30. Keep the line moving. Point to tickets.",
   ],
 };
 const teams = [

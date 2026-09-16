@@ -257,7 +257,7 @@
       test: /parking|directions volunteer|crowd \/ lobby|lot to door|overflow if the lot/i,
       roster: /parking|directions|crowd \/ lobby/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lot + door + lobby", do: "Wave cars. Point lot to door. BBQ inside, concert under the pavilion. Keep the line moving." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lot + door + lobby", do: "Dinner doors at 5:00. Everything is inside. Concert-only stay in cars until 6:30. Keep the line moving." },
         { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Doors rush", do: "Concert doors. No pile-up at the ticket table. Then you may stand down unless Event Lead keeps you." },
       ],
     },
