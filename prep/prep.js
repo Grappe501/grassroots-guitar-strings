@@ -1,0 +1,103 @@
+const sections = [
+  {id:'overview',title:'Overview',intro:'Command board for Thursday. Every task has an owner and timing field so nothing is left floating.',cards:[
+    {title:'Event facts',tasks:['Venue access begins at 8:00 AM','Eight 8-foot round tables with eight chairs each; 64 chairs total','Round tables arranged in a horseshoe with an open dance floor in front of the stage','Four 8-foot rectangular tables at the front entryway for buffet BBQ','One 4-foot table in the lobby for tickets/check-in','BBQ planned for 100 people','BBQ/social period begins at 5:30 PM','David acoustic set begins about 5:45 PM for roughly 30 minutes','Concert doors open at 6:30 PM','Main show starts promptly at 7:00 PM','Show expected to end 8:45–9:00 PM','Building must be fully broken down and cleared by 10:00 PM']},
+    {title:'Command priorities',tasks:['Choose one Event Captain','Lock the setup roster','Lock the event/guest-service roster','Recruit a dedicated 10–12+ person teardown crew','Confirm Ben’s food/service-supply list tonight','Confirm Tracy’s production/equipment list','Inventory coolers and bottled water','Confirm ticketing and payment procedure','Assign photography/video','Create the load-out plan before Thursday']}
+  ]},
+  {id:'ben',title:'Ben / BBQ',intro:'Use this section tonight with Ben. Mark the responsible person beside every confirmation item.',cards:[
+    {title:'Food for 100',tasks:['Confirm pulled pork for 100','Confirm bread/buns for 100+','Confirm potato salad for 100','Confirm baked beans for 100','Confirm BBQ sauce/condiments','Confirm serving pans/trays for pulled pork','Confirm serving pans/bowls for potato salad','Confirm serving pans/bowls for baked beans','Confirm serving utensils for pulled pork','Confirm serving utensils for potato salad','Confirm serving utensils for baked beans','Confirm tongs/ladles/spoons as needed','Confirm food covers','Confirm warming/chafing equipment','Confirm fuel for warming equipment, if applicable']},
+    {title:'Disposable service items',tasks:['Confirm dinner plates — target 125','Confirm forks — target 125','Confirm knives — target 125','Confirm spoons if needed — target 125','Confirm napkins — target 125','Confirm sandwich wrappers/baskets/boats if needed','Confirm cups if Ben is providing them','Confirm whether Ben is providing anything else not listed']},
+    {title:'Logistics',tasks:['Confirm BBQ delivery or pickup','Confirm exact food arrival time','Confirm who receives the food','Confirm Ben’s setup requirements','Confirm how food should be held/served','Confirm what equipment Ben needs from us','Write final BEN PROVIDES list','Write final WE PROVIDE list']}
+  ]},
+  {id:'setup',title:'Setup',intro:'Setup starts at 8:00 AM. Finish the public-facing room well before guests arrive.',cards:[
+    {title:'Venue / room',tasks:['Confirm venue access at 8:00 AM','Walk venue before unloading','Identify electrical outlets/circuits','Identify emergency exits and keep clear','Identify restrooms','Identify guest entrance and lobby flow','Position 8 round tables','Position 64 chairs','Create horseshoe arrangement','Create clear dance floor in front of stage','Keep aisles and sightlines clear','Position 4 rectangular buffet tables at front entryway','Position 4-foot ticket table in lobby','Set up beverage station','Set up sign pickup area','Set up campaign information/display area','Set up performer/backstage area if needed']},
+    {title:'Tables / decorations',tasks:['Put tablecloths on all round tables','Put tablecloths on buffet tables','Put tablecloth on lobby ticket table','Set decorations','Set banners/signage','Set display stands/easels','Remove empty boxes and setup clutter from public areas','Final room appearance check']},
+    {title:'Production setup',tasks:['Tracy Morgan begins lights and sound','Unload production equipment','Place speakers','Place microphones and stands','Run cables safely','Tape/secure cables','Set lighting','Check power distribution','Set main-stage sound','Set David acoustic position in center dance floor','Place bar stool for David','Check center-floor lighting','Complete sound check']}
+  ]},
+  {id:'volunteers',title:'Volunteers',intro:'Build the roster before Thursday. Each person should have a job, arrival time, and backup plan.',cards:[
+    {title:'Morning setup — 8:00 AM',tasks:['Assign setup captain','Recruit table/chair crew','Recruit tablecloth/decor crew','Recruit campaign-material crew','Recruit sign crew','Recruit lobby/ticket setup person','Recruit beverage/cooler crew','Recruit general runner/floater']},
+    {title:'Event operations — 5:00 PM',tasks:['Assign Event Captain','Assign ticket/check-in person','Assign ticket backup','Assign BBQ/food person','Assign water/ice/cooler captain','Assign guest greeters','Assign sign distribution person','Assign campaign materials person','Assign photography/video person','Assign Kelly/guest-relations support','Assign David/performer support','Assign venue/facilities person','Assign event runner/floater']},
+    {title:'Teardown — recruit specifically',tasks:['Recruit 10–12+ dedicated teardown volunteers','Tell teardown volunteers to stay immediately after the show','Assign Strike Team A — tables/chairs','Assign Strike Team B — campaign materials/signs','Assign Strike Team C — food/drinks/coolers','Assign Strike Team D — production/load-out','Assign Strike Team E — venue cleanup/final sweep','Assign teardown captain','Confirm every teardown volunteer knows their team before showtime']}
+  ]},
+  {id:'tickets',title:'Tickets',intro:'The lobby is the controlled arrival point. Keep one person stationed there.',cards:[
+    {title:'Lobby setup',tasks:['Bring 4-foot table to lobby','Add tablecloth','Prepare tickets','Prepare guest list if applicable','Prepare pens','Prepare cash box/change if cash accepted','Prepare electronic payment method if applicable','Prepare ticket signage','Prepare event information','Prepare campaign QR codes','Prepare backup paper process']},
+    {title:'Ticket operations',tasks:['Assign primary ticket/check-in person','Assign backup ticket person','Confirm walk-up ticket procedure','Confirm guest-list procedure','Confirm cash/payment procedure','Confirm ticket reconciliation procedure','Record ticket inventory before doors','Open ticket table at 5:30 PM','Maintain ticket station through 6:30 doors','Close/reconcile ticket station after arrivals settle']}
+  ]},
+  {id:'campaign',title:'Campaign',intro:'Have campaign materials organized, visible, and easy to hand to people without creating a bottleneck.',cards:[
+    {title:'Materials',tasks:['Bring Kelly Craft memorabilia','Bring Kelly Grappe campaign literature','Bring business/contact cards','Bring postcards','Bring door hangers','Bring buttons/stickers/pins as applicable','Prepare campaign QR codes','Prepare volunteer signup information','Prepare donation information','Set up campaign display','Assign campaign-materials owner']},
+    {title:'100 yard signs',tasks:['Confirm 100 signs physically available','Confirm 100 sign stakes','Count signs','Count stakes','Separate damaged signs','Bundle signs for easy distribution','Create sign pickup station','Prepare sign request/sign-out sheet or digital form','Assign sign distribution person','Record recipient name/address/contact as appropriate','Track number of signs distributed','Count remaining signs before departure']},
+    {title:'Guest experience',tasks:['Identify important supporters/VIPs','Assign guest greeters','Make sure Kelly is circulating','Introduce people who should meet','Make volunteer opportunities visible','Capture follow-up information where appropriate','Make sure QR codes are easy to scan']}
+  ]},
+  {id:'food',title:'Food & Drinks',intro:'BBQ/social hour runs 5:30–6:30 PM. Plan the beverage station independently of Ben until his supply list is confirmed.',cards:[
+    {title:'Our beverages',tasks:['Purchase Splenda sweet tea','Purchase lemonade','Purchase lots of bottled water','Get glass serving container for sweet tea','Get glass serving container for lemonade','Confirm beverage dispensers/spigots','Get cups if not supplied by Ben','Get ice for tea/lemonade','Get extra ice for water coolers','Collect as many ice chests/coolers as possible','Label personal coolers','Assign cooler/water captain','Fill coolers before guests arrive','Set up beverage station','Replenish water during event','Monitor and replenish ice','Collect and return coolers after event']},
+    {title:'Buffet setup',tasks:['Dress four 8-foot buffet tables','Plan food flow before BBQ arrives','Place plates at start of buffet','Place utensils/napkins at appropriate point','Place pulled pork','Place bread/buns','Place potato salad','Place baked beans','Place sauces/condiments','Place serving utensils','Keep food covered as appropriate','Keep hot food at safe serving temperature','Keep cold food appropriately chilled','Place trash cans nearby','Place hand sanitizer/paper towels nearby']},
+    {title:'5:30–6:30 social hour',tasks:['BBQ arrives/is received','Buffet opens at 5:30','Ticket table operating','Guests welcomed','Water available','Ice available','Kelly circulating','Campaign materials visible','Photos/video begin','David prepares for acoustic set','At about 6:15 begin transition toward concert','Clear center-floor acoustic equipment after David finishes','Check buffet/room before concert doors']}
+  ]},
+  {id:'production',title:'Sound & Show',intro:'Tracy Morgan owns lights/sound unless another owner is assigned. David’s acoustic set happens in the center of the dance floor.',cards:[
+    {title:'Tracy / production',tasks:['Confirm Tracy’s arrival and equipment list','Sound system','Speakers','Mixer','Microphones','Microphone stands','Instrument microphones/inputs','Speaker stands','Cables','Power strips','Extension cords','Cable tape/management','Stage lighting','Lighting stands','Spare batteries','Test every microphone','Test every instrument input','Test speakers','Test lighting','Complete full sound check','Confirm performer changeover requirements']},
+    {title:'David acoustic set — about 5:45–6:15',tasks:['Place bar stool in center of dance floor','Acoustic guitar ready','Microphone ready','Mic stand ready','Acoustic amplification ready','Safe cable routing','Center-floor lighting ready','Water for David','David’s set/talking points ready','Test sound from actual stool position','David starts about 5:45','David wraps around 6:15','Clear acoustic equipment before 6:30 doors']},
+    {title:'7:00 concert',tasks:['Performers ready','Instruments ready','Stage microphones ready','Lighting ready','Sound ready','Stage clear','Water available for performers','Opening/welcome prepared','Introductions prepared','Photographer/video ready','Concert starts promptly at 7:00','Monitor doors and late arrivals','Monitor sound and lighting']}
+  ]},
+  {id:'timeline',title:'Timeline',intro:'Use this as the clock. The Event Captain should own transitions.',timeline:[
+    ['8:00 AM','Venue access and setup begins','Setup crew + Tracy'],
+    ['10:00 AM','Infrastructure check: room, power, production, ticketing plan','Setup / Production'],
+    ['Early afternoon','Finish room, campaign, sign, lobby, beverage, and production setup','All setup leads'],
+    ['4:30 PM','Shift from setup mode to event mode','Event Captain'],
+    ['5:00 PM','Event crew in position','Event Captain'],
+    ['5:30 PM','BBQ/social hour begins; ticket station operating','Food + Ticket + Guest teams'],
+    ['5:45 PM','David acoustic set in center dance floor','David + Production'],
+    ['6:15 PM','Acoustic set wraps; transition room toward concert','Event Captain'],
+    ['6:30 PM','Concert doors open','Ticket + Door teams'],
+    ['6:45 PM','15-minute hard checkpoint; stage/room/personnel lockdown','Event Captain + Tracy'],
+    ['7:00 PM','Concert starts promptly','Show team'],
+    ['8:45–9:00 PM','Show ends; strike begins immediately','Teardown Captain'],
+    ['By 9:15 PM','Tables/campaign/food/production well into load-out','Strike teams'],
+    ['By 9:45 PM','Final cleanup and venue walkthrough','Venue team'],
+    ['10:00 PM','Building fully cleared/secured','Event Captain']
+  ]},
+  {id:'breakdown',title:'Breakdown',intro:'This is a timed strike. Do not wait until the end of the show to decide who does what.',cards:[
+    {title:'Strike Team A — tables & chairs',tasks:['Clear tables','Remove tablecloths','Fold tablecloths','Clean tables','Fold round tables','Fold rectangular buffet tables','Fold 4-foot lobby table','Stack 64 chairs','Return furniture to venue configuration','Final furniture check']},
+    {title:'Strike Team B — campaign',tasks:['Collect campaign literature','Collect Kelly Craft memorabilia','Collect banners','Collect displays','Collect QR signs','Pack remaining campaign materials','Pack unused yard signs','Count remaining signs','Pack sign stakes','Check every campaign table']},
+    {title:'Strike Team C — food/drinks',tasks:['Clear BBQ','Handle leftovers appropriately','Dispose of food waste','Collect trash','Clean buffet tables','Remove buffet tablecloths','Collect bottled water','Consolidate drinks','Collect ice chests','Separate personal coolers for owners','Remove beverage containers','Final food-area sweep']},
+    {title:'Strike Team D — production',tasks:['Shut down sound','Shut down lights','Disconnect equipment','Coil cables','Pack microphones','Pack stands','Pack speakers','Pack mixer','Pack lighting','Confirm all production equipment is accounted for','Load Tracy’s vehicle','Final stage check']},
+    {title:'Strike Team E — venue',tasks:['Clear lobby','Clean main room','Check bathrooms','Remove trash','Check stage','Check all corners/rooms','Check parking/exterior','Collect lost-and-found items','Final venue walkthrough','Confirm venue requirements satisfied','Secure/lock building']},
+    {title:'Load-out control',tasks:['Create vehicle/load-out map before Thursday','Assign campaign materials vehicle','Assign production vehicle','Assign food/cooler vehicle','Keep personal belongings separate from event inventory','Confirm every item has a destination','Final headcount of strike crew','Event Captain confirms building clear by 10:00 PM']}
+  ]},
+  {id:'final',title:'Final Sweep',intro:'Last look before the doors close behind us. Nothing is complete until the venue is clear and the event inventory is accounted for.',cards:[
+    {title:'Operations',tasks:['Event Captain has master checklist','All assigned owners confirmed','All volunteer arrival times confirmed','Teardown crew confirmed','Backup contacts confirmed','Phone chargers/battery packs accounted for']},
+    {title:'Supplies',tasks:['Pens','Sharpies','Scissors','Gaffer tape','Duct tape','Zip ties','Rubber bands','Safety pins','Paper towels','Trash bags','Hand sanitizer','Cleaning wipes','First-aid kit','Box cutter/multi-tool','Spare batteries','Extension cords','Power strips']},
+    {title:'Before leaving',tasks:['Count remaining yard signs','Count sign stakes','Collect all campaign materials','Collect all decorations','Collect tablecloths','Collect all coolers','Collect beverage containers','Confirm Tracy has all production equipment','Confirm ticket/cash/payment reconciliation complete','Confirm photos/video captured','Complete final venue walkthrough','Confirm venue cleared and secured by 10:00 PM']}
+  ]}
+];
+
+const STORAGE_KEY='ggs-prep-2026-09-17-v1';
+const state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+const content=document.getElementById('tabContent');
+const template=document.getElementById('taskTemplate');
+
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));updateProgress()}
+function taskKey(section,card,index){return `${section}:${card}:${index}`}
+function render(){
+  content.innerHTML=sections.map((s,si)=>{
+    if(s.timeline)return `<section class="section ${si===0?'is-active':''}" data-section="${s.id}"><div class="section-head"><p class="eyebrow">${s.title}</p><h2>${s.title}</h2><p>${s.intro}</p></div><div class="card"><div class="timeline">${s.timeline.map((r,i)=>`<div class="time-row"><div class="time">${r[0]}</div><div><strong>${r[1]}</strong><div class="mini">${r[2]}</div><div class="task" data-key="${taskKey(s.id,'timeline',i)}"><label class="check"><input type="checkbox" class="task-check"><span class="checkmark"></span><span class="task-text">Checkpoint complete</span></label><input class="owner" type="text" placeholder="Assigned to…"><input class="when" type="text" placeholder="Actual time…"></div></div></div>`).join('')}</div></div></section>`;
+    return `<section class="section ${si===0?'is-active':''}" data-section="${s.id}"><div class="section-head"><p class="eyebrow">${s.title}</p><h2>${s.title}</h2><p>${s.intro}</p></div><div class="grid">${s.cards.map((c,ci)=>`<article class="card"><h3>${c.title}</h3><div class="checklist-actions"><button class="small-btn" data-complete-card="${s.id}|${ci}">Complete section</button><button class="small-btn" data-clear-card="${s.id}|${ci}">Clear section</button></div><div class="task-list">${c.tasks.map((t,ti)=>`<div class="task" data-key="${taskKey(s.id,ci,ti)}"><label class="check"><input type="checkbox" class="task-check"><span class="checkmark"></span><span class="task-text">${t}</span></label><input class="owner" type="text" placeholder="Assigned to…"><input class="when" type="text" placeholder="When…"></div>`).join('')}</div></article>`).join('')}</div></section>`;
+  }).join('');
+  bind();restore();updateProgress();
+}
+function bind(){
+  document.querySelectorAll('.task').forEach(row=>{
+    const key=row.dataset.key;const check=row.querySelector('.task-check');const owner=row.querySelector('.owner');const when=row.querySelector('.when');
+    check.addEventListener('change',()=>{state[key]={...(state[key]||{}),done:check.checked,owner:owner.value,when:when.value};save()});
+    owner.addEventListener('input',()=>{state[key]={...(state[key]||{}),done:check.checked,owner:owner.value,when:when.value};save()});
+    when.addEventListener('input',()=>{state[key]={...(state[key]||{}),done:check.checked,owner:owner.value,when:when.value};save()});
+  });
+  document.querySelectorAll('[data-complete-card]').forEach(b=>b.addEventListener('click',()=>setCard(b.dataset.completeCard,true)));
+  document.querySelectorAll('[data-clear-card]').forEach(b=>b.addEventListener('click',()=>setCard(b.dataset.clearCard,false)));
+}
+function setCard(id,done){const [section,card]=id.split('|');document.querySelectorAll(`[data-section="${section}"] .card`).forEach((c,ci)=>{if(String(ci)===card)c.querySelectorAll('.task').forEach(row=>{const key=row.dataset.key;const st=state[key]||{};st.done=done;state[key]=st;row.querySelector('.task-check').checked=done})});save()}
+function restore(){document.querySelectorAll('.task').forEach(row=>{const st=state[row.dataset.key];if(!st)return;row.querySelector('.task-check').checked=!!st.done;row.querySelector('.owner').value=st.owner||'';row.querySelector('.when').value=st.when||''})}
+function updateProgress(){const rows=[...document.querySelectorAll('.task')];const done=rows.filter(r=>r.querySelector('.task-check').checked).length;const pct=rows.length?Math.round(done/rows.length*100):0;document.getElementById('progressPct').textContent=pct+'%';document.getElementById('progressCount').textContent=`${done} / ${rows.length}`;document.getElementById('progressBar').style.width=pct+'%'}
+
+document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('is-active');t.setAttribute('aria-selected','false')});document.querySelectorAll('.section').forEach(s=>s.classList.remove('is-active'));tab.classList.add('is-active');tab.setAttribute('aria-selected','true');document.querySelector(`[data-section="${tab.dataset.tab}"]`).classList.add('is-active');window.scrollTo({top:0,behavior:'smooth'})}));
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Reset every checkbox, owner, and timing field on this device?')){localStorage.removeItem(STORAGE_KEY);location.reload()}});
+render();
