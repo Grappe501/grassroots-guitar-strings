@@ -289,6 +289,7 @@ html.night .radio-field textarea {
   body[data-mode="packet"] .dashboard,
   body[data-mode="packet"] .crew-band,
   body[data-mode="packet"] .attention,
+  body[data-mode="packet"] #listsStage,
   body[data-mode="packet"] #planStage {
     display: none !important;
   }

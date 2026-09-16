@@ -224,11 +224,9 @@
       });
     });
 
-    const radio = store ? store.readDoc("radio") : null;
-    const box = document.getElementById("radioNote");
-    if (box && radio && document.activeElement !== box) {
-      box.value = radio.note || "";
-      document.getElementById("radioBy").textContent = radio.by ? "Last update: " + radio.by : "";
+    if (window.GGSRadioFeed) {
+      const feed = document.getElementById("radioFeed");
+      if (feed) window.GGSRadioFeed.render(feed);
     }
     const share = document.getElementById("shareHint");
     share.textContent = "Keep this page on your phone: " + location.origin + slice.pageUrl(name);
@@ -274,16 +272,15 @@
     }, 250);
   });
 
-  const box = document.getElementById("radioNote");
-  let timer = null;
-  box.addEventListener("input", () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      const me = currentName();
-      if (store) store.saveDoc("radio", { note: box.value, by: me, at: new Date().toISOString() });
-      document.getElementById("radioBy").textContent = me ? "Last update: " + me : "Saved";
-    }, 250);
-  });
+  if (window.GGSRadioFeed) {
+    window.GGSRadioFeed.mount({
+      feed: "#radioFeed",
+      input: "#radioInput",
+      send: "#radioSend",
+      need: "#whoInput",
+      getName: currentName,
+    });
+  }
 
   if (queryWho()) writePrefs({ me: queryWho() });
 

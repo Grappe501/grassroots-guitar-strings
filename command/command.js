@@ -94,5 +94,19 @@ if(window.GGSPrepStore){
     el.textContent=e.detail==='saving'?'Saving to every device…':e.detail==='offline'?'Shared board unreachable — this phone only until it reconnects.':'Shared across every device.';
     el.dataset.state=e.detail||'ok';
   });
+  if (window.GGSRadioFeed) {
+    window.GGSRadioFeed.mount({
+      feed: "#radioFeed",
+      input: "#radioInput",
+      send: "#radioSend",
+      getName: function () {
+        try {
+          return JSON.parse(localStorage.getItem("ggs-prep-v3-prefs") || "{}").me || "";
+        } catch (err) {
+          return "";
+        }
+      },
+    });
+  }
   window.GGSPrepStore.startSync();
 }

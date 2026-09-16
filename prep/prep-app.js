@@ -114,6 +114,7 @@
     renderGaps();
     paintOwnerReach();
     if (window.GGSPrepV3) window.GGSPrepV3.refresh();
+    if (window.GGSPrepV4) window.GGSPrepV4.fillOwnerList();
   }
 
   function claim(el) {
@@ -128,6 +129,12 @@
     }
     el.querySelector(".owner").value = name;
     saveRow(el);
+    const phone = document.getElementById("mePhone");
+    if (phone && !(prefs.phone || "").trim()) {
+      phone.classList.add("is-needed");
+      phone.focus();
+    }
+    if (window.GGSPrepV4) window.GGSPrepV4.fillOwnerList();
   }
 
   function taskHtml(k, label, whenPlaceholder) {
@@ -141,7 +148,7 @@
       esc(label) +
       '</span></label><input class="owner" value="' +
       esc(x.owner || "") +
-      '" placeholder="Assigned to…"><span class="owner-reach"></span><input class="when" value="' +
+      '" list="ownerNames" autocomplete="off" placeholder="Assigned to…"><span class="owner-reach"></span><input class="when" value="' +
       esc(x.when || "") +
       '" placeholder="' +
       esc(whenPlaceholder) +

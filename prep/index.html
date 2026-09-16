@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#17466b">
-<title>Grassroots & Guitar Strings — Prep v3</title>
+<title>Grassroots & Guitar Strings — Prep v4</title>
 <meta name="description" content="Day-of command board for Grassroots and Guitar Strings. Thursday, September 17, 2026.">
 <link rel="stylesheet" href="/prep/prep.css">
 <link rel="stylesheet" href="/prep/prep-v3.css">
 <link rel="stylesheet" href="/prep/prep-v3-run.css">
+<link rel="stylesheet" href="/prep/prep-v4.css">
 <link rel="stylesheet" href="/css/contacts.css">
 </head>
-<body>
+<body class="v4">
 <div id="prepApp">
 <header class="topbar">
   <div class="topbar__inner">
     <div>
-      <p class="eyebrow">PREP v3 · RUN THE NIGHT</p>
+      <p class="eyebrow">PREP v4 · HARDENED NIGHT BOARD <span class="v4-mark">V4</span></p>
       <h1>Grassroots &amp; Guitar Strings</h1>
       <p class="subtitle">Thursday, September 17, 2026 · Woody's Sherwood Forest</p>
       <p class="sync-status" id="syncStatus">Connecting to shared board…</p>
@@ -25,6 +26,7 @@
       <div class="mode-switch" role="group" aria-label="Board mode">
         <button type="button" class="btn btn--light is-mode" data-mode="plan">Plan</button>
         <button type="button" class="btn btn--gold is-mode" data-mode="run">Run</button>
+        <button type="button" class="btn btn--light is-mode" data-mode="lists">Lists</button>
         <button type="button" class="btn btn--light is-mode" data-mode="packet">Packet</button>
       </div>
       <a class="btn btn--gold" id="myPageBtn" href="/me/">My page</a>
@@ -44,11 +46,19 @@
     <div class="gate-grid" id="gateGrid"></div>
   </section>
 
-  <section class="radio-band">
-    <label class="radio-field">Shared radio — what is happening right now
-      <textarea id="radioNote" rows="2" maxlength="400" placeholder="Example: Ben is 15 minutes out. Ticket table is live. Need two more teardown people."></textarea>
-    </label>
-    <p class="radio-by" id="radioBy"></p>
+  <section class="radio-band radio-feed" aria-label="Night radio">
+    <div class="radio-head">
+      <div>
+        <p class="eyebrow">NIGHT RADIO</p>
+        <h2>Straight-line traffic. Every phone.</h2>
+      </div>
+      <p class="radio-by" id="radioBy">Put your name in I am, then Send.</p>
+    </div>
+    <div class="radio-feed-list" id="radioFeed" aria-live="polite"></div>
+    <div class="radio-compose">
+      <input id="radioInput" type="text" maxlength="240" autocomplete="off" placeholder="Ben is 15 out. Ticket table is live. Need two more teardown people.">
+      <button type="button" class="btn btn--gold" id="radioSend">Send</button>
+    </div>
   </section>
 
   <section class="now-strip" aria-live="polite">
@@ -90,6 +100,8 @@
     <p class="filter-status" id="filterStatus">All tasks</p>
   </section>
 
+  <datalist id="ownerNames"></datalist>
+
   <section class="role-row" aria-label="Jump to a job">
     <button type="button" class="role" data-jump="overview">Captain</button>
     <button type="button" class="role" data-jump="ben">Ben / BBQ</button>
@@ -100,6 +112,7 @@
     <button type="button" class="role" data-jump="food">Food</button>
     <button type="button" class="role" data-jump="volunteers">People</button>
     <button type="button" class="role" data-jump="breakdown">Strike</button>
+    <button type="button" class="role" id="listsJump">Load in / out</button>
   </section>
 
   <section class="dashboard v3-dash">
@@ -142,6 +155,27 @@
     <div class="run-mine" id="runMine"></div>
   </section>
 
+  <section id="listsStage" class="lists-stage" hidden>
+    <div class="lists-head">
+      <article class="lists-stat">
+        <p class="eyebrow">Load in</p>
+        <strong id="gearInCount">0 / 0</strong>
+        <div class="progress"><div id="gearInBar"></div></div>
+        <p>Must be on site before guests.</p>
+      </article>
+      <article class="lists-stat">
+        <p class="eyebrow">Load out</p>
+        <strong id="gearOutCount">0 / 0</strong>
+        <div class="progress"><div id="gearOutBar"></div></div>
+        <p>Must leave with us. Building clear by 10:00 PM.</p>
+      </article>
+    </div>
+    <p class="eyebrow">MASTER GEAR</p>
+    <h2>Overall item checklist, by section</h2>
+    <p>This is not the job board. This is what physically comes in and what physically goes out. Venue already placed tables, chairs, and the dance floor.</p>
+    <div class="gear-board" id="gearBoard"></div>
+  </section>
+
   <section id="packetStage" class="packet-stage" hidden>
     <p class="eyebrow">Print one job, not the whole book</p>
     <div class="packet-roles" id="packetRoles"></div>
@@ -150,10 +184,12 @@
 </main>
 </div>
 <script src="/js/prep-store.js"></script>
+<script src="/js/radio-feed.js"></script>
 <script src="/prep/prep-v2.js"></script>
 <script src="/js/crew-slice.js"></script>
 <script src="/prep/prep-app.js"></script>
 <script src="/prep/prep-enhancements.js"></script>
 <script src="/prep/prep-v3.js"></script>
+<script src="/prep/prep-v4.js"></script>
 </body>
 </html>

@@ -136,7 +136,7 @@
   }
 
   function setMode(mode) {
-    prefs.mode = mode === "run" || mode === "packet" ? mode : "plan";
+    prefs.mode = mode === "run" || mode === "packet" || mode === "lists" ? mode : "plan";
     writePrefs({ mode: prefs.mode });
     document.body.dataset.mode = prefs.mode;
     document.querySelectorAll("[data-mode]").forEach((btn) => {
@@ -145,23 +145,29 @@
     const plan = document.getElementById("planStage");
     const run = document.getElementById("runStage");
     const packet = document.getElementById("packetStage");
+    const lists = document.getElementById("listsStage");
     if (plan) plan.hidden = prefs.mode !== "plan";
     if (run) run.hidden = prefs.mode !== "run";
     if (packet) packet.hidden = prefs.mode !== "packet";
+    if (lists) lists.hidden = prefs.mode !== "lists";
     document.querySelectorAll(".now-strip, .dashboard, .crew-band, .attention").forEach((el) => {
       el.hidden = prefs.mode !== "plan";
     });
-    document.querySelectorAll(".ops-bar, .role-row").forEach((el) => {
+    document.querySelectorAll(".ops-bar").forEach((el) => {
       el.hidden = prefs.mode === "packet";
     });
+    document.querySelectorAll(".role-row").forEach((el) => {
+      el.hidden = prefs.mode === "packet" || prefs.mode === "lists";
+    });
     const hash = (location.hash || "").replace("#", "");
-    if (prefs.mode === "run" || prefs.mode === "packet") {
+    if (prefs.mode === "run" || prefs.mode === "packet" || prefs.mode === "lists") {
       if (hash !== prefs.mode) history.replaceState(null, "", "#" + prefs.mode);
-    } else if (hash === "run" || hash === "packet") {
+    } else if (hash === "run" || hash === "packet" || hash === "lists") {
       history.replaceState(null, "", location.pathname);
     }
     if (prefs.mode === "run") renderRun();
     if (prefs.mode === "packet") renderPacket();
+    if (prefs.mode === "lists" && window.GGSPrepV4) window.GGSPrepV4.renderGear();
   }
 
   function cue() {
@@ -337,35 +343,16 @@
   }
 
   function bindRadio() {
-    const box = document.getElementById("radioNote");
-    const by = document.getElementById("radioBy");
-    if (!box) return;
-    const doc = store ? store.readDoc("radio") : null;
-    if (doc && doc.note) {
-      box.value = doc.note;
-      if (by) by.textContent = doc.by ? "Last update: " + doc.by : "";
-    }
-    let timer = null;
-    box.addEventListener("input", () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        const me = (JSON.parse(localStorage.getItem(PREFS) || "{}").me || "").trim();
-        if (store) store.saveDoc("radio", { note: box.value, by: me, at: new Date().toISOString() });
-        if (by) by.textContent = me ? "Last update: " + me : "Saved to the shared board";
-      }, 250);
-    });
+    /* v4 feed owns radio */
   }
 
   function refresh() {
     renderGates();
     if (prefs.mode === "run") renderRun();
     if (prefs.mode === "packet") renderPacket();
-    const doc = store ? store.readDoc("radio") : null;
-    const box = document.getElementById("radioNote");
-    if (box && doc && document.activeElement !== box) {
-      box.value = doc.note || "";
-      const by = document.getElementById("radioBy");
-      if (by && doc.by) by.textContent = "Last update: " + doc.by;
+    if (window.GGSRadioFeed) {
+      const feed = document.getElementById("radioFeed");
+      if (feed) window.GGSRadioFeed.render(feed);
     }
   }
 
@@ -383,7 +370,9 @@
   }
   bindRadio();
   const hash = (location.hash || "").replace("#", "");
-  if (hash === "run" || hash === "packet") prefs.mode = hash;
+  if (hash === "run" || hash === "packet" || hash === "lists") prefs.mode = hash;
+  const listsJump = document.getElementById("listsJump");
+  if (listsJump) listsJump.addEventListener("click", () => setMode("lists"));
   setMode(prefs.mode || "plan");
   refresh();
   setInterval(() => {
