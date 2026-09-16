@@ -41,6 +41,20 @@
     return NAME_ROLES.filter((row) => row.who.test(n)).map((row) => row.id);
   }
 
+  const JOB_ROLE = {
+    event: "captain",
+    setup: "setup",
+    tickets: "tickets",
+    food: "food",
+    campaign: "campaign",
+    production: "production",
+    relief: "floater",
+    relief2: "floater",
+    kelly: "greeter",
+    photo: "photo",
+    strike: "strike",
+  };
+
   function rolesFor(name, pack) {
     const slice = global.GGSCrewSlice;
     const have = (pack && pack.roles ? pack.roles.slice() : []) || [];
@@ -56,6 +70,12 @@
         ids[id] = true;
       }
     });
+    const claimed = global.GGSLeadDuties && global.GGSLeadDuties.jobFor(name);
+    const fromJob = claimed ? JOB_ROLE[claimed.id] : "";
+    if (fromJob && slice && !ids[fromJob]) {
+      const role = slice.ROLES.find((item) => item.id === fromJob);
+      if (role) have.push(role);
+    }
     return have.sort((a, b) => a.priority - b.priority);
   }
 

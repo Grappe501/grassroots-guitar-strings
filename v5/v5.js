@@ -24,8 +24,52 @@
   }
 
   function meName() {
-    if (window.GGSSignIn) return window.GGSSignIn.identity().name;
-    return String(prefs().me || "").trim();
+    const raw = window.GGSSignIn ? window.GGSSignIn.identity().name : String(prefs().me || "").trim();
+    const person = window.GGSPeople && (window.GGSPeople.uniquePerson(raw) || window.GGSPeople.findPerson(raw));
+    return person ? person.name : raw;
+  }
+
+  function clockNow() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, "0");
+    const d = String(now.getDate()).padStart(2, "0");
+    if (y + "-" + m + "-" + d === "2026-09-17") return now;
+    const mapped = new Date("2026-09-17T00:00:00");
+    mapped.setHours(now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+    return mapped;
+  }
+
+  function spotCue(name) {
+    const spots = window.GGSDaySpots;
+    if (!spots) return null;
+    const spot = spots.spotForName(name);
+    if (!spot || !spot.clock || !spot.clock.length) return null;
+    const now = clockNow();
+    function at(t) {
+      const p = String(t || "").split(":");
+      const d = new Date(now.getTime());
+      d.setSeconds(0, 0);
+      d.setHours(Number(p[0]) || 0, Number(p[1]) || 0, 0, 0);
+      return d;
+    }
+    let current = spot.clock[0];
+    let next = spot.clock[1] || null;
+    spot.clock.forEach(function (row, i) {
+      if (now >= at(row.t)) {
+        current = row;
+        next = spot.clock[i + 1] || null;
+      }
+    });
+    return {
+      place: spot.title,
+      do: current.text,
+      next: next ? next.text : "",
+      strike: current.kind === "strike",
+      waiting: now < at(spot.clock[0].t),
+      empty: false,
+      spot: spot,
+    };
   }
 
   function state() {
@@ -163,13 +207,18 @@
   }
 
   function renderNow(name, pack, roles, lead) {
-    const cue = slice.cueAt(roles, new Date());
+    const fromSpot = spotCue(name);
+    const cue = fromSpot || slice.cueAt(roles, clockNow());
     const card = document.getElementById("nowCard");
     card.classList.toggle("is-strike", !!cue.strike);
     document.getElementById("nowKicker").textContent = cue.strike ? "STRIKE" : cue.waiting ? "Be here first" : "You should be";
     document.getElementById("nowPlace").textContent = cue.place;
     document.getElementById("nowDo").textContent = cue.do;
-    document.getElementById("nowNext").textContent = cue.empty ? "When your name is on a job, this fills in." : "Hard stop 10:00 PM";
+    document.getElementById("nowNext").textContent = cue.empty
+      ? "When your name is on a job, this fills in."
+      : cue.next
+        ? "Next — " + cue.next
+        : "Hard stop 10:00 PM";
     const leadBox = document.getElementById("leadNext");
     leadBox.hidden = !lead;
     if (lead && window.GGSNextAction) window.GGSNextAction.paint(state(), roster());
@@ -256,6 +305,7 @@
     if (window.GGSSignIn && !window.GGSSignIn.identity().ok) return;
     const name = meName();
     if (!name) return;
+    if (window.GGSLeadDuties && window.GGSLeadDuties.seedDefaults) window.GGSLeadDuties.seedDefaults();
     const pack = packFor(name);
     const roles = leads.rolesFor(name, pack);
     const lead = leads.isLead(name);

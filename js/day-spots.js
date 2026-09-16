@@ -450,14 +450,16 @@
     return doc && doc.owners && typeof doc.owners === "object" ? doc.owners : {};
   }
 
-  function saveOwner(store, id, name) {
+  function saveOwner(store, id, name, opts) {
     if (!store) return;
     const next = Object.assign({}, owners(store), { [id]: String(name || "").trim() });
     store.saveDoc("spots", { v: 1, owners: next });
     syncRoster(store, id, next[id]);
     const spot = byId(id);
-    if (spot && spot.leadJob && global.GGSLeadDuties && next[id]) {
-      global.GGSLeadDuties.saveOwner(spot.leadJob, next[id]);
+    if (!opts || !opts.skipLead) {
+      if (spot && spot.leadJob && global.GGSLeadDuties && next[id]) {
+        global.GGSLeadDuties.saveOwner(spot.leadJob, next[id]);
+      }
     }
     if (store.flush) store.flush();
   }

@@ -194,7 +194,9 @@
   }
 
   function save(name, phone) {
-    const clean = String(name || "").trim();
+    const raw = String(name || "").trim();
+    const person = global.GGSPeople && (global.GGSPeople.uniquePerson(raw) || global.GGSPeople.findPerson(raw));
+    const clean = person ? person.name : raw;
     const number = String(phone || "").trim();
     writePrefs({ me: clean, phone: number });
     if (global.GGSPrepStore && global.GGSCrewSlice && global.GGSCrewSlice.phoneDigits(number)) {

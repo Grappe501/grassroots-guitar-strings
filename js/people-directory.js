@@ -182,6 +182,7 @@
       title: "Event Lead",
       weight: "Heaviest",
       cartoon: "Mighty Mouse",
+      defaultOwner: "Steve Grappe",
       arrival: "4:30 PM",
       owns: "The clock, every post, strike, 10:00 PM clear.",
       duties: [

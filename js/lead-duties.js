@@ -14,6 +14,12 @@
     });
   }
 
+  function syncSpot(id, owner) {
+    if (!global.GGSDaySpots || !store) return;
+    const spot = global.GGSDaySpots.SPOTS.find((row) => row.leadJob === id);
+    if (spot) global.GGSDaySpots.saveOwner(store, spot.id, owner, { skipLead: true });
+  }
+
   function saveOwner(id, owner) {
     if (!store) return;
     const next = jobs().map((job) => ({
@@ -21,6 +27,8 @@
       owner: job.id === id ? String(owner || job.cartoon).trim() || job.cartoon : job.owner,
     }));
     store.saveDoc("lead-jobs", { v: 1, jobs: next });
+    const claimed = next.find((row) => row.id === id);
+    if (claimed && claimed.owner) syncSpot(id, claimed.owner);
     if (store.flush) store.flush();
   }
 
@@ -94,7 +102,12 @@
       else saved.push({ id: job.id, owner: job.defaultOwner });
       dirty = true;
     });
-    if (dirty) store.saveDoc("lead-jobs", { v: 1, jobs: saved });
+    if (dirty) {
+      store.saveDoc("lead-jobs", { v: 1, jobs: saved });
+      saved.forEach((row) => {
+        if (row && row.owner) syncSpot(row.id, row.owner);
+      });
+    }
   }
 
   function renderBoard() {
@@ -139,7 +152,7 @@
     });
   }
 
-  global.GGSLeadDuties = { jobs, saveOwner, jobFor, isCartoon, briefing, renderBoard };
+  global.GGSLeadDuties = { jobs, saveOwner, jobFor, isCartoon, briefing, renderBoard, seedDefaults };
   global.addEventListener("ggs-prep-loaded", seedDefaults);
   if (document.getElementById("leadJobList")) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderBoard);
