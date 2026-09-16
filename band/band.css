@@ -51,6 +51,90 @@ body.band .band-room-label input {
   padding: 0.55rem 0.7rem;
 }
 
+.band-sheet {
+  background: #fff;
+  border: 2px solid #000066;
+  border-radius: 18px;
+  padding: 1rem 1rem 1.15rem;
+  margin-bottom: 1rem;
+  color: #12124a;
+}
+
+.band-sheet__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  border-bottom: 4px solid #ca913d;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.band-sheet__head h2 {
+  margin: 0.1rem 0 0.25rem;
+  color: #000066;
+  font-size: 1.45rem;
+}
+
+.band-sheet__who {
+  font-weight: 800;
+  color: #000066;
+  text-align: right;
+}
+
+.band-sheet__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.band-sheet__grid section {
+  border: 1px solid #d5deea;
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+}
+
+.band-sheet__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.band-sheet__table th,
+.band-sheet__table td {
+  text-align: left;
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid #e4ebf3;
+}
+
+.band-sheet__table th {
+  color: #000066;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.band-sheet__table td:first-child {
+  width: 6.5rem;
+  font-weight: 800;
+  color: #000066;
+  white-space: nowrap;
+}
+
+.band-sheet__next {
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #d5deea;
+}
+
+.band-sheet__next p + p { margin-top: 0.25rem; }
+
+@media (max-width: 640px) {
+  .band-sheet__grid,
+  .band-sheet__head { display: block; }
+  .band-sheet__who { text-align: left; margin-top: 0.6rem; }
+}
+
 body.band #greenRoomSave {
   margin-top: 0.65rem;
   border: 0;

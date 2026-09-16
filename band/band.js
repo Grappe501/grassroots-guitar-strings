@@ -130,8 +130,8 @@
     if (title) title.textContent = room ? room : "Not set yet";
     if (body) {
       body.textContent = room
-        ? "Band green room from 6:15–7:00, and after sound check if they want it. Back at the stage by 6:50."
-        : "Call Tommy at Woody’s and ask what room the band can have from 6:15–7:00 — and after sound check if he has something earlier.";
+        ? "Band green room from 6:15–7:00, and after acoustic PA check if they want it. Preshow is 6:30. Back for the 7:00 set."
+        : "Call Tommy at Woody’s and ask what room the band can have from 6:15–7:00 — and after acoustic PA check if he has something earlier.";
     }
     if (input && !input.value) input.value = room;
   }
