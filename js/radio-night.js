@@ -90,7 +90,7 @@
     if (input) {
       input.placeholder =
         selected === "all"
-          ? "Ben is 15 out. Need two more teardown people."
+          ? "Tell the room something good."
           : "Private to " + name + "…";
     }
     if (talk) talk.textContent = selected === "all" ? "Hold to talk — ALL" : "Hold to talk — " + name;
@@ -149,6 +149,8 @@
           (selected === p.id ? " is-active" : "") +
           (live ? " is-live" : " is-away") +
           (p.talk ? " is-talk" : "") +
+          (p.vibe === "help" ? " is-help" : "") +
+          (p.vibe === "fire" ? " is-fire" : "") +
           (unread ? " is-unread" : "") +
           '" data-radio-to="' +
           esc(p.id) +
@@ -157,7 +159,15 @@
           '"><span>' +
           esc(first) +
           "</span><em>" +
-          (p.talk ? (p.talk === "all" ? "ALL" : "PTT") : live ? "live" : "away") +
+          (p.talk
+            ? p.talk === "all"
+              ? "ALL"
+              : "PTT"
+            : p.vibe
+              ? { here: "Here", walk: "Walk", break: "Break", help: "Help", fire: "Fire" }[p.vibe] || "live"
+              : live
+                ? "live"
+                : "away") +
           "</em>" +
           (unread ? '<i class="radio-badge">' + unread + "</i>" : "") +
           "</button>"
@@ -187,12 +197,13 @@
     const id = myId();
     if (!db || !id || !who().ok) return;
     db.saveDoc("here:" + id, {
-      v: 1,
+      v: 2,
       id: id,
       name: myName(),
       seen: Date.now(),
       talk: talkTo || "",
       gone: false,
+      vibe: global.GGSNightSocial ? global.GGSNightSocial.vibe() : "here",
     });
   }
 
@@ -522,7 +533,21 @@
     hint("Join Woody's Wi-Fi first. Then tap Talk once to open the mic. Hold to talk.");
   }
 
-  global.GGSRadioNight = { attach, pick };
+  function selectedName() {
+    if (selected === "all") return "";
+    const them = livePeople().find((p) => p.id === selected);
+    return them ? String(them.name || "").trim() : "";
+  }
+
+  global.GGSRadioNight = {
+    attach,
+    pick,
+    touch: function () {
+      beat("");
+    },
+    selectedName,
+    livePeople,
+  };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", attach);
   else attach();
 })(window);

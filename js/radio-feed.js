@@ -105,12 +105,62 @@
     return el;
   }
 
+  function myFirst() {
+    const n = global.GGSSignIn ? global.GGSSignIn.identity().name : "";
+    return String(n || "")
+      .trim()
+      .split(/\s+/)[0]
+      .toLowerCase();
+  }
+
+  function mentioned(text) {
+    const me = myFirst();
+    if (!me || me.length < 2) return false;
+    return new RegExp("\\b" + me.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i").test(String(text || ""));
+  }
+
+  function rxHtml(row) {
+    const marks = ["🔥", "🙌", "👍"];
+    const rx = row.rx && typeof row.rx === "object" ? row.rx : {};
+    const me = String((global.GGSSignIn && global.GGSSignIn.identity().name) || "").trim();
+    return (
+      '<span class="radio-rx">' +
+      marks
+        .map((mark) => {
+          const list = Array.isArray(rx[mark]) ? rx[mark] : [];
+          const mine = list.some((n) => String(n).toLowerCase() === me.toLowerCase());
+          return (
+            '<button type="button" class="radio-rx-btn' +
+            (mine ? " is-mine" : "") +
+            (list.length ? " is-on" : "") +
+            '" data-rx="' +
+            esc(row.id || "") +
+            '" data-mark="' +
+            mark +
+            '">' +
+            mark +
+            (list.length ? "<i>" + list.length + "</i>" : "") +
+            "</button>"
+          );
+        })
+        .join("") +
+      "</span>"
+    );
+  }
+
   function lineHtml(row) {
     const by = String(row.by || "Unknown").trim() || "Unknown";
     const color = colorFor(by);
     const when = row.at ? new Date(row.at).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "";
+    const kind = String(row.kind || "");
+    const mine = mentioned(row.text);
     return (
-      '<div class="radio-line" style="--who:' +
+      '<div class="radio-line' +
+      (kind ? " is-" + esc(kind) : "") +
+      (mine ? " is-mention" : "") +
+      '" data-id="' +
+      esc(row.id || "") +
+      '" style="--who:' +
       color +
       '"><span class="radio-who">' +
       esc(by) +
@@ -118,7 +168,9 @@
       esc(row.text || "") +
       '</span><span class="radio-time">' +
       esc(when) +
-      "</span></div>"
+      "</span>" +
+      (row.id ? rxHtml(row) : "") +
+      "</div>"
     );
   }
 
@@ -163,27 +215,64 @@
     }
     const stick = root.scrollHeight - root.scrollTop < root.clientHeight + 40;
     root.innerHTML = lines.map(lineHtml).join("");
+    root.querySelectorAll("[data-rx]").forEach((btn) => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        react(btn.dataset.rx, btn.dataset.mark);
+        renderFeed(root);
+      });
+    });
     if (stick) root.scrollTop = root.scrollHeight;
   }
 
-  function send(getName, input) {
+  function pushLine(by, text, kind) {
     const store = global.GGSPrepStore;
-    const text = String((input && input.value) || "").trim();
-    const by = whoFn(getName);
-    if (!text) return { ok: false, reason: "empty" };
-    if (by.length < 2) return { ok: false, reason: "name" };
-    const messages = readMessages().concat({
+    const name = String(by || "").trim();
+    const body = String(text || "").trim();
+    if (!body) return { ok: false, reason: "empty" };
+    if (name.length < 2) return { ok: false, reason: "name" };
+    const row = {
       id: stamp(),
-      by: by.slice(0, 40),
-      text: text.slice(0, 240),
+      by: name.slice(0, 40),
+      text: body.slice(0, 240),
       at: new Date().toISOString(),
-    });
+    };
+    if (kind) row.kind = String(kind).slice(0, 16);
+    const messages = readMessages().concat(row);
     if (store) {
       store.saveDoc(activeDoc(), { v: 4, messages: messages.slice(activeDoc() === "radio" ? -80 : -60) });
       if (store.flush) store.flush();
     }
-    if (input) input.value = "";
     return { ok: true };
+  }
+
+  function react(id, mark) {
+    const store = global.GGSPrepStore;
+    const by = String((global.GGSSignIn && global.GGSSignIn.identity().name) || "").trim();
+    if (!store || !id || !by || by.length < 2) return { ok: false };
+    const key = String(mark || "🔥");
+    const messages = readMessages().map((row) => {
+      if (String(row.id || "") !== String(id)) return row;
+      const rx = Object.assign({}, row.rx && typeof row.rx === "object" ? row.rx : {});
+      const list = Array.isArray(rx[key]) ? rx[key].slice() : [];
+      const hit = list.findIndex((n) => String(n).toLowerCase() === by.toLowerCase());
+      if (hit >= 0) list.splice(hit, 1);
+      else list.push(by.slice(0, 40));
+      if (list.length) rx[key] = list;
+      else delete rx[key];
+      return Object.assign({}, row, { rx: rx });
+    });
+    store.saveDoc(activeDoc(), { v: 4, messages: messages.slice(activeDoc() === "radio" ? -80 : -60) });
+    if (navigator.vibrate) navigator.vibrate(8);
+    return { ok: true };
+  }
+
+  function send(getName, input) {
+    const text = String((input && input.value) || "").trim();
+    const by = whoFn(getName);
+    const result = pushLine(by, text);
+    if (result.ok && input) input.value = "";
+    return result;
   }
 
   function mount(opts) {
@@ -235,5 +324,7 @@
     digestText,
     setChannelSource,
     activeDoc,
+    pushLine,
+    react,
   };
 })(window);

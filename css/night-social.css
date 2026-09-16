@@ -1,0 +1,165 @@
+.night-pulse {
+  margin: 0.75rem 0 0.85rem;
+  padding: 0.7rem 0.75rem 0.8rem;
+  border-radius: 16px;
+  background: #0a0a4a;
+  border: 1px solid #2a4154;
+}
+
+body:not(.v5) .night-pulse {
+  background: #f4f7fc;
+  border-color: rgba(0, 0, 102, 0.16);
+}
+
+.night-pulse .eyebrow {
+  margin-bottom: 0.45rem;
+}
+
+.night-vibes,
+.night-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.night-quick {
+  margin-top: 0.4rem;
+}
+
+.night-chip {
+  border: 1px solid #2a4154;
+  border-radius: 999px;
+  background: transparent;
+  color: #e7eef4;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.42rem 0.7rem;
+  cursor: pointer;
+}
+
+body:not(.v5) .night-chip {
+  color: #12124a;
+  border-color: rgba(0, 0, 102, 0.2);
+  background: #fff;
+}
+
+.night-chip.is-on,
+.night-chip--gold {
+  background: #ca913d;
+  border-color: #ca913d;
+  color: #07074a;
+}
+
+.night-chip--send:active,
+.night-chip:active {
+  transform: scale(0.98);
+}
+
+.radio-line {
+  grid-template-columns: 6rem minmax(0, 1fr) 4.2rem;
+  grid-template-areas:
+    "who text time"
+    "rx rx rx";
+}
+
+body.v5 .radio-line {
+  grid-template-columns: 4.8rem minmax(0, 1fr) 3.2rem;
+}
+
+.radio-who {
+  grid-area: who;
+}
+
+.radio-text {
+  grid-area: text;
+}
+
+.radio-time {
+  grid-area: time;
+}
+
+.radio-rx {
+  grid-area: rx;
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.15rem 0 0.2rem;
+}
+
+.radio-rx-btn {
+  border: 1px solid #2a4154;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.12rem 0.45rem;
+  cursor: pointer;
+}
+
+body:not(.v5) .radio-rx-btn {
+  border-color: #d9d6ce;
+}
+
+.radio-rx-btn i {
+  font-style: normal;
+  margin-left: 0.15rem;
+}
+
+.radio-rx-btn.is-on {
+  border-color: #ca913d;
+}
+
+.radio-rx-btn.is-mine {
+  background: rgba(202, 145, 61, 0.22);
+}
+
+.radio-line.is-hype,
+.radio-line.is-shout {
+  background: rgba(202, 145, 61, 0.14);
+}
+
+.radio-line.is-mention {
+  box-shadow: inset 3px 0 0 #ca913d;
+}
+
+.night-hype-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 40%, rgba(202, 145, 61, 0.55), rgba(7, 7, 74, 0.15) 58%, transparent 72%);
+  animation: nightHype 1.6s ease-out forwards;
+}
+
+.night-hype-flash p {
+  margin: 0;
+  font-family: "League Spartan", Raleway, sans-serif;
+  font-size: clamp(1.8rem, 8vw, 3rem);
+  color: #ca913d;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+@keyframes nightHype {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.radio-person.is-help {
+  outline: 2px solid #c0172a;
+}
+
+.radio-person.is-fire em {
+  color: #ca913d;
+}
