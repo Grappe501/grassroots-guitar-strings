@@ -285,7 +285,7 @@
         "6:15 table back up. 6:30 concert-door browse window. Stay.",
         "7:15 close again. Sit the concert 45 minutes. Relief comes get you if a line forms.",
         "8:00 table through encore. Box loose shirts so strike is 20 minutes.",
-        "8:45 Strike B. Banners, bungees, both campaign cloths, conversation cards, count, bins to the campaign vehicle.",
+        "8:45 Strike B. Campaign signs, both shirt stacks, push cards, foldovers, pull-up, hanging banners, pens, pins, stakes, cloths, conversation cards. Count. Bins to the campaign vehicle.",
       ],
     },
     {
