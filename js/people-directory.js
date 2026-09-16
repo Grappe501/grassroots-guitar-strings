@@ -263,10 +263,10 @@
       title: "Production Lead",
       weight: "All day with Tracy",
       cartoon: "Scooby",
-      arrival: "8:00 AM",
+      arrival: "8:00–10:00 AM",
       owns: "Tracy's helper all day. At encore, 3 muscle carry lights and sound out.",
       duties: [
-        "8:00 AM with Tracy. One system. Do not build a second plot.",
+        "Tracy arrives 8:00–10:00 AM with a complete lights and sound system. Ready to go. Band loads in at 2:00.",
         "Someone brings the bar stool. Acoustic 5:45–6:15 inside. Concert-only stay in cars until 6:30.",
         "6:45 checkpoint with Event Lead. Stay through the last song.",
         "Strike D: Tracy directs. Helper plus 3 muscle carry speakers, lights, and cases to his vehicle.",

@@ -4,8 +4,9 @@
   const state = store ? store.readCache() : JSON.parse(localStorage.getItem("ggs-prep-2026-09-17-v2") || "{}");
   const PREFS = "ggs-prep-v3-prefs";
   const milestones = [
-    ["2026-09-17T08:00:00", "8:00 AM", "Venue access + setup"],
-    ["2026-09-17T10:00:00", "10:00 AM", "System line check — band at 4:30"],
+    ["2026-09-17T08:00:00", "8:00 AM", "Venue open. Tracy window 8-10"],
+    ["2026-09-17T10:00:00", "10:00 AM", "Tracy on site — band load-in 2:00"],
+    ["2026-09-17T14:00:00", "2:00 PM", "Band load-in — you tell us"],
     ["2026-09-17T16:30:00", "4:30 PM", "SOUND CHECK + night crew"],
     ["2026-09-17T17:00:00", "5:00 PM", "Dinner doors — concert-only stay in cars"],
     ["2026-09-17T17:30:00", "5:30 PM", "Buffet opens"],
@@ -54,17 +55,41 @@
     "setup:0:17": { done: true, owner: "Venue", when: "In place on arrival" },
   };
 
-  function seedVenueLayout() {
+  const TRACY_READY = {
+    "overview:1:6": { done: true, owner: "Tracy", when: "8-10 AM · he brings it" },
+    "production:0:0": { done: true, owner: "Tracy", when: "Complete system" },
+    "production:0:3": { done: true, owner: "Tracy", when: "He brings it" },
+    "production:0:4": { done: true, owner: "Tracy", when: "He brings it" },
+    "production:0:5": { done: true, owner: "Tracy", when: "He brings it" },
+    "production:0:6": { done: true, owner: "Tracy", when: "He brings it" },
+    "production:0:7": { done: true, owner: "Tracy", when: "Ready when he is up" },
+    "gear:in:production:0": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:1": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:2": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:3": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:4": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:5": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:6": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:7": { done: true, owner: "Tracy", when: "He brings it" },
+    "gear:in:production:8": { done: true, owner: "Tracy", when: "He brings it" },
+  };
+
+  function seedFixed(map, already) {
     let wrote = false;
-    Object.keys(VENUE_LAYOUT).forEach((k) => {
+    Object.keys(map).forEach((k) => {
       const cur = state[k] || {};
-      const owner = String(cur.owner || "").toLowerCase();
-      if (cur.done && owner.includes("venue")) return;
-      state[k] = Object.assign({}, cur, VENUE_LAYOUT[k]);
+      if (already(cur)) return;
+      state[k] = Object.assign({}, cur, map[k]);
       if (store) store.saveOne(k, state[k]);
       wrote = true;
     });
-    if (!wrote) return;
+    return wrote;
+  }
+
+  function seedVenueLayout() {
+    const venue = seedFixed(VENUE_LAYOUT, (cur) => cur.done && String(cur.owner || "").toLowerCase().includes("venue"));
+    const tracy = seedFixed(TRACY_READY, (cur) => cur.done && /tracy/i.test(String(cur.owner || "")));
+    if (!venue && !tracy) return;
     restore();
     progress();
     applyFilters();

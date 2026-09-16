@@ -16,7 +16,7 @@ const defaults = {
     "Server 3 — serving line with Ben.",
     "Water — $1 bottles only. Tea and lemonade are free while they last.",
     "Campaign + merch — one table, 30 min set",
-    "Tracy production helper — 8:00 AM through Strike D",
+    "Tracy production helper — with Tracy 8:00–10:00 AM through Strike D",
     "Floater A — relief loop all night",
     "Floater B — relief loop + roam shots if no Photo Lead",
   ],
@@ -46,7 +46,7 @@ function arrivalFor(role, kind) {
   if (kind === "strike") return "After show";
   if (/muscle/i.test(role)) return "8:45 PM";
   if (/parking|directions|crowd/i.test(role)) return "5:00 PM";
-  if (/tracy/i.test(role)) return "8:00 AM";
+  if (/tracy/i.test(role)) return "8:00–10:00 AM";
   if (/floater/i.test(role)) return "4:30 PM";
   return "5:00 PM";
 }

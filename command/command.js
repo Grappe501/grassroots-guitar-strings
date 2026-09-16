@@ -1,6 +1,7 @@
 const milestones=[
- ['2026-09-17T08:00:00','8:00 AM','Venue access + setup'],
- ['2026-09-17T10:00:00','10:00 AM','Infrastructure / production check'],
+ ['2026-09-17T08:00:00','8:00 AM','Venue open. Tracy window 8-10'],
+ ['2026-09-17T10:00:00','10:00 AM','Tracy on site — band load-in 2:00'],
+ ['2026-09-17T14:00:00','2:00 PM','Band load-in — you tell us'],
  ['2026-09-17T16:30:00','4:30 PM','Shift setup → event mode'],
  ['2026-09-17T17:00:00','5:00 PM','Dinner doors — concert-only stay in cars'],
  ['2026-09-17T17:30:00','5:30 PM','Buffet opens'],
@@ -22,7 +23,7 @@ const areas=[
  ['Tickets','Ticket station, payment procedure and reconciliation.','Tickets & Money'],
  ['Campaign','30 min merch set. Pull-ups, push cards, buttons, candy, foldovers.','Campaign & Merch'],
  ['Food & Drinks','8 gal unsweet tea, 6 gal lemonade, 120 bottles water, 12 bags ice. One ice chest + scoop for tea and lemonade.','Food & Drinks'],
- ['Production','Tracy, sound, lights and David acoustic setup.','Sound & Show'],
+ ['Production','Tracy arrives 8-10 with a complete lights and sound system. Band loads in at 2:00.','Sound & Show'],
  ['Breakdown','Same 7 people. Venue furniture stays. 45–60 min.','Breakdown']
 ];
 const state=JSON.parse(localStorage.getItem('ggs-command-v1')||'{}');

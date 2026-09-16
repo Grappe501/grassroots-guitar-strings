@@ -4,16 +4,16 @@
   }
 
   const CLOCK = [
-    beat("08:00", "Setup 1–3 · Tracy helper", "Venue open. Event t-shirts on. Furniture is already placed. Do not rebuild tables or the dance floor.", "arrive"),
+    beat("08:00", "Setup 1–3 · Tracy helper", "Venue open. Event t-shirts on. Furniture is already placed. Tracy arrives sometime 8:00–10:00 with a complete lights and sound system. Ready to go.", "arrive"),
     beat("08:05", "Setup 1–3", "Walk the room, exits, and lobby. Then dress the 8 guest tables only.", "work"),
-    beat("08:10", "Tracy helper", "Unload one production system with Tracy. Cables, tape, fetch. Do not build a second plot.", "work"),
+    beat("08:10", "Tracy helper", "Wait for Tracy in the 8:00–10:00 window. He has everything. Helper job is cables, tape, fetch if he asks. Do not build a second plot.", "work"),
     beat("08:25", "Setup 3 / Campaign", "Tables done. Start the 30-minute merch set. Hang two banners with bungee cords. Table conversation cards on the guest tables. Cards, buttons, candy, shirts.", "work"),
     beat("08:25", "Setup 1 + 2", "Place printed signs. Dress the lobby ticket table.", "work"),
     beat("08:40", "Setup 1–3", "Set the tea and lemonade station. No ice yet. Ice waits until 4:30.", "work"),
     beat("09:00", "Setup 3", "Merch set done. Yard-sign sheet on the same table. First name + phone.", "work"),
     beat("09:15", "Tracy helper", "Power mapped. Dance floor cables taped. Spare batteries at the mixer.", "work"),
     beat("09:30", "Tracy helper", "Bar stool staged for David. One vocal mic and stand ready.", "work"),
-    beat("10:00", "Tracy + helper", "System ready. Line check and lights. Band sound check is 4:30 — do not wait for the band this morning.", "work"),
+    beat("10:00", "Tracy + helper", "Tracy is on site. Lights and sound are his complete system. Band loads in at 2:00. Sound check is 4:30.", "work"),
     beat("10:30", "Setup 1–3", "Morning work is done. Leave. Eat a real lunch off site. Back at 4:30 in your night seat.", "leave"),
     beat("12:00", "Tracy helper", "Lunch off site, 45 minutes, only if Tracy can hold the system.", "eat"),
     beat("14:00", "David + band", "LOAD IN 2:00 PM — you tell us. Band merch table and merch area go up when the band sets up.", "arrive"),
@@ -90,12 +90,12 @@
   }
 
   const BAND = [
-    beat("08:00", "Tracy · lights · sound", "Venue open. Load one system. Furniture is already placed — do not move tables or the dance floor.", "arrive"),
-    beat("08:10", "Tracy · helper", "Unload speakers, mixer, mics, stands, lights. Tape as you go. One plot only.", "work"),
-    beat("09:00", "Tracy · helper", "Power mapped. Dance-floor cables taped. Lights hung and aimed.", "work"),
+    beat("08:00", "Tracy · lights · sound", "Tracy window opens. He arrives sometime 8:00–10:00 with a complete lights and sound system. Ready to go. Furniture is already placed — do not move tables or the dance floor.", "arrive"),
+    beat("08:10", "Tracy · helper", "He has everything. Helper fetches if he asks. One plot only. Do not build a second system.", "work"),
+    beat("09:00", "Tracy · helper", "If he is in: hang and aim. If not: wait. The system is his and it is complete.", "work"),
     beat("09:30", "Tracy · helper", "Acoustic ready: bar stool, one vocal mic, stand. Concert mics staged, not live.", "work"),
-    beat("10:00", "Tracy · helper", "System line check. Lights focused. Band is not required this morning.", "work"),
-    beat("10:30", "Tracy", "Morning build is done. Hold the system or take lunch if a body stays on it.", "leave"),
+    beat("10:00", "Tracy · helper", "Tracy is on site. Lights and sound ready. Band loads in at 2:00. Sound check is 4:30.", "work"),
+    beat("10:30", "Tracy", "Morning window is closed. Hold the system or take lunch if a body stays on it.", "leave"),
     beat("12:00", "Tracy · helper", "Lunch off site, 45 minutes, only if the system can hold.", "eat"),
     beat("14:00", "David + band", "LOAD IN 2:00 PM — you tell us. Band merch table and merch area go up when the band sets up.", "arrive"),
     beat("16:30", "David + band + Tracy", "SOUND CHECK. You loaded in at 2:00. Acoustic patch and concert patch. Not 5:00. Not after BBQ starts.", "show"),
@@ -116,16 +116,16 @@
   ];
 
   const HOUSE = [
-    beat("08:00", "Setup 1–3 · Tracy helper", "Venue open. Setup arrives. Load-in. Dress the room. Furniture already placed.", "arrive", "setup"),
+    beat("08:00", "Setup 1–3 · Tracy helper", "Venue open. Setup arrives. Dress the room. Furniture already placed. Tracy arrives 8:00–10:00 with a complete lights and sound system.", "arrive", "setup"),
     beat("08:05", "Setup 1–3", "Walk room, exits, lobby. Dress 8 guest tables only.", "work", "setup"),
-    beat("08:10", "Tracy + helper", "Unload lights and sound. One system.", "work", "setup"),
+    beat("08:10", "Tracy + helper", "Tracy window. He arrives 8:00–10:00 with everything for lights and sound. Ready to go.", "work", "setup"),
     beat("08:25", "Setup 3 / Campaign", "30-minute merch set. Hang two banners with bungee cords. Table conversation cards on the guest tables.", "work", "setup"),
     beat("08:25", "Setup 1 + 2", "Printed signs up. Dress the lobby ticket table.", "work", "setup"),
     beat("08:40", "Setup 1–3", "Tea and lemonade station. No ice until 4:30.", "work", "setup"),
     beat("09:00", "Setup 3", "Merch done. Yard-sign sheet on the table.", "work", "setup"),
     beat("09:15", "Tracy + helper", "Power mapped. Dance-floor cables taped.", "work", "setup"),
     beat("09:30", "Tracy + helper", "Bar stool and one vocal mic staged for David.", "work", "setup"),
-    beat("10:00", "Tracy + helper", "Setup ready. Line check and lights. Band is not required.", "work", "setup"),
+    beat("10:00", "Tracy + helper", "Tracy is on site. Lights and sound ready. Band loads in at 2:00.", "work", "setup"),
     beat("10:30", "Setup 1–3", "Morning setup done. Leave. Back at 4:30 in night seats.", "leave", "setup"),
     beat("12:00", "Tracy helper", "Lunch 45 minutes only if the system can hold.", "eat", "setup"),
     beat("14:00", "David + band", "LOAD IN 2:00 PM — you tell us. Band merch table and merch area go up when the band sets up.", "arrive", "arrive"),
