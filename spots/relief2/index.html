@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000066">
+<title>Thursday clock</title>
+<link rel="stylesheet" href="/css/kelly-brand.css">
+<link rel="stylesheet" href="/spots/spots.css">
+<link rel="stylesheet" href="/css/contrast.css">
+</head>
+<body class="spot" data-spot="relief2">
+<header class="spot-top">
+  <p class="eyebrow" id="spotKicker">SPOT</p>
+  <h1 id="spotTitle">Your day</h1>
+  <p id="spotWho">Name goes here tomorrow.</p>
+  <p><a href="/spots/">All 13 pages</a> · <a href="/v5/">My night</a></p>
+</header>
+<main class="spot-wrap">
+  <article class="spot-now" id="spotNow"></article>
+  <article class="spot-facts">
+    <p class="eyebrow">THIS SEAT</p>
+    <p id="spotWhy"></p>
+    <p><b>Arrive</b> — <span id="spotArrive"></span></p>
+    <p><b>Eat</b> — <span id="spotEat"></span></p>
+    <p><b>Sit</b> — <span id="spotSit"></span></p>
+    <p><b>Wear</b> — <span id="spotWear"></span></p>
+    <p><b>Shows</b> — <span id="spotShows"></span></p>
+    <div id="spotPick"></div>
+  </article>
+  <ol class="spot-clock" id="spotClock"></ol>
+</main>
+<script src="/js/prep-store.js"></script>
+<script src="/js/crew-slice.js"></script>
+<script src="/js/people-directory.js"></script>
+<script src="/js/site-leads.js"></script>
+<script src="/js/lead-duties.js"></script>
+<script src="/js/day-spots.js"></script>
+<script src="/spots/spots.js"></script>
+</body>
+</html>

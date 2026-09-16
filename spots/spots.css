@@ -1,0 +1,154 @@
+body.spot {
+  margin: 0;
+  background: #f4f7fc;
+  color: #12124a;
+  font-family: Raleway, ui-sans-serif, system-ui, sans-serif;
+}
+
+.spot-top {
+  background: #000066;
+  color: #e7eef4;
+  padding: calc(1rem + env(safe-area-inset-top)) 1rem 1.1rem;
+  border-bottom: 4px solid #ca913d;
+}
+
+.spot-top h1 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: clamp(1.7rem, 7vw, 2.5rem);
+  color: #fff;
+}
+
+.spot-top p,
+.spot-top a {
+  color: #dbe7ef;
+}
+
+.spot-top a {
+  font-weight: 800;
+}
+
+.spot-wrap {
+  width: min(42rem, calc(100% - 1.4rem));
+  margin: 1rem auto 2.5rem;
+}
+
+.spot-facts,
+.spot-now,
+.spot-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 102, 0.14);
+  border-radius: 16px;
+  padding: 1rem 1.05rem 1.1rem;
+  margin-bottom: 0.85rem;
+}
+
+.spot-now.is-sit,
+.spot-now.is-eat {
+  border-left: 6px solid #ca913d;
+}
+
+.spot-now.is-strike {
+  border-left: 6px solid #9b1d1d;
+}
+
+.spot-now h2,
+.spot-card h2 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1.35rem;
+}
+
+.spot-facts p,
+.spot-card p {
+  margin: 0.35rem 0 0;
+}
+
+.spot-owner,
+.spot-card select {
+  width: 100%;
+  margin-top: 0.7rem;
+  min-height: 3rem;
+  border: 2px solid #000066;
+  border-radius: 12px;
+  background: #fff;
+  color: #12124a;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.45rem 0.6rem;
+}
+
+.spot-go {
+  display: inline-block;
+  margin-top: 0.75rem;
+  background: #ca913d;
+  color: #07074a;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+}
+
+.spot-clock {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.spot-line {
+  display: grid;
+  grid-template-columns: 5.6rem 4.4rem 1fr;
+  gap: 0.45rem;
+  padding: 0.7rem 0.2rem;
+  border-bottom: 1px solid rgba(0, 0, 102, 0.1);
+  align-items: start;
+}
+
+.spot-line b {
+  font-family: "League Spartan", Raleway, sans-serif;
+  font-size: 0.95rem;
+}
+
+.spot-line em {
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a4b08;
+  padding-top: 0.15rem;
+}
+
+.spot-line.is-sit em,
+.spot-line.is-eat em {
+  color: #8a4b08;
+}
+
+.spot-line.is-now {
+  background: #fff6e8;
+  border-radius: 12px;
+  padding: 0.75rem 0.55rem;
+  border: 2px solid #ca913d;
+}
+
+.spot-hub {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.spot-card h2 a {
+  color: #000066;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .spot-line {
+    grid-template-columns: 4.8rem 1fr;
+  }
+  .spot-line em {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+  .spot-line span {
+    grid-column: 1 / -1;
+  }
+}

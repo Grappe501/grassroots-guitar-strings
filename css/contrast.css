@@ -14,6 +14,9 @@
 .gap-text,
 .lists-stage,
 .lead-job,
+.spot-card,
+.spot-now,
+.spot-facts,
 .job,
 .stats article,
 .panel,
@@ -30,7 +33,8 @@
 .radio-compose input,
 .wifi-form input,
 .me-phone-edit input,
-.lead-owner {
+.lead-owner,
+.spot-owner {
   background: #fff;
   color: var(--ggs-on-light);
 }
@@ -65,7 +69,10 @@ body:not(.v5):not(.wifi) .ops-bar .eyebrow,
 body:not(.v5):not(.wifi) .crew-band .eyebrow,
 body:not(.v5):not(.wifi) .attention .eyebrow,
 body:not(.v5):not(.wifi) .stats .eyebrow,
-body:not(.v5):not(.wifi) .lead-job .eyebrow {
+body:not(.v5):not(.wifi) .lead-job .eyebrow,
+body:not(.v5):not(.wifi) .spot-now .eyebrow,
+body:not(.v5):not(.wifi) .spot-facts .eyebrow,
+body:not(.v5):not(.wifi) .spot-card .eyebrow {
   color: var(--ggs-label-light);
 }
 
@@ -75,6 +82,7 @@ body:not(.v5):not(.wifi) .lead-job .eyebrow {
 .signin__card .eyebrow,
 .v5-top .eyebrow,
 .lead-top .eyebrow,
+.spot-top .eyebrow,
 .bar .eyebrow,
 .radio-digest .eyebrow,
 body.v5 .eyebrow,

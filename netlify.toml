@@ -27,6 +27,16 @@
   status = 301
 
 [[redirects]]
+  from = "/day"
+  to = "/spots/"
+  status = 302
+
+[[redirects]]
+  from = "/day/"
+  to = "/spots/"
+  status = 302
+
+[[redirects]]
   from = "/night"
   to = "/v5/"
   status = 302

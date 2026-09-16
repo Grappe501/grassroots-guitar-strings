@@ -140,6 +140,23 @@
     document.getElementById("briefNext").textContent = brief.next;
     const list = document.getElementById("briefDuties");
     list.innerHTML = (brief.duties || []).map((d) => "<li>" + esc(d) + "</li>").join("");
+    const day = window.GGSDaySpots && window.GGSDaySpots.spotForName(name);
+    let link = card.querySelector("[data-day-spot]");
+    if (!link) {
+      link = document.createElement("a");
+      link.className = "v5-link";
+      link.setAttribute("data-day-spot", "1");
+      card.appendChild(link);
+    }
+    if (day) {
+      link.hidden = false;
+      link.href = "/spots/" + day.id + "/";
+      link.textContent = "Your minute-by-minute day";
+    } else {
+      link.hidden = false;
+      link.href = "/spots/";
+      link.textContent = "The 13 phone pages";
+    }
   }
 
   function renderNow(name, pack, roles, lead) {
