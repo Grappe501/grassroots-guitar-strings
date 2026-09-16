@@ -322,7 +322,7 @@
       id: "floater",
       label: "Floater / relief",
       priority: 2,
-      test: /floater|relief loop|becomes floater|setup person 1|setup person 2/i,
+      test: /floater|relief loop|relief lead|becomes floater|setup person 1|setup person 2/i,
       roster: /floater|relief|setup 1|setup 2|setup person 1|setup person 2/i,
       day: [
         { start: "2026-09-17T08:00:00", end: "2026-09-17T10:30:00", place: "Main room · 8 tables", do: "Dress the 8 tables and signs with the other two. Then you may leave." },

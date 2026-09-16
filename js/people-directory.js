@@ -24,7 +24,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "You are already in the system.",
-      next: "Read the 10 lead jobs. Tomorrow you pick one. Steve starts at Event Lead.",
+      next: "Read the 11 lead jobs. Tomorrow you pick one. Steve starts at Event Lead.",
       duties: [
         "Look at /leads/ before the meeting.",
         "Event Lead is the heaviest. Then Setup, Tickets, Food, Campaign.",
@@ -39,7 +39,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -50,7 +50,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -61,7 +61,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -72,7 +72,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -99,7 +99,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -126,7 +126,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Food is a natural seat if you want it with Ben. Or take another job from the list of 10.",
+      next: "Food is a natural seat if you want it with Ben. Or take another job from the list of 11.",
       duties: ["Read /leads/.", "Food & Drinks is open unless Ben claims it."],
     },
     {
@@ -137,7 +137,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -148,7 +148,7 @@
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -269,17 +269,32 @@
       weight: "All night on your feet",
       cartoon: "Road Runner",
       arrival: "4:30 PM",
-      owns: "Floater A and Floater B. Breaks, ice, trash.",
+      owns: "Floater A. Breaks, ice, trash. Doors with tickets.",
       duties: [
         "After 4:30 you only relieve posts and run ice/trash.",
         "Every 30 minutes: tickets 10, food 10, campaign 10.",
-        "At doors, one floater stands with tickets.",
+        "At doors you stand with tickets. Relief Lead 2 keeps the loop moving.",
         "At 8:30 tell every post: you stay until 10.",
       ],
     },
     {
-      id: "kelly",
+      id: "relief2",
       rank: 8,
+      title: "Relief Lead 2",
+      weight: "All night on your feet",
+      cartoon: "Speedy Gonzales",
+      arrival: "4:30 PM",
+      owns: "Floater B. Same loop. Food breaks. Roam shots if Photo Lead is empty.",
+      duties: [
+        "After 4:30 you only relieve posts and run ice/trash.",
+        "Every 30 minutes: tickets 10, food 10, campaign 10. Offset from Relief Lead so both are not at the same table.",
+        "Cover food breaks and the 6:30 refill. Relief Lead is on tickets at doors.",
+        "If Photo Lead is empty, grab roam shots between loops. Still not Kelly Support.",
+      ],
+    },
+    {
+      id: "kelly",
+      rank: 9,
       title: "Kelly Support Lead",
       weight: "On the candidate",
       cartoon: "Robin",
@@ -294,7 +309,7 @@
     },
     {
       id: "photo",
-      rank: 9,
+      rank: 10,
       title: "Photo / Video Lead",
       weight: "Roam the room",
       cartoon: "Jimmy Olsen",
@@ -309,7 +324,7 @@
     },
     {
       id: "strike",
-      rank: 10,
+      rank: 11,
       title: "Strike / Close Lead",
       weight: "75 minutes, hard stop",
       cartoon: "Wreck-It Ralph",
