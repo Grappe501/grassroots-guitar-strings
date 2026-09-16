@@ -35,9 +35,22 @@
     return PALETTE[Math.abs(h) % PALETTE.length];
   }
 
+  let channelFn = function () {
+    return "all";
+  };
+
+  function setChannelSource(fn) {
+    if (typeof fn === "function") channelFn = fn;
+  }
+
+  function activeDoc() {
+    const ch = channelFn() || "all";
+    return ch === "all" ? "radio" : "dm:" + ch;
+  }
+
   function readMessages() {
     const store = global.GGSPrepStore;
-    const doc = store ? store.readDoc("radio") : null;
+    const doc = store ? store.readDoc(activeDoc()) : null;
     if (!doc) return [];
     if (Array.isArray(doc.messages)) return doc.messages;
     if (doc.note) {
@@ -58,7 +71,10 @@
     if (!root) return;
     const lines = readMessages();
     if (!lines.length) {
-      root.innerHTML = '<p class="radio-empty">No traffic yet. Type a line and hit Send.</p>';
+      const dm = (channelFn() || "all") !== "all";
+      root.innerHTML = dm
+        ? '<p class="radio-empty">Private thread. Only the two of you see this.</p>'
+        : '<p class="radio-empty">No traffic yet. Type a line and hit Send.</p>';
       return;
     }
     const stick = root.scrollHeight - root.scrollTop < root.clientHeight + 40;
@@ -98,7 +114,7 @@
       at: new Date().toISOString(),
     });
     if (store) {
-      store.saveDoc("radio", { v: 4, messages: messages.slice(-80) });
+      store.saveDoc(activeDoc(), { v: 4, messages: messages.slice(activeDoc() === "radio" ? -80 : -60) });
       if (store.flush) store.flush();
     }
     if (input) input.value = "";
@@ -128,6 +144,7 @@
         return;
       }
       if (result.ok && hint) hint.textContent = "Live on every device.";
+      if (result.ok) global.dispatchEvent(new CustomEvent("ggs-radio-sent"));
       paint();
       input.focus();
     }
@@ -144,5 +161,12 @@
     return { render: paint, send: go };
   }
 
-  global.GGSRadioFeed = { mount, render: renderFeed, colorFor, readMessages };
+  global.GGSRadioFeed = {
+    mount,
+    render: renderFeed,
+    colorFor,
+    readMessages,
+    setChannelSource,
+    activeDoc,
+  };
 })(window);

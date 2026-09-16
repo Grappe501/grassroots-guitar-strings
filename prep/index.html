@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/prep/prep-v4.css">
 <link rel="stylesheet" href="/css/sign-in.css">
 <link rel="stylesheet" href="/css/contacts.css">
+<link rel="stylesheet" href="/css/radio-night.css">
 </head>
 <body class="v4">
 <div id="signInGate" class="signin" hidden>
@@ -62,19 +63,27 @@
     <div class="gate-grid" id="gateGrid"></div>
   </section>
 
-  <section class="radio-band radio-feed" aria-label="Night radio">
-    <div class="radio-head">
-      <div>
-        <p class="eyebrow">NIGHT RADIO</p>
-        <h2>Straight-line traffic. Every phone.</h2>
+  <section class="radio-band radio-feed radio-desk" id="radioDesk" aria-label="Night radio">
+    <div class="radio-desk__main">
+      <div class="radio-head">
+        <div>
+          <p class="eyebrow">NIGHT RADIO</p>
+          <h2>Text or walkie. All, or one person.</h2>
+        </div>
+        <p class="radio-by" id="radioBy">Signed-in phones appear on the right.</p>
       </div>
-      <p class="radio-by" id="radioBy">Put your name in I am, then Send.</p>
+      <p class="radio-channel" id="radioChannel">All radios</p>
+      <div class="radio-feed-list" id="radioFeed" aria-live="polite"></div>
+      <div class="radio-compose">
+        <input id="radioInput" type="text" maxlength="240" autocomplete="off" placeholder="Ben is 15 out. Ticket table is live. Need two more teardown people.">
+        <button type="button" class="btn btn--gold" id="radioSend">Send</button>
+      </div>
+      <div class="radio-ptt">
+        <button type="button" class="radio-talk" id="radioTalk">Hold to talk — ALL</button>
+        <p class="radio-ptt-hint" id="radioTalkHint">Tap Talk once to open the mic. Then hold like a walkie. Headset optional.</p>
+      </div>
     </div>
-    <div class="radio-feed-list" id="radioFeed" aria-live="polite"></div>
-    <div class="radio-compose">
-      <input id="radioInput" type="text" maxlength="240" autocomplete="off" placeholder="Ben is 15 out. Ticket table is live. Need two more teardown people.">
-      <button type="button" class="btn btn--gold" id="radioSend">Send</button>
-    </div>
+    <aside class="radio-people" id="radioPeople" aria-label="Radios on tonight"></aside>
   </section>
 
   <section class="now-strip" aria-live="polite">
@@ -204,6 +213,7 @@
 <script src="/js/crew-slice.js"></script>
 <script src="/js/sign-in.js"></script>
 <script src="/js/radio-feed.js"></script>
+<script src="/js/radio-night.js"></script>
 <script src="/prep/prep-v2.js"></script>
 <script src="/prep/prep-app.js"></script>
 <script src="/prep/prep-enhancements.js"></script>

@@ -2,6 +2,7 @@
   const API = "/api/prep-assignments";
   const CACHE = "ggs-prep-2026-09-17-v2";
   const POLL_MS = 4000;
+  let pollMs = POLL_MS;
   let timer = null;
   let pollTimer = null;
   let inflight = null;
@@ -131,13 +132,40 @@
     }
   }
 
+  function listDocs(prefix) {
+    const state = readCache();
+    const start = "_doc:" + String(prefix || "");
+    const out = [];
+    Object.keys(state).forEach((key) => {
+      if (!key.startsWith(start)) return;
+      let data = null;
+      try {
+        data = state[key] && state[key].extra ? JSON.parse(state[key].extra) : null;
+      } catch (err) {
+        data = null;
+      }
+      out.push({ name: key.slice(5), data: data });
+    });
+    return out;
+  }
+
+  function tick() {
+    if (dirty.size) flush();
+    else load();
+  }
+
+  function setPoll(ms) {
+    pollMs = Math.max(800, Number(ms) || POLL_MS);
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = setInterval(tick, pollMs);
+    }
+  }
+
   function startSync() {
     load();
     if (pollTimer) clearInterval(pollTimer);
-    pollTimer = setInterval(() => {
-      if (dirty.size) flush();
-      else load();
-    }, POLL_MS);
+    pollTimer = setInterval(tick, pollMs);
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") load();
       else flush();
@@ -152,9 +180,11 @@
     saveOne,
     saveDoc,
     readDoc,
+    listDocs,
     reset,
     readCache,
     startSync,
+    setPoll,
     flush,
   };
 })(window);
