@@ -1,21 +1,19 @@
 const KEY = "ggs-volunteers-2026-09-17-v1";
+const NEED_STAY = 7;
 const defaults = {
-  setup: ["Setup Captain", "Setup Person 2", "Setup Person 3"],
+  setup: [
+    "Setup 1 → Floater A after 4:30",
+    "Setup 2 → Floater B after 4:30",
+    "Setup 3 → Campaign + merch (30 min set)",
+  ],
   event: [
-    "Event Captain",
-    "Primary ticket/check-in",
-    "Ticket backup",
-    "BBQ/food service 1",
-    "BBQ/food service 2",
-    "Water + ice captain — $1 water sales",
-    "Guest greeter 1",
-    "Campaign + sign distribution",
-    "Photography/video — vertical only",
-    "Kelly/guest-relations support",
-    "David/performer support",
-    "Venue/facilities",
-    "Runner/floater",
-    "Tracy production helper — stays through Strike D",
+    "Event Captain — clock + venue + strike lead",
+    "Tickets — one person; floater covers breaks",
+    "Food + $1 water + ice — one person (Ben is the vendor)",
+    "Campaign + merch — one table, 30 min set",
+    "Tracy production helper — 8:00 AM through Strike D",
+    "Floater A — relief loop all night",
+    "Floater B — relief loop + photo if no photographer",
   ],
   strike: [],
 };
@@ -28,13 +26,40 @@ const teams = [
 ];
 const store = window.GGSPrepStore;
 const slice = window.GGSCrewSlice;
+
+function arrivalFor(role, kind) {
+  if (kind === "setup") return "8:00 AM";
+  if (kind === "strike") return "After show";
+  if (/tracy/i.test(role)) return "8:00 AM";
+  if (/floater/i.test(role)) return "4:30 PM";
+  return "5:00 PM";
+}
+
+function emptyRow(role, kind) {
+  return { role, name: "", phone: "", arrival: arrivalFor(role, kind), backup: "", done: false };
+}
+
+function ensureFloaters() {
+  if (!state.event) state.event = [];
+  [
+    "Floater A — relief loop all night",
+    "Floater B — relief loop + photo if no photographer",
+  ].forEach((role) => {
+    const hint = /floater a/i.test(role) ? /floater a/i : /floater b/i;
+    if (!state.event.some((row) => hint.test(String(row.role || "")))) {
+      state.event.push(emptyRow(role, "event"));
+    }
+  });
+}
+
 let state =
   (store && store.readDoc("volunteers")) ||
   JSON.parse(localStorage.getItem(KEY) || "null") || {
-    setup: defaults.setup.map((role) => ({ role, name: "", phone: "", arrival: "8:00 AM", backup: "", done: false })),
-    event: defaults.event.map((role) => ({ role, name: "", phone: "", arrival: "5:00 PM", backup: "", done: false })),
+    setup: defaults.setup.map((role) => emptyRow(role, "setup")),
+    event: defaults.event.map((role) => emptyRow(role, "event")),
     strike: [],
   };
+ensureFloaters();
 const esc = (x) =>
   String(x ?? "")
     .replaceAll("&", "&amp;")
@@ -117,7 +142,7 @@ function add(kind) {
     role: kind === "strike" ? teams[state[kind].length % teams.length] : "New assignment",
     name: "",
     phone: "",
-    arrival: kind === "setup" ? "8:00 AM" : kind === "event" ? "5:00 PM" : "After show",
+    arrival: arrivalFor(kind === "strike" ? "strike" : "New assignment", kind),
     backup: "",
     done: false,
   });
@@ -146,21 +171,37 @@ function applyRemote(data) {
       done: false,
     });
   }
+  ensureFloaters();
   ["setup", "event", "strike"].forEach(render);
   counts();
 }
 
+function stayNames() {
+  const seen = [];
+  ["setup", "event", "strike"].forEach((kind) => {
+    (state[kind] || []).forEach((row) => {
+      const name = String((row && row.name) || "").trim();
+      if (!name) return;
+      const dup = seen.some((item) =>
+        slice ? slice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
+      );
+      if (!dup) seen.push(name);
+    });
+  });
+  return seen;
+}
+
 function counts() {
   document.getElementById("setupCount").textContent = state.setup.filter((x) => x.name.trim()).length + " / 3";
-  document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + Math.max(14, state.event.length);
-  const n = state.strike.filter((x) => x.name.trim()).length;
-  document.getElementById("strikeCount").textContent = n + " / 10";
+  document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + NEED_STAY;
+  const n = stayNames().length;
+  document.getElementById("strikeCount").textContent = n + " / " + NEED_STAY;
   document.getElementById("strikeAlert").textContent =
-    n >= 12
-      ? "Teardown roster has 12+ committed people. Keep the team together through final clearance."
-      : n >= 10
-        ? "Minimum teardown roster reached. Keep recruiting toward 12+ for a safer 10:00 PM clear."
-        : "Teardown is short by " + (10 - n) + ". Recruit 10 people minimum; target 12+ so the building can be cleared by 10:00 PM.";
+    n >= NEED_STAY
+      ? "7 people named. Those same people stay through 10:00 PM. Do not recruit a second strike crew."
+      : "Night crew is " +
+        (NEED_STAY - n) +
+        " short of 7. Setup 1+2 become floaters. Setup 3 becomes campaign. Everyone stays for strike.";
   if (window.GGSNextAction && window.GGSNextAction.paintTexts) {
     window.GGSNextAction.paintTexts(store ? store.readCache() : {}, state);
   }
@@ -191,8 +232,8 @@ document.getElementById("saveBtn").addEventListener("click", () => {
 document.getElementById("clearBtn").addEventListener("click", () => {
   if (confirm("Clear the shared volunteer roster?")) {
     state = {
-      setup: defaults.setup.map((role) => ({ role, name: "", phone: "", arrival: "8:00 AM", backup: "", done: false })),
-      event: defaults.event.map((role) => ({ role, name: "", phone: "", arrival: "5:00 PM", backup: "", done: false })),
+      setup: defaults.setup.map((role) => emptyRow(role, "setup")),
+      event: defaults.event.map((role) => emptyRow(role, "event")),
       strike: [],
     };
     save();

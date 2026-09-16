@@ -17,13 +17,13 @@ const milestones=[
 const areas=[
  ['Venue','Confirm access, room layout, exits and public flow.','Setup'],
  ['Food / BBQ','Ben food and service supply list confirmed.','Ben / BBQ'],
- ['Setup','Venue already placed tables, chairs, horseshoe, and dance floor. We dress tables, signs, campaign, and beverages.','Setup'],
- ['Volunteers','Setup, event crew and 10–12+ teardown crew assigned.','Volunteers'],
+ ['Setup','8 tables to dress. ~90 min. Then 3 dressers become floaters + campaign.','Setup'],
+ ['Volunteers','7 people. Same crew stays through 10. Two floaters run relief.','Volunteers'],
  ['Tickets','Ticket station, payment procedure and reconciliation.','Tickets & Money'],
- ['Campaign','Literature, signs, QR displays and merchandise.','Campaign & Merch'],
+ ['Campaign','30 min merch set. Pull-ups, push cards, buttons, candy, foldovers.','Campaign & Merch'],
  ['Food & Drinks','8 gal unsweet tea, 6 gal lemonade, 120 bottles water, 12 bags ice.','Food & Drinks'],
  ['Production','Tracy, sound, lights and David acoustic setup.','Sound & Show'],
- ['Breakdown','Strike Teams A–E and load-out map.','Breakdown']
+ ['Breakdown','Same 7 people. Venue furniture stays. 45–60 min.','Breakdown']
 ];
 const state=JSON.parse(localStorage.getItem('ggs-command-v1')||'{}');
 const prepState=(window.GGSPrepStore?window.GGSPrepStore.readCache():JSON.parse(localStorage.getItem('ggs-prep-2026-09-17-v2')||'{}'));

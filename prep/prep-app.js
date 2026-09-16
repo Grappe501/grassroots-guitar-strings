@@ -18,7 +18,7 @@
     ["2026-09-17T21:15:00", "9:15 PM", "Load-out underway"],
     ["2026-09-17T22:00:00", "10:00 PM", "Building cleared"],
   ];
-  const criticalHints = /teardown|strike|event captain|tracy|ben food|ticket|10–12|10-12|load-out|photographer|cooler captain/i;
+  const criticalHints = /teardown|strike|event captain|tracy|ben food|ticket|floater|night roster|load-out|photographer|cooler captain/i;
 
   let prefs = { me: "", phone: "", filter: "all", night: false, tab: "overview", q: "" };
   try {

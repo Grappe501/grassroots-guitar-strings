@@ -1,5 +1,5 @@
 (function (global) {
-  const NEED_STRIKE = 10;
+  const NEED_STAY = 7;
   const MARK = {
     open: "2026-09-17T08:00:00",
     eventMode: "2026-09-17T16:30:00",
@@ -57,15 +57,17 @@
     return hit ? firstName(hit.owner) : "";
   }
 
-  function strikeCount(roster) {
+  function stayCount(roster) {
     const seen = [];
-    ((roster && roster.strike) || []).forEach((row) => {
-      const name = String((row && row.name) || "").trim();
-      if (!name) return;
-      const dup = seen.some((item) =>
-        global.GGSCrewSlice ? global.GGSCrewSlice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
-      );
-      if (!dup) seen.push(name);
+    ["setup", "event", "strike"].forEach((kind) => {
+      ((roster && roster[kind]) || []).forEach((row) => {
+        const name = String((row && row.name) || "").trim();
+        if (!name) return;
+        const dup = seen.some((item) =>
+          global.GGSCrewSlice ? global.GGSCrewSlice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
+        );
+        if (!dup) seen.push(name);
+      });
     });
     return seen.length;
   }
@@ -148,13 +150,13 @@
       });
     }
 
-    const short = NEED_STRIKE - strikeCount(roster);
+    const short = NEED_STAY - stayCount(roster);
     if (short > 0 && weight(p, "strike")) {
       facts.push({
         kind: "strike",
         score: weight(p, "strike") + short,
         href: "/volunteers/",
-        line: "Strike crew is " + short + " short.",
+        line: "Night crew is " + short + " short of 7. Same people stay through 10.",
       });
     }
 
@@ -244,18 +246,18 @@
 
   function texts(state, roster) {
     const list = harvest(state);
-    const short = NEED_STRIKE - strikeCount(roster);
+    const short = NEED_STAY - stayCount(roster);
     const iceCap = named(list, /water \+ ice captain|ice captain/i);
     const out = [];
     if (short > 0) {
       out.push({
         id: "strike",
-        label: "Teardown",
+        label: "Night crew",
         need: "Need " + short + " more",
         text:
-          "Can you stay for teardown at Woody's Sherwood Forest Thursday 9/17 after the show (about 8:45)? We still need " +
+          "Can you work Thursday 9/17 at Woody's from 5:00 PM through 10:00 PM clear? Same people stay after the show — no second teardown crew. We still need " +
           short +
-          " people. Free food if you commit and stay. Building must be clear by 10. Reply YES and I will put you on a strike team.",
+          " on the night roster. Food is on us if you stay. Reply YES.",
       });
     }
     if (undone(list, /ice for 120 bottled waters/i).length) {

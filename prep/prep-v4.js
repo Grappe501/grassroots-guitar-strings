@@ -115,6 +115,11 @@
         "Website signs printed at HQ — 8.5 x 11",
         "Print the full 8.5 x 11 sign stack at HQ",
         "Donate QR + acrylic holders",
+        "Pull-up banners",
+        "Push cards",
+        "Buttons",
+        "Candy",
+        "Foldover cards",
       ],
       out: [
         "Literature packed",
@@ -127,7 +132,7 @@
     {
       id: "room",
       title: "Room dress",
-      inn: ["Round tablecloths", "Buffet tablecloths", "Lobby tablecloth", "Decorations / banners"],
+      inn: ["8 round tablecloths only", "Buffet tablecloths", "Lobby tablecloth", "Decorations / pull-up banners"],
       out: ["Tablecloths collected", "Decorations packed", "Lobby cleared"],
     },
     {

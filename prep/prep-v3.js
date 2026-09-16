@@ -18,7 +18,8 @@
   ];
   const packets = [
     { id: "captain", label: "I'm Captain", match: /event captain|choose event captain|hard stop|load-out|announce teardown/i, tabs: ["overview", "volunteers", "timeline", "final"], who: /event captain/i },
-    { id: "setup", label: "I'm Setup", match: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup/i, tabs: ["setup"], who: /setup/i },
+    { id: "setup", label: "I'm Setup", match: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup|dress 8 guest/i, tabs: ["setup"], who: /setup/i },
+    { id: "floater", label: "I'm Floater", match: /floater|relief loop|becomes floater/i, tabs: ["setup", "volunteers", "food", "tickets", "campaign"], who: /floater|relief/i },
     {
       id: "tracy",
       label: "I'm Tracy",
@@ -32,7 +33,7 @@
     },
     { id: "tickets", label: "I'm Tickets", match: /ticket|cash|envelope|reconcile|payment/i, tabs: ["tickets"], who: /ticket|check-in/i },
     { id: "food", label: "I'm Ben", who: /ben/i, match: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |\$1 water|money bag|sweetener|unsweet|120 bottle|bags ice/i, tabs: ["ben", "food"] },
-    { id: "campaign", label: "I'm Campaign", match: /yard sign|merch|qr|literature|regnet|campaign display/i, tabs: ["campaign"], who: /campaign|sign/i },
+    { id: "campaign", label: "I'm Campaign", match: /yard sign|merch|qr|literature|regnet|campaign display|pull-up|push card|foldover/i, tabs: ["campaign"], who: /campaign|sign|merch/i },
     { id: "strike", label: "I'm Strike", match: /strike|teardown|load-out|final venue|building cleared/i, tabs: ["breakdown", "final"], who: /strike|teardown/i },
   ];
 

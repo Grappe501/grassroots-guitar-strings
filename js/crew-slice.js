@@ -203,22 +203,22 @@
       test: /event captain|choose event captain|hard checkpoint|announce teardown/i,
       roster: /event captain/i,
       day: [
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Main room", do: "Shift the building from setup to event mode." },
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:45:00", place: "Whole room", do: "Walk stations. Tickets, buffet, campaign, and stage all have an owner." },
-        { start: "2026-09-17T18:45:00", end: "2026-09-17T19:00:00", place: "Stage + lobby", do: "Hard checkpoint. Concert starts at 7:00." },
-        { start: "2026-09-17T19:00:00", end: "2026-09-17T20:45:00", place: "Show floor", do: "Stay visible. Call strike the moment the show ends." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Whole building", do: "Strike now. Confirm the building is cleared by 10:00 PM." },
+        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Main room", do: "7 people on posts. Ice is going in. Floaters start the relief loop." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:45:00", place: "Whole room", do: "Walk stations every 15 min. Tickets, food, campaign, stage each have one body." },
+        { start: "2026-09-17T18:45:00", end: "2026-09-17T19:00:00", place: "Stage + lobby", do: "Hard checkpoint. Every post still has a person. Concert at 7:00." },
+        { start: "2026-09-17T19:00:00", end: "2026-09-17T20:45:00", place: "Show floor", do: "Stay visible. Floaters give breaks. Call strike the moment the show ends." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Whole building", do: "Same 7 strike. Venue furniture stays. Clear by 10:00 PM." },
       ],
     },
     {
       id: "setup",
       label: "Setup crew",
       priority: 5,
-      test: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup|position 8 round/i,
-      roster: /setup/i,
+      test: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup|position 8 round|dress 8 guest/i,
+      roster: /setup [123]|setup person/i,
       day: [
-        { start: "2026-09-17T08:00:00", end: "2026-09-17T16:30:00", place: "Main room · horseshoe", do: "Venue already placed tables, chairs, horseshoe, and dance floor. Dress tables, signs, campaign display, beverages." },
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Main room", do: "Room ready for guests. Then hand off to event crew." },
+        { start: "2026-09-17T08:00:00", end: "2026-09-17T10:30:00", place: "Main room · 8 tables", do: "Dress 8 tables (25 min), signs (15), lobby (10), drinks station (20). Setup 3 then does the 30 min merch set." },
+        { start: "2026-09-17T10:30:00", end: "2026-09-17T16:30:00", place: "Off site unless called", do: "Room is dressed. Come back at 4:30 as Floater A, Floater B, or Campaign." },
       ],
     },
     {
@@ -242,10 +242,10 @@
       test: /ticket|cash|envelope|reconcile|payment|guest list/i,
       roster: /ticket|check-in/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lobby · ticket table", do: "Table live before BBQ guests. QR, cash, envelopes." },
-        { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Lobby · ticket table", do: "Concert doors. Keep the line moving." },
-        { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Lobby or nearby", do: "Late arrivals. Hold the cash box." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Lobby · then secure", do: "Reconcile tickets, cash, and envelopes. Do not leave money on a table." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lobby · ticket table", do: "You are the only ticket person. Wave Floater A when you need 10 min." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Lobby · ticket table", do: "Doors rush. Floater A stands with you. Keep the line moving." },
+        { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Lobby or nearby", do: "Late arrivals. Hold the cash box. Floater covers a real break." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Lobby · then secure", do: "Reconcile tickets, cash, and envelopes. Then help Strike B or E." },
       ],
     },
     {
@@ -255,21 +255,22 @@
       test: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |plates|serving|unsweet|sweetener|120 bottle/i,
       roster: /bbq|food|water|ice|cooler/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T17:30:00", place: "Buffet + drinks / ice", do: "Receive food. 8 gal tea, 6 gal lemonade, 120 waters, 12 bags ice. Sweeteners out." },
-        { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Buffet + $1 water", do: "BBQ / social hour. Sell water for a $1 cash donation. No cards." },
-        { start: "2026-09-17T18:30:00", end: "2026-09-17T20:45:00", place: "Coolers · $1 water", do: "Keep ice and water up. Cash only. Money stays in the bag." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike C · food", do: "Clear food, drinks, coolers, trash." },
+        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:30:00", place: "Buffet + drinks / ice", do: "Ice now, not at 8 AM. Receive Ben. You are food AND water." },
+        { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Buffet + $1 water", do: "Guests serve themselves. You refill and sell $1 water. Floater B spells you." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T20:45:00", place: "Coolers · $1 water", do: "Buffet is over. Stay on water and ice. Cash only. Money stays in the bag." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike C · food", do: "Clear food, drinks, coolers, trash. 20 min with Floater B." },
       ],
     },
     {
       id: "campaign",
       label: "Campaign + merch",
       priority: 4,
-      test: /yard sign|merch|qr|literature|regnet|campaign display|t-shirt/i,
-      roster: /campaign|sign/i,
+      test: /yard sign|merch|qr|literature|regnet|campaign display|t-shirt|pull-up|push card|foldover|buttons — pack/i,
+      roster: /campaign|sign|merch|setup 3|setup person 3/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "Merch + campaign display", do: "Signs, literature, shirts, QR. Stay at the table." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike B · campaign", do: "Pack signs, merch, literature. Count what is left." },
+        { start: "2026-09-17T08:30:00", end: "2026-09-17T10:30:00", place: "Campaign table", do: "After the 8 tables: 30 min merch set. Pull-ups, push cards, buttons, candy, foldovers, shirts." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "Merch + campaign table", do: "One table. Hand out signs and shirts. Wave a floater for a 10 min break each hour." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike B · campaign", do: "Pack banners, cards, candy, merch, leftover signs. 20 min." },
       ],
     },
     {
@@ -279,18 +280,33 @@
       test: /photo|video|vertical|photographer/i,
       roster: /photo|video/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "Roam the room", do: "Vertical only. Guests, Kelly, David, the room, the work." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T21:15:00", place: "Closing shot", do: "One group / closing frame. Then help strike if you can." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "Roam the room", do: "Optional 8th. Vertical only. If you are also Floater B, shoot between relief loops." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T21:15:00", place: "Closing shot", do: "One group frame. Then Strike E walk." },
       ],
     },
     {
       id: "greeter",
       label: "Guest greeter",
-      priority: 4,
+      priority: 5,
       test: /greeter|welcome guests|kelly\/guest|guest-relations/i,
       roster: /greeter|kelly\/guest/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T19:15:00", place: "Lobby + room entry", do: "Meet people. Point them to tickets, food, and seats." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T19:15:00", place: "Lobby + room entry", do: "Kelly greets. You only cover this if you are also Floater A." },
+      ],
+    },
+    {
+      id: "floater",
+      label: "Floater / relief",
+      priority: 2,
+      test: /floater|relief loop|becomes floater|setup person 1|setup person 2/i,
+      roster: /floater|relief|setup 1|setup 2|setup person 1|setup person 2/i,
+      day: [
+        { start: "2026-09-17T08:00:00", end: "2026-09-17T10:30:00", place: "Main room · 8 tables", do: "Dress the 8 tables and signs with the other two. Then you may leave." },
+        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Whole room", do: "Back on site. Ice with food. Walk every post once." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Relief loop", do: "Every 30 min: tickets 10, food 10, campaign 10. That is the job." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Doors + loop", do: "Floater A helps tickets at doors. Floater B keeps the loop moving." },
+        { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Show floor", do: "Quiet relief. Trash. One floater always walking so someone can take a break." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike", do: "Pair up. Venue furniture stays. Clear by 10." },
       ],
     },
     {
@@ -336,7 +352,7 @@
     windows.sort((a, b) => a.start - b.start);
     const current = windows.filter((w) => now >= w.start && now < w.end);
     const upcoming = windows.find((w) => w.start > now);
-    if (now >= strike && roles.some((r) => r.id === "strike" || r.id === "captain" || r.id === "production" || r.id === "food" || r.id === "campaign" || r.id === "tickets")) {
+    if (now >= strike && roles.some((r) => r.id === "strike" || r.id === "captain" || r.id === "production" || r.id === "food" || r.id === "campaign" || r.id === "tickets" || r.id === "floater")) {
       const strikeWin = current.find((w) => w.start >= strike) || current[0];
       if (strikeWin) {
         return { place: strikeWin.place, do: strikeWin.do, next: null, strike: true, role: strikeWin.role };
