@@ -96,35 +96,79 @@ function hm(t){
   if(!Number.isFinite(h)) return t;
   return (h%12||12)+':'+m+' '+(h>=12?'PM':'AM');
 }
+function rowText(row){
+  return ((row&&row.querySelector('span'))||{}).textContent||'';
+}
+function paintSeat(){
+  const kicker=document.getElementById('seatKicker');
+  const title=document.getElementById('seatTitle');
+  const who=document.getElementById('whoSeat');
+  let name='';
+  try{
+    name=(window.GGSSignIn&&window.GGSSignIn.identity().name)||JSON.parse(localStorage.getItem('ggs-prep-v3-prefs')||'{}').me||'';
+  }catch(err){ name=''; }
+  const person=window.GGSPeople&&(window.GGSPeople.uniquePerson(name)||window.GGSPeople.findPerson(name));
+  if(person) name=person.name;
+  const job=window.GGSLeadDuties&&window.GGSLeadDuties.jobFor?window.GGSLeadDuties.jobFor(name):null;
+  if(job){
+    if(kicker) kicker.textContent='YOUR SEAT · '+job.title.toUpperCase();
+    if(title) title.textContent=job.title;
+    if(who) who.textContent=(name||'This seat')+' · arrive '+job.arrival+' · '+job.owns;
+  }else if(name){
+    if(kicker) kicker.textContent='THURSDAY CLOCK';
+    if(title) title.textContent=name;
+    if(who) who.textContent='Thursday, September 17, 2026. Your jobs follow this clock.';
+  }
+}
 function renderHouseRos(){
   const el=document.getElementById('houseRos');
   const label=document.getElementById('clockLabel');
+  const nowTitle=document.getElementById('nowPlainTitle');
+  const nowNext=document.getElementById('nowPlainNext');
   if(!el) return;
   const rows=Array.prototype.slice.call(el.querySelectorAll('[data-t]'));
   if(!rows.length) return;
   const now=houseNow();
+  const firstT=rows[0].getAttribute('data-t');
+  const lastT=rows[rows.length-1].getAttribute('data-t');
+  const started=now>=houseAt(firstT);
+  const ended=now>=houseAt(lastT);
   let current=rows[0];
   let next=rows[1]||null;
-  rows.forEach(function(row,i){
-    if(now>=houseAt(row.getAttribute('data-t'))){
-      current=row;
-      next=rows[i+1]||null;
-    }
-  });
+  if(started){
+    rows.forEach(function(row,i){
+      if(now>=houseAt(row.getAttribute('data-t'))){
+        current=row;
+        next=rows[i+1]||null;
+      }
+    });
+  }
   const nowT=current.getAttribute('data-t');
   const nextT=next?next.getAttribute('data-t'):'';
   rows.forEach(function(row){
     const t=row.getAttribute('data-t');
-    row.classList.toggle('is-past', now>=houseAt(t) && t!==nowT);
-    row.classList.toggle('is-now', t===nowT);
-    row.classList.toggle('is-next', !!nextT && t===nextT && t!==nowT);
+    row.classList.toggle('is-past', started&&now>=houseAt(t)&&t!==nowT);
+    row.classList.toggle('is-now', started&&!ended&&t===nowT);
+    row.classList.toggle('is-next', !started?t===firstT:(!!nextT&&t===nextT&&t!==nowT));
   });
-  if(label){
-    const text=(current.querySelector('span')||{}).textContent||'';
-    const nxt=next?((next.querySelector('span')||{}).textContent||''):'';
-    label.textContent='NOW · '+hm(nowT)+' — '+text+(next?'  Next · '+hm(nextT)+' '+nxt:'');
+  if(!started){
+    if(label) label.textContent='Thursday has not started on this clock yet.';
+    if(nowTitle) nowTitle.textContent='Thursday has not started';
+    if(nowNext) nowNext.textContent='First move is 8:00 AM setup. Event Lead walks in at 4:30 PM.';
+    return;
   }
-  if(!window.__houseDidScroll && current){
+  if(ended){
+    if(label) label.textContent='10:00 PM. Building should be clear.';
+    if(nowTitle) nowTitle.textContent='Building clear';
+    if(nowNext) nowNext.textContent='Event Lead leaves last.';
+    return;
+  }
+  const text=rowText(current);
+  const nxt=rowText(next);
+  if(label) label.textContent=hm(nowT)+' — '+text;
+  if(nowTitle) nowTitle.textContent=text;
+  if(nowNext) nowNext.textContent=next?('Next · '+hm(nextT)+' — '+nxt):'Hard stop 10:00 PM.';
+  if(!window.__houseDidScroll&&current){
     window.__houseDidScroll=true;
     current.scrollIntoView({block:'center'});
   }
@@ -207,7 +251,13 @@ function renderCrewCall(){
   el.innerHTML=people.length?people.map((name)=>'<div class="crew-call-row">'+slice.contactHtml(name,slice.phoneFor(name,book))+'</div>').join(''):'<p class="muted">Names and numbers land here as people add them.</p>';
 }
 function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness();renderGaps();renderCrewCall();paintNext()}
-renderStatus();readiness();renderGaps();renderCrewCall();bind();tick();setInterval(()=>{tick();readiness();renderGaps();renderCrewCall()},15000);
+if(window.GGSLeadDuties&&window.GGSLeadDuties.seedDefaults){
+  try{window.GGSLeadDuties.seedDefaults();}catch(err){/* keep */}
+}
+paintSeat();
+window.addEventListener('ggs-signed-in',paintSeat);
+window.addEventListener('ggs-prep-loaded',paintSeat);
+renderStatus();readiness();renderGaps();renderCrewCall();bind();tick();setInterval(()=>{tick();readiness();renderGaps();renderCrewCall();paintSeat()},15000);
 const nightOn=localStorage.getItem('ggs-command-night')==='1';
 applyNight(nightOn);
 const nightBtn=document.getElementById('nightBtn');

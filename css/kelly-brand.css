@@ -13,19 +13,24 @@ select {
 }
 
 h1,
-h2,
-h3,
 .display-title,
-.v5-top h1,
-.v5-now h2,
 .signin__card h1,
 .sign h1,
 .topbar h1 {
-  font-family: var(--ggs-font-display);
-  letter-spacing: -0.02em;
+  font-family: var(--ggs-font-body);
+  letter-spacing: 0.01em;
+  word-spacing: 0.08em;
+}
+
+h2,
+h3 {
+  font-family: var(--ggs-font-body);
+  letter-spacing: 0;
+  word-spacing: 0.06em;
 }
 
 .eyebrow {
   font-family: var(--ggs-font-ui);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
+  word-spacing: 0.18em;
 }
