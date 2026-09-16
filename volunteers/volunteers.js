@@ -9,7 +9,7 @@ const defaults = {
   ],
   event: [
     "Event Captain — clock + venue + strike lead",
-    "Tickets — one person; floater covers breaks",
+    "Tickets — one person; a Production Manager covers breaks",
     "Food service lead — Ben. Line, not plates, not water.",
     "Server 1 — Sarah. Serving line with Ben.",
     "Server 2 — serving line with Ben.",
@@ -17,8 +17,8 @@ const defaults = {
     "Drink station — tea, lemonade, ice, water, donations.",
     "Campaign + merch — one table, 30 min set",
     "Merch 2 — rush helper. Acoustic over to 7:00. Donations, handouts, greet.",
-    "Floater A — relief loop all night",
-    "Floater B — relief loop + roam shots if no Photo Lead",
+    "Production Manager 1 — fill gaps, point people, keep the plan.",
+    "Production Manager 2 — fill gaps, point people, keep the plan.",
     "Kelly Support — runner plus vertical photos on Kelly",
     "Photo Lead — roam, action, crowd. Not on Kelly all night.",
   ],
@@ -48,7 +48,7 @@ function arrivalFor(role, kind) {
   if (kind === "strike") return "After show";
   if (/parking|directions|crowd/i.test(role)) return "4:30 PM";
   if (/tracy/i.test(role)) return "8:00–10:00 AM";
-  if (/floater|relief/i.test(role)) return "5:30 PM if you can";
+  if (/floater|relief|production manager/i.test(role)) return "5:30 PM if you can";
   if (/merch 2/i.test(role)) return "6:00 PM";
   return "4:30 PM";
 }
@@ -70,7 +70,7 @@ function migrateArrivals() {
         return;
       }
       const a = String(row.arrival || "");
-      if (/floater|relief/i.test(String(row.role || "")) && /4:30|3:00|10:00/.test(a)) {
+      if (/floater|relief|production manager/i.test(String(row.role || "")) && /4:30|3:00|10:00/.test(a)) {
         row.arrival = "5:30 PM if you can";
         dirty = true;
         return;
@@ -117,13 +117,21 @@ function ensureMerch2() {
 
 function ensureFloaters() {
   if (!state.event) state.event = [];
+  (state.event || []).forEach((row) => {
+    const role = String((row && row.role) || "");
+    if (/floater a|relief lead(?! 2)/i.test(role) && !/production manager 1/i.test(role)) {
+      row.role = "Production Manager 1 — fill gaps, point people, keep the plan.";
+    }
+    if (/floater b|relief lead 2/i.test(role) && !/production manager 2/i.test(role)) {
+      row.role = "Production Manager 2 — fill gaps, point people, keep the plan.";
+    }
+  });
   [
-    "Floater A — relief loop all night",
-    "Floater B — relief loop + roam shots if no Photo Lead",
-  ].forEach((role) => {
-    const hint = /floater a/i.test(role) ? /floater a/i : /floater b/i;
-    if (!state.event.some((row) => hint.test(String(row.role || "")))) {
-      state.event.push(emptyRow(role, "event"));
+    { role: "Production Manager 1 — fill gaps, point people, keep the plan.", hint: /production manager 1|floater a|relief lead(?! 2)/i },
+    { role: "Production Manager 2 — fill gaps, point people, keep the plan.", hint: /production manager 2|floater b|relief lead 2/i },
+  ].forEach((seat) => {
+    if (!state.event.some((row) => seat.hint.test(String(row.role || "")))) {
+      state.event.push(emptyRow(seat.role, "event"));
     }
   });
 }

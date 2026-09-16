@@ -88,7 +88,7 @@
           : "") +
         '<a class="spot-go" href="/spots/' +
         spot.id +
-        '/">Open this phone page</a></article>'
+        '/">Open Spot Instructions</a></article>'
       );
     }).join("");
     root.querySelectorAll(".spot-owner").forEach((sel) => {
@@ -104,11 +104,13 @@
     if (!spot) return;
     const map = spots.hydrateFromRoster(store);
     const who = map[spot.id] || "";
-    const live = nowBlock(spot.clock);
+    const clock = spots.clockFor ? spots.clockFor(spot) : spot.clock;
+    const live = nowBlock(clock);
     const whoEl = document.getElementById("spotWho");
     const pick = document.getElementById("spotPick");
-    document.title = spot.title + " — Thursday clock";
-    document.getElementById("spotKicker").textContent = "SPOT " + spot.n + " OF " + spots.SPOTS.length + " · " + spot.short.toUpperCase();
+    document.title = spot.title + " — Spot Instructions";
+    const active = spots.SPOTS.filter(function (row) { return !row.retired; }).length;
+    document.getElementById("spotKicker").textContent = "SPOT " + spot.n + " OF " + active + " · " + spot.short.toUpperCase();
     document.getElementById("spotTitle").textContent = spot.title;
     document.getElementById("spotWhy").textContent = spot.why;
     document.getElementById("spotArrive").textContent = spot.arrive;
@@ -122,7 +124,7 @@
       if (pick) pick.innerHTML = "";
       whoEl.textContent = "No named seat. Everyone pitches in.";
       document.getElementById("spotKicker").textContent = "NOT A NAMED SEAT · " + spot.short.toUpperCase();
-      return paintNow(spot, live);
+      return paintNow(spot, live, clock);
     }
     if (pick && people) {
       pick.innerHTML = people.leadSelectHtml(who, {
@@ -136,11 +138,11 @@
         whoEl.textContent = sel.value ? sel.value + " — this is your page." : "Name goes here today.";
       });
     }
-    whoEl.textContent = who ? who + " — this is your page." : "Name goes here today.";
-    paintNow(spot, live);
+    whoEl.textContent = who ? who + " — this is your Spot page." : "Name goes here today.";
+    paintNow(spot, live, clock);
   }
 
-  function paintNow(spot, live) {
+  function paintNow(spot, live, clock) {
     const nowEl = document.getElementById("spotNow");
     const list = document.getElementById("spotClock");
     if (!nowEl || !list) return;
@@ -156,7 +158,7 @@
         ? "<p>Next · " + hm(live.next.t) + " — " + esc(live.next.text) + "</p>"
         : "<p>That is the last line on this page.</p>");
     nowEl.className = "spot-now is-" + live.current.kind;
-    list.innerHTML = spot.clock
+    list.innerHTML = (clock || spot.clock)
       .map((block) => {
         const on = live.current === block;
         return (

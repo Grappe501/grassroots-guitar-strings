@@ -106,18 +106,24 @@
     return null;
   }
 
+  function liveClock(spot) {
+    if (window.GGSDaySpots && window.GGSDaySpots.clockFor) return window.GGSDaySpots.clockFor(spot);
+    return (spot && spot.clock) || [];
+  }
+
   function paintClock(spot) {
     const root = document.getElementById("nightClock");
     if (!root) return;
-    if (!spot || !spot.clock || !spot.clock.length) {
+    const clock = liveClock(spot);
+    if (!clock.length) {
       root.innerHTML = "";
       root.removeAttribute("data-spot");
       return;
     }
-    const idx = clockIndex(spot.clock);
-    if (root.dataset.spot !== spot.id || root.children.length !== spot.clock.length) {
-      root.dataset.spot = spot.id;
-      root.innerHTML = spot.clock
+    const idx = clockIndex(clock);
+    if (root.dataset.spot !== (spot && spot.id) || root.children.length !== clock.length) {
+      root.dataset.spot = spot && spot.id ? spot.id : "";
+      root.innerHTML = clock
         .map(function (block) {
           return (
             '<li class="is-' +
@@ -177,7 +183,8 @@
     const doit = document.getElementById("nowDo");
     const nextEl = document.getElementById("nowNext");
     if (!card) return;
-    if (!spot || !spot.clock || !spot.clock.length) {
+    const clock = liveClock(spot);
+    if (!clock.length) {
       card.classList.remove("is-strike");
       if (kicker) kicker.textContent = "Be here first";
       if (place) place.textContent = "Arrive 4:30";
@@ -186,10 +193,10 @@
       return;
     }
     const now = clockNow();
-    const i = clockIndex(spot.clock);
-    const current = spot.clock[i];
-    const next = spot.clock[i + 1] || null;
-    const waiting = now < atTime(spot.clock[0].t, now);
+    const i = clockIndex(clock);
+    const current = clock[i];
+    const next = clock[i + 1] || null;
+    const waiting = now < atTime(clock[0].t, now);
     card.classList.toggle("is-strike", current.kind === "strike");
     if (kicker) kicker.textContent = current.kind === "strike" ? "STRIKE" : waiting ? "Be here first" : kindLabel(current.kind).toUpperCase() + " · " + hm(current.t);
     if (place) place.textContent = spot.title;
@@ -223,7 +230,9 @@
       if (seatEl) seatEl.textContent = "Hey " + first;
       if (helloEl) {
         helloEl.textContent = spot
-          ? "Thank you for volunteering, " + first + ". Tonight is going to be a great night. Your job is " + spot.title + ". Keep things fun and lively. Take pictures."
+          ? spot.ros
+            ? "Thank you for volunteering, " + first + ". Tonight is going to be a great night. You are " + spot.title + ". Fill gaps. Point people where to go. Make sure nobody needs a break. Keep the plan. Take pictures."
+            : "Thank you for volunteering, " + first + ". Tonight is going to be a great night. Your job is " + spot.title + ". Keep things fun and lively. Take pictures."
           : "Thank you for volunteering, " + first + ". Tonight is going to be a great night. Keep things fun and lively. Take pictures. Your seat gets your name today.";
       }
       if (roleEl) {
@@ -247,7 +256,16 @@
       paintClock(spot);
       paintDay();
       const night = document.getElementById("nightBlock");
-      if (night) night.hidden = !(spot && spot.clock && spot.clock.length);
+      const day = document.getElementById("dayBlock");
+      const live = window.GGSDaySpots && window.GGSDaySpots.clockFor ? window.GGSDaySpots.clockFor(spot) : (spot && spot.clock) || [];
+      if (night) night.hidden = !live.length;
+      if (day) day.hidden = Boolean(spot && spot.ros);
+      const nightEyebrow = night && night.querySelector(".eyebrow");
+      const nightH2 = night && night.querySelector("h2");
+      if (spot && spot.ros) {
+        if (nightEyebrow) nightEyebrow.textContent = "THE PLAN";
+        if (nightH2) nightH2.textContent = "The whole night, in order. Gold is now. Fill gaps. Point people. Keep it on plan.";
+      }
     } catch (err) {
       const seatEl = document.getElementById("v5Seat");
       if (seatEl && !seatEl.textContent) seatEl.textContent = "Your night";

@@ -22,8 +22,8 @@
     food: { kind: "event", hint: /food service lead/i },
     campaign: { kind: "event", hint: /campaign \+ merch/i },
     merch2: { kind: "event", hint: /merch 2/i, role: "Merch 2 — rush helper. Acoustic over to 7:00. Donations, handouts, greet." },
-    relief: { kind: "event", hint: /floater a/i },
-    relief2: { kind: "event", hint: /floater b/i },
+    relief: { kind: "event", hint: /production manager 1|floater a|relief lead(?! 2)/i, role: "Production Manager 1 — fill gaps, point people, keep the plan." },
+    relief2: { kind: "event", hint: /production manager 2|floater b|relief lead 2/i, role: "Production Manager 2 — fill gaps, point people, keep the plan." },
     kelly: { kind: "event", hint: /kelly support/i },
     photo: { kind: "event", hint: /photo lead/i },
     strike: { kind: "event", hint: /strike lead|close lead|teardown captain|^strike \/|^strike\b/i, role: "Strike Lead — call the walk. Venue furniture stays." },
@@ -361,7 +361,7 @@
     if (title) title.textContent = personal ? "Your duty." : "Every duty. One board.";
     if (intro) {
       intro.textContent = personal
-        ? "This is your job tonight. Open My Night for the minute-by-minute clock."
+        ? "This is your job tonight. Open Tonight for the minute-by-minute clock."
         : "Overall view. Name each seat. When someone opens this page, they only see their own duty.";
     }
     const view = document.getElementById("dutyViewLink");
