@@ -259,7 +259,7 @@
         "8:00 AM with Tracy. One system. Do not build a second plot.",
         "Someone brings the bar stool. Acoustic 5:45–6:15. Clear by 6:30.",
         "6:45 checkpoint with Event Lead. Stay through the last song.",
-        "Strike D: Tracy directs. Helper plus 3 muscle carry speakers, lights, and cases to her vehicle.",
+        "Strike D: Tracy directs. Helper plus 3 muscle carry speakers, lights, and cases to his vehicle.",
       ],
     },
     {
