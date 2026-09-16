@@ -32,12 +32,20 @@
     if (store.flush) store.flush();
   }
 
+  function ownerName(job) {
+    if (!job) return "";
+    const owner = String(job.owner || "").trim();
+    if (owner && !isCartoon(job)) return owner;
+    return String(job.defaultOwner || "").trim();
+  }
+
   function jobFor(name) {
     if (!name) return null;
     return (
       jobs().find((job) => {
-        if (isCartoon(job)) return false;
-        return dir ? dir.match(job.owner, name) : false;
+        const owner = ownerName(job);
+        if (!owner) return false;
+        return dir ? dir.match(owner, name) : false;
       }) || null
     );
   }
@@ -152,7 +160,7 @@
     });
   }
 
-  global.GGSLeadDuties = { jobs, saveOwner, jobFor, isCartoon, briefing, renderBoard, seedDefaults };
+  global.GGSLeadDuties = { jobs, saveOwner, jobFor, isCartoon, briefing, renderBoard, seedDefaults, ownerName };
   global.addEventListener("ggs-prep-loaded", seedDefaults);
   if (document.getElementById("leadJobList")) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderBoard);

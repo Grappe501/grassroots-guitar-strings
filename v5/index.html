@@ -17,11 +17,11 @@
 <link rel="stylesheet" href="/css/night-social.css">
 <link rel="stylesheet" href="/wifi/wifi.css">
 <link rel="stylesheet" href="/css/gap-texts.css">
-<link rel="stylesheet" href="/v5/v5.css?v=day1">
+<link rel="stylesheet" href="/v5/v5.css?v=seat2">
 <link rel="stylesheet" href="/css/contrast.css">
 </head>
-<body class="v5">
-<div id="signInGate" class="signin" hidden>
+<body class="v5 is-locked">
+<div id="signInGate" class="signin">
   <article class="signin__card">
     <p class="eyebrow">KELLY GRAPPE</p>
     <h1>Who are you?</h1>
@@ -39,10 +39,11 @@
 
 <div id="v5App" data-needs-identity>
   <header class="v5-top">
-    <p class="eyebrow" id="v5Kicker">YOUR NIGHT</p>
-    <h1 id="v5Who">Signed in</h1>
-    <p class="v5-sync" id="syncStatus">Connecting…</p>
+    <p class="eyebrow" id="v5Kicker">YOUR SEAT</p>
+    <h1 id="v5Seat">Your job</h1>
+    <p class="v5-who" id="v5Who"></p>
     <p class="v5-role" id="v5Role"></p>
+    <p class="v5-sync" id="syncStatus">Connecting…</p>
     <a class="v5-link" href="/prep/?full=1">Full board</a>
     <button type="button" class="v5-text" data-sign-out>Not me</button>
   </header>
@@ -122,17 +123,17 @@
 
 <script src="/js/prep-store.js"></script>
 <script src="/js/crew-slice.js"></script>
-<script src="/js/people-directory.js?v=seat1"></script>
-<script src="/js/site-leads.js?v=seat1"></script>
-<script src="/js/sign-in.js?v=seat1"></script>
-<script src="/js/lead-duties.js?v=seat1"></script>
-<script src="/js/day-spots.js?v=seat1"></script>
+<script src="/js/people-directory.js?v=seat2"></script>
+<script src="/js/site-leads.js?v=seat2"></script>
+<script src="/js/sign-in.js?v=seat2"></script>
+<script src="/js/lead-duties.js?v=seat2"></script>
+<script src="/js/day-spots.js?v=seat2"></script>
 <script src="/js/radio-feed.js"></script>
 <script src="/js/radio-night.js"></script>
 <script src="/js/night-social.js"></script>
 <script src="/js/wifi-join.js"></script>
 <script src="/prep/prep-v2.js"></script>
 <script src="/js/next-action.js"></script>
-<script src="/v5/v5.js?v=day1"></script>
+<script src="/v5/v5.js?v=seat2"></script>
 </body>
 </html>

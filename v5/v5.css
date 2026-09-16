@@ -4,7 +4,14 @@ body.v5 {
   min-height: 100%;
   background: #07074a;
   color: #e7eef4;
-  font-family: Raleway, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: Raleway, "Segoe UI", system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  word-spacing: 0.04em;
+}
+
+body.v5.is-locked #v5App {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 body.v5 {
@@ -17,12 +24,29 @@ body.v5 {
   border-bottom: 4px solid #ca913d;
 }
 
-.v5-top h1 {
+.v5-top h1,
+.v5-now h2,
+.v5-brief h2,
+.v5-lead h2,
+.v5-tab h2 {
   margin: 0.15rem 0 0;
-  font-family: "League Spartan", Raleway, sans-serif;
+  font-family: Raleway, "Segoe UI", system-ui, sans-serif;
   font-size: clamp(1.8rem, 8vw, 2.4rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  word-spacing: 0.06em;
+}
+
+.v5-who {
+  margin: 0.35rem 0 0;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.v5-top .v5-link,
+.v5-top .v5-text {
+  display: block;
 }
 
 .eyebrow {

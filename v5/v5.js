@@ -80,10 +80,6 @@
     return idx;
   }
 
-  function spotFor(name) {
-    return window.GGSDaySpots && window.GGSDaySpots.spotForName(name);
-  }
-
   function spotCue(name) {
     const spot = spotFor(name);
     if (!spot || !spot.clock || !spot.clock.length) return null;
@@ -111,10 +107,62 @@
   }
 
   function packFor(name) {
-    return slice.sliceFor(name, state(), roster(), sections);
+    if (!slice || !slice.sliceFor) return { mine: [], rosterHits: [], roles: [] };
+    try {
+      return slice.sliceFor(name, state(), roster(), sections);
+    } catch (err) {
+      return { mine: [], rosterHits: [], roles: [] };
+    }
+  }
+
+  function seatFor(name) {
+    if (window.GGSLeadDuties && window.GGSLeadDuties.jobFor) {
+      const job = window.GGSLeadDuties.jobFor(name);
+      if (job) return job;
+    }
+    const jobs = (window.GGSPeople && window.GGSPeople.JOBS) || [];
+    const match = window.GGSPeople && window.GGSPeople.match;
+    return (
+      jobs.find(function (job) {
+        return job.defaultOwner && match && match(job.defaultOwner, name);
+      }) || null
+    );
+  }
+
+  function spotFor(name) {
+    const named = window.GGSDaySpots && window.GGSDaySpots.spotForName(name);
+    if (named) return named;
+    const job = seatFor(name);
+    if (job && window.GGSDaySpots) {
+      return window.GGSDaySpots.SPOTS.find(function (spot) {
+        return spot.leadJob === job.id;
+      }) || null;
+    }
+    return null;
+  }
+
+  function paintSeat(name) {
+    const job = seatFor(name);
+    const brief = window.GGSLeadDuties ? window.GGSLeadDuties.briefing(name) : null;
+    const seatEl = document.getElementById("v5Seat");
+    const whoEl = document.getElementById("v5Who");
+    const kickerEl = document.getElementById("v5Kicker");
+    const roleEl = document.getElementById("v5Role");
+    if (whoEl) whoEl.textContent = name || "";
+    if (job) {
+      if (kickerEl) kickerEl.textContent = "YOUR SEAT";
+      if (seatEl) seatEl.textContent = job.title;
+      if (roleEl) roleEl.textContent = "Arrive " + job.arrival + ". " + job.owns;
+      return job;
+    }
+    if (kickerEl) kickerEl.textContent = brief && brief.kicker ? brief.kicker : "YOUR NIGHT";
+    if (seatEl) seatEl.textContent = brief && brief.title ? brief.title : "Your job";
+    if (roleEl) roleEl.textContent = brief && brief.next ? brief.next : "";
+    return null;
   }
 
   function roleOpen(roles) {
+    if (!slice || !slice.harvest) return [];
     const rows = slice.harvest(state(), sections);
     return rows.filter((row) => {
       if (row.done) return false;
@@ -242,7 +290,11 @@
 
   function renderNow(name, pack, roles, lead) {
     const fromSpot = spotCue(name);
-    const cue = fromSpot || slice.cueAt(roles, clockNow());
+    const cue =
+      fromSpot ||
+      (slice && slice.cueAt
+        ? slice.cueAt(roles, clockNow())
+        : { place: "Stand by", do: "Your jobs are on this page.", next: null, empty: true });
     const card = document.getElementById("nowCard");
     card.classList.toggle("is-strike", !!cue.strike);
     document.getElementById("nowKicker").textContent = cue.strike ? "STRIKE" : cue.waiting ? "Be here first" : "You should be";
@@ -257,7 +309,10 @@
     leadBox.hidden = !lead;
     if (lead && window.GGSNextAction) window.GGSNextAction.paint(state(), roster());
     const mine = pack.mine.filter((row) => !row.done).slice(0, 3);
-    const command = lead || leads.isCaptain(roles) ? roleOpen(roles).filter((row) => !pack.mine.some((m) => m.key === row.key)).slice(0, 3) : [];
+    const command =
+      lead || (leads && leads.isCaptain && leads.isCaptain(roles))
+        ? roleOpen(roles).filter((row) => !pack.mine.some((m) => m.key === row.key)).slice(0, 3)
+        : [];
     const box = document.getElementById("nowJobs");
     const rows = mine.concat(command);
     box.innerHTML = rows.length
@@ -297,8 +352,8 @@
   function renderJobs(name, pack, roles) {
     const spot = spotFor(name);
     const mine = pack.mine;
-    const extras = roleOpen(roles).filter((row) => !mine.some((m) => m.key === row.key));
-    const captain = leads.isCaptain(roles) || leads.isLead(name);
+    const extras = slice ? roleOpen(roles).filter((row) => !mine.some((m) => m.key === row.key)) : [];
+    const captain = !!(seatFor(name) || (leads && ((leads.isCaptain && leads.isCaptain(roles)) || (leads.isLead && leads.isLead(name)))));
     const facts = document.getElementById("jobsFacts");
     const clockEl = document.getElementById("jobsClock");
     if (spot && spot.clock && spot.clock.length) {
@@ -334,7 +389,7 @@
 
   function renderBoard(name) {
     const board = document.getElementById("boardList");
-    if (!leads.isLead(name)) {
+    if (!leads || !leads.isLead(name)) {
       board.innerHTML = "";
       return;
     }
@@ -379,31 +434,34 @@
   }
 
   function render() {
-    if (window.GGSSignIn && !window.GGSSignIn.identity().ok) return;
-    const name = meName();
-    if (!name) return;
-    if (window.GGSLeadDuties && window.GGSLeadDuties.seedDefaults) window.GGSLeadDuties.seedDefaults();
-    const pack = packFor(name);
-    const roles = leads.rolesFor(name, pack);
-    const lead = leads.isLead(name);
-    document.getElementById("v5Who").textContent = name;
-    const brief = window.GGSLeadDuties ? window.GGSLeadDuties.briefing(name) : null;
-    document.getElementById("v5Kicker").textContent = brief && brief.kicker ? brief.kicker : lead ? "SITE LEAD" : leads.isCaptain(roles) ? "CAPTAIN" : "YOUR NIGHT";
-    document.getElementById("v5Role").textContent = brief && brief.job
-      ? brief.job.title + " · " + brief.job.arrival
-      : roles.length
-        ? roles.map((r) => r.label).join(" · ")
-        : lead
-          ? "Day-of lead. Claim a seat on the 10-job list."
-          : "Your jobs only";
-    const boardBtn = document.getElementById("boardTab");
-    boardBtn.hidden = !lead;
-    document.querySelector(".v5-nav").dataset.cols = lead ? "4" : "3";
-    if (!lead && tab === "board") setTab("now");
-    renderBrief(name);
-    renderNow(name, pack, roles, lead);
-    renderJobs(name, pack, roles);
-    renderBoard(name);
+    try {
+      if (window.GGSSignIn) window.GGSSignIn.applyLock();
+      const name = meName();
+      if (!name) return;
+      if (window.GGSLeadDuties && window.GGSLeadDuties.seedDefaults) {
+        try {
+          window.GGSLeadDuties.seedDefaults();
+        } catch (err) {
+          /* keep the seat even if the shared board is late */
+        }
+      }
+      const job = paintSeat(name);
+      const pack = packFor(name);
+      const roles = leads && leads.rolesFor ? leads.rolesFor(name, pack) : [];
+      const lead = !!(job || (leads && leads.isLead && leads.isLead(name)));
+      const boardBtn = document.getElementById("boardTab");
+      if (boardBtn) boardBtn.hidden = !lead;
+      const nav = document.querySelector(".v5-nav");
+      if (nav) nav.dataset.cols = lead ? "4" : "3";
+      if (!lead && tab === "board") setTab("now");
+      renderBrief(name);
+      renderNow(name, pack, roles, lead);
+      renderJobs(name, pack, roles);
+      renderBoard(name);
+    } catch (err) {
+      const seatEl = document.getElementById("v5Seat");
+      if (seatEl && !seatEl.textContent) seatEl.textContent = "Your job";
+    }
   }
 
   document.querySelectorAll(".v5-nav [data-tab]").forEach((btn) => {
