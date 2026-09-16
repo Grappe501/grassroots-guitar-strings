@@ -108,5 +108,19 @@
     beat("22:00", "Tracy", "Building clear. Production is gone.", "done"),
   ];
 
-  global.GGSRunOfShow = { CLOCK: CLOCK, BAND: BAND, hm: hm, idFor: idFor };
+  const HOUSE = [
+    beat("08:00", "House", "Venue open. Load-in. Dress the room."),
+    beat("10:00", "House", "Room dressed. Lights and sound ready."),
+    beat("16:30", "House", "Sound check. Night crew back."),
+    beat("17:00", "House", "Posts live. Parking, tickets, lobby."),
+    beat("17:30", "House", "BBQ opens."),
+    beat("17:45", "House", "David acoustic — dinner show."),
+    beat("18:15", "House", "Acoustic over. Floor clear."),
+    beat("18:30", "House", "Concert doors."),
+    beat("19:00", "House", "Concert."),
+    beat("20:45", "House", "Show over. Strike."),
+    beat("22:00", "House", "Building clear."),
+  ];
+
+  global.GGSRunOfShow = { CLOCK: CLOCK, BAND: BAND, HOUSE: HOUSE, hm: hm, idFor: idFor };
 })(window);
