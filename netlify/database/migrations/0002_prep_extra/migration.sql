@@ -1,0 +1,2 @@
+ALTER TABLE prep_assignments
+  ADD COLUMN IF NOT EXISTS extra TEXT NOT NULL DEFAULT '';

@@ -37,4 +37,4 @@ function readiness(){const vals=areas.map(a=>pctForPrefix(tabToId(a[2])));const 
 function bind(){document.getElementById('eventModeBtn').onclick=()=>document.getElementById('modeOverlay').hidden=false;document.getElementById('closeMode').onclick=()=>document.getElementById('modeOverlay').hidden=true;document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>location.href=`/prep/#${b.dataset.jump}`)}
 function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness()}
 renderStatus();readiness();bind();tick();setInterval(()=>{tick();readiness()},30000);
-if(window.GGSPrepStore){window.addEventListener('ggs-prep-loaded',(e)=>applyPrep(e.detail));window.GGSPrepStore.load()}
+if(window.GGSPrepStore){window.addEventListener('ggs-prep-loaded',(e)=>applyPrep(e.detail));window.GGSPrepStore.startSync()}
