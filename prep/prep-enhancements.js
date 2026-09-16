@@ -3,7 +3,8 @@
   const websiteUrl='https://www.kellygrappe.com/';
   const donateUrl='https://goodchange.app/donate/commi-h8';
   const storageKey='ggs-prep-qr-v1';
-  const state=JSON.parse(localStorage.getItem(storageKey)||'{}');
+  const store=window.GGSPrepStore;
+  const state=store?store.readCache():JSON.parse(localStorage.getItem(storageKey)||'{}');
   const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
   const qr=url=>`https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=300&margin=2`;
   function addCard(sectionId,title,tasks){
@@ -16,7 +17,8 @@
     card.querySelectorAll('.task').forEach(row=>row.addEventListener('input',()=>save(row)));
     card.querySelectorAll('.task').forEach(row=>row.addEventListener('change',()=>save(row)));
   }
-  function save(row){const key=row.dataset.qrKey;state[key]={done:row.querySelector('.task-check').checked,owner:row.querySelector('.owner').value,when:row.querySelector('.when').value};localStorage.setItem(storageKey,JSON.stringify(state));}
+  function save(row){const key=row.dataset.qrKey;state[key]={done:row.querySelector('.task-check').checked,owner:row.querySelector('.owner').value,when:row.querySelector('.when').value};if(store)store.saveOne(key,state[key]);else localStorage.setItem(storageKey,JSON.stringify(state));}
+  function restoreQr(data){document.querySelectorAll('[data-qr-key]').forEach((row)=>{const x=(data||state)[row.dataset.qrKey];if(!x)return;row.querySelector('.task-check').checked=!!x.done;row.querySelector('.owner').value=x.owner||'';row.querySelector('.when').value=x.when||''});}
   function run(){
     addCard('setup','QR display materials',[
       ['Get 3 clear acrylic sign holders — 2 minimum, 3 preferred'],
@@ -41,5 +43,6 @@
       ['Place QR stations at ticket/lobby, campaign display and high-traffic guest area']
     ]);
   }
+  window.addEventListener('ggs-prep-loaded',(e)=>restoreQr(e.detail));
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
