@@ -12,7 +12,7 @@
     "Sarah Hurst",
     "Chance Bradford",
     "Leeann Solice",
-    "Debi Martin",
+    "Debbie Martin",
     "Julia Taylor",
     "Paul Egan",
     "Kate Stebbins",
@@ -22,7 +22,7 @@
     { who: /^ben\b|hurst/i, id: "food" },
     { who: /tracy/i, id: "production" },
     { who: /kelly/i, id: "candidate" },
-    { who: /debi|martin/i, id: "campaign" },
+    { who: /debi|debbie|martin/i, id: "campaign" },
   ];
 
   function match(name, other) {

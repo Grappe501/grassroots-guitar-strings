@@ -5,7 +5,8 @@
     return String(value || "")
       .trim()
       .toLowerCase()
-      .replace(/\s+/g, " ");
+      .replace(/\s+/g, " ")
+      .replace(/\bdebi\b/g, "debbie");
   }
 
   function nameMatch(owner, me) {

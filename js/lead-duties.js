@@ -56,7 +56,9 @@
     if (!store) return false;
     const seat = VOL_SEATS[id];
     if (!seat) return false;
-    const name = realOwner(id, owner);
+    let name = realOwner(id, owner);
+    const person = dir ? dir.findPerson(name) : null;
+    if (person) name = person.name;
     if (!name) return false;
     const doc = store.readDoc("volunteers") || { setup: [], event: [], strike: [], grounds: [] };
     if (!doc[seat.kind]) doc[seat.kind] = [];
@@ -101,7 +103,9 @@
     jobs().forEach((job) => {
       const seat = VOL_SEATS[job.id];
       if (!seat) return;
-      const name = ownerName(job);
+      let name = ownerName(job);
+      const person = dir ? dir.findPerson(name) : null;
+      if (person) name = person.name;
       if (!name) return;
       if (isCartoon(job) && !job.defaultOwner) return;
       if (!state[seat.kind]) state[seat.kind] = [];
@@ -231,6 +235,14 @@
     const doc = store.readDoc("lead-jobs") || {};
     const saved = Array.isArray(doc.jobs) ? doc.jobs.slice() : [];
     let dirty = false;
+    saved.forEach((hit) => {
+      if (!hit || !hit.owner) return;
+      const person = dir.findPerson(hit.owner);
+      if (person && String(hit.owner).trim() !== person.name) {
+        hit.owner = person.name;
+        dirty = true;
+      }
+    });
     dir.JOBS.forEach((job) => {
       if (!job.defaultOwner) return;
       const hit = saved.find((row) => row && row.id === job.id);

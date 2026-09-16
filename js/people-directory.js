@@ -158,8 +158,8 @@
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
-      name: "Debi Martin",
-      first: "Debi",
+      name: "Debbie Martin",
+      first: "Debbie",
       phone: "",
       gate: "You own the merch table. Phone goes in tomorrow. Confirm when we have it, then connect to Wi-Fi.",
       go: "Open my board",
@@ -314,9 +314,9 @@
       title: "Campaign & Merch Lead",
       weight: "Medium",
       cartoon: "Wonder Woman",
-      defaultOwner: "Debi Martin",
+      defaultOwner: "Debbie Martin",
       arrival: "10:00 AM if you dress · 3:00 PM for night",
-      owns: "Debi Martin. One table. Signs, shirts, and $1 water.",
+      owns: "Debbie Martin. One table. Signs, shirts, and $1 water.",
       duties: [
         "If you dress tables: 10:00 with Setup. 10:25 you own merch — 30 minutes. Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, cash envelopes. 4-ft and 6-ft cloths. Conversation cards.",
         "11:00 yard-sign sheet on the same table. First name + phone. Morning done 12:30. Lunch off site. Back 3:00.",

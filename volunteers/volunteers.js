@@ -158,7 +158,7 @@ ensureLeadRows();
 const bootLeadDirty = applyLeadSeats();
 (function seedNamedSeats() {
   const debi = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
-  if (debi && !String(debi.name || "").trim()) debi.name = "Debi Martin";
+  if (debi && (!String(debi.name || "").trim() || /debi martin/i.test(String(debi.name || "")))) debi.name = "Debbie Martin";
   const ben = (state.event || []).find((item) => /food service lead/i.test(String(item.role || "")));
   if (ben && !String(ben.name || "").trim()) ben.name = "Ben Hurst";
   const sarah = (state.event || []).find((item) => /server 1/i.test(String(item.role || "")));
