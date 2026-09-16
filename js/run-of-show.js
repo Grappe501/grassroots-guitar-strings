@@ -1,6 +1,6 @@
 (function (global) {
-  function beat(t, who, text, kind) {
-    return { t: t, who: who, text: text, kind: kind || "work" };
+  function beat(t, who, text, kind, lane) {
+    return { t: t, who: who, text: text, kind: kind || "work", lane: lane || "" };
   }
 
   const CLOCK = [
@@ -112,17 +112,39 @@
   ];
 
   const HOUSE = [
-    beat("08:00", "House", "Venue open. Load-in. Dress the room."),
-    beat("10:00", "House", "Room dressed. Lights and sound ready."),
-    beat("16:30", "House", "Sound check. Night crew back."),
-    beat("17:00", "House", "Posts live. Parking, tickets, lobby."),
-    beat("17:30", "House", "BBQ opens."),
-    beat("17:45", "House", "David acoustic — dinner show."),
-    beat("18:15", "House", "Acoustic over. Band to green room. Floor clear."),
-    beat("18:30", "House", "Concert doors."),
-    beat("19:00", "House", "Concert."),
-    beat("20:45", "House", "Show over. Strike."),
-    beat("22:00", "House", "Building clear."),
+    beat("08:00", "Setup 1–3 · Tracy helper", "Venue open. Setup arrives. Load-in. Dress the room. Furniture already placed.", "arrive", "setup"),
+    beat("08:05", "Setup 1–3", "Walk room, exits, lobby. Dress 8 guest tables only.", "work", "setup"),
+    beat("08:10", "Tracy + helper", "Unload lights and sound. One system.", "work", "setup"),
+    beat("08:25", "Setup 3", "30-minute merch set: pull-ups, cards, buttons, candy, shirts.", "work", "setup"),
+    beat("08:25", "Setup 1 + 2", "Printed signs up. Dress the lobby ticket table.", "work", "setup"),
+    beat("08:40", "Setup 1–3", "Tea and lemonade station. No ice until 4:30.", "work", "setup"),
+    beat("09:00", "Setup 3", "Merch done. Yard-sign sheet on the table.", "work", "setup"),
+    beat("09:15", "Tracy + helper", "Power mapped. Dance-floor cables taped.", "work", "setup"),
+    beat("09:30", "Tracy + helper", "Bar stool and one vocal mic staged for David.", "work", "setup"),
+    beat("10:00", "Tracy + helper", "Setup ready. Line check and lights. Band is not required.", "work", "setup"),
+    beat("10:30", "Setup 1–3", "Morning setup done. Leave. Back at 4:30 in night seats.", "leave", "setup"),
+    beat("12:00", "Tracy helper", "Lunch 45 minutes only if the system can hold.", "eat", "setup"),
+    beat("16:30", "David + band + Tracy", "Band arrives. SOUND CHECK. Acoustic and concert patches.", "arrive", "arrive"),
+    beat("16:30", "Night crew", "Night crew arrives. T-shirts on. Ice now. Stay off the dance floor.", "arrive", "arrive"),
+    beat("16:32", "Ben + 3 servers", "Food line arrives. Ice chest + scoop. Ben does not plate.", "arrive", "arrive"),
+    beat("16:35", "Water", "Water arrives. 120 bottles on ice. $1 cash only.", "arrive", "arrive"),
+    beat("16:45", "Parking · directions · crowd", "Eat now. On lot, path, and lobby at 5:00.", "arrive", "arrive"),
+    beat("17:00", "Parking · directions · crowd · tickets", "Arrival posts live. Lot, path, lobby, ticket table.", "arrive", "arrive"),
+    beat("17:30", "Ben + 3 servers", "BBQ STARTS. Serving line open.", "show", "start"),
+    beat("17:45", "David + Tracy", "ACOUSTIC STARTS. 5:45–6:15. Center of the dance floor.", "show", "start"),
+    beat("18:15", "David + band", "ACOUSTIC ENDS. Green room 45 minutes. Back at the stage by 6:50.", "sit", "end"),
+    beat("18:15", "Tracy + Floater B", "Floor clear. Concert system up.", "work", "end"),
+    beat("18:30", "Tickets · Floater A", "Concert doors open. 15-minute rush.", "show", "start"),
+    beat("18:45", "Captain · Tracy", "Hard checkpoint. Every post has a body. Concert at 7:00.", "work", "start"),
+    beat("18:50", "David + band", "Band leaves green room. On stage for 7:00.", "arrive", "arrive"),
+    beat("19:00", "Whole room", "CONCERT STARTS. Last song about 8:45.", "show", "start"),
+    beat("20:40", "Tracy muscle 1–3", "Strike muscle arrives at the stage. Find Tracy.", "arrive", "arrive"),
+    beat("20:45", "Whole room", "CONCERT ENDS. Strike starts. Venue furniture stays.", "strike", "end"),
+    beat("20:46", "Strike A–D", "Cloths, merch, food, production. Helper + 3 muscle to Tracy.", "strike", "end"),
+    beat("21:15", "Event Captain", "Packs in vehicles. Production should be loading.", "strike", "end"),
+    beat("21:30", "Tracy + muscle", "Stage empty. Cases in his vehicle.", "strike", "end"),
+    beat("21:45", "Captain + Floater B", "Final walk: restrooms, lot, pavilion.", "strike", "end"),
+    beat("22:00", "Event Captain", "Building clear. Captain leaves last.", "done", "end"),
   ];
 
   global.GGSRunOfShow = { CLOCK: CLOCK, BAND: BAND, HOUSE: HOUSE, hm: hm, idFor: idFor };

@@ -54,12 +54,8 @@ function houseAt(t){
   d.setHours(Number(p[0])||0,Number(p[1])||0,0,0);
   return d;
 }
-function renderHouseRos(){
-  const el=document.getElementById('houseRos');
-  const show=window.GGSRunOfShow;
-  if(!el||!show||!show.HOUSE) return;
+function houseLive(list){
   const now=houseNow();
-  const list=show.HOUSE;
   let current=list[0];
   let next=list[1]||null;
   list.forEach(function(row,i){
@@ -68,16 +64,56 @@ function renderHouseRos(){
       next=list[i+1]||null;
     }
   });
-  el.innerHTML=list.map(function(row){
-    const cls=[
-      now>=houseAt(row.t)&&row.t!==current.t?'is-past':'',
-      current&&row.t===current.t?'is-now':'',
-      next&&row.t===next.t?'is-next':''
-    ].filter(Boolean).join(' ');
-    return '<li class="'+cls+'"><b>'+show.hm(row.t)+'</b><span>'+row.text+'</span></li>';
-  }).join('');
+  return {now:now,current:current,next:next};
 }
-function tick(){const now=new Date();document.getElementById('clock').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const event=new Date('2026-09-17T19:00:00');const diff=event-now;document.getElementById('clockLabel').textContent=diff>0?`Concert starts ${timeDistance(diff)}`:'Event day — use the live timeline';document.getElementById('modeTime').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const d=new Date('2026-09-17T20:45:00');document.getElementById('modeTitle').textContent=now>=d?'STRIKE MODE':'Event operations';document.getElementById('modeNext').textContent=now>=d?'Strike immediately. Building must be clear by 10:00 PM.':'Use the full checklist for assignments, owners and completion.';renderHouseRos();renderTimeline();paintNext()}
+function houseUpcoming(list,lane){
+  const now=houseNow();
+  return list.find(function(row){return row.lane===lane&&now<houseAt(row.t);})||null;
+}
+function houseRowHtml(show,row,here){
+  const cls=[
+    here.now>=houseAt(row.t)&&row.t!==here.current.t?'is-past':'',
+    here.current&&row.t===here.current.t?'is-now':'',
+    here.next&&row.t===here.next.t?'is-next':''
+  ].filter(Boolean).join(' ');
+  return '<li class="'+cls+'"><b>'+show.hm(row.t)+'</b><div><small>'+row.who+'</small><span>'+row.text+'</span></div></li>';
+}
+function renderHouseRos(){
+  const el=document.getElementById('houseRos');
+  const pins=document.getElementById('housePins');
+  const label=document.getElementById('clockLabel');
+  const show=window.GGSRunOfShow;
+  if(!el||!show||!show.HOUSE) return;
+  const list=show.HOUSE;
+  const here=houseLive(list);
+  const lanes=[
+    ['setup','Setup times'],
+    ['arrive','Arrival times'],
+    ['start','Show starts'],
+    ['end','Show ends + clear']
+  ];
+  el.innerHTML=lanes.map(function(lane){
+    const rows=list.filter(function(row){return row.lane===lane[0];});
+    return '<section class="house-lane"><p class="eyebrow">'+lane[1]+'</p><ol class="house-ros">'+rows.map(function(row){return houseRowHtml(show,row,here);}).join('')+'</ol></section>';
+  }).join('');
+  if(pins){
+    const pinLanes=[
+      ['setup','Next setup'],
+      ['arrive','Next arrival'],
+      ['start','Next start'],
+      ['end','Next end']
+    ];
+    pins.innerHTML=pinLanes.map(function(pin){
+      const row=houseUpcoming(list,pin[0])||(here.current&&here.current.lane===pin[0]?here.current:null);
+      const when=row?show.hm(row.t)+' · '+row.text:pin[0]==='end'?'Building is clear.':'—';
+      return '<article><p class="eyebrow">'+pin[1]+'</p><p>'+when+'</p></article>';
+    }).join('');
+  }
+  if(label&&here.current){
+    label.textContent='NOW · '+show.hm(here.current.t)+' — '+here.current.text+(here.next?'  Next · '+show.hm(here.next.t)+' '+here.next.text:'');
+  }
+}
+function tick(){const now=new Date();document.getElementById('clock').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});document.getElementById('modeTime').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const d=new Date('2026-09-17T20:45:00');document.getElementById('modeTitle').textContent=now>=d?'STRIKE MODE':'Event operations';document.getElementById('modeNext').textContent=now>=d?'Strike immediately. Building must be clear by 10:00 PM.':'Use the full checklist for assignments, owners and completion.';renderHouseRos();renderTimeline();paintNext()}
 function readiness(){const vals=areas.map(a=>pctForPrefix(tabToId(a[2])));const p=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);document.getElementById('readiness').textContent=p+'%';document.getElementById('readinessBar').style.width=p+'%';document.getElementById('readinessDetail').textContent=`${vals.filter(x=>x>=80).length} of ${vals.length} command areas at 80%+ completion.`}
 function bind(){document.getElementById('eventModeBtn').onclick=()=>document.getElementById('modeOverlay').hidden=false;document.getElementById('closeMode').onclick=()=>document.getElementById('modeOverlay').hidden=true;document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>location.href=`/prep/#${b.dataset.jump}`)}
 function nextActions(){
