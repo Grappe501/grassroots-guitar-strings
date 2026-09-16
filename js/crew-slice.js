@@ -255,9 +255,9 @@
       test: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |plates|serving/i,
       roster: /bbq|food|water|ice|cooler/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T17:30:00", place: "Buffet + tea station", do: "Receive food. Ice, tea, lemonade, water ready." },
-        { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Buffet tables", do: "BBQ / social hour. Keep the line fed." },
-        { start: "2026-09-17T18:30:00", end: "2026-09-17T20:45:00", place: "Buffet / coolers", do: "Hold leftovers safely. Water stays out." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T17:30:00", place: "Buffet + $1 water / ice", do: "Receive food. Ice stocked. Water signs and money bag out." },
+        { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Buffet + $1 water", do: "BBQ / social hour. Sell water for a $1 donation. Cards scan GoodChange." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T20:45:00", place: "Coolers · $1 water", do: "Keep ice and water up. Cash in the bag. Cards to the GGS QR." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike C · food", do: "Clear food, drinks, coolers, trash." },
       ],
     },

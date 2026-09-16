@@ -21,7 +21,7 @@
     { id: "setup", label: "Setup crew", match: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup/i, tabs: ["setup"] },
     { id: "tracy", label: "Tracy + helper", match: /tracy|sound|speaker|microphone|stage light|extension cord|acoustic/i, tabs: ["production", "setup"] },
     { id: "tickets", label: "Tickets + money", match: /ticket|cash|envelope|reconcile|payment/i, tabs: ["tickets"] },
-    { id: "food", label: "Food + drinks", match: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben /i, tabs: ["ben", "food"] },
+    { id: "food", label: "Food + drinks", match: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |\$1 water|money bag/i, tabs: ["ben", "food"] },
     { id: "campaign", label: "Campaign + merch", match: /yard sign|merch|qr|literature|regnet|campaign display/i, tabs: ["campaign"] },
     { id: "strike", label: "Strike / teardown", match: /strike|teardown|load-out|final venue|building cleared/i, tabs: ["breakdown", "final"] },
   ];

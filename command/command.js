@@ -21,7 +21,7 @@ const areas=[
  ['Volunteers','Setup, event crew and 10–12+ teardown crew assigned.','Volunteers'],
  ['Tickets','Ticket station, payment procedure and reconciliation.','Tickets & Money'],
  ['Campaign','Literature, signs, QR displays and merchandise.','Campaign & Merch'],
- ['Food & Drinks','Tea, lemonade, water, glass containers, ice and coolers.','Food & Drinks'],
+ ['Food & Drinks','Tea, lemonade, $1 water, ice, coolers and the water money bag.','Food & Drinks'],
  ['Production','Tracy, sound, lights and David acoustic setup.','Sound & Show'],
  ['Breakdown','Strike Teams A–E and load-out map.','Breakdown']
 ];

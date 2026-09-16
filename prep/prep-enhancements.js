@@ -2,6 +2,7 @@
   const volunteerUrl='https://www.kellygrappe.com/get-involved';
   const websiteUrl='https://www.kellygrappe.com/';
   const donateUrl='https://goodchange.app/donate/commi-h8';
+  const ggsUrl='https://goodchange.app/donate/grass-ax';
   const storageKey='ggs-prep-qr-v1';
   const store=window.GGSPrepStore;
   const state=store?store.readCache():JSON.parse(localStorage.getItem(storageKey)||'{}');
@@ -41,6 +42,13 @@
       ['Test donate QR'],
       ['Assign QR station owner'],
       ['Place QR stations at ticket/lobby, campaign display and high-traffic guest area']
+    ]);
+    addCard('food','$1 water — cards go here',[
+      ['Print the $1 water signs'],
+      ['Card payments: GoodChange Grassroots & Guitar Strings',ggsUrl],
+      ['Do not use the campaign donate QR for water'],
+      ['Money bag + ones for change'],
+      ['Water + ice captain owns this station']
     ]);
   }
   window.addEventListener('ggs-prep-loaded',(e)=>restoreQr(e.detail));

@@ -7,7 +7,7 @@ const defaults = {
     "Ticket backup",
     "BBQ/food service 1",
     "BBQ/food service 2",
-    "Water/ice/cooler captain",
+    "Water + ice captain — $1 water sales",
     "Guest greeter 1",
     "Campaign + sign distribution",
     "Photography/video — vertical only",
