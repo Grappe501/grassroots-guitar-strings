@@ -184,6 +184,16 @@
       });
     }
 
+    const wifiDoc = global.GGSPrepStore ? global.GGSPrepStore.readDoc("wifi") : null;
+    if (!(wifiDoc && wifiDoc.ssid && wifiDoc.password)) {
+      facts.push({
+        kind: "wifi",
+        score: 10,
+        href: "/wifi/",
+        line: "Get Woody's Wi-Fi name and password. Enter them so crew can tap to join.",
+      });
+    }
+
     if (undone(list, /print all 8\.5 x 11 signs at hq/i).length && weight(p, "signs")) {
       facts.push({ kind: "signs", score: weight(p, "signs"), href: "/signs/", line: "Print the 8.5 x 11 signs at HQ." });
     }

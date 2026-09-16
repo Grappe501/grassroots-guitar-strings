@@ -519,7 +519,7 @@
     beat("");
     paintPeople();
     scanSignals();
-    hint("Tap Talk once to open the mic. Then hold to talk. Headphones optional.");
+    hint("Join Woody's Wi-Fi first. Then tap Talk once to open the mic. Hold to talk.");
   }
 
   global.GGSRadioNight = { attach, pick };

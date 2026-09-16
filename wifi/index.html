@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17466b">
+<title>Woody's Wi-Fi — Grassroots & Guitar Strings</title>
+<link rel="stylesheet" href="/css/sign-in.css">
+<link rel="stylesheet" href="/wifi/wifi.css">
+</head>
+<body>
+<div id="signInGate" class="signin" hidden>
+  <article class="signin__card">
+    <p class="eyebrow">SIGN IN</p>
+    <h1>Who are you?</h1>
+    <p>Crew only. Name and a day-of number first.</p>
+    <label>I am
+      <input id="gateName" type="text" autocomplete="name" placeholder="Your name">
+    </label>
+    <label>My phone
+      <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
+    </label>
+    <p class="signin__err" id="gateErr" hidden>Both are required.</p>
+    <button type="button" class="signin__go" id="gateGo">Open Wi-Fi</button>
+  </article>
+</div>
+<div id="wifiPage" data-needs-identity>
+  <header class="wifi-top">
+    <p class="eyebrow">VENUE WI-FI</p>
+    <h1>Woody's Sherwood Forest</h1>
+    <p>Join this network before radio or walkie. One tap. Every crew phone.</p>
+    <p class="sync-status" id="syncStatus">Connecting to shared board…</p>
+    <nav class="wifi-nav">
+      <a href="/me/">My page</a>
+      <a href="/prep/">Prep</a>
+      <a href="/command/">Command</a>
+    </nav>
+  </header>
+  <main class="wifi-main">
+    <section id="wifiReady" hidden>
+      <p class="eyebrow">TAP ONCE</p>
+      <h2>Join the venue Wi-Fi</h2>
+      <button type="button" class="wifi-join" id="wifiJoin">Join Woody's Wi-Fi</button>
+      <p class="wifi-hint" id="wifiJoinHint">Android: tap Join. iPhone: tap Join, then Install the profile.</p>
+      <div class="wifi-creds">
+        <p>Network <strong id="wifiName"></strong> <button type="button" id="wifiCopyName">Copy name</button></p>
+        <p>Password <strong id="wifiPass"></strong> <button type="button" id="wifiCopyPass">Copy password</button></p>
+      </div>
+    </section>
+    <section id="wifiMissing">
+      <p class="eyebrow">NOT IN YET</p>
+      <h2>Get the name and password from Woody's</h2>
+      <p>Ask the venue. Type both here once. Every signed-in phone can then tap Join.</p>
+    </section>
+    <section class="wifi-form">
+      <p class="eyebrow">CREW ENTRY</p>
+      <h2>What Woody's gave you</h2>
+      <label>Wi-Fi name
+        <input id="wifiSsid" type="text" autocomplete="off" placeholder="Network name on the wall or from staff">
+      </label>
+      <label>Password
+        <input id="wifiPassword" type="text" autocomplete="off" placeholder="Venue Wi-Fi password">
+      </label>
+      <button type="button" class="wifi-save" id="wifiSave">Save for every phone</button>
+      <p class="wifi-fine">Crew board only. Do not put this on a guest sign.</p>
+    </section>
+  </main>
+</div>
+<script src="/js/prep-store.js"></script>
+<script src="/js/crew-slice.js"></script>
+<script src="/js/sign-in.js"></script>
+<script src="/js/wifi-join.js"></script>
+<script>
+  if (window.GGSPrepStore) {
+    window.addEventListener("ggs-prep-status", function (e) {
+      var el = document.getElementById("syncStatus");
+      if (!el) return;
+      el.textContent = e.detail === "saving" ? "Saving to every device…" : e.detail === "offline" ? "Shared board unreachable." : "Shared across every device.";
+    });
+    window.GGSPrepStore.startSync();
+  }
+</script>
+</body>
+</html>

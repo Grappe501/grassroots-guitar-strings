@@ -1,0 +1,151 @@
+body {
+  margin: 0;
+  background: #0b1c28;
+  color: #e7eef4;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.wifi-top,
+.wifi-main {
+  width: min(36rem, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.wifi-top {
+  padding: 1.4rem 0 0.6rem;
+}
+
+.wifi-top h1,
+.wifi-main h2 {
+  margin: 0.2rem 0 0.45rem;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #f3c979;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.wifi-nav {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0 0;
+}
+
+.wifi-nav a {
+  color: #0f3048;
+  background: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+}
+
+.sync-status {
+  color: #f3c979;
+  font-weight: 700;
+}
+
+.wifi-main {
+  padding: 0.6rem 0 3rem;
+}
+
+.wifi-main section {
+  background: #122433;
+  border: 1px solid #2a4154;
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.wifi-join,
+.wifi-save {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 1rem 0.8rem;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.wifi-join {
+  background: #f3c979;
+  color: #172532;
+}
+
+.wifi-save {
+  background: #17466b;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+.wifi-hint,
+.wifi-fine {
+  color: #9aafbd;
+  font-weight: 700;
+}
+
+.wifi-creds p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.65rem;
+  align-items: center;
+  font-weight: 700;
+}
+
+.wifi-creds button,
+.wifi-form button {
+  font: inherit;
+  font-weight: 800;
+}
+
+.wifi-creds button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.35rem 0.55rem;
+  background: #1d5a86;
+  color: #fff;
+  cursor: pointer;
+}
+
+.wifi-form label {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0.55rem 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f3c979;
+}
+
+.wifi-form input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #3a5366;
+  border-radius: 10px;
+  padding: 0.75rem;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #172532;
+}
+
+.wifi-banner {
+  display: block;
+  background: #c0172a;
+  color: #fff;
+  text-align: center;
+  font-weight: 900;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+}
+
+body.is-locked .wifi-banner {
+  display: none;
+}
