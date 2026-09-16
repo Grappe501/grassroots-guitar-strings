@@ -1,0 +1,112 @@
+body.ros {
+  margin: 0;
+  background: #f4f7fc;
+  color: #12124a;
+  font-family: Raleway, ui-sans-serif, system-ui, sans-serif;
+}
+
+.ros-top {
+  background: #000066;
+  color: #e7eef4;
+  padding: calc(1rem + env(safe-area-inset-top)) 1rem 1.1rem;
+  border-bottom: 4px solid #ca913d;
+}
+
+.ros-top h1 {
+  margin: 0.2rem 0 0.35rem;
+  font-size: clamp(1.7rem, 6vw, 2.6rem);
+  color: #fff;
+}
+
+.ros-top p,
+.ros-top a { color: #dbe7ef; }
+.ros-top a { font-weight: 800; }
+
+.ros-clock {
+  margin: 0.35rem 0 0;
+  font-family: "League Spartan", Raleway, sans-serif;
+  font-size: clamp(2rem, 8vw, 3rem);
+  color: #ca913d;
+}
+
+.ros-wrap {
+  width: min(46rem, calc(100% - 1.4rem));
+  margin: 1rem auto 2.5rem;
+}
+
+.ros-now,
+.ros-pulse,
+.ros-note {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 102, 0.14);
+  border-radius: 16px;
+  padding: 1rem 1.05rem 1.1rem;
+  margin-bottom: 0.85rem;
+}
+
+.ros-now.is-sit,
+.ros-now.is-eat { border-left: 6px solid #ca913d; }
+.ros-now.is-strike { border-left: 6px solid #9b1d1d; }
+.ros-now.is-show { border-left: 6px solid #000066; }
+
+.ros-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.ros-actions button,
+.ros-pulse button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  background: #ca913d;
+  color: #07074a;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ros-actions button[data-mark="late"] { background: #9b1d1d; color: #fff; }
+.ros-actions button[data-mark="skip"] { background: #364272; color: #fff; }
+
+.ros-list { list-style: none; margin: 0; padding: 0; }
+
+.ros-row {
+  display: grid;
+  grid-template-columns: 5.6rem 1fr;
+  gap: 0.45rem;
+  padding: 0.75rem 0.2rem;
+  border-bottom: 1px solid rgba(0, 0, 102, 0.1);
+}
+
+.ros-row b {
+  font-family: "League Spartan", Raleway, sans-serif;
+}
+
+.ros-row small {
+  display: block;
+  color: #8a4b08;
+  font-weight: 800;
+  margin-bottom: 0.15rem;
+}
+
+.ros-row.is-past { opacity: 0.45; }
+.ros-row.is-now {
+  background: #fff6e8;
+  border: 2px solid #ca913d;
+  border-radius: 12px;
+  padding: 0.8rem 0.55rem;
+  opacity: 1;
+}
+.ros-row.is-next { background: #eef2fb; border-radius: 12px; padding: 0.8rem 0.55rem; }
+.ros-row.is-done small::after { content: " · done"; }
+.ros-row.is-late small::after { content: " · late"; color: #9b1d1d; }
+
+.ros-pulse h2 { margin: 0.15rem 0 0.4rem; }
+.ros-moves { margin: 0.4rem 0 0; padding-left: 1.15rem; }
+
+@media (max-width: 640px) {
+  .ros-row { grid-template-columns: 4.6rem 1fr; }
+}

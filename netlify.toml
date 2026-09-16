@@ -27,6 +27,16 @@
   status = 301
 
 [[redirects]]
+  from = "/run"
+  to = "/clock/"
+  status = 302
+
+[[redirects]]
+  from = "/run/"
+  to = "/clock/"
+  status = 302
+
+[[redirects]]
   from = "/day"
   to = "/spots/"
   status = 302

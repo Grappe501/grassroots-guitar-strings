@@ -17,6 +17,9 @@
 .spot-card,
 .spot-now,
 .spot-facts,
+.ros-now,
+.ros-pulse,
+.ros-note,
 .job,
 .stats article,
 .panel,
@@ -72,7 +75,10 @@ body:not(.v5):not(.wifi) .stats .eyebrow,
 body:not(.v5):not(.wifi) .lead-job .eyebrow,
 body:not(.v5):not(.wifi) .spot-now .eyebrow,
 body:not(.v5):not(.wifi) .spot-facts .eyebrow,
-body:not(.v5):not(.wifi) .spot-card .eyebrow {
+body:not(.v5):not(.wifi) .spot-card .eyebrow,
+body:not(.v5):not(.wifi) .ros-now .eyebrow,
+body:not(.v5):not(.wifi) .ros-pulse .eyebrow,
+body:not(.v5):not(.wifi) .ros-note .eyebrow {
   color: var(--ggs-label-light);
 }
 
@@ -83,6 +89,7 @@ body:not(.v5):not(.wifi) .spot-card .eyebrow {
 .v5-top .eyebrow,
 .lead-top .eyebrow,
 .spot-top .eyebrow,
+.ros-top .eyebrow,
 .bar .eyebrow,
 .radio-digest .eyebrow,
 body.nametags .badge-kicker,
