@@ -45,12 +45,27 @@ const slice = window.GGSCrewSlice;
 
 function arrivalFor(role, kind) {
   if (kind === "setup") return "10:00 AM";
-  if (/muscle/i.test(role)) return "3:00 PM · required 8:45";
+  if (/muscle/i.test(role)) return "4:30 PM · required 8:45";
   if (kind === "strike") return "After show";
-  if (/parking|directions|crowd/i.test(role)) return "3:00 PM";
+  if (/parking|directions|crowd/i.test(role)) return "4:30 PM";
   if (/tracy/i.test(role)) return "8:00–10:00 AM";
-  if (/floater/i.test(role)) return "3:00 PM";
-  return "3:00 PM";
+  if (/floater/i.test(role)) return "4:30 PM";
+  return "4:30 PM";
+}
+
+function migrateArrivals() {
+  let dirty = false;
+  ["setup", "event", "strike", "grounds"].forEach((kind) => {
+    (state[kind] || []).forEach((row) => {
+      if (/tracy/i.test(String(row.role || ""))) return;
+      if (kind === "setup") return;
+      const a = String(row.arrival || "");
+      if (!/3:00/.test(a)) return;
+      row.arrival = /muscle/i.test(String(row.role || "")) ? "4:30 PM · required 8:45" : "4:30 PM";
+      dirty = true;
+    });
+  });
+  return dirty;
 }
 
 function emptyRow(role, kind) {
@@ -158,6 +173,7 @@ ensureMuscle();
 ensureGrounds();
 ensureFoodLine();
 ensureLeadRows();
+const bootArriveDirty = migrateArrivals();
 const bootLeadDirty = applyLeadSeats();
 (function seedNamedSeats() {
   const debi = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
@@ -293,9 +309,10 @@ function applyRemote(data) {
   ensureGrounds();
   ensureFoodLine();
   ensureLeadRows();
+  const arriveDirty = migrateArrivals();
   const leadDirty = applyLeadSeats();
   ["setup", "event", "strike", "grounds"].forEach(render);
-  if (leadDirty) save();
+  if (leadDirty || arriveDirty) save();
   counts();
 }
 
@@ -347,7 +364,7 @@ if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {
   });
 }
 ["setup", "event", "strike", "grounds"].forEach(render);
-if (bootLeadDirty) save();
+if (bootLeadDirty || bootArriveDirty) save();
 counts();
 document.querySelectorAll("[data-add]").forEach((b) =>
   b.addEventListener("click", () => {
