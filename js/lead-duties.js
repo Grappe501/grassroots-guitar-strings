@@ -9,6 +9,7 @@
     return base.filter((job) => !job.retired).map((job) => {
       const hit = saved.find((row) => row && row.id === job.id) || {};
       let owner = String(hit.owner || "").trim();
+      if (dir && dir.canonName) owner = dir.canonName(owner);
       if (!owner || (dir && dir.match(owner, job.cartoon))) owner = job.defaultOwner || job.cartoon;
       return Object.assign({}, job, { owner: owner });
     });
@@ -46,7 +47,7 @@
   }
 
   function realOwner(id, owner) {
-    const name = String(owner || "").trim();
+    const name = dir && dir.canonName ? dir.canonName(owner) : String(owner || "").trim();
     if (!name) return "";
     const job = ((dir && dir.JOBS) || []).find((row) => row.id === id);
     if (job && dir && dir.match(name, job.cartoon)) return String(job.defaultOwner || "").trim();
@@ -169,7 +170,7 @@
 
   function saveOwner(id, owner) {
     if (!store) return;
-    const name = String(owner || "").trim();
+    const name = dir && dir.canonName ? dir.canonName(owner) : String(owner || "").trim();
     const duty = allJobs().find((job) => job.id === id);
     if (duty && duty.spotId && global.GGSDaySpots) {
       global.GGSDaySpots.saveOwner(store, duty.spotId, name, { skipLead: true });

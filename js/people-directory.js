@@ -161,6 +161,7 @@
     {
       name: "Debbie Martin",
       first: "Debbie",
+      aliases: ["Debi Martin", "Debbi Martin"],
       phone: "",
       gate: "You own the merch table. Phone goes in tomorrow. Confirm when we have it, then connect to Wi-Fi.",
       go: "Open my night",
@@ -548,7 +549,22 @@
   function findPerson(name) {
     const n = String(name || "").trim();
     if (!n) return null;
-    return PEOPLE.find((p) => match(p.name, n)) || null;
+    return (
+      PEOPLE.find(
+        (p) =>
+          match(p.name, n) ||
+          (p.aliases || []).some((alias) => match(alias, n) || norm(alias) === norm(n))
+      ) || null
+    );
+  }
+
+  function canonName(name) {
+    const label = String(name || "").trim();
+    if (!label) return "";
+    if (/^venue$/i.test(label)) return "Venue";
+    const person = findPerson(label);
+    if (person) return person.name;
+    return label.replace(/\bDebbi\b/gi, "Debbie").replace(/\bDebi\b/gi, "Debbie");
   }
 
   function attending() {
@@ -585,7 +601,7 @@
 
   function leadSelectHtml(selected, extra) {
     const cfg = extra || {};
-    const sel = String(selected || "").trim();
+    const sel = canonName(selected);
     const cls = cfg.className || "owner";
     const attrs = cfg.attrs || "";
     const blank = cfg.blank != null ? cfg.blank : "Unassigned";
@@ -613,7 +629,86 @@
     return String(phone || "").trim();
   }
 
+  function rewriteRowName(row) {
+    if (!row || typeof row !== "object") return false;
+    const next = canonName(row.name);
+    if (next === String(row.name || "").trim()) return false;
+    row.name = next;
+    return true;
+  }
+
+  function migrateStoredNames() {
+    const store = global.GGSPrepStore;
+    if (!store || !store.readDoc) return;
+    let dirty = false;
+    const spots = store.readDoc("spots");
+    if (spots && spots.owners && typeof spots.owners === "object") {
+      Object.keys(spots.owners).forEach((id) => {
+        const next = canonName(spots.owners[id]);
+        if (next !== String(spots.owners[id] || "").trim()) {
+          spots.owners[id] = next;
+          dirty = true;
+        }
+      });
+      if (dirty) store.saveDoc("spots", spots);
+    }
+    const roster = store.readDoc("volunteers");
+    if (roster) {
+      let rosterDirty = false;
+      ["setup", "event", "strike", "grounds"].forEach((kind) => {
+        (roster[kind] || []).forEach((row) => {
+          if (rewriteRowName(row)) rosterDirty = true;
+        });
+      });
+      if (rosterDirty) {
+        store.saveDoc("volunteers", roster);
+        dirty = true;
+      }
+    }
+    const leads = store.readDoc("lead-jobs");
+    if (leads && Array.isArray(leads.jobs)) {
+      let leadDirty = false;
+      leads.jobs.forEach((row) => {
+        if (!row) return;
+        const next = canonName(row.owner);
+        if (next !== String(row.owner || "").trim()) {
+          row.owner = next;
+          leadDirty = true;
+        }
+      });
+      if (leadDirty) {
+        store.saveDoc("lead-jobs", leads);
+        dirty = true;
+      }
+    }
+    const contacts = store.readDoc("contacts");
+    const book = contacts && contacts.people && typeof contacts.people === "object" ? contacts.people : contacts;
+    if (book && typeof book === "object") {
+      const nextBook = {};
+      let contactDirty = false;
+      Object.keys(book).forEach((key) => {
+        if (key === "people") return;
+        const canon = canonName(key) || key;
+        if (canon !== key) contactDirty = true;
+        nextBook[canon] = book[key];
+      });
+      if (contactDirty) {
+        store.saveDoc("contacts", { people: nextBook });
+        dirty = true;
+      }
+    }
+    try {
+      const prefs = JSON.parse(localStorage.getItem("ggs-prep-v3-prefs") || "{}");
+      const me = canonName(prefs.me);
+      if (me && me !== String(prefs.me || "").trim()) {
+        localStorage.setItem("ggs-prep-v3-prefs", JSON.stringify(Object.assign({}, prefs, { me: me })));
+      }
+    } catch (err) {}
+    if (dirty && store.flush) store.flush();
+  }
+
   function seedContacts() {
+    migrateStoredNames();
     const store = global.GGSPrepStore;
     const slice = global.GGSCrewSlice;
     if (!store || !slice) return;
@@ -627,7 +722,7 @@
     });
   }
 
-  global.GGSPeople = { PEOPLE, JOBS, findPerson, uniquePerson, suggestions, names, match, prettyPhone, seedContacts, leadSelectHtml };
+  global.GGSPeople = { PEOPLE, JOBS, findPerson, uniquePerson, suggestions, names, match, prettyPhone, seedContacts, leadSelectHtml, canonName, migrateStoredNames };
   function bootSeed() {
     seedContacts();
   }

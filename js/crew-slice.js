@@ -131,7 +131,9 @@
 
   function saveContact(store, name, phone) {
     if (!store) return;
-    const cleanName = String(name || "").trim();
+    const cleanName =
+      (global.GGSPeople && global.GGSPeople.canonName && global.GGSPeople.canonName(name)) ||
+      String(name || "").trim();
     if (!cleanName) return;
     const cleanPhone = String(phone || "").trim();
     const people = readContacts(store);

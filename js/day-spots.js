@@ -585,7 +585,7 @@
 
   function saveOwner(store, id, name, opts) {
     if (!store) return;
-    const next = Object.assign({}, owners(store), { [id]: String(name || "").trim() });
+    const next = Object.assign({}, owners(store), { [id]: prettyName(name) || String(name || "").trim() });
     store.saveDoc("spots", { v: 1, owners: next });
     syncRoster(store, id, next[id]);
     const spot = byId(id);
@@ -612,11 +612,12 @@
   function prettyName(name) {
     const label = String(name || "").trim();
     if (!label) return "";
+    if (global.GGSPeople && global.GGSPeople.canonName) return global.GGSPeople.canonName(label);
     if (global.GGSPeople) {
       const person = global.GGSPeople.findPerson(label);
       if (person && person.name) return person.name;
     }
-    return label;
+    return label.replace(/\bDebbi\b/gi, "Debbie").replace(/\bDebi\b/gi, "Debbie");
   }
 
   function ensureRosterRow(roster, spot, rule, extra) {
@@ -668,6 +669,10 @@
     let rosterDirty = false;
     SPOTS.filter((spot) => !spot.retired).forEach((spot) => {
       let spotName = prettyName(current[spot.id] || "");
+      if (spotName && spotName !== String(current[spot.id] || "").trim()) {
+        current[spot.id] = spotName;
+        spotsDirty = true;
+      }
       const rules = spot.roster || [];
       if (!spotName) {
         rules.some((rule) => {

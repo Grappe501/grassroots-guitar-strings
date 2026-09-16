@@ -22,7 +22,8 @@
 
   function identity() {
     const prefs = readPrefs();
-    const name = String(prefs.me || "").trim();
+    const rawName = String(prefs.me || "").trim();
+    const name = global.GGSPeople && global.GGSPeople.canonName ? global.GGSPeople.canonName(rawName) : rawName;
     const raw = String(prefs.phone || "").trim();
     return { name, phone: raw, ok: name.length >= 2 && digits(raw).length >= 7 };
   }
