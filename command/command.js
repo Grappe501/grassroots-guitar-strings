@@ -35,6 +35,54 @@ function timeDistance(ms){if(ms<0){const n=Math.abs(ms);if(n<60000)return 'just 
 function tick(){const now=new Date();document.getElementById('clock').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const event=new Date('2026-09-17T19:00:00');const diff=event-now;document.getElementById('clockLabel').textContent=diff>0?`Concert starts ${timeDistance(diff)}`:'Event day — use the live timeline';document.getElementById('modeTime').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const d=new Date('2026-09-17T20:45:00');document.getElementById('modeTitle').textContent=now>=d?'STRIKE MODE':'Event operations';document.getElementById('modeNext').textContent=now>=d?'Strike immediately. Building must be clear by 10:00 PM.':'Use the full checklist for assignments, owners and completion.';renderTimeline()}
 function readiness(){const vals=areas.map(a=>pctForPrefix(tabToId(a[2])));const p=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);document.getElementById('readiness').textContent=p+'%';document.getElementById('readinessBar').style.width=p+'%';document.getElementById('readinessDetail').textContent=`${vals.filter(x=>x>=80).length} of ${vals.length} command areas at 80%+ completion.`}
 function bind(){document.getElementById('eventModeBtn').onclick=()=>document.getElementById('modeOverlay').hidden=false;document.getElementById('closeMode').onclick=()=>document.getElementById('modeOverlay').hidden=true;document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>location.href=`/prep/#${b.dataset.jump}`)}
-function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness()}
-renderStatus();readiness();bind();tick();setInterval(()=>{tick();readiness()},30000);
-if(window.GGSPrepStore){window.addEventListener('ggs-prep-loaded',(e)=>applyPrep(e.detail));window.GGSPrepStore.startSync()}
+function nextActions(){
+  const critical=/teardown|strike|event captain|tracy|ben|ticket|10–12|10-12|load-out|photographer|cooler/i;
+  return Object.entries(prepState)
+    .filter(([k,v])=>k.indexOf('_doc:')!==0 && v && !v.done && !(v.owner||'').trim())
+    .map(([k,v])=>({key:k,owner:v.owner||'',section:k.split(':')[0]}))
+    .sort((a,b)=>Number(critical.test(a.key))-Number(critical.test(b.key)))
+    .reverse();
+}
+function renderGaps(){
+  const rows=nextActions();
+  const gap=document.getElementById('gapCount');
+  if(gap) gap.textContent=String(rows.length);
+  const list=document.getElementById('nextList');
+  if(!list) return;
+  const labels={overview:'Overview',ben:'Ben / BBQ',setup:'Setup',volunteers:'People',tickets:'Tickets',campaign:'Campaign',food:'Food',production:'Tracy / show',timeline:'Timeline',breakdown:'Strike',final:'Final sweep'};
+  const counts={};
+  rows.forEach((r)=>{counts[r.section]=(counts[r.section]||0)+1});
+  const order=['volunteers','breakdown','ben','production','tickets','setup','campaign','food','overview','timeline','final'];
+  const items=order.filter((id)=>counts[id]).map((id)=>`<li><a href="/prep/#${id}">${labels[id]} — ${counts[id]} unassigned</a></li>`);
+  list.innerHTML=items.join('')||'<li>Every open task has a name.</li>';
+  const first=order.find((id)=>counts[id]);
+  if(first){
+    document.getElementById('criticalTitle').textContent=labels[first]+' still has unassigned work';
+    document.getElementById('criticalMeta').textContent=rows.length+' open tasks with no owner';
+  } else {
+    document.getElementById('criticalTitle').textContent='Board is covered';
+    document.getElementById('criticalMeta').textContent='Every open task has a name.';
+  }
+}
+function applyNight(on){
+  document.documentElement.classList.toggle('night',on);
+  const btn=document.getElementById('nightBtn');
+  if(btn) btn.textContent=on?'Day mode':'Night mode';
+  localStorage.setItem('ggs-command-night',on?'1':'0');
+}
+function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness();renderGaps()}
+renderStatus();readiness();renderGaps();bind();tick();setInterval(()=>{tick();readiness();renderGaps()},15000);
+const nightOn=localStorage.getItem('ggs-command-night')==='1';
+applyNight(nightOn);
+const nightBtn=document.getElementById('nightBtn');
+if(nightBtn) nightBtn.onclick=()=>applyNight(!document.documentElement.classList.contains('night'));
+if(window.GGSPrepStore){
+  window.addEventListener('ggs-prep-loaded',(e)=>applyPrep(e.detail));
+  window.addEventListener('ggs-prep-status',(e)=>{
+    const el=document.getElementById('syncStatus');
+    if(!el) return;
+    el.textContent=e.detail==='saving'?'Saving to every device…':e.detail==='offline'?'Shared board unreachable — this phone only until it reconnects.':'Shared across every device.';
+    el.dataset.state=e.detail||'ok';
+  });
+  window.GGSPrepStore.startSync();
+}

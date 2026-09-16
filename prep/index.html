@@ -1,11 +1,108 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17466b"><title>Grassroots & Guitar Strings — Event Prep</title><meta name="description" content="Grassroots & Guitar Strings event command board."><link rel="stylesheet" href="/prep/prep.css"></head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17466b">
+<title>Grassroots & Guitar Strings — Prep v2</title>
+<meta name="description" content="Shared event command board for Grassroots and Guitar Strings. Thursday, September 17, 2026.">
+<link rel="stylesheet" href="/prep/prep.css">
+<link rel="stylesheet" href="/prep/prep-v3.css">
+</head>
 <body>
-<header class="topbar"><div class="topbar__inner"><div><p class="eyebrow">EVENT COMMAND BOARD</p><h1>Grassroots &amp; Guitar Strings</h1><p class="subtitle">Thursday, September 17, 2026 · Event Prep</p><p class="sync-status" id="syncStatus">Connecting to shared board…</p></div><div class="top-actions"><a class="btn btn--light" href="/command/">Command Center</a><button class="btn btn--light" id="printBtn">Print</button><button class="btn btn--gold" id="resetBtn">Reset checklist</button></div></div></header>
-<main class="shell"><section class="dashboard"><div class="stat"><span class="stat__label">Overall completion</span><strong id="progressPct">0%</strong></div><div class="progress"><div id="progressBar"></div></div><div class="stat"><span class="stat__label">Completed</span><strong id="progressCount">0 / 0</strong></div><div class="critical"><strong>Hard stop:</strong> show ends about 8:45–9:00 PM. Strike starts immediately. Building cleared by 10:00 PM.</div></section>
-<nav class="tabs" role="tablist" aria-label="Event preparation sections"><button class="tab is-active" data-tab="overview">Overview</button><button class="tab" data-tab="ben">Ben / BBQ</button><button class="tab" data-tab="setup">Setup</button><button class="tab" data-tab="volunteers">Volunteers</button><button class="tab" data-tab="tickets">Tickets &amp; Money</button><button class="tab" data-tab="campaign">Campaign &amp; Merch</button><button class="tab" data-tab="food">Food &amp; Drinks</button><button class="tab" data-tab="production">Sound &amp; Show</button><button class="tab" data-tab="timeline">Timeline</button><button class="tab" data-tab="breakdown">Breakdown</button><button class="tab" data-tab="final">Final Sweep</button></nav>
-<div id="tabContent"></div></main>
-<script src="/js/prep-store.js"></script><script src="/prep/prep-v2.js"></script><script src="/prep/prep-enhancements.js"></script>
-</body></html>
+<div id="prepApp">
+<header class="topbar">
+  <div class="topbar__inner">
+    <div>
+      <p class="eyebrow">PREP v2 · SHARED COMMAND BOARD</p>
+      <h1>Grassroots &amp; Guitar Strings</h1>
+      <p class="subtitle">Thursday, September 17, 2026 · Woody's Sherwood Forest</p>
+      <p class="sync-status" id="syncStatus">Connecting to shared board…</p>
+    </div>
+    <div class="top-actions">
+      <a class="btn btn--light" href="/command/">Command</a>
+      <a class="btn btn--light" href="/volunteers/">People</a>
+      <button class="btn btn--light" id="nightBtn" type="button">Night mode</button>
+      <button class="btn btn--light" id="printBtn" type="button">Print</button>
+      <button class="btn btn--gold" id="resetBtn" type="button">Reset checklist</button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="now-strip" aria-live="polite">
+    <article class="now-card now-card--clock">
+      <p class="eyebrow">Now</p>
+      <div id="nowClock">--:--</div>
+      <p id="nowLabel">Loading event clock…</p>
+    </article>
+    <article class="now-card now-card--next">
+      <p class="eyebrow">Next on the clock</p>
+      <h2 id="nextTitle">Venue access + setup</h2>
+      <p id="nextMeta">8:00 AM · Setup + Tracy</p>
+    </article>
+    <article class="now-card now-card--gap">
+      <p class="eyebrow">Needs an owner</p>
+      <div class="big-number" id="gapCount">0</div>
+      <p id="gapLabel">Open tasks with no name yet</p>
+    </article>
+  </section>
+
+  <section class="ops-bar">
+    <label class="me-field">I am
+      <input id="meInput" type="text" autocomplete="name" placeholder="Your name">
+    </label>
+    <label class="search-field">Find a task
+      <input id="searchInput" type="search" placeholder="tea, signs, Tracy, strike…">
+    </label>
+    <div class="filter-row" role="group" aria-label="Task filters">
+      <button type="button" class="chip is-active" data-filter="all">All</button>
+      <button type="button" class="chip" data-filter="open">Open</button>
+      <button type="button" class="chip" data-filter="owner">Needs owner</button>
+      <button type="button" class="chip" data-filter="mine">Mine</button>
+      <button type="button" class="chip" data-filter="done">Done</button>
+    </div>
+  </section>
+
+  <section class="role-row" aria-label="Jump to a job">
+    <button type="button" class="role" data-jump="overview">Captain</button>
+    <button type="button" class="role" data-jump="ben">Ben / BBQ</button>
+    <button type="button" class="role" data-jump="setup">Setup</button>
+    <button type="button" class="role" data-jump="production">Tracy</button>
+    <button type="button" class="role" data-jump="tickets">Tickets</button>
+    <button type="button" class="role" data-jump="campaign">Campaign</button>
+    <button type="button" class="role" data-jump="food">Food</button>
+    <button type="button" class="role" data-jump="volunteers">People</button>
+    <button type="button" class="role" data-jump="breakdown">Strike</button>
+  </section>
+
+  <section class="dashboard v3-dash">
+    <div class="stat"><span class="stat__label">Overall</span><strong id="progressPct">0%</strong></div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <div class="stat"><span class="stat__label">Done</span><strong id="progressCount">0 / 0</strong></div>
+    <div class="stat"><span class="stat__label">Showing</span><strong id="visibleCount">0</strong></div>
+    <div class="critical"><strong>Hard stop:</strong> show ends about 8:45–9:00 PM. Strike starts immediately. Building cleared by 10:00 PM.</div>
+  </section>
+
+  <section class="crew-band" id="crewBand">
+    <p class="eyebrow">Who is on the board</p>
+    <div class="crew-list" id="crewList"><span class="muted">Names appear here as people get assigned.</span></div>
+  </section>
+
+  <aside class="attention" id="attention">
+    <p class="eyebrow">Attention</p>
+    <h2>Do these next</h2>
+    <ol id="attentionList"></ol>
+  </aside>
+
+  <nav class="tabs" role="tablist" aria-label="Event preparation sections"></nav>
+  <p class="empty-filter" id="emptyFilter" hidden>Nothing matches that filter. Clear search or switch back to All.</p>
+  <div id="tabContent"></div>
+</main>
+</div>
+<script src="/js/prep-store.js"></script>
+<script src="/prep/prep-v2.js"></script>
+<script src="/prep/prep-app.js"></script>
+<script src="/prep/prep-enhancements.js"></script>
+</body>
+</html>

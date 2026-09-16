@@ -1,0 +1,297 @@
+#prepApp .now-strip,
+#prepApp .ops-bar,
+#prepApp .role-row,
+#prepApp .crew-band,
+#prepApp .attention {
+  margin-bottom: 1rem;
+}
+
+.now-strip {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 0.9fr;
+  gap: 0.85rem;
+}
+
+.now-card {
+  background: #fff;
+  border: 1px solid #d9d6ce;
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 5px 20px rgba(15, 48, 72, 0.07);
+}
+
+.now-card--clock {
+  background: #0f3048;
+  color: #fff;
+  border-color: #0f3048;
+}
+
+.now-card--clock .eyebrow,
+.now-card--clock #nowLabel {
+  color: #f3c979;
+}
+
+#nowClock {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.now-card h2 {
+  margin: 0.15rem 0 0.25rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.now-card--next {
+  border-left: 6px solid #f3c979;
+}
+
+.now-card .big-number {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #17466b;
+}
+
+.ops-bar {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  gap: 0.75rem 1rem;
+  align-items: end;
+  background: #fff;
+  border: 1px solid #d9d6ce;
+  border-radius: 16px;
+  padding: 0.9rem;
+}
+
+.me-field,
+.search-field {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64727d;
+}
+
+.me-field input,
+.search-field input {
+  border: 1px solid #cdd2d5;
+  border-radius: 10px;
+  padding: 0.7rem 0.75rem;
+  font: inherit;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+  color: #172532;
+}
+
+.me-field input.is-needed {
+  outline: 3px solid rgba(192, 23, 42, 0.35);
+  border-color: #c0172a;
+}
+
+.filter-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip,
+.role,
+.crew-pill,
+.claim {
+  border: 1px solid #cdd2d5;
+  background: #fff;
+  color: #17466b;
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.chip.is-active,
+.role:hover,
+.crew-pill:hover {
+  background: #17466b;
+  color: #fff;
+  border-color: #17466b;
+}
+
+.role-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.v3-dash {
+  grid-template-columns: auto minmax(140px, 1fr) auto auto;
+}
+
+.crew-band,
+.attention {
+  background: #fff;
+  border: 1px solid #d9d6ce;
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+}
+
+.crew-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+}
+
+.attention h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.attention ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.attention button {
+  border: 0;
+  background: none;
+  color: #17466b;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.2rem 0;
+}
+
+.tab-count {
+  display: inline-block;
+  min-width: 1.2rem;
+  margin-left: 0.2rem;
+  font-size: 0.68rem;
+  opacity: 0.8;
+}
+
+.task .claim {
+  grid-column: 1 / -1;
+  margin-left: 1.75rem;
+  justify-self: start;
+  width: auto;
+}
+
+.card.is-filtered-out {
+  display: none;
+}
+
+.empty-filter {
+  background: #fffaf0;
+  border: 1px solid #e0d6bf;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+}
+
+html.night,
+html.night body {
+  background: #0b1c28;
+  color: #e7eef4;
+}
+
+html.night .topbar {
+  background: #07141d;
+}
+
+html.night .now-card,
+html.night .ops-bar,
+html.night .dashboard,
+html.night .card,
+html.night .crew-band,
+html.night .attention,
+html.night .tab,
+html.night .empty-filter {
+  background: #122433;
+  border-color: #2a4154;
+  color: #e7eef4;
+}
+
+html.night .now-card--clock {
+  background: #07141d;
+}
+
+html.night .tab.is-active {
+  background: #f3c979;
+  color: #122433;
+  border-color: #f3c979;
+}
+
+html.night .owner,
+html.night .when,
+html.night .me-field input,
+html.night .search-field input,
+html.night .chip,
+html.night .role,
+html.night .claim,
+html.night .small-btn,
+html.night .crew-pill {
+  background: #0b1c28;
+  color: #e7eef4;
+  border-color: #3a5366;
+}
+
+html.night .task {
+  background: #0f2432;
+  border-color: #2a4154;
+}
+
+html.night .tabs {
+  background: #0b1c28;
+}
+
+html.night .subtitle,
+html.night .muted,
+html.night .mini,
+html.night .stat__label {
+  color: #9eb0be;
+}
+
+html.night .critical {
+  background: #243246;
+  color: #f3e6c4;
+}
+
+@media (max-width: 900px) {
+  .now-strip,
+  .ops-bar,
+  .v3-dash {
+    grid-template-columns: 1fr 1fr;
+  }
+  .now-card--next,
+  .filter-row,
+  .search-field {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .now-strip,
+  .ops-bar,
+  .v3-dash {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .now-strip,
+  .ops-bar,
+  .role-row,
+  .crew-band,
+  .attention,
+  .chip,
+  .claim,
+  #nightBtn {
+    display: none !important;
+  }
+}

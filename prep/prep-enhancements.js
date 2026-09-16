@@ -44,5 +44,7 @@
     ]);
   }
   window.addEventListener('ggs-prep-loaded',(e)=>restoreQr(e.detail));
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+  function boot(){run();if(window.GGSPrepApp&&window.GGSPrepApp.applyFilters)window.GGSPrepApp.applyFilters()}
+  window.addEventListener('ggs-prep-rendered',boot);
+  boot();
 })();

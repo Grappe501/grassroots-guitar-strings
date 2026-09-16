@@ -44,6 +44,9 @@ const S=[
 ['Event tote',['Pens','Sharpies','Scissors','Gaffer tape','Duct tape','Zip ties','Rubber bands','Safety pins','Paper towels','Trash bags','Hand sanitizer','Cleaning wipes','First-aid kit','Box cutter/multi-tool','Spare batteries','Extension cords','Power strips','Phone chargers','Battery packs']],
 ['Before leaving',['Count remaining signs','Count stakes','Collect campaign materials','Collect decorations','Collect tablecloths','Collect coolers','Collect glass beverage containers','Collect merchandise','Count shirts sold/remaining','Account for Regnet Populis giveaways','Ticket/cash/payment reconciliation','Secure contribution envelopes','Confirm vertical photos/video captured','Final venue walkthrough','Venue cleared/secured by 10 PM']]]]
 ];
+window.GGS_PREP_SECTIONS=S;
+if(document.getElementById('prepApp')){/* v3 app owns render */}
+else{
 const store=window.GGSPrepStore;const state=store?store.readCache():JSON.parse(localStorage.getItem('ggs-prep-2026-09-17-v2')||'{}');const root=document.getElementById('tabContent');
 const esc=x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 function k(s,c,i){return `${s}:${c}:${i}`}
@@ -54,3 +57,4 @@ function restore(){const active=document.activeElement;document.querySelectorAll
 function progress(){const a=[...document.querySelectorAll('.task')],d=a.filter(x=>x.querySelector('.task-check').checked).length,p=a.length?Math.round(d/a.length*100):0;document.getElementById('progressPct').textContent=p+'%';document.getElementById('progressCount').textContent=`${d} / ${a.length}`;document.getElementById('progressBar').style.width=p+'%'}
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('is-active');x.setAttribute('aria-selected','false')});document.querySelectorAll('.section').forEach(x=>x.classList.remove('is-active'));t.classList.add('is-active');t.setAttribute('aria-selected','true');document.querySelector(`[data-section="${t.dataset.tab}"]`).classList.add('is-active');scrollTo(0,0)}));
 document.getElementById('printBtn').addEventListener('click',()=>print());document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Reset this shared event checklist?')){(store?store.reset():Promise.resolve()).then(()=>location.reload())}});render();if(store){window.addEventListener('ggs-prep-loaded',(e)=>{Object.keys(state).forEach((k)=>delete state[k]);Object.assign(state,e.detail||{});restore();progress()});window.addEventListener('ggs-prep-status',(e)=>{const el=document.getElementById('syncStatus');if(!el)return;el.textContent=e.detail==='saving'?'Saving to every device…':e.detail==='offline'?'Shared board unreachable — this phone only until it reconnects.':'Shared across every device. No refresh needed.';el.dataset.state=e.detail||'ok'});store.startSync()}
+}

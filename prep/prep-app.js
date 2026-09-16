@@ -1,0 +1,513 @@
+(function () {
+  const S = window.GGS_PREP_SECTIONS || [];
+  const store = window.GGSPrepStore;
+  const state = store ? store.readCache() : JSON.parse(localStorage.getItem("ggs-prep-2026-09-17-v2") || "{}");
+  const PREFS = "ggs-prep-v3-prefs";
+  const milestones = [
+    ["2026-09-17T08:00:00", "8:00 AM", "Venue access + setup"],
+    ["2026-09-17T10:00:00", "10:00 AM", "Room / production check"],
+    ["2026-09-17T16:30:00", "4:30 PM", "Shift to event mode"],
+    ["2026-09-17T17:00:00", "5:00 PM", "Event crew in position"],
+    ["2026-09-17T17:30:00", "5:30 PM", "BBQ / social hour"],
+    ["2026-09-17T17:45:00", "5:45 PM", "David acoustic set"],
+    ["2026-09-17T18:15:00", "6:15 PM", "Acoustic wraps"],
+    ["2026-09-17T18:30:00", "6:30 PM", "Concert doors"],
+    ["2026-09-17T18:45:00", "6:45 PM", "Hard checkpoint"],
+    ["2026-09-17T19:00:00", "7:00 PM", "Concert starts"],
+    ["2026-09-17T20:45:00", "8:45 PM", "Strike begins"],
+    ["2026-09-17T21:15:00", "9:15 PM", "Load-out underway"],
+    ["2026-09-17T22:00:00", "10:00 PM", "Building cleared"],
+  ];
+  const criticalHints = /teardown|strike|event captain|tracy|ben food|ticket|10–12|10-12|load-out|photographer|cooler captain/i;
+
+  let prefs = { me: "", filter: "all", night: false, tab: "overview", q: "" };
+  try {
+    prefs = Object.assign(prefs, JSON.parse(localStorage.getItem(PREFS) || "{}"));
+  } catch (err) {
+    /* keep defaults */
+  }
+
+  const root = document.getElementById("tabContent");
+  const tabsEl = document.querySelector(".tabs");
+  const esc = (x) =>
+    String(x)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+
+  function key(section, card, i) {
+    return section + ":" + card + ":" + i;
+  }
+
+  function savePrefs() {
+    localStorage.setItem(PREFS, JSON.stringify(prefs));
+  }
+
+  function applyNight() {
+    document.documentElement.classList.toggle("night", !!prefs.night);
+    const btn = document.getElementById("nightBtn");
+    if (btn) btn.textContent = prefs.night ? "Day mode" : "Night mode";
+    const theme = document.querySelector('meta[name="theme-color"]');
+    if (theme) theme.setAttribute("content", prefs.night ? "#0b1c28" : "#17466b");
+  }
+
+  function rowState(el) {
+    const k = el.dataset.key || el.dataset.qrKey;
+    return state[k] || {};
+  }
+
+  function saveRow(el) {
+    const k = el.dataset.key || el.dataset.qrKey;
+    if (!k) return;
+    const next = {
+      done: el.querySelector(".task-check").checked,
+      owner: el.querySelector(".owner").value,
+      when: el.querySelector(".when").value,
+    };
+    state[k] = next;
+    if (store) store.saveOne(k, next);
+    progress();
+    applyFilters();
+    renderCrew();
+    renderAttention();
+    renderGaps();
+  }
+
+  function claim(el) {
+    const name = (prefs.me || "").trim();
+    if (!name) {
+      const input = document.getElementById("meInput");
+      if (input) {
+        input.focus();
+        input.classList.add("is-needed");
+      }
+      return;
+    }
+    el.querySelector(".owner").value = name;
+    saveRow(el);
+  }
+
+  function taskHtml(k, label, whenPlaceholder) {
+    const x = state[k] || {};
+    return (
+      '<div class="task" data-key="' +
+      esc(k) +
+      '"><label class="check"><input class="task-check" type="checkbox"' +
+      (x.done ? " checked" : "") +
+      '><span class="checkmark"></span><span class="task-text">' +
+      esc(label) +
+      '</span></label><input class="owner" value="' +
+      esc(x.owner || "") +
+      '" placeholder="Assigned to…"><input class="when" value="' +
+      esc(x.when || "") +
+      '" placeholder="' +
+      esc(whenPlaceholder) +
+      '"><button type="button" class="claim" data-claim>Assign to me</button></div>'
+    );
+  }
+
+  function renderTabs() {
+    tabsEl.innerHTML = S.map((s, i) => {
+      const id = s[0];
+      const title = s[1];
+      const active = (prefs.tab || "overview") === id || (!prefs.tab && i === 0);
+      return (
+        '<button class="tab' +
+        (active ? " is-active" : "") +
+        '" data-tab="' +
+        id +
+        '" aria-selected="' +
+        (active ? "true" : "false") +
+        '">' +
+        esc(title) +
+        ' <span class="tab-count" data-count="' +
+        id +
+        '"></span></button>'
+      );
+    }).join("");
+  }
+
+  function render() {
+    root.innerHTML = S.map((s, si) => {
+      const [id, title, intro, cards, timeline] = s;
+      const active = (prefs.tab || "overview") === id || (!prefs.tab && si === 0);
+      if (timeline) {
+        return (
+          '<section class="section' +
+          (active ? " is-active" : "") +
+          '" data-section="' +
+          id +
+          '"><div class="section-head"><p class="eyebrow">RUN OF SHOW</p><h2>' +
+          esc(title) +
+          "</h2><p>" +
+          esc(intro) +
+          '</p></div><div class="card"><div class="timeline">' +
+          timeline
+            .map(
+              (r, i) =>
+                '<div class="time-row"><div class="time">' +
+                esc(r[0]) +
+                "</div><div><strong>" +
+                esc(r[1]) +
+                '</strong><div class="mini">' +
+                esc(r[2]) +
+                "</div>" +
+                taskHtml(key(id, "timeline", i), "Checkpoint complete", "Actual time…") +
+                "</div></div>",
+            )
+            .join("") +
+          "</div></div></section>"
+        );
+      }
+      return (
+        '<section class="section' +
+        (active ? " is-active" : "") +
+        '" data-section="' +
+        id +
+        '"><div class="section-head"><p class="eyebrow">EVENT COMMAND</p><h2>' +
+        esc(title) +
+        "</h2><p>" +
+        esc(intro) +
+        '</p></div><div class="grid">' +
+        cards
+          .map(
+            (c, ci) =>
+              '<article class="card"><h3>' +
+              esc(c[0]) +
+              '</h3><div class="checklist-actions"><button class="small-btn" data-complete="' +
+              id +
+              "|" +
+              ci +
+              '">Complete section</button><button class="small-btn" data-clear="' +
+              id +
+              "|" +
+              ci +
+              '">Clear section</button></div><div class="task-list">' +
+              c[1].map((t, ti) => taskHtml(key(id, ci, ti), t, "When…")).join("") +
+              "</div></article>",
+          )
+          .join("") +
+        "</div></section>"
+      );
+    }).join("");
+    bind();
+    restore();
+    progress();
+    applyFilters();
+    renderCrew();
+    renderAttention();
+    renderGaps();
+    updateTabCounts();
+    window.dispatchEvent(new CustomEvent("ggs-prep-rendered"));
+  }
+
+  function bind() {
+    document.querySelectorAll(".task").forEach((row) => {
+      ["change", "input"].forEach((evt) => row.addEventListener(evt, () => saveRow(row)));
+      const claimBtn = row.querySelector("[data-claim]");
+      if (claimBtn) claimBtn.addEventListener("click", () => claim(row));
+    });
+    document.querySelectorAll("[data-complete],[data-clear]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const raw = btn.dataset.complete || btn.dataset.clear;
+        const [section, card] = raw.split("|");
+        const done = !!btn.dataset.complete;
+        document
+          .querySelectorAll('[data-section="' + section + '"] .card')
+          [+card].querySelectorAll(".task")
+          .forEach((row) => {
+            const k = row.dataset.key;
+            const x = state[k] || {};
+            x.done = done;
+            state[k] = x;
+            row.querySelector(".task-check").checked = done;
+            if (store) store.saveOne(k, x);
+          });
+        progress();
+        applyFilters();
+        renderAttention();
+        renderGaps();
+        updateTabCounts();
+      });
+    });
+  }
+
+  function restore() {
+    const active = document.activeElement;
+    document.querySelectorAll(".task").forEach((row) => {
+      if (active && row.contains(active)) return;
+      const x = rowState(row);
+      row.querySelector(".task-check").checked = !!x.done;
+      row.querySelector(".owner").value = x.owner || "";
+      row.querySelector(".when").value = x.when || "";
+    });
+  }
+
+  function allTasks() {
+    return Array.from(document.querySelectorAll(".task[data-key], .task[data-qr-key]"));
+  }
+
+  function matchesFilter(row) {
+    const x = {
+      done: row.querySelector(".task-check").checked,
+      owner: (row.querySelector(".owner").value || "").trim(),
+      text: (row.querySelector(".task-text").textContent || "").toLowerCase(),
+    };
+    const q = (prefs.q || "").trim().toLowerCase();
+    if (q && !x.text.includes(q) && !x.owner.toLowerCase().includes(q)) return false;
+    if (prefs.filter === "open") return !x.done;
+    if (prefs.filter === "done") return x.done;
+    if (prefs.filter === "owner") return !x.done && !x.owner;
+    if (prefs.filter === "mine") {
+      const me = (prefs.me || "").trim().toLowerCase();
+      return !!me && x.owner.toLowerCase().includes(me);
+    }
+    return true;
+  }
+
+  function applyFilters() {
+    let shown = 0;
+    allTasks().forEach((row) => {
+      const on = matchesFilter(row);
+      row.hidden = !on;
+      if (on) shown += 1;
+    });
+    document.querySelectorAll(".card").forEach((card) => {
+      const visible = card.querySelectorAll(".task:not([hidden])").length;
+      card.classList.toggle("is-filtered-out", visible === 0 && !!card.querySelector(".task"));
+    });
+    const empty = document.getElementById("emptyFilter");
+    if (empty) empty.hidden = shown > 0;
+    const visibleCount = document.getElementById("visibleCount");
+    if (visibleCount) visibleCount.textContent = String(shown);
+    updateTabCounts();
+  }
+
+  function progress() {
+    const rows = allTasks();
+    const done = rows.filter((x) => x.querySelector(".task-check").checked).length;
+    const pct = rows.length ? Math.round((done / rows.length) * 100) : 0;
+    document.getElementById("progressPct").textContent = pct + "%";
+    document.getElementById("progressCount").textContent = done + " / " + rows.length;
+    document.getElementById("progressBar").style.width = pct + "%";
+  }
+
+  function updateTabCounts() {
+    S.forEach((s) => {
+      const id = s[0];
+      const open = document.querySelectorAll('[data-section="' + id + '"] .task:not([hidden])').length;
+      const badge = document.querySelector('[data-count="' + id + '"]');
+      if (badge) badge.textContent = open ? String(open) : "";
+    });
+  }
+
+  function renderCrew() {
+    const names = {};
+    allTasks().forEach((row) => {
+      const owner = (row.querySelector(".owner").value || "").trim();
+      if (owner) names[owner] = (names[owner] || 0) + 1;
+    });
+    const list = Object.entries(names).sort((a, b) => b[1] - a[1]);
+    const el = document.getElementById("crewList");
+    if (!el) return;
+    el.innerHTML = list.length
+      ? list
+          .map(
+            ([name, n]) =>
+              '<button type="button" class="crew-pill" data-crew="' +
+              esc(name) +
+              '">' +
+              esc(name) +
+              " · " +
+              n +
+              "</button>",
+          )
+          .join("")
+      : '<span class="muted">Names appear here as people get assigned.</span>';
+    el.querySelectorAll("[data-crew]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        prefs.me = btn.dataset.crew;
+        prefs.filter = "mine";
+        document.getElementById("meInput").value = prefs.me;
+        document.querySelectorAll("[data-filter]").forEach((c) => c.classList.toggle("is-active", c.dataset.filter === "mine"));
+        savePrefs();
+        applyFilters();
+      });
+    });
+  }
+
+  function renderAttention() {
+    const items = allTasks()
+      .map((row) => {
+        const text = row.querySelector(".task-text").textContent || "";
+        const owner = (row.querySelector(".owner").value || "").trim();
+        const done = row.querySelector(".task-check").checked;
+        const section = row.closest("[data-section]");
+        return { text, owner, done, section: section ? section.dataset.section : "", critical: criticalHints.test(text) };
+      })
+      .filter((x) => !x.done && !x.owner)
+      .sort((a, b) => Number(b.critical) - Number(a.critical))
+      .slice(0, 8);
+    const el = document.getElementById("attentionList");
+    if (!el) return;
+    el.innerHTML = items.length
+      ? items
+          .map(
+            (x) =>
+              "<li><button type=\"button\" data-jump=\"" +
+              esc(x.section) +
+              '">' +
+              esc(x.text) +
+              "</button></li>",
+          )
+          .join("")
+      : "<li>Every open task has a name. Keep moving the clock.</li>";
+    el.querySelectorAll("[data-jump]").forEach((btn) => btn.addEventListener("click", () => showTab(btn.dataset.jump)));
+  }
+
+  function renderGaps() {
+    const gap = allTasks().filter((row) => {
+      return !row.querySelector(".task-check").checked && !(row.querySelector(".owner").value || "").trim();
+    }).length;
+    const el = document.getElementById("gapCount");
+    if (el) el.textContent = String(gap);
+  }
+
+  function showTab(id) {
+    if (!id || !document.querySelector('[data-section="' + id + '"]')) return;
+    prefs.tab = id;
+    savePrefs();
+    document.querySelectorAll(".tab").forEach((tab) => {
+      const on = tab.dataset.tab === id;
+      tab.classList.toggle("is-active", on);
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    document.querySelectorAll(".section").forEach((section) => {
+      section.classList.toggle("is-active", section.dataset.section === id);
+    });
+    if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
+    window.scrollTo(0, 0);
+  }
+
+  function tick() {
+    const now = new Date();
+    const clock = document.getElementById("nowClock");
+    if (clock) clock.textContent = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    let current = milestones[0];
+    let upcoming = milestones[1];
+    for (let i = 0; i < milestones.length; i += 1) {
+      const t = new Date(milestones[i][0]);
+      if (t <= now) {
+        current = milestones[i];
+        upcoming = milestones[i + 1] || milestones[i];
+      }
+    }
+    const concert = new Date("2026-09-17T19:00:00");
+    const strike = new Date("2026-09-17T20:45:00");
+    const label = document.getElementById("nowLabel");
+    if (now >= strike) {
+      if (label) label.textContent = "STRIKE MODE · building clear by 10:00 PM";
+      document.getElementById("nextTitle").textContent = "Strike immediately";
+      document.getElementById("nextMeta").textContent = "Teams A–E · 10:00 PM hard stop";
+    } else if (now >= concert) {
+      if (label) label.textContent = "Concert is live";
+      document.getElementById("nextTitle").textContent = upcoming[2];
+      document.getElementById("nextMeta").textContent = upcoming[1];
+    } else {
+      if (label) label.textContent = current[1] + " · " + current[2];
+      document.getElementById("nextTitle").textContent = upcoming[2];
+      document.getElementById("nextMeta").textContent = upcoming[1];
+    }
+  }
+
+  function bindChrome() {
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => showTab(tab.dataset.tab));
+    });
+    document.querySelectorAll("[data-jump]").forEach((btn) => {
+      btn.addEventListener("click", () => showTab(btn.dataset.jump));
+    });
+    document.querySelectorAll("[data-filter]").forEach((chip) => {
+      chip.classList.toggle("is-active", chip.dataset.filter === prefs.filter);
+      chip.addEventListener("click", () => {
+        prefs.filter = chip.dataset.filter;
+        document.querySelectorAll("[data-filter]").forEach((c) => c.classList.toggle("is-active", c === chip));
+        savePrefs();
+        applyFilters();
+      });
+    });
+    const me = document.getElementById("meInput");
+    if (me) {
+      me.value = prefs.me || "";
+      me.addEventListener("input", () => {
+        prefs.me = me.value;
+        me.classList.remove("is-needed");
+        savePrefs();
+        if (prefs.filter === "mine") applyFilters();
+      });
+    }
+    const search = document.getElementById("searchInput");
+    if (search) {
+      search.value = prefs.q || "";
+      search.addEventListener("input", () => {
+        prefs.q = search.value;
+        savePrefs();
+        applyFilters();
+      });
+    }
+    document.getElementById("nightBtn").addEventListener("click", () => {
+      prefs.night = !prefs.night;
+      savePrefs();
+      applyNight();
+    });
+    document.getElementById("printBtn").addEventListener("click", () => print());
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      const typed = window.prompt("This clears the shared board on every device. Type RESET to continue.");
+      if (typed !== "RESET") return;
+      (store ? store.reset() : Promise.resolve()).then(() => location.reload());
+    });
+    const hash = (location.hash || "").replace("#", "");
+    if (hash) prefs.tab = hash;
+  }
+
+  applyNight();
+  renderTabs();
+  bindChrome();
+  render();
+  tick();
+  setInterval(tick, 30000);
+
+  window.addEventListener("ggs-prep-loaded", (e) => {
+    Object.keys(state).forEach((k) => delete state[k]);
+    Object.assign(state, e.detail || {});
+    restore();
+    progress();
+    applyFilters();
+    renderCrew();
+    renderAttention();
+    renderGaps();
+  });
+  window.addEventListener("ggs-prep-status", (e) => {
+    const el = document.getElementById("syncStatus");
+    if (!el) return;
+    el.textContent =
+      e.detail === "saving"
+        ? "Saving to every device…"
+        : e.detail === "offline"
+          ? "Shared board unreachable — this phone only until it reconnects."
+          : "Shared across every device. No refresh needed.";
+    el.dataset.state = e.detail || "ok";
+  });
+  window.addEventListener("ggs-prep-rendered", () => {
+    setTimeout(() => {
+      applyFilters();
+      renderCrew();
+      renderAttention();
+      renderGaps();
+    }, 0);
+  });
+  if (store) store.startSync();
+
+  window.GGSPrepApp = { applyFilters, showTab, renderCrew, renderAttention };
+})();
