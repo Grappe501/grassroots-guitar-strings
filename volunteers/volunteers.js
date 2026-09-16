@@ -161,6 +161,9 @@ function counts() {
       : n >= 10
         ? "Minimum teardown roster reached. Keep recruiting toward 12+ for a safer 10:00 PM clear."
         : "Teardown is short by " + (10 - n) + ". Recruit 10 people minimum; target 12+ so the building can be cleared by 10:00 PM.";
+  if (window.GGSNextAction && window.GGSNextAction.paintTexts) {
+    window.GGSNextAction.paintTexts(store ? store.readCache() : {}, state);
+  }
 }
 
 if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {

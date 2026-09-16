@@ -232,6 +232,129 @@
     return { line: line, meta: clockMeta(t, p), href: top.href };
   }
 
+  function texts(state, roster) {
+    const list = harvest(state);
+    const short = NEED_STRIKE - strikeCount(roster);
+    const iceCap = named(list, /water \+ ice captain|ice captain/i);
+    const out = [];
+    if (short > 0) {
+      out.push({
+        id: "strike",
+        label: "Teardown",
+        need: "Need " + short + " more",
+        text:
+          "Can you stay for teardown at Woody's Sherwood Forest Thursday 9/17 after the show (about 8:45)? We still need " +
+          short +
+          " people. Free food if you commit and stay. Building must be clear by 10. Reply YES and I will put you on a strike team.",
+      });
+    }
+    if (undone(list, /ice for 120 bottled waters/i).length) {
+      out.push({
+        id: "ice",
+        label: "Ice",
+        need: "6 bags at water",
+        text: "Need 6 bags of ice (10 lb) on the water table at Woody's before 5:30 Thursday. Can you grab them?",
+      });
+    } else if (undone(list, /ice for tea\/lemonade/i).length) {
+      out.push({
+        id: "ice",
+        label: "Ice",
+        need: "4 bags at tea",
+        text: "Need 4 bags of ice (10 lb) for tea and lemonade at Woody's before 5:30 Thursday. Can you grab them?",
+      });
+    } else if (undone(list, /12 bags ice|12 bags \/ 120/i).length) {
+      out.push({
+        id: "ice",
+        label: "Ice",
+        need: "Buy 12 bags",
+        text: "Need 12 bags of ice (10 lb) for Thursday at Woody's. 4 for tea, 6 for water, 2 spare. Can you buy them?",
+      });
+    } else if (undone(list, /spare ice/i).length) {
+      out.push({
+        id: "ice",
+        label: "Ice",
+        need: "2 spare bags",
+        text: "Need 2 spare bags of ice (10 lb) at Woody's as backup. Can you grab them?",
+      });
+    }
+    if (!iceCap && undone(list, /water \+ ice captain|assign water \+ ice captain/i).length) {
+      out.push({
+        id: "water",
+        label: "Water",
+        need: "Need a captain",
+        text: "Can you run water and ice at Woody's Thursday from 5:30? 120 bottles. Sell for $1 cash or give one away. Same person owns ice. Reply YES.",
+      });
+    } else if (undone(list, /stock 120 bottled waters on ice/i).length) {
+      out.push({
+        id: "water",
+        label: "Water",
+        need: "120 bottles",
+        text: "120 water bottles still need to go on ice at Woody's before guests. $1 cash or complimentary. Can you take the water table?",
+      });
+    }
+    return out;
+  }
+
+  function smsHref(text) {
+    const body = encodeURIComponent(text);
+    const apple = /iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+    return apple ? "sms:&body=" + body : "sms:?body=" + body;
+  }
+
+  function paintTexts(state, roster) {
+    const root = document.getElementById("gapTextList");
+    if (!root) return texts(state, roster);
+    const rows = texts(state, roster);
+    if (!rows.length) {
+      root.innerHTML = '<p class="muted">Teardown, ice, and water asks are covered on the board.</p>';
+      return rows;
+    }
+    root.innerHTML = rows
+      .map((row) => {
+        return (
+          '<article class="gap-text" data-gap="' +
+          row.id +
+          '"><p class="eyebrow">' +
+          row.label +
+          " · " +
+          row.need +
+          "</p><textarea readonly rows=\"4\">" +
+          row.text.replace(/</g, "") +
+          "</textarea><div class=\"gap-text-actions\"><button type=\"button\" class=\"gap-copy\" data-copy=\"" +
+          row.id +
+          "\">Copy</button><a class=\"gap-sms\" href=\"" +
+          smsHref(row.text) +
+          "\">Text</a></div></article>"
+        );
+      })
+      .join("");
+    root.querySelectorAll("[data-copy]").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const card = btn.closest(".gap-text");
+        const box = card && card.querySelector("textarea");
+        const text = box ? box.value : "";
+        const done = function () {
+          btn.textContent = "Copied";
+          setTimeout(function () {
+            btn.textContent = "Copy";
+          }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(function () {
+            if (box) {
+              box.focus();
+              box.select();
+            }
+          });
+        } else if (box) {
+          box.focus();
+          box.select();
+        }
+      });
+    });
+    return rows;
+  }
+
   function paint(state, roster) {
     const next = compute(new Date(), state, roster);
     const title = document.getElementById("criticalTitle") || document.getElementById("nextTitle");
@@ -243,8 +366,9 @@
       link.href = next.href;
       link.textContent = next.href.indexOf("volunteers") >= 0 ? "Open volunteer command →" : "Open this job →";
     }
+    paintTexts(state, roster);
     return next;
   }
 
-  global.GGSNextAction = { compute, paint };
+  global.GGSNextAction = { compute, paint, texts, paintTexts };
 })(window);
