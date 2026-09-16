@@ -256,8 +256,8 @@
       roster: /bbq|food|water|ice|cooler/i,
       day: [
         { start: "2026-09-17T17:00:00", end: "2026-09-17T17:30:00", place: "Buffet + $1 water / ice", do: "Receive food. Ice stocked. Water signs and money bag out." },
-        { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Buffet + $1 water", do: "BBQ / social hour. Sell water for a $1 donation. Cards scan GoodChange." },
-        { start: "2026-09-17T18:30:00", end: "2026-09-17T20:45:00", place: "Coolers · $1 water", do: "Keep ice and water up. Cash in the bag. Cards to the GGS QR." },
+        { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Buffet + $1 water", do: "BBQ / social hour. Sell water for a $1 cash donation. No cards." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T20:45:00", place: "Coolers · $1 water", do: "Keep ice and water up. Cash only. Money stays in the bag." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike C · food", do: "Clear food, drinks, coolers, trash." },
       ],
     },
