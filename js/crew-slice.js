@@ -108,7 +108,7 @@
       if (typeof value === "string" && value.trim()) people[key] = value.trim();
     });
     const roster = (store && store.readDoc("volunteers")) || {};
-    ["setup", "event", "strike"].forEach((kind) => {
+    ["setup", "event", "strike", "grounds"].forEach((kind) => {
       (roster[kind] || []).forEach((row) => {
         const name = String(row.name || "").trim();
         const phone = String(row.phone || "").trim();
@@ -141,7 +141,7 @@
     const roster = store.readDoc("volunteers");
     if (!roster) return;
     let changed = false;
-    ["setup", "event", "strike"].forEach((kind) => {
+    ["setup", "event", "strike", "grounds"].forEach((kind) => {
       (roster[kind] || []).forEach((row) => {
         if (nameMatch(row.name, cleanName) && String(row.phone || "") !== cleanPhone) {
           row.phone = cleanPhone;
@@ -248,6 +248,17 @@
         { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Lobby · ticket table", do: "Doors rush. Floater A stands with you. Keep the line moving." },
         { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Lobby or nearby", do: "Late arrivals. Hold the cash box. Floater covers a real break." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Lobby · then secure", do: "Reconcile tickets, cash, and envelopes. Then help Strike B or E." },
+      ],
+    },
+    {
+      id: "grounds",
+      label: "Parking / directions / crowd",
+      priority: 3,
+      test: /parking|directions volunteer|crowd \/ lobby|lot to door|overflow if the lot/i,
+      roster: /parking|directions|crowd \/ lobby/i,
+      day: [
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lot + door + lobby", do: "Wave cars. Point lot to door. BBQ inside, concert under the pavilion. Keep the line moving." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Doors rush", do: "Concert doors. No pile-up at the ticket table. Then you may stand down unless Event Lead keeps you." },
       ],
     },
     {
@@ -407,7 +418,7 @@
       const name = String((state[key] && state[key].owner) || "").trim();
       if (name) names[name] = true;
     });
-    ["setup", "event", "strike"].forEach((kind) => {
+    ["setup", "event", "strike", "grounds"].forEach((kind) => {
       ((roster && roster[kind]) || []).forEach((row) => {
         const name = String(row.name || "").trim();
         if (name) names[name] = true;
@@ -419,7 +430,7 @@
   function sliceFor(name, state, roster, sections) {
     const mine = harvest(state, sections).filter((row) => nameMatch(row.owner, name));
     const rosterHits = [];
-    ["setup", "event", "strike"].forEach((kind) => {
+    ["setup", "event", "strike", "grounds"].forEach((kind) => {
       ((roster && roster[kind]) || []).forEach((row) => {
         if (nameMatch(row.name, name)) rosterHits.push(Object.assign({ kind }, row));
       });

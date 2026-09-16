@@ -18,7 +18,7 @@ const areas=[
  ['Venue','Confirm access, room layout, exits and public flow.','Setup'],
  ['Food / BBQ','Ben food and service supply list confirmed.','Ben / BBQ'],
  ['Setup','8 tables to dress. ~90 min. Then 3 dressers become floaters + campaign.','Setup'],
- ['Volunteers','7 people. Same crew stays through 10. Two floaters run relief.','Volunteers'],
+ ['Volunteers','13 people: 7 night + 3 arrival + 3 Tracy muscle. Two floaters run relief.','Volunteers'],
  ['Tickets','Ticket station, payment procedure and reconciliation.','Tickets & Money'],
  ['Campaign','30 min merch set. Pull-ups, push cards, buttons, candy, foldovers.','Campaign & Merch'],
  ['Food & Drinks','8 gal unsweet tea, 6 gal lemonade, 120 bottles water, 12 bags ice.','Food & Drinks'],

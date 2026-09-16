@@ -191,6 +191,16 @@
       });
     }
 
+    if (undone(list, /name parking volunteer|name directions volunteer|name crowd\/lobby volunteer/i).length) {
+      const openGrounds = undone(list, /name parking volunteer|name directions volunteer|name crowd\/lobby volunteer/i).length;
+      facts.push({
+        kind: "setup",
+        score: weight(p, "setup") + openGrounds,
+        href: "/volunteers/",
+        line: "Name " + openGrounds + " arrival people: parking, directions, crowd.",
+      });
+    }
+
     if (undone(list, /bar stool/i).length && weight(p, "stool")) {
       facts.push({
         kind: "stool",

@@ -179,7 +179,7 @@
       arrival: "4:30 PM",
       owns: "The clock, every post, strike, 10:00 PM clear.",
       duties: [
-        "Walk tickets, food, campaign, and stage every 15 minutes from 5:00.",
+        "Walk tickets, food, campaign, parking/crowd, and stage every 15 minutes from 5:00.",
         "6:45 hard checkpoint with Production.",
         "Call strike the moment the show ends. Same 7 people. Send 3 muscle to Tracy for sound/lights carry-out. Venue furniture stays.",
         "Confirm the building is cleared at 10:00.",

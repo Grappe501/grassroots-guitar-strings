@@ -20,6 +20,11 @@ const defaults = {
     "Sound/lights muscle 2 — 8:45. Carry lights and cases. Tracy directs.",
     "Sound/lights muscle 3 — 8:45. Carry remaining production to Tracy's vehicle.",
   ],
+  grounds: [
+    "Parking — 5:00–7:00. Wave cars. Overflow if the lot fills.",
+    "Directions — 5:00–7:00. Lot to door. BBQ inside, concert under the pavilion.",
+    "Crowd / lobby — 5:00–7:00. Keep the line moving. Do not block doors. Point to tickets.",
+  ],
 };
 const teams = [
   "A · Tables / Chairs",
@@ -35,6 +40,7 @@ function arrivalFor(role, kind) {
   if (kind === "setup") return "8:00 AM";
   if (kind === "strike") return "After show";
   if (/muscle/i.test(role)) return "8:45 PM";
+  if (/parking|directions|crowd/i.test(role)) return "5:00 PM";
   if (/tracy/i.test(role)) return "8:00 AM";
   if (/floater/i.test(role)) return "4:30 PM";
   return "5:00 PM";
@@ -53,6 +59,17 @@ function ensureFloaters() {
     const hint = /floater a/i.test(role) ? /floater a/i : /floater b/i;
     if (!state.event.some((row) => hint.test(String(row.role || "")))) {
       state.event.push(emptyRow(role, "event"));
+    }
+  });
+}
+
+function ensureGrounds() {
+  if (!state.grounds) state.grounds = [];
+  defaults.grounds.forEach((role) => {
+    const key = role.split(" — ")[0];
+    const hint = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+    if (!state.grounds.some((row) => hint.test(String(row.role || "")))) {
+      state.grounds.push(emptyRow(role, "event"));
     }
   });
 }
@@ -77,9 +94,11 @@ let state =
     setup: defaults.setup.map((role) => emptyRow(role, "setup")),
     event: defaults.event.map((role) => emptyRow(role, "event")),
     strike: [],
+    grounds: defaults.grounds.map((role) => emptyRow(role, "event")),
   };
 ensureFloaters();
 ensureMuscle();
+ensureGrounds();
 (function seedDebiMerch() {
   const row = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
   if (row && !String(row.name || "").trim()) row.name = "Debi Martin";
@@ -199,9 +218,11 @@ function applyRemote(data) {
       done: false,
     });
   }
+  if (!state.grounds) state.grounds = [];
   ensureFloaters();
   ensureMuscle();
-  ["setup", "event", "strike"].forEach(render);
+  ensureGrounds();
+  ["setup", "event", "strike", "grounds"].forEach(render);
   counts();
 }
 
@@ -224,14 +245,18 @@ function stayNames() {
 function counts() {
   document.getElementById("setupCount").textContent = state.setup.filter((x) => x.name.trim()).length + " / 3";
   document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + NEED_STAY;
+  const groundsEl = document.getElementById("groundsCount");
+  if (groundsEl) {
+    groundsEl.textContent = (state.grounds || []).filter((x) => String(x.name || "").trim()).length + " / 3";
+  }
   const n = stayNames().length;
   document.getElementById("strikeCount").textContent = n + " / " + NEED_STAY;
   document.getElementById("strikeAlert").textContent =
     n >= NEED_STAY
-      ? "7 people named. Those same people stay through 10:00 PM. Do not recruit a second strike crew."
+      ? "13 unique people: 7 night + 3 arrival (parking/directions/crowd) + 3 Tracy muscle. Kelly Support and Photo are extra only if they are not already one of the 7."
       : "Night crew is " +
         (NEED_STAY - n) +
-        " short of 7. Setup 1+2 become floaters. Setup 3 becomes campaign. Everyone stays for strike.";
+        " short of 7. Also name 3 arrival people and 3 Tracy muscle. Setup 1+2 become floaters. Setup 3 becomes campaign.";
   if (window.GGSNextAction && window.GGSNextAction.paintTexts) {
     window.GGSNextAction.paintTexts(store ? store.readCache() : {}, state);
   }
@@ -247,7 +272,7 @@ if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {
     done: false,
   });
 }
-["setup", "event", "strike"].forEach(render);
+["setup", "event", "strike", "grounds"].forEach(render);
 counts();
 document.querySelectorAll("[data-add]").forEach((b) =>
   b.addEventListener("click", () => {
@@ -265,11 +290,13 @@ document.getElementById("clearBtn").addEventListener("click", () => {
       setup: defaults.setup.map((role) => emptyRow(role, "setup")),
       event: defaults.event.map((role) => emptyRow(role, "event")),
       strike: defaults.strike.map((role) => emptyRow(role, "strike")),
+      grounds: defaults.grounds.map((role) => emptyRow(role, "event")),
     };
     ensureFloaters();
     ensureMuscle();
+    ensureGrounds();
     save();
-    ["setup", "event", "strike"].forEach(render);
+    ["setup", "event", "strike", "grounds"].forEach(render);
   }
 });
 document.getElementById("printBtn").addEventListener("click", () => print());
