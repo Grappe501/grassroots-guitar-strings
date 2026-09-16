@@ -280,6 +280,19 @@
     return true;
   }
 
+  function ensurePlan() {
+    if (window.GGSPrepV3) window.GGSPrepV3.setMode("plan");
+    else {
+      document.body.dataset.mode = "plan";
+      const plan = document.getElementById("planStage");
+      const run = document.getElementById("runStage");
+      const packet = document.getElementById("packetStage");
+      if (plan) plan.hidden = false;
+      if (run) run.hidden = true;
+      if (packet) packet.hidden = true;
+    }
+  }
+
   function applyFilters() {
     let shown = 0;
     allTasks().forEach((row) => {
@@ -295,16 +308,31 @@
     if (empty) empty.hidden = shown > 0;
     const visibleCount = document.getElementById("visibleCount");
     if (visibleCount) visibleCount.textContent = String(shown);
+    const status = document.getElementById("filterStatus");
+    if (status) {
+      const labels = { all: "All tasks", open: "Open tasks", owner: "Needs an owner", mine: "Assigned to you", done: "Done" };
+      const q = (prefs.q || "").trim();
+      status.textContent =
+        (q ? '"' + q + '" · ' : "") + (labels[prefs.filter] || "All tasks") + " · " + shown + " showing";
+    }
     updateTabCounts();
-    const q = (prefs.q || "").trim();
-    if (!q) return;
-    if (window.GGSPrepV3 && document.body.dataset.mode !== "plan") window.GGSPrepV3.setMode("plan");
+  }
+
+  function revealWork() {
+    ensurePlan();
+    applyFilters();
     const current = document.querySelector(".section.is-active");
-    const currentHas = current && current.querySelector(".task:not([hidden])");
-    if (currentHas) return;
+    if (current && current.querySelector(".task:not([hidden])")) {
+      current.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
     const hit = allTasks().find((row) => !row.hidden);
     const section = hit && hit.closest("[data-section]");
     if (section) showTab(section.dataset.section);
+    else {
+      const stage = document.getElementById("planStage");
+      if (stage) stage.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   function progress() {
@@ -406,9 +434,7 @@
 
   function showTab(id) {
     if (!id || !document.querySelector('[data-section="' + id + '"]')) return;
-    if (window.GGSPrepV3 && document.body.dataset.mode !== "plan") {
-      window.GGSPrepV3.setMode("plan");
-    }
+    ensurePlan();
     prefs.tab = id;
     savePrefs();
     document.querySelectorAll(".tab").forEach((tab) => {
@@ -419,9 +445,12 @@
     document.querySelectorAll(".section").forEach((section) => {
       section.classList.toggle("is-active", section.dataset.section === id);
     });
+    document.querySelectorAll(".role[data-jump]").forEach((btn) => {
+      btn.classList.toggle("is-active", btn.dataset.jump === id);
+    });
     if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
-    const stage = document.getElementById("planStage");
-    if (stage) stage.scrollIntoView({ behavior: "smooth", block: "start" });
+    const section = document.querySelector('[data-section="' + id + '"]');
+    if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function tick() {
@@ -459,16 +488,41 @@
     document.querySelectorAll(".tab").forEach((tab) => {
       tab.addEventListener("click", () => showTab(tab.dataset.tab));
     });
-    document.querySelectorAll("[data-jump]").forEach((btn) => {
+    document.querySelectorAll(".role[data-jump]").forEach((btn) => {
+      btn.classList.toggle("is-active", btn.dataset.jump === prefs.tab);
+      btn.addEventListener("click", () => {
+        prefs.filter = "all";
+        prefs.q = "";
+        const search = document.getElementById("searchInput");
+        if (search) search.value = "";
+        document.querySelectorAll("[data-filter]").forEach((c) => c.classList.toggle("is-active", c.dataset.filter === "all"));
+        savePrefs();
+        applyFilters();
+        showTab(btn.dataset.jump);
+      });
+    });
+    document.querySelectorAll("[data-jump]:not(.role)").forEach((btn) => {
       btn.addEventListener("click", () => showTab(btn.dataset.jump));
     });
     document.querySelectorAll("[data-filter]").forEach((chip) => {
       chip.classList.toggle("is-active", chip.dataset.filter === prefs.filter);
+      chip.setAttribute("aria-pressed", chip.dataset.filter === prefs.filter ? "true" : "false");
       chip.addEventListener("click", () => {
         prefs.filter = chip.dataset.filter;
-        document.querySelectorAll("[data-filter]").forEach((c) => c.classList.toggle("is-active", c === chip));
+        document.querySelectorAll("[data-filter]").forEach((c) => {
+          const on = c === chip;
+          c.classList.toggle("is-active", on);
+          c.setAttribute("aria-pressed", on ? "true" : "false");
+        });
         savePrefs();
-        applyFilters();
+        if (prefs.filter === "mine" && !(prefs.me || "").trim()) {
+          const me = document.getElementById("meInput");
+          if (me) {
+            me.classList.add("is-needed");
+            me.focus();
+          }
+        }
+        revealWork();
       });
     });
     const me = document.getElementById("meInput");
@@ -515,7 +569,7 @@
       search.addEventListener("input", () => {
         prefs.q = search.value;
         savePrefs();
-        applyFilters();
+        revealWork();
       });
     }
     document.getElementById("nightBtn").addEventListener("click", () => {
@@ -574,5 +628,5 @@
   });
   if (store) store.startSync();
 
-  window.GGSPrepApp = { applyFilters, showTab, renderCrew, renderAttention };
+  window.GGSPrepApp = { applyFilters, showTab, revealWork, renderCrew, renderAttention };
 })();

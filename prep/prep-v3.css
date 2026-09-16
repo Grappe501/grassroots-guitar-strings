@@ -1,3 +1,22 @@
+[hidden] {
+  display: none !important;
+}
+
+body[data-mode="run"] #planStage,
+body[data-mode="run"] #packetStage,
+body[data-mode="plan"] #runStage,
+body[data-mode="plan"] #packetStage,
+body[data-mode="packet"] #planStage,
+body[data-mode="packet"] #runStage,
+body[data-mode="packet"] .ops-bar,
+body[data-mode="packet"] .role-row {
+  display: none !important;
+}
+
+#planStage .section {
+  scroll-margin-top: 16px;
+}
+
 #prepApp .now-strip,
 #prepApp .ops-bar,
 #prepApp .role-row,
@@ -108,6 +127,14 @@
   gap: 0.4rem;
 }
 
+.filter-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #17466b;
+}
+
 .chip,
 .role,
 .crew-pill,
@@ -122,6 +149,7 @@
 }
 
 .chip.is-active,
+.role.is-active,
 .role:hover {
   background: #17466b;
   color: #fff;
@@ -270,7 +298,8 @@ html.night .tabs {
 html.night .subtitle,
 html.night .muted,
 html.night .mini,
-html.night .stat__label {
+html.night .stat__label,
+html.night .filter-status {
   color: #9eb0be;
 }
 

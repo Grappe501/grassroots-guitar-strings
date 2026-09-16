@@ -81,12 +81,13 @@
       <input id="searchInput" type="search" placeholder="Type tea, signs, Tracy, strike… jumps to that job">
     </label>
     <div class="filter-row" role="group" aria-label="Task filters">
-      <button type="button" class="chip is-active" data-filter="all">All</button>
-      <button type="button" class="chip" data-filter="open">Open</button>
-      <button type="button" class="chip" data-filter="owner">Needs owner</button>
-      <button type="button" class="chip" data-filter="mine">Mine</button>
-      <button type="button" class="chip" data-filter="done">Done</button>
+      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="chip" data-filter="open" aria-pressed="false">Open</button>
+      <button type="button" class="chip" data-filter="owner" aria-pressed="false">Needs owner</button>
+      <button type="button" class="chip" data-filter="mine" aria-pressed="false">Mine</button>
+      <button type="button" class="chip" data-filter="done" aria-pressed="false">Done</button>
     </div>
+    <p class="filter-status" id="filterStatus">All tasks</p>
   </section>
 
   <section class="role-row" aria-label="Jump to a job">
