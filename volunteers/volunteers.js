@@ -19,6 +19,8 @@ const defaults = {
     "Tracy production helper — with Tracy 8:00–10:00 AM through Strike D",
     "Floater A — relief loop all night",
     "Floater B — relief loop + roam shots if no Photo Lead",
+    "Kelly Support — runner plus vertical photos on Kelly",
+    "Photo Lead — roam, action, crowd. Not on Kelly all night.",
   ],
   strike: [
     "Sound/lights muscle 1 — 8:45. Carry speakers and stands. Tracy directs.",

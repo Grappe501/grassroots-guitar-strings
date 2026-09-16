@@ -284,7 +284,7 @@
     } else {
       link.hidden = false;
       link.href = "/spots/";
-      link.textContent = "The 17 phone pages";
+        link.textContent = "All phone pages";
     }
   }
 
@@ -319,10 +319,20 @@
       ? rows.map((row) => jobBtn(row, name)).join("")
       : '<p class="v5-meta">Nothing open on your name right now.</p>';
     bindJobs(box, name);
+    const night = document.getElementById("nightBlock");
+    if (night) {
+      const spot = fromSpot && fromSpot.spot;
+      night.hidden = !(spot && spot.clock && spot.clock.length);
+      const facts = document.getElementById("nightFacts");
+      if (spot) {
+        if (facts) facts.textContent = "Arrive " + spot.arrive + " · Eat — " + spot.eat + " · Sit — " + spot.sit;
+        paintDayClock(spot, "nightClock");
+      }
+    }
   }
 
-  function paintDayClock(spot) {
-    const root = document.getElementById("jobsClock");
+  function paintDayClock(spot, id) {
+    const root = document.getElementById(id || "jobsClock");
     if (!root || !spot || !spot.clock) return;
     const idx = clockIndex(spot.clock);
     if (root.dataset.spot !== spot.id || root.children.length !== spot.clock.length) {
@@ -361,7 +371,7 @@
       document.getElementById("jobsTitle").textContent = "Minute by minute. Gold row is now.";
       facts.hidden = false;
       facts.textContent = "Arrive " + spot.arrive + " · Eat — " + spot.eat + " · Sit — " + spot.sit;
-      paintDayClock(spot);
+      paintDayClock(spot, "jobsClock");
     } else {
       document.getElementById("jobsKicker").textContent = captain ? "YOUR COMMAND" : "YOUR JOBS";
       document.getElementById("jobsTitle").textContent = captain

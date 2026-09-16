@@ -125,6 +125,10 @@ body.v5 {
   color: #dbe7ef;
 }
 
+.v5-night {
+  margin: 1rem 0 0.4rem;
+}
+
 .v5-ros {
   list-style: none;
   margin: 0 0 1.1rem;
