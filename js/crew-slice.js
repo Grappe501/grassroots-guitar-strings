@@ -282,7 +282,7 @@
       roster: /\$1 bottles only|water — \$1/i,
       day: [
         { start: "2026-09-17T15:00:00", end: "2026-09-17T17:30:00", place: "Bottle station", do: "On site at 3:00. 120 bottles on ice. $1 cash only. Tea and lemonade are free at the line — not your bag." },
-        { start: "2026-09-17T17:30:00", end: "2026-09-17T19:20:00", place: "Bottle station", do: "Sell $1 water. Stay through David. You are not on the serving line." },
+        { start: "2026-09-17T17:30:00", end: "2026-09-17T19:20:00", place: "Merch table", do: "Sell $1 water at merch. Stay through David. You are not on the serving line." },
         { start: "2026-09-17T19:20:00", end: "2026-09-17T20:00:00", place: "Concert seats", do: "Sit. Relief 2 has the bag." },
         { start: "2026-09-17T20:00:00", end: "2026-09-17T20:45:00", place: "Bottle station", do: "Back on water through the last song." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike", do: "Reconcile the bag with Event Lead. Pack leftover bottles." },

@@ -51,9 +51,9 @@
     },
     {
       id: "water",
-      title: "$1 water + ice",
+      title: "$1 water + ice — sold at merch",
       inn: [
-        "Bottled water — 120 bottles ($1 and giveaway)",
+        "Bottled water — 120 bottles. Sold at the merch table. $1 cash.",
         "Ice chests / coolers",
         "Ice — 6 bags (10 lb) for bottled water",
         "Money bag",
@@ -130,6 +130,7 @@
         "Pens",
         "Postcards",
         "Cash envelopes",
+        "Bottled water — 120 bottles. Sold at this table. $1 cash.",
       ],
       out: [
         "Literature packed",
@@ -150,6 +151,8 @@
         "Bungee cords packed",
         "Postcards packed",
         "Cash / checks",
+        "Leftover water packed",
+        "Water cash / bag with Event Lead",
       ],
     },
     {
