@@ -220,9 +220,7 @@
         .map((m, i) => '<div class="run-cue' + (i === 0 ? " is-now" : "") + '"><b>' + esc(m[1]) + "</b><span>" + esc(m[2]) + "</span></div>")
         .join("");
     }
-    const runMe = document.getElementById("runMe");
     const storedMe = (JSON.parse(localStorage.getItem(PREFS) || "{}").me || "").trim();
-    if (runMe && document.activeElement !== runMe) runMe.value = storedMe;
     const me = storedMe.toLowerCase();
     const mine = document.getElementById("runMine");
     if (!mine) return;
@@ -246,7 +244,7 @@
             );
           })
           .join("")
-      : '<p class="muted">Type your name in Plan, then assign work to yourself. Those jobs land here.</p>';
+      : '<p class="muted">No open work on your signed-in name yet.</p>';
     mine.querySelectorAll("[data-done]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const row = document.querySelector('.task[data-key="' + btn.dataset.done + '"]');

@@ -84,6 +84,13 @@ body[data-mode="packet"] .role-row {
   padding: 0.9rem;
 }
 
+.me-signed {
+  margin: 0;
+  font-weight: 800;
+  color: #000066;
+  align-self: center;
+}
+
 .me-field,
 .search-field {
   display: grid;

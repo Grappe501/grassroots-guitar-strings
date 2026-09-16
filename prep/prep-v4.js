@@ -251,8 +251,9 @@
         if (n) names[n] = true;
       });
     });
-    const me = document.getElementById("meInput");
-    if (me && me.value.trim()) names[me.value.trim()] = true;
+    let me = "";
+    if (window.GGSSignIn) me = window.GGSSignIn.identity().name || "";
+    if (me) names[me] = true;
     return Object.keys(names).sort((a, b) => a.localeCompare(b));
   }
 
@@ -277,11 +278,13 @@
       feed: "#radioFeed",
       input: "#radioInput",
       send: "#radioSend",
-      need: "#meInput",
       getName: function () {
-        const a = document.getElementById("meInput");
-        const b = document.getElementById("runMe");
-        return (a && a.value) || (b && b.value) || "";
+        if (window.GGSSignIn) return window.GGSSignIn.identity().name || "";
+        try {
+          return JSON.parse(localStorage.getItem("ggs-prep-v3-prefs") || "{}").me || "";
+        } catch (err) {
+          return "";
+        }
       },
     });
   }

@@ -290,7 +290,7 @@
       const hint = document.getElementById("radioBy");
       const result = send(opts.getName, input);
       if (!result.ok && result.reason === "name") {
-        if (hint) hint.textContent = "Type your name in I am, then Send.";
+        if (hint) hint.textContent = "Sign in first, then Send.";
         if (need) {
           need.classList.add("is-needed");
           need.focus();

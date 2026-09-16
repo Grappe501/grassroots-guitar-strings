@@ -533,7 +533,20 @@
     }
   }
 
+  function paintMeSigned() {
+    const el = document.getElementById("meSigned");
+    if (!el) return;
+    const name = (prefs.me || "").trim();
+    el.textContent = name ? "Signed in as " + name : "";
+  }
+
   function bindChrome() {
+    paintMeSigned();
+    window.addEventListener("ggs-signed-in", function (e) {
+      if (e.detail && e.detail.me) prefs.me = e.detail.me;
+      if (e.detail && e.detail.phone) prefs.phone = e.detail.phone;
+      paintMeSigned();
+    });
     document.querySelectorAll(".tab").forEach((tab) => {
       tab.addEventListener("click", () => showTab(tab.dataset.tab));
     });
