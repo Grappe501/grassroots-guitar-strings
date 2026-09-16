@@ -28,9 +28,20 @@ const areas=[
 const state=JSON.parse(localStorage.getItem('ggs-command-v1')||'{}');
 const prepState=(window.GGSPrepStore?window.GGSPrepStore.readCache():JSON.parse(localStorage.getItem('ggs-prep-2026-09-17-v2')||'{}'));
 function pctForPrefix(prefix){const rows=Object.entries(prepState).filter(([k])=>k.startsWith(prefix+':'));if(!rows.length)return 0;return Math.round(rows.filter(([,v])=>v.done).length/rows.length*100)}
-function renderStatus(){const el=document.getElementById('statusGrid');el.innerHTML=areas.map(([name,desc,tab])=>{const p=pctForPrefix(tab==='Tickets & Money'?'tickets':tab==='Campaign & Merch'?'campaign':tab==='Sound & Show'?'production':tab==='Food & Drinks'?'food':tab==='Ben / BBQ'?'ben':tab.toLowerCase());const cls=p>=80?'is-ready':p<40?'is-alert':'';return `<article class="status-card ${cls}"><h3>${name}</h3><p class="muted">${desc}</p><div class="status-line"><span>${p}% complete</span><strong>${p>=80?'READY':p?'IN PROGRESS':'NEEDS OWNER'}</strong></div><div class="status-bar"><div style="width:${p}%"></div></div><a class="text-link" href="/prep/#${tabToId(tab)}">Open →</a></article>`}).join('')}
+function renderStatus(){const el=document.getElementById('statusGrid');if(!el) return;el.innerHTML=areas.map(([name,desc,tab])=>{const p=pctForPrefix(tab==='Tickets & Money'?'tickets':tab==='Campaign & Merch'?'campaign':tab==='Sound & Show'?'production':tab==='Food & Drinks'?'food':tab==='Ben / BBQ'?'ben':tab.toLowerCase());const cls=p>=80?'is-ready':p<40?'is-alert':'';return `<article class="status-card ${cls}"><h3>${name}</h3><p class="muted">${desc}</p><div class="status-line"><span>${p}% complete</span><strong>${p>=80?'READY':p?'IN PROGRESS':'NEEDS OWNER'}</strong></div><div class="status-bar"><div style="width:${p}%"></div></div></article>`}).join('')}
 function tabToId(tab){return {'Ben / BBQ':'ben','Setup':'setup','Volunteers':'volunteers','Tickets & Money':'tickets','Campaign & Merch':'campaign','Food & Drinks':'food','Sound & Show':'production','Breakdown':'breakdown'}[tab]||tab.toLowerCase()}
-function renderTimeline(){const now=new Date();document.getElementById('timeline').innerHTML=milestones.map((m,i)=>{const t=new Date(m[0]);const diff=t-now;const cls=diff<0?'past':(diff<3600000&&diff>=0?'current':'');const stateLabel=diff<0?'passed':cls?'next':'upcoming';return `<div class="timeline-row ${cls}"><div class="time">${m[1]}</div><div><strong>${m[2]}</strong><small>${timeDistance(diff)}</small></div><div class="state">${stateLabel}</div></div>`}).join('')}
+function renderTimeline(){
+  const el=document.getElementById('timeline');
+  if(!el) return;
+  const now=new Date();
+  el.innerHTML=milestones.map(function(m){
+    const t=new Date(m[0]);
+    const diff=t-now;
+    const cls=diff<0?'past':(diff<3600000&&diff>=0?'current':'');
+    const stateLabel=diff<0?'passed':cls?'next':'upcoming';
+    return '<div class="timeline-row '+cls+'"><div class="time">'+m[1]+'</div><div><strong>'+m[2]+'</strong><small>'+timeDistance(diff)+'</small></div><div class="state">'+stateLabel+'</div></div>';
+  }).join('');
+}
 function timeDistance(ms){if(ms<0){const n=Math.abs(ms);if(n<60000)return 'just passed';if(n<3600000)return `${Math.floor(n/60000)} min ago`;return `${Math.floor(n/3600000)} hr ago`}if(ms<60000)return 'in less than a minute';if(ms<3600000)return `in ${Math.floor(ms/60000)} min`;return `in ${Math.floor(ms/3600000)} hr ${Math.floor((ms%3600000)/60000)} min`}
 function paintNext(){
   if(!window.GGSNextAction) return;
@@ -78,44 +89,82 @@ function houseRowHtml(show,row,here){
   ].filter(Boolean).join(' ');
   return '<li class="'+cls+'"><b>'+show.hm(row.t)+'</b><div><small>'+row.who+'</small><span>'+row.text+'</span></div></li>';
 }
+function hm(t){
+  const p=String(t||'').split(':');
+  const h=Number(p[0]);
+  const m=p[1]||'00';
+  if(!Number.isFinite(h)) return t;
+  return (h%12||12)+':'+m+' '+(h>=12?'PM':'AM');
+}
 function renderHouseRos(){
   const el=document.getElementById('houseRos');
-  const pins=document.getElementById('housePins');
   const label=document.getElementById('clockLabel');
-  const show=window.GGSRunOfShow;
-  if(!el||!show||!show.HOUSE) return;
-  const list=show.HOUSE;
-  const here=houseLive(list);
-  const lanes=[
-    ['setup','Setup times'],
-    ['arrive','Arrival times'],
-    ['start','Show starts'],
-    ['end','Show ends + clear']
-  ];
-  el.innerHTML=lanes.map(function(lane){
-    const rows=list.filter(function(row){return row.lane===lane[0];});
-    return '<section class="house-lane"><p class="eyebrow">'+lane[1]+'</p><ol class="house-ros">'+rows.map(function(row){return houseRowHtml(show,row,here);}).join('')+'</ol></section>';
-  }).join('');
-  if(pins){
-    const pinLanes=[
-      ['setup','Next setup'],
-      ['arrive','Next arrival'],
-      ['start','Next start'],
-      ['end','Next end']
-    ];
-    pins.innerHTML=pinLanes.map(function(pin){
-      const row=houseUpcoming(list,pin[0])||(here.current&&here.current.lane===pin[0]?here.current:null);
-      const when=row?show.hm(row.t)+' · '+row.text:pin[0]==='end'?'Building is clear.':'—';
-      return '<article><p class="eyebrow">'+pin[1]+'</p><p>'+when+'</p></article>';
-    }).join('');
+  if(!el) return;
+  const rows=Array.prototype.slice.call(el.querySelectorAll('[data-t]'));
+  if(!rows.length) return;
+  const now=houseNow();
+  let current=rows[0];
+  let next=rows[1]||null;
+  rows.forEach(function(row,i){
+    if(now>=houseAt(row.getAttribute('data-t'))){
+      current=row;
+      next=rows[i+1]||null;
+    }
+  });
+  const nowT=current.getAttribute('data-t');
+  const nextT=next?next.getAttribute('data-t'):'';
+  rows.forEach(function(row){
+    const t=row.getAttribute('data-t');
+    row.classList.toggle('is-past', now>=houseAt(t) && t!==nowT);
+    row.classList.toggle('is-now', t===nowT);
+    row.classList.toggle('is-next', !!nextT && t===nextT && t!==nowT);
+  });
+  if(label){
+    const text=(current.querySelector('span')||{}).textContent||'';
+    const nxt=next?((next.querySelector('span')||{}).textContent||''):'';
+    label.textContent='NOW · '+hm(nowT)+' — '+text+(next?'  Next · '+hm(nextT)+' '+nxt:'');
   }
-  if(label&&here.current){
-    label.textContent='NOW · '+show.hm(here.current.t)+' — '+here.current.text+(here.next?'  Next · '+show.hm(here.next.t)+' '+here.next.text:'');
+  if(!window.__houseDidScroll && current){
+    window.__houseDidScroll=true;
+    current.scrollIntoView({block:'center'});
   }
 }
-function tick(){const now=new Date();document.getElementById('clock').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});document.getElementById('modeTime').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const d=new Date('2026-09-17T20:45:00');document.getElementById('modeTitle').textContent=now>=d?'STRIKE MODE':'Event operations';document.getElementById('modeNext').textContent=now>=d?'Strike immediately. Building must be clear by 10:00 PM.':'Use the full checklist for assignments, owners and completion.';renderHouseRos();renderTimeline();paintNext()}
-function readiness(){const vals=areas.map(a=>pctForPrefix(tabToId(a[2])));const p=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);document.getElementById('readiness').textContent=p+'%';document.getElementById('readinessBar').style.width=p+'%';document.getElementById('readinessDetail').textContent=`${vals.filter(x=>x>=80).length} of ${vals.length} command areas at 80%+ completion.`}
-function bind(){document.getElementById('eventModeBtn').onclick=()=>document.getElementById('modeOverlay').hidden=false;document.getElementById('closeMode').onclick=()=>document.getElementById('modeOverlay').hidden=true;document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>location.href=`/prep/#${b.dataset.jump}`)}
+function tick(){
+  const now=new Date();
+  const face=document.getElementById('clock');
+  if(face) face.textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+  const modeTime=document.getElementById('modeTime');
+  if(modeTime) modeTime.textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+  const d=new Date('2026-09-17T20:45:00');
+  const modeTitle=document.getElementById('modeTitle');
+  const modeNext=document.getElementById('modeNext');
+  if(modeTitle) modeTitle.textContent=now>=d?'STRIKE MODE':'Event operations';
+  if(modeNext) modeNext.textContent=now>=d?'Strike immediately. Building must be clear by 10:00 PM.':'Use the full checklist for assignments, owners and completion.';
+  renderHouseRos();
+  renderTimeline();
+  paintNext();
+}
+function readiness(){
+  const num=document.getElementById('readiness');
+  const bar=document.getElementById('readinessBar');
+  const detail=document.getElementById('readinessDetail');
+  if(!num&&!bar&&!detail) return;
+  const vals=areas.map(function(a){return pctForPrefix(tabToId(a[2]));});
+  const p=Math.round(vals.reduce(function(a,b){return a+b;},0)/vals.length);
+  if(num) num.textContent=p+'%';
+  if(bar) bar.style.width=p+'%';
+  if(detail) detail.textContent=vals.filter(function(x){return x>=80;}).length+' of '+vals.length+' command areas at 80%+ completion.';
+}
+function bind(){
+  const open=document.getElementById('eventModeBtn');
+  const overlay=document.getElementById('modeOverlay');
+  const close=document.getElementById('closeMode');
+  if(open&&overlay) open.onclick=function(){overlay.hidden=false;};
+  if(close&&overlay) close.onclick=function(){overlay.hidden=true;};
+  document.querySelectorAll('[data-jump]').forEach(function(b){
+    b.onclick=function(){location.href='/prep/#'+b.dataset.jump;};
+  });
+}
 function nextActions(){
   const critical=/teardown|strike|event captain|tracy|ben|ticket|10–12|10-12|load-out|photographer|cooler/i;
   return Object.entries(prepState)
@@ -129,7 +178,10 @@ function renderGaps(){
   const gap=document.getElementById('gapCount');
   if(gap) gap.textContent=String(rows.length);
   const list=document.getElementById('nextList');
-  if(!list) return;
+  if(!list){
+    paintNext();
+    return;
+  }
   const labels={overview:'Overview',ben:'Ben / BBQ',setup:'Setup',volunteers:'People',tickets:'Tickets',campaign:'Campaign',food:'Food',production:'Tracy / show',timeline:'Timeline',breakdown:'Strike',final:'Final sweep'};
   const counts={};
   rows.forEach((r)=>{counts[r.section]=(counts[r.section]||0)+1});

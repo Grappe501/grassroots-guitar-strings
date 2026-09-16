@@ -8,6 +8,9 @@
 .house-pins article{background:#ffffff14;border-radius:12px;padding:.65rem .7rem}
 .house-pins .eyebrow{color:#ca913d;opacity:1}
 .house-pins p{margin:0;color:#e7eef4}
+.house-ros--full{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .7rem;margin:0}
+.house-ros--full li{align-items:start}
+@media(max-width:800px){.house-ros--full{grid-template-columns:1fr}}
 .house-lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin:0 0 .75rem}
 .house-lane{background:#ffffff10;border-radius:14px;padding:.65rem .55rem .7rem}
 .house-lane .eyebrow{color:#ca913d;opacity:1;margin-bottom:.35rem}
