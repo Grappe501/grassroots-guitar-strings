@@ -43,6 +43,7 @@ const store = window.GGSPrepStore;
 const slice = window.GGSCrewSlice;
 
 function arrivalFor(role, kind) {
+  if (/event captain/i.test(role)) return "8:00 AM";
   if (kind === "setup") return "10:00 AM";
   if (/muscle/i.test(role)) return "4:30 PM · required 8:45";
   if (kind === "strike") return "After show";
@@ -72,6 +73,11 @@ function migrateArrivals() {
       const a = String(row.arrival || "");
       if (/floater|relief|production manager/i.test(String(row.role || "")) && /4:30|3:00|10:00/.test(a)) {
         row.arrival = "5:30 PM if you can";
+        dirty = true;
+        return;
+      }
+      if (/event captain/i.test(String(row.role || "")) && /4:30|5:30|10:00/.test(a)) {
+        row.arrival = "8:00 AM";
         dirty = true;
         return;
       }
