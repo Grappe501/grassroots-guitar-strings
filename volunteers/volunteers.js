@@ -1,6 +1,6 @@
 const KEY = "ggs-volunteers-2026-09-17-v1";
 const NEED_STAY = 10;
-const NEED_EVENT = 11;
+const NEED_EVENT = 10;
 const defaults = {
   setup: [
     "Setup 1 — morning dresser",
@@ -16,7 +16,6 @@ const defaults = {
     "Server 3 — serving line with Ben.",
     "Drink station — tea, lemonade, ice, water, donations.",
     "Campaign + merch — one table, 30 min set",
-    "Tracy production helper — with Tracy 8:00–10:00 AM through Strike D",
     "Floater A — relief loop all night",
     "Floater B — relief loop + roam shots if no Photo Lead",
     "Kelly Support — runner plus vertical photos on Kelly",
@@ -37,7 +36,7 @@ const teams = [
   "A · Tables / Chairs",
   "B · Campaign / Signs / Merch",
   "C · Food / Drinks / Coolers",
-  "D · Tracy + helper + 3 muscle",
+  "D · Tracy + anyone who can + 3 muscle",
   "E · Venue / Final Sweep",
 ];
 const store = window.GGSPrepStore;
@@ -85,6 +84,13 @@ function migrateArrivals() {
 
 function emptyRow(role, kind) {
   return { role, name: "", phone: "", arrival: arrivalFor(role, kind), backup: "", done: false };
+}
+
+function dropTracyHelper() {
+  ["event", "setup"].forEach((kind) => {
+    if (!state[kind]) return;
+    state[kind] = state[kind].filter((row) => !/tracy production helper|assist tracy|campaign volunteer helper/i.test(String((row && row.role) || "")));
+  });
 }
 
 function ensureFloaters() {
@@ -188,6 +194,7 @@ ensureMuscle();
 ensureGrounds();
 ensureFoodLine();
 ensureLeadRows();
+dropTracyHelper();
 const bootArriveDirty = migrateArrivals();
 const bootLeadDirty = applyLeadSeats();
 (function seedNamedSeats() {
@@ -308,22 +315,13 @@ function applyRemote(data) {
   const active = document.activeElement;
   if (active && active.closest && active.closest(".person")) return;
   state = data;
-  if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {
-    state.event.push({
-      role: "Tracy production helper — stays through Strike D",
-      name: "",
-      phone: "",
-      arrival: "8:00 AM",
-      backup: "",
-      done: false,
-    });
-  }
   if (!state.grounds) state.grounds = [];
   ensureFloaters();
   ensureMuscle();
   ensureGrounds();
   ensureFoodLine();
   ensureLeadRows();
+  dropTracyHelper();
   const arriveDirty = migrateArrivals();
   const leadDirty = applyLeadSeats();
   ["setup", "event", "strike", "grounds"].forEach(render);
@@ -368,16 +366,6 @@ function counts() {
   }
 }
 
-if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {
-  state.event.push({
-    role: "Tracy production helper — stays through Strike D",
-    name: "",
-    phone: "",
-    arrival: "8:00 AM",
-    backup: "",
-    done: false,
-  });
-}
 ["setup", "event", "strike", "grounds"].forEach(render);
 if (bootLeadDirty || bootArriveDirty) save();
 counts();
@@ -404,6 +392,7 @@ document.getElementById("clearBtn").addEventListener("click", () => {
     ensureGrounds();
     ensureFoodLine();
     ensureLeadRows();
+    dropTracyHelper();
     applyLeadSeats();
     save();
     ["setup", "event", "strike", "grounds"].forEach(render);

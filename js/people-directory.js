@@ -24,7 +24,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "You are already in the system.",
-      next: "Read the 11 lead jobs. Tomorrow you pick one. Steve starts at Event Lead.",
+      next: "Read the 10 lead jobs. Tomorrow you pick one. Steve starts at Event Lead.",
       duties: [
         "Look at /leads/ before the meeting.",
         "Event Lead is the heaviest. Then Setup, Tickets, Food, Campaign.",
@@ -39,7 +39,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -50,7 +50,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -61,7 +61,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -72,7 +72,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -100,7 +100,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -143,7 +143,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -154,7 +154,7 @@
       go: "Open my night",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
-      next: "Eleven lead jobs. Steve starts at the top. Claim the one you want.",
+      next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
     {
@@ -382,22 +382,15 @@
     {
       id: "production",
       rank: 6,
+      retired: true,
       title: "Production Lead",
       weight: "All day with Tracy",
       cartoon: "Scooby",
       arrival: "9:00 AM production load in",
-      owns: "Tracy's helper all day. At encore, 3 muscle carry lights and sound out.",
+      owns: "Retired. No named helper. Everyone pitches in. At encore, 3 muscle carry lights and sound out.",
       duties: [
-        "9:00 production load in. Tracy walks in with a complete lights and sound system. Ready to go. Event t-shirt on. Open My Night.",
-        "Helper job is cables, tape, water, fetch if he asks. Do not build a second plot. Do not buy gear.",
-        "10:00 system check. Band is not required this morning. 12:00 lunch 45 minutes only if he says the system can hold.",
-        "2:00 DAB load in. Stay out of their merch set. You stay on house production. 3:00 DAB check.",
-        "4:30 Acoustic PA check. Ice is not your job.",
-        "5:30 band dinner if the system can hold. You miss the acoustic set on purpose if you eat late.",
-        "5:45 you and Tracy run David. Center of the dance floor. Stool, one mic, his amp only.",
-        "6:15 clear acoustic. Floor clear. Concert system up. 6:45 checkpoint with Event Lead.",
-        "7:00 sit a stool at FOH. Watch the board. Stay through the last song.",
-        "8:45 Strike D. 3 muscle report to you. Tracy directs. His vehicle. You may leave when production is loaded.",
+        "No named helper. Tracy has a complete system. If you are free, ask him if he needs a hand. Ask someone else to come too.",
+        "3 muscle still report at 8:45. Anyone else free goes to Tracy. Ask the person next to you.",
       ],
     },
     {
@@ -493,7 +486,7 @@
       duties: [
         "4:30 arrive if this is your only seat. Stay all night on your other seat if you have one. Open My Night. Strike focus starts 8:30.",
         "8:30 walk every post with Event Lead. Confirm 3 muscle are coming. Tell people: you stay until 10.",
-        "8:45 show over. Call pairs out loud: A cloths (2), B campaign (2), C Ben + 3 servers, D Tracy + helper + 3 muscle, E everyone walks last.",
+        "8:45 show over. Call pairs out loud: A cloths (2), B campaign (2), C Ben + 3 servers, D Tracy + anyone who can + 3 muscle, E everyone walks last.",
         "Venue furniture stays. Leave the 8 rounds, buffet tables, lobby table, and 64 chairs.",
         "9:00 A should be folding cloths. B packing merch. C food. D loading Tracy's vehicle.",
         "9:15 walk A through D. No second speech. Just finish.",

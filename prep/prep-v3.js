@@ -26,7 +26,7 @@
       who: /tracy/i,
       pick: function (row) {
         if (row.section === "production") return true;
-        if (row.section === "volunteers" && /tracy production helper|sound\/lights muscle/i.test(row.text)) return true;
+        if (row.section === "volunteers" && /sound\/lights muscle/i.test(row.text)) return true;
         if (row.section === "production" && /sound\/lights muscle/i.test(row.text)) return true;
         if (row.section === "breakdown" && /shut down sound|shut down lights|disconnect equipment|coil cables|pack microphones|pack stands|pack speakers|pack mixer|pack lighting|account for all production|load tracy|final stage check|sound\/lights muscle/i.test(row.text)) return true;
         return false;
@@ -86,14 +86,12 @@
     const setup = namedCount(people.setup);
     const tickets = namedRole(people.event, /primary ticket|check-in/i);
     const photo = namedRole(people.event, /photo|video/i);
-    const tracy =
-      namedRole(people.event, /tracy/i) ||
-      (taskNamed(/tracy production helper|name the campaign volunteer helper|campaign volunteer to assist tracy/i) ? "named" : "");
+    const muscle = namedCount(people.strike);
     const strike = namedCount(people.strike);
     return [
       { id: "captain", label: "Event Captain", ok: !!captain, detail: captain || "Need a name" },
       { id: "setup", label: "Setup 3", ok: setup >= 3, detail: setup + " / 3" },
-      { id: "tracy", label: "Tracy helper", ok: !!tracy, detail: tracy || "Need a helper" },
+      { id: "tracy", label: "Everyone helps Tracy", ok: true, detail: muscle ? muscle + " muscle named" : "Ask the room. 3 muscle at 8:45." },
       { id: "tickets", label: "Ticket lead", ok: !!tickets, detail: tickets || "Need a lead" },
       { id: "photo", label: "Photo Lead · roam", ok: !!photo, detail: photo || "Need a rover" },
       { id: "strike", label: "Teardown 10+", ok: strike >= 10, detail: strike + " / 10" },

@@ -243,33 +243,22 @@
     {
       id: "production",
       n: 9,
-      title: "Tracy helper",
-      short: "One system",
-      arrive: "9:00 AM production load in",
-      eat: "Lunch off site ~12:00. Band dinner 5:30 if the system can hold.",
-      sit: "Acoustic PA check 4:30. Run the acoustic set with Tracy. Watch the concert from a stool at the sound board.",
-      leadJob: "production",
-      roster: [{ kind: "event", hint: /tracy production helper|tracy/i }],
-      why: "Tracy brings a complete lights and sound system. You stay with him. Acoustic 5:45. Concert from the deck.",
+      title: "Help Tracy",
+      short: "Everyone pitches in",
+      retired: true,
+      arrive: "When Tracy asks",
+      eat: "Eat on your own seat.",
+      sit: "Stay on your own seat. If Tracy needs hands, go help. Ask someone next to you to come too.",
+      roster: [],
+      why: "No named helper. Tracy has a complete system. Everyone pitches in. Ask others to help when he needs hands. 3 muscle still report at 8:45.",
       clock: [
-        row("09:00", "arrive", "Production load in. Tracy has a complete lights and sound system. Ready to go. Event t-shirt on. Open My Night. Find him."),
-        row("09:10", "work", "He has everything. Helper job is cables, tape, water, fetch if he asks. Do not build a second plot."),
-        row("10:00", "work", "System check. Band is not required this morning. DAB load in 2:00. DAB check 3:00. Acoustic PA check 4:30."),
-        row("12:30", "work", "Room dressers may leave. You stay with Tracy or take a short break if he says so."),
-        row("12:00", "eat", "LUNCH off site. 45 minutes. Tell Tracy when you walk. Come back."),
-        row("14:00", "work", "DAB load in. Stay out of their merch set. You stay on house production. Bar stool staged for David if it is not already."),
-        row("15:00", "work", "DAB check. Stay on house production."),
-        row("16:30", "show", "Acoustic PA check. Ice is not your job. Stay on the system."),
-        row("16:50", "work", "Acoustic PA check done. Stage quiet. Confirm stool, one vocal mic, his amp only for 5:45."),
-        row("17:30", "eat", "Band dinner if the system can hold. 15 minutes."),
-        row("17:45", "show", "David acoustic. You and Tracy. 30 minutes. Center of the dance floor. Do not sit."),
-        row("18:15", "work", "Clear acoustic. Stool away. Floor clear. Floater B helps. Concert system up. Band is in the green room until 6:50."),
-        row("18:45", "work", "Checkpoint with Event Lead. Every concert input live. You stay through the last song."),
-        row("19:00", "sit", "Concert. Sit a stool at FOH. That is your show. Watch the board."),
-        row("20:40", "work", "3 muscle should be at the stage. Point them to Tracy."),
+        row("09:00", "work", "Tracy load in. No named helper. If you are free, ask him if he needs a hand. Ask someone else to come too."),
+        row("16:30", "work", "Acoustic PA check. Stay off the dance floor unless Tracy asks you on it."),
+        row("17:45", "work", "David acoustic. Tracy runs it. Pitch in only if he asks."),
+        row("18:15", "work", "Acoustic over. If you are free, help clear the floor. Ask one more person to help."),
+        row("20:40", "work", "3 muscle at the stage. Anyone else free goes to Tracy. Ask the person next to you."),
         row("20:45", "strike", "Strike D. Tracy directs. No empty hands. His vehicle. Venue tables stay."),
-        row("21:30", "strike", "Stage empty. Cases in his vehicle."),
-        row("22:00", "done", "Production is in the vehicle. You may leave with Tracy."),
+        row("22:00", "done", "Production is in the vehicle."),
       ],
     },
     {
@@ -546,7 +535,7 @@
         row("17:45", "sit", "Sit David if you are not on another post."),
         row("19:00", "sit", "Sit the concert if you are not on another post."),
         row("20:30", "work", "STRIKE FOCUS. Walk every post with Event Lead. Confirm 3 muscle are coming. Tell people: you stay until 10."),
-        row("20:45", "strike", "Show over. Call pairs out loud: A cloths (2), B campaign (2), C Ben + 3 servers, D Tracy + helper + 3 muscle, E everyone walks last."),
+        row("20:45", "strike", "Show over. Call pairs out loud: A cloths (2), B campaign (2), C Ben + 3 servers, D Tracy + anyone who can + 3 muscle, E everyone walks last."),
         row("20:46", "strike", "Venue furniture stays. Leave the 8 rounds, buffet tables, lobby table, and 64 chairs."),
         row("21:00", "strike", "A folding cloths. B packing merch. C food. D loading Tracy's vehicle. Band load-out is separate."),
         row("21:15", "strike", "Walk A through D. No second speech. Just finish. Bins in vehicles."),
@@ -647,12 +636,12 @@
     if (!name) return null;
     const store = global.GGSPrepStore;
     const map = hydrateFromRoster(store);
-    const hit = SPOTS.find((spot) => matchName(map[spot.id], name));
+    const hit = SPOTS.find((spot) => !spot.retired && matchName(map[spot.id], name));
     if (hit) return hit;
     if (global.GGSLeadDuties) {
       const job = global.GGSLeadDuties.jobFor(name);
       if (job) {
-        const fromLead = SPOTS.find((spot) => spot.leadJob === job.id);
+        const fromLead = SPOTS.find((spot) => !spot.retired && spot.leadJob === job.id);
         if (fromLead) return fromLead;
       }
     }

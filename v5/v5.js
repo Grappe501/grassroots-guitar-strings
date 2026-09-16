@@ -87,7 +87,7 @@
     const match = window.GGSPeople && window.GGSPeople.match;
     return (
       jobs.find(function (job) {
-        return job.defaultOwner && match && match(job.defaultOwner, name);
+        return !job.retired && job.defaultOwner && match && match(job.defaultOwner, name);
       }) || null
     );
   }
@@ -99,7 +99,7 @@
     if (job && window.GGSDaySpots) {
       return (
         window.GGSDaySpots.SPOTS.find(function (spot) {
-          return spot.leadJob === job.id;
+          return !spot.retired && spot.leadJob === job.id;
         }) || null
       );
     }

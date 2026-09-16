@@ -61,7 +61,7 @@
     const root = document.getElementById("spotHub");
     if (!root || !spots) return;
     const map = spots.hydrateFromRoster(store);
-    root.innerHTML = spots.SPOTS.map((spot) => {
+    root.innerHTML = spots.SPOTS.filter((spot) => !spot.retired).map((spot) => {
       const who = map[spot.id] || "";
       return (
         '<article class="spot-card"><p class="eyebrow">' +
@@ -118,6 +118,12 @@
     document.getElementById("spotShows").textContent = spots.SHOWS.dinner + " · " + spots.SHOWS.concert;
     const socialEl = document.getElementById("spotSocial");
     if (socialEl) socialEl.textContent = spots.SOCIAL;
+    if (spot.retired) {
+      if (pick) pick.innerHTML = "";
+      whoEl.textContent = "No named seat. Everyone pitches in.";
+      document.getElementById("spotKicker").textContent = "NOT A NAMED SEAT · " + spot.short.toUpperCase();
+      return paintNow(spot, live);
+    }
     if (pick && people) {
       pick.innerHTML = people.leadSelectHtml(who, {
         className: "spot-owner",

@@ -6,7 +6,7 @@
     const base = (dir && dir.JOBS) || [];
     const doc = store ? store.readDoc("lead-jobs") : null;
     const saved = doc && Array.isArray(doc.jobs) ? doc.jobs : [];
-    return base.map((job) => {
+    return base.filter((job) => !job.retired).map((job) => {
       const hit = saved.find((row) => row && row.id === job.id) || {};
       let owner = String(hit.owner || "").trim();
       if (!owner || (dir && dir.match(owner, job.cartoon))) owner = job.defaultOwner || job.cartoon;
@@ -20,7 +20,6 @@
     tickets: { kind: "event", hint: /^tickets\b/i },
     food: { kind: "event", hint: /food service lead/i },
     campaign: { kind: "event", hint: /campaign \+ merch|^campaign\b|\bmerch\b/i },
-    production: { kind: "event", hint: /tracy production helper|\btracy\b/i },
     relief: { kind: "event", hint: /floater a/i },
     relief2: { kind: "event", hint: /floater b/i },
     kelly: { kind: "event", hint: /kelly support/i },
@@ -244,6 +243,7 @@
       }
     });
     dir.JOBS.forEach((job) => {
+      if (job.retired) return;
       if (!job.defaultOwner) return;
       const hit = saved.find((row) => row && row.id === job.id);
       const current = hit ? String(hit.owner || "").trim() : "";

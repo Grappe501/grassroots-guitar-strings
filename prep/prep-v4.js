@@ -25,7 +25,7 @@
         "Speakers packed",
         "Mixer packed",
         "Lights packed",
-        "Loaded in Tracy's vehicle — helper + 3 muscle carry",
+        "Loaded in Tracy's vehicle — anyone free + 3 muscle carry",
         "Bar stool goes home with the person who brought it",
         "Stage floor clear",
       ],

@@ -166,19 +166,6 @@
     }
 
     if (
-      undone(list, /name the campaign volunteer helper|campaign volunteer to assist tracy/i).length &&
-      !named(list, /tracy production helper|name the campaign volunteer helper|assist tracy/i) &&
-      weight(p, "tracy")
-    ) {
-      facts.push({
-        kind: "tracy",
-        score: weight(p, "tracy"),
-        href: "/prep/#production",
-        line: "Tracy still needs the campaign helper named.",
-      });
-    }
-
-    if (
       undone(list, /name sound\/lights muscle/i).length &&
       weight(p, "tracy")
     ) {
