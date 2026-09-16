@@ -266,8 +266,10 @@
       owner: (row.querySelector(".owner").value || "").trim(),
       text: (row.querySelector(".task-text").textContent || "").toLowerCase(),
     };
+    const card = row.closest(".card");
+    const cardTitle = card && card.querySelector("h3") ? card.querySelector("h3").textContent.toLowerCase() : "";
     const q = (prefs.q || "").trim().toLowerCase();
-    if (q && !x.text.includes(q) && !x.owner.toLowerCase().includes(q)) return false;
+    if (q && !x.text.includes(q) && !x.owner.toLowerCase().includes(q) && !cardTitle.includes(q)) return false;
     if (prefs.filter === "open") return !x.done;
     if (prefs.filter === "done") return x.done;
     if (prefs.filter === "owner") return !x.done && !x.owner;
@@ -294,6 +296,15 @@
     const visibleCount = document.getElementById("visibleCount");
     if (visibleCount) visibleCount.textContent = String(shown);
     updateTabCounts();
+    const q = (prefs.q || "").trim();
+    if (!q) return;
+    if (window.GGSPrepV3 && document.body.dataset.mode !== "plan") window.GGSPrepV3.setMode("plan");
+    const current = document.querySelector(".section.is-active");
+    const currentHas = current && current.querySelector(".task:not([hidden])");
+    if (currentHas) return;
+    const hit = allTasks().find((row) => !row.hidden);
+    const section = hit && hit.closest("[data-section]");
+    if (section) showTab(section.dataset.section);
   }
 
   function progress() {
