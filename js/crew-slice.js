@@ -277,13 +277,13 @@
     },
     {
       id: "photo",
-      label: "Photo / video on Kelly",
+      label: "Photo / video · roam",
       priority: 3,
-      test: /photo|video|vertical|photographer|jimmy olsen/i,
-      roster: /photo|video|jimmy olsen/i,
+      test: /photo lead|journalistic|action shots of kelly|roam for action|photographer|jimmy olsen|closing\/group shot/i,
+      roster: /photo lead|photo \/ video|photographer|jimmy olsen/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "On Kelly", do: "Vertical only. Stay with Kelly. Guests, David, the room — from her side of the night." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T21:15:00", place: "Closing shot", do: "One group frame with Kelly. Then help the final walk." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "The whole room", do: "Roam. Action shots of Kelly and the crowd. Journalistic. Do not park on Kelly — Support mans her." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T21:15:00", place: "Closing shot", do: "One group frame. Then help the final walk." },
       ],
     },
     {
@@ -293,7 +293,7 @@
       test: /press flesh|candidate|kelly support/i,
       roster: /kelly grappe|candidate/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "The room · guests", do: "Press flesh. Do not run a table. Support and photo stay with you." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "The room · guests", do: "Press flesh. Do not run a table. Only Kelly Support mans you. Photo Lead roams." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T21:15:00", place: "Thank-yous", do: "One last round of thanks. Then you may leave. Crew closes." },
       ],
     },
@@ -301,10 +301,10 @@
       id: "greeter",
       label: "Kelly Support",
       priority: 4,
-      test: /greeter|welcome guests|kelly\/guest|guest-relations|kelly support|robin/i,
+      test: /greeter|welcome guests|kelly\/guest|guest-relations|kelly support|robin|vertical on kelly|support shoots/i,
       roster: /greeter|kelly\/guest|kelly support|robin/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "With Kelly", do: "You are her runner. Water, intros, move a pull-up. She only greets." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "With Kelly", do: "You man her. Runner plus vertical photos and video. Photo Lead roams — they are not your backup on her hip." },
       ],
     },
     {

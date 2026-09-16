@@ -13,7 +13,7 @@ const defaults = {
     "Campaign + merch — one table, 30 min set",
     "Tracy production helper — 8:00 AM through Strike D",
     "Floater A — relief loop all night",
-    "Floater B — relief loop + photo if no photographer",
+    "Floater B — relief loop + roam shots if no Photo Lead",
   ],
   strike: [
     "Sound/lights muscle 1 — 8:45. Carry speakers and stands. Tracy directs.",
@@ -48,7 +48,7 @@ function ensureFloaters() {
   if (!state.event) state.event = [];
   [
     "Floater A — relief loop all night",
-    "Floater B — relief loop + photo if no photographer",
+    "Floater B — relief loop + roam shots if no Photo Lead",
   ].forEach((role) => {
     const hint = /floater a/i.test(role) ? /floater a/i : /floater b/i;
     if (!state.event.some((row) => hint.test(String(row.role || "")))) {

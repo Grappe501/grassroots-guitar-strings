@@ -95,7 +95,7 @@
       { id: "setup", label: "Setup 3", ok: setup >= 3, detail: setup + " / 3" },
       { id: "tracy", label: "Tracy helper", ok: !!tracy, detail: tracy || "Need a helper" },
       { id: "tickets", label: "Ticket lead", ok: !!tickets, detail: tickets || "Need a lead" },
-      { id: "photo", label: "Vertical photo", ok: !!photo, detail: photo || "Need a shooter" },
+      { id: "photo", label: "Photo Lead · roam", ok: !!photo, detail: photo || "Need a rover" },
       { id: "strike", label: "Teardown 10+", ok: strike >= 10, detail: strike + " / 10" },
     ];
   }
