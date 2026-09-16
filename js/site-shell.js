@@ -94,25 +94,23 @@
 </div>`;
   }
 
-  function stampHtml() {
+  function serviceSignHtml() {
     return `
-<div class="ink-stamp" role="img" aria-label="Family friendly. Under 25 gets into the concert free.">
-  <span class="ink-stamp__ring" aria-hidden="true"></span>
-  <span class="ink-stamp__copy">
-    <span class="ink-stamp__kicker">Family Friendly</span>
-    <span class="ink-stamp__rule" aria-hidden="true"></span>
-    <span class="ink-stamp__offer">Under 25 gets into concert</span>
-    <span class="ink-stamp__free">Free</span>
-  </span>
-</div>`;
+<aside class="service-sign" role="img" aria-label="Educators and first responders get into the concert free. Show school or department ID at the door.">
+  <p class="service-sign__kicker">Tonight's honor</p>
+  <p class="service-sign__title">Educators &amp; First Responders</p>
+  <p class="service-sign__offer">Concert admission</p>
+  <p class="service-sign__free">Free</p>
+  <p class="service-sign__note">Show school or department ID at the door. Dinner and reserved tables are still ticketed.</p>
+</aside>`;
   }
 
   function showLandingStamp() {
-    const seenKey = "ggs-family-stamp-seen";
+    const seenKey = "ggs-service-sign-seen";
     try {
       if (sessionStorage.getItem(seenKey) === "1") return;
     } catch (err) {
-      /* private mode — still show the stamp */
+      /* private mode — still show the sign */
     }
 
     const overlay = document.createElement("div");
@@ -120,8 +118,11 @@
     overlay.id = "landing-stamp";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
-    overlay.setAttribute("aria-label", "Family friendly. Under 25 gets into the concert free.");
-    overlay.innerHTML = `${stampHtml()}<button type="button" class="landing-stamp__continue">Continue to the show</button>`;
+    overlay.setAttribute(
+      "aria-label",
+      "Educators and first responders get into the concert free.",
+    );
+    overlay.innerHTML = `${serviceSignHtml()}<button type="button" class="landing-stamp__continue">Continue to the show</button>`;
     document.body.appendChild(overlay);
     document.body.style.overflow = "hidden";
 

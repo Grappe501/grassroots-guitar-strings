@@ -57,6 +57,18 @@ const TICKET_TIERS = [
     featured: true,
   },
   {
+    id: "educators-first-responders",
+    name: "Educators & First Responders",
+    price: 0,
+    priceLabel: "FREE",
+    description:
+      "Teachers, school staff, and first responders get into the concert at no charge. Show school or department ID at the door. Dinner and reserved tables are still ticketed.",
+    available: true,
+    featured: true,
+    ctaLabel: "Show ID at the door — details",
+    track: "service_free_details_clicked",
+  },
+  {
     id: "concert-only",
     name: "David Adam Byrnes Concert Only",
     price: 25,
