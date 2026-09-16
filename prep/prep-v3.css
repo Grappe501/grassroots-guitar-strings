@@ -93,6 +93,14 @@
   border-color: #c0172a;
 }
 
+.my-page-link {
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 800;
+  color: #17466b;
+}
+
 .filter-row {
   grid-column: 1 / -1;
   display: flex;

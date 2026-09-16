@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f3048">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="My GGS">
+<title>My page — Grassroots & Guitar Strings</title>
+<meta name="description" content="Your slice of Grassroots and Guitar Strings. Where you should be, and only your jobs.">
+<link rel="stylesheet" href="/me/me.css">
+</head>
+<body>
+<header class="me-top">
+  <p class="eyebrow">MY PAGE · THURSDAY, SEPTEMBER 17</p>
+  <h1 id="whoTitle">Who are you?</h1>
+  <p class="sync" id="syncStatus">Connecting to shared board…</p>
+  <div class="me-actions">
+    <a class="btn" href="/prep/">Full board</a>
+    <a class="btn" href="/prep/#run">Run</a>
+    <button class="btn" id="switchBtn" type="button">Not me</button>
+  </div>
+</header>
+
+<main class="me-shell">
+  <section id="whoGate" class="who-gate" hidden>
+    <p>Type the same name people will put on jobs. This page fills itself every time you get assigned.</p>
+    <label>I am
+      <input id="whoInput" type="text" autocomplete="name" placeholder="Your name">
+    </label>
+    <button class="btn btn--gold" id="whoGo" type="button">Open my page</button>
+    <div class="who-list" id="whoList"></div>
+  </section>
+
+  <section id="meBoard" hidden>
+    <article class="here-card" id="hereCard">
+      <p class="eyebrow" id="hereKicker">You should be</p>
+      <h2 id="herePlace">Stand by</h2>
+      <p id="hereDo"></p>
+      <p class="here-next" id="hereNext"></p>
+    </article>
+
+    <section class="radio-band">
+      <label>Shared radio
+        <textarea id="radioNote" rows="2" maxlength="400" placeholder="What is happening right now."></textarea>
+      </label>
+      <p class="radio-by" id="radioBy"></p>
+    </section>
+
+    <section class="role-band" id="roleBand" hidden>
+      <p class="eyebrow">Your jobs tonight</p>
+      <div id="rolePills"></div>
+    </section>
+
+    <section class="day-band" id="dayBand" hidden>
+      <p class="eyebrow">Where you should be</p>
+      <ol id="dayList"></ol>
+    </section>
+
+    <section class="work-band">
+      <p class="eyebrow">Assigned to you</p>
+      <h2>Your slice</h2>
+      <p class="muted" id="workEmpty">Nothing has your name on it yet. The moment someone assigns you, it lands here.</p>
+      <div id="workList"></div>
+    </section>
+
+    <p class="hard">Hard stop: show ends about 8:45–9:00 PM. Strike starts immediately. Building cleared by 10:00 PM.</p>
+    <p class="share" id="shareHint"></p>
+  </section>
+</main>
+<script src="/js/prep-store.js"></script>
+<script src="/prep/prep-v2.js"></script>
+<script src="/js/crew-slice.js"></script>
+<script src="/me/me.js"></script>
+</body>
+</html>

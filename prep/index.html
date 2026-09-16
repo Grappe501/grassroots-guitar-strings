@@ -26,6 +26,7 @@
         <button type="button" class="btn btn--gold is-mode" data-mode="run">Run</button>
         <button type="button" class="btn btn--light is-mode" data-mode="packet">Packet</button>
       </div>
+      <a class="btn btn--gold" id="myPageBtn" href="/me/">My page</a>
       <a class="btn btn--light" href="/command/">Command</a>
       <a class="btn btn--light" href="/volunteers/">People</a>
       <button class="btn btn--light" id="nightBtn" type="button">Night mode</button>
@@ -82,6 +83,7 @@
   <section class="ops-bar">
     <label class="me-field">I am
       <input id="meInput" type="text" autocomplete="name" placeholder="Your name">
+      <a class="my-page-link" id="myPageLink" href="/me/" hidden>Open my phone page</a>
     </label>
     <label class="search-field">Find a task
       <input id="searchInput" type="search" placeholder="tea, signs, Tracy, strike…">
@@ -156,6 +158,7 @@
 </div>
 <script src="/js/prep-store.js"></script>
 <script src="/prep/prep-v2.js"></script>
+<script src="/js/crew-slice.js"></script>
 <script src="/prep/prep-app.js"></script>
 <script src="/prep/prep-enhancements.js"></script>
 <script src="/prep/prep-v3.js"></script>

@@ -45,7 +45,7 @@ const S=[
 ['Before leaving',['Count remaining signs','Count stakes','Collect campaign materials','Collect decorations','Collect tablecloths','Collect coolers','Collect glass beverage containers','Collect merchandise','Count shirts sold/remaining','Account for Regnet Populis giveaways','Ticket/cash/payment reconciliation','Secure contribution envelopes','Confirm vertical photos/video captured','Final venue walkthrough','Venue cleared/secured by 10 PM']]]]
 ];
 window.GGS_PREP_SECTIONS=S;
-if(document.getElementById('prepApp')){/* v3 app owns render */}
+if(document.getElementById('prepApp')||!document.getElementById('tabContent')){/* v3 / personal page owns render */}
 else{
 const store=window.GGSPrepStore;const state=store?store.readCache():JSON.parse(localStorage.getItem('ggs-prep-2026-09-17-v2')||'{}');const root=document.getElementById('tabContent');
 const esc=x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');

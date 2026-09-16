@@ -42,6 +42,15 @@
 
   function savePrefs() {
     localStorage.setItem(PREFS, JSON.stringify(prefs));
+    const link = document.getElementById("myPageLink");
+    const btn = document.getElementById("myPageBtn");
+    const name = (prefs.me || "").trim();
+    const href = name && window.GGSCrewSlice ? window.GGSCrewSlice.pageUrl(name) : "/me/";
+    if (link) {
+      link.href = href;
+      link.hidden = name.length < 2;
+    }
+    if (btn) btn.href = href;
   }
 
   function applyNight() {
@@ -329,12 +338,7 @@
       : '<span class="muted">Names appear here as people get assigned.</span>';
     el.querySelectorAll("[data-crew]").forEach((btn) => {
       btn.addEventListener("click", () => {
-        prefs.me = btn.dataset.crew;
-        prefs.filter = "mine";
-        document.getElementById("meInput").value = prefs.me;
-        document.querySelectorAll("[data-filter]").forEach((c) => c.classList.toggle("is-active", c.dataset.filter === "mine"));
-        savePrefs();
-        applyFilters();
+        location.href = window.GGSCrewSlice ? window.GGSCrewSlice.pageUrl(btn.dataset.crew) : "/me/?who=" + encodeURIComponent(btn.dataset.crew);
       });
     });
   }
@@ -477,6 +481,7 @@
     });
     const hash = (location.hash || "").replace("#", "");
     if (hash && hash !== "run" && hash !== "packet") prefs.tab = hash;
+    savePrefs();
   }
 
   applyNight();
