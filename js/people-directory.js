@@ -175,6 +175,20 @@
         "Strike B is 20 minutes. Pack leftover water, the water bag, campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, cash / checks, conversation cards, both cloths.",
       ],
     },
+    {
+      name: "Julia Taylor",
+      first: "Julia",
+      phone: "",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
+      go: "Open my board",
+      kicker: "VOLUNTEER",
+      title: "You are on the list.",
+      next: "Pick a seat when Steve names one. Arrive 3:00. Earlier if you can.",
+      duties: [
+        "3:00 arrive. Earlier if you can. Event t-shirt on. Open My Night.",
+        "Do the job on your seat clock. Stay until 10 unless Event Lead sends you.",
+      ],
+    },
   ];
 
   const JOBS = [

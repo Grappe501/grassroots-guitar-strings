@@ -13,6 +13,7 @@
     "Chance Bradford",
     "Leeann Solice",
     "Debi Martin",
+    "Julia Taylor",
   ];
 
   const NAME_ROLES = [
