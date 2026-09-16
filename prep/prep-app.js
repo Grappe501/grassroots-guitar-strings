@@ -76,7 +76,7 @@
     const link = document.getElementById("myPageLink");
     const btn = document.getElementById("myPageBtn");
     const name = (prefs.me || "").trim();
-    const href = name && window.GGSCrewSlice ? window.GGSCrewSlice.pageUrl(name) : "/me/";
+    const href = name && window.GGSCrewSlice ? window.GGSCrewSlice.pageUrl(name) : "/v5/";
     if (link) {
       link.href = href;
       link.hidden = name.length < 2;

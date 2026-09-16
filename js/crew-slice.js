@@ -22,7 +22,7 @@
   }
 
   function pageUrl(name) {
-    return "/me/?who=" + encodeURIComponent(String(name || "").trim());
+    return "/v5/?who=" + encodeURIComponent(String(name || "").trim());
   }
 
   function esc(value) {

@@ -3,109 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0f3048">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="My GGS">
-<title>My page — Grassroots & Guitar Strings</title>
-<meta name="description" content="Your slice of Grassroots and Guitar Strings. Where you should be, and only your jobs.">
-<link rel="stylesheet" href="/me/me.css">
-<link rel="stylesheet" href="/prep/prep-v4.css">
-<link rel="stylesheet" href="/css/sign-in.css">
-<link rel="stylesheet" href="/css/contacts.css">
-<link rel="stylesheet" href="/css/radio-night.css">
-<link rel="stylesheet" href="/wifi/wifi.css">
+<title>My night — Grassroots & Guitar Strings</title>
+<meta http-equiv="refresh" content="0;url=/v5/">
+<link rel="canonical" href="/v5/">
 </head>
 <body>
-<div id="signInGate" class="signin" hidden>
-  <article class="signin__card">
-    <p class="eyebrow">SIGN IN</p>
-    <h1>Who are you?</h1>
-    <p>Name and a day-of number first. This page only fills for you.</p>
-    <label>I am
-      <input id="gateName" type="text" autocomplete="name" placeholder="Your name">
-    </label>
-    <label>My phone
-      <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
-    </label>
-    <p class="signin__err" id="gateErr" hidden>Both are required. Use a real number people can call tonight.</p>
-    <button type="button" class="signin__go" id="gateGo">Open my page</button>
-  </article>
-</div>
-<div data-needs-identity>
-<header class="me-top">
-  <p class="eyebrow">MY PAGE · THURSDAY, SEPTEMBER 17</p>
-  <h1 id="whoTitle">Who are you?</h1>
-  <p class="sync" id="syncStatus">Connecting to shared board…</p>
-  <div class="me-actions">
-    <a class="btn" href="/wifi/">Wi-Fi</a>
-    <a class="btn" href="/prep/">Full board</a>
-    <a class="btn" href="/prep/#run">Run</a>
-    <a class="btn" href="/prep/#lists">Lists</a>
-    <button class="btn" id="switchBtn" type="button">Not me</button>
-  </div>
-</header>
-
-<main class="me-shell">
-  <section id="whoGate" class="who-gate" hidden></section>
-
-  <section id="meBoard" hidden>
-    <div class="me-reach" id="meReach"></div>
-    <label class="me-phone-edit">My day-of number
-      <input id="boardPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can tap">
-    </label>
-    <article class="here-card" id="hereCard">
-      <p class="eyebrow" id="hereKicker">You should be</p>
-      <h2 id="herePlace">Stand by</h2>
-      <p id="hereDo"></p>
-      <p class="here-next" id="hereNext"></p>
-    </article>
-
-    <section class="radio-band radio-feed radio-desk" id="radioDesk">
-      <div class="radio-desk__main">
-        <p class="eyebrow">NIGHT RADIO</p>
-        <p class="radio-channel" id="radioChannel">All radios</p>
-        <div class="radio-feed-list" id="radioFeed" aria-live="polite"></div>
-        <div class="radio-compose">
-          <input id="radioInput" type="text" maxlength="240" autocomplete="off" placeholder="Send a line to every phone.">
-          <button type="button" class="btn btn--gold" id="radioSend">Send</button>
-        </div>
-        <div class="radio-ptt">
-          <button type="button" class="radio-talk" id="radioTalk">Hold to talk — ALL</button>
-          <p class="radio-ptt-hint" id="radioTalkHint">Tap Talk once to open the mic. Then hold like a walkie. Headset optional.</p>
-        </div>
-      </div>
-      <aside class="radio-people" id="radioPeople" aria-label="Radios on tonight"></aside>
-    </section>
-
-    <section class="role-band" id="roleBand" hidden>
-      <p class="eyebrow">Your jobs tonight</p>
-      <div id="rolePills"></div>
-    </section>
-
-    <section class="day-band" id="dayBand" hidden>
-      <p class="eyebrow">Where you should be</p>
-      <ol id="dayList"></ol>
-    </section>
-
-    <section class="work-band">
-      <p class="eyebrow">Assigned to you</p>
-      <h2>Your slice</h2>
-      <p class="muted" id="workEmpty">Nothing has your name on it yet. The moment someone assigns you, it lands here.</p>
-      <div id="workList"></div>
-    </section>
-
-    <p class="hard">Hard stop: show ends about 8:45–9:00 PM. Strike starts immediately. Building cleared by 10:00 PM.</p>
-    <p class="share" id="shareHint"></p>
-  </section>
-</main>
-</div>
-<script src="/js/prep-store.js"></script>
-<script src="/js/crew-slice.js"></script>
-<script src="/js/sign-in.js"></script>
-<script src="/js/wifi-join.js"></script>
-<script src="/js/radio-feed.js"></script>
-<script src="/js/radio-night.js"></script>
-<script src="/prep/prep-v2.js"></script>
-<script src="/me/me.js"></script>
+<script>
+  location.replace("/v5/" + location.search + location.hash);
+</script>
+<p><a href="/v5/">Open GGS Night</a></p>
 </body>
 </html>

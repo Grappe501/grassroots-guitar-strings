@@ -202,7 +202,7 @@
     a.href = "/wifi/";
     a.textContent = cfg.ssid && cfg.password ? "Join Woody's Wi-Fi — tap to connect" : "Get Woody's Wi-Fi — enter it so crew can tap to join";
     a.hidden = false;
-    const host = document.querySelector(".topbar, .me-top, .wrap");
+    const host = document.querySelector(".v5-top, .topbar, .me-top, .wrap");
     if (host && host.parentNode) host.parentNode.insertBefore(a, host.nextSibling);
     else document.body.insertBefore(a, document.body.firstChild);
   }

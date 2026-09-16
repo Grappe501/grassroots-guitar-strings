@@ -45,7 +45,7 @@ const esc = (x) =>
 function reachHtml(name, phone) {
   if (slice) return slice.contactHtml(name, phone);
   return name
-    ? '<a class="person-page" href="/me/?who=' + encodeURIComponent(name) + '">Phone page</a>'
+    ? '<a class="person-page" href="/v5/?who=' + encodeURIComponent(name) + '">Phone page</a>'
     : "";
 }
 
