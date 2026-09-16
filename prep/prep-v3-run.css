@@ -262,6 +262,40 @@
   text-decoration: line-through;
 }
 
+.packet-stats {
+  font-weight: 800;
+  color: #17466b;
+}
+
+.packet-live {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.packet-live li {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid #efe8d8;
+}
+
+.packet-live label {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+html.night .packet-stats {
+  color: #f3c979;
+}
+
+html.night .packet-live li {
+  border-color: #2a4154;
+}
+
 html.night .gates,
 html.night .radio-band,
 html.night .packet-stage {

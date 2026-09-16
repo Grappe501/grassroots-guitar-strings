@@ -17,23 +17,23 @@
     ["2026-09-17T22:00:00", "10:00 PM", "Building cleared"],
   ];
   const packets = [
-    { id: "captain", label: "Event Captain", match: /event captain|choose event captain|hard stop|load-out|announce teardown/i, tabs: ["overview", "volunteers", "timeline", "final"] },
-    { id: "setup", label: "Setup crew", match: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup/i, tabs: ["setup"] },
+    { id: "captain", label: "I'm Captain", match: /event captain|choose event captain|hard stop|load-out|announce teardown/i, tabs: ["overview", "volunteers", "timeline", "final"], who: /event captain/i },
+    { id: "setup", label: "I'm Setup", match: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup/i, tabs: ["setup"], who: /setup/i },
     {
       id: "tracy",
-      label: "Tracy + helper",
-      intro: "Tracy owns lights, sound, and electrical. One campaign volunteer stays with her from 8:00 AM load-in through Strike D. The venue already placed tables, chairs, and the dance floor — do not rebuild them. Photo/video is a different person.",
+      label: "I'm Tracy",
+      who: /tracy/i,
       pick: function (row) {
-        if (row.tab === "production") return true;
-        if (row.tab === "volunteers" && /tracy production helper/i.test(row.text)) return true;
-        if (row.tab === "breakdown" && /shut down sound|shut down lights|disconnect equipment|coil cables|pack microphones|pack stands|pack speakers|pack mixer|pack lighting|account for all production|load tracy|final stage check/i.test(row.text)) return true;
+        if (row.section === "production") return true;
+        if (row.section === "volunteers" && /tracy production helper/i.test(row.text)) return true;
+        if (row.section === "breakdown" && /shut down sound|shut down lights|disconnect equipment|coil cables|pack microphones|pack stands|pack speakers|pack mixer|pack lighting|account for all production|load tracy|final stage check/i.test(row.text)) return true;
         return false;
       },
     },
-    { id: "tickets", label: "Tickets + money", match: /ticket|cash|envelope|reconcile|payment/i, tabs: ["tickets"] },
-    { id: "food", label: "Food + drinks", match: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |\$1 water|money bag|sweetener|unsweet|120 bottle|bags ice/i, tabs: ["ben", "food"] },
-    { id: "campaign", label: "Campaign + merch", match: /yard sign|merch|qr|literature|regnet|campaign display/i, tabs: ["campaign"] },
-    { id: "strike", label: "Strike / teardown", match: /strike|teardown|load-out|final venue|building cleared/i, tabs: ["breakdown", "final"] },
+    { id: "tickets", label: "I'm Tickets", match: /ticket|cash|envelope|reconcile|payment/i, tabs: ["tickets"], who: /ticket|check-in/i },
+    { id: "food", label: "I'm Ben", who: /ben/i, match: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |\$1 water|money bag|sweetener|unsweet|120 bottle|bags ice/i, tabs: ["ben", "food"] },
+    { id: "campaign", label: "I'm Campaign", match: /yard sign|merch|qr|literature|regnet|campaign display/i, tabs: ["campaign"], who: /campaign|sign/i },
+    { id: "strike", label: "I'm Strike", match: /strike|teardown|load-out|final venue|building cleared/i, tabs: ["breakdown", "final"], who: /strike|teardown/i },
   ];
 
   let prefs = { me: "", mode: "plan", packet: "captain" };
@@ -257,11 +257,63 @@
     });
   }
 
+  function signedName() {
+    if (window.GGSSignIn) {
+      const who = window.GGSSignIn.identity();
+      if (who && who.name) return who.name;
+    }
+    return String(prefs.me || "").trim();
+  }
+
+  function packetList() {
+    const me = signedName();
+    const list = packets.slice();
+    if (me && !list.some((p) => p.who && p.who.test(me))) {
+      list.unshift({ id: "me", label: "I'm " + me.split(/\s+/)[0], who: null, mine: me });
+    }
+    return list;
+  }
+
+  function belongs(pack, row, me) {
+    if (pack.mine) {
+      return !!(window.GGSCrewSlice && window.GGSCrewSlice.nameMatch(row.owner, pack.mine));
+    }
+    if (pack.who && pack.who.test(String(row.owner || ""))) return true;
+    if (me && pack.who && pack.who.test(me) && window.GGSCrewSlice && window.GGSCrewSlice.nameMatch(row.owner, me)) {
+      return true;
+    }
+    if (pack.pick) return pack.pick(row);
+    if (pack.tabs && pack.tabs.indexOf(row.section) !== -1) return true;
+    if (pack.match && pack.match.test(row.text || "")) return true;
+    return false;
+  }
+
+  function togglePacket(key, done) {
+    const node = document.querySelector('.task[data-key="' + key + '"]');
+    if (node) {
+      node.querySelector(".task-check").checked = done;
+      node.dispatchEvent(new Event("change", { bubbles: true }));
+    } else if (store) {
+      const cur = assignments()[key] || {};
+      store.saveOne(key, { owner: cur.owner || "", when: cur.when || "", done: done, extra: cur.extra || "" });
+    }
+    renderPacket();
+    renderGates();
+    if (window.GGSNextAction) window.GGSNextAction.paint(assignments(), roster());
+  }
+
   function renderPacket() {
     const roles = document.getElementById("packetRoles");
     const sheet = document.getElementById("packetSheet");
     if (!roles || !sheet) return;
-    roles.innerHTML = packets
+    const slice = window.GGSCrewSlice;
+    const sections = window.GGS_PREP_SECTIONS || [];
+    const state = assignments();
+    const people = roster();
+    const me = signedName();
+    const list = packetList();
+    if (!list.some((p) => p.id === prefs.packet)) prefs.packet = list[0].id;
+    roles.innerHTML = list
       .map(
         (p) =>
           '<button type="button" class="chip' +
@@ -270,7 +322,7 @@
           p.id +
           '">' +
           esc(p.label) +
-          "</button>",
+          "</button>"
       )
       .join("");
     roles.querySelectorAll("[data-packet]").forEach((btn) => {
@@ -279,67 +331,88 @@
         renderPacket();
       });
     });
-    const pack = packets.find((p) => p.id === prefs.packet) || packets[0];
+    const pack = list.find((p) => p.id === prefs.packet) || list[0];
+    const harvested = slice ? slice.harvest(state, sections) : [];
     const seen = {};
-    const lines = Array.from(document.querySelectorAll(".task[data-key]"))
-      .map((row) => {
-        const section = row.closest("[data-section]");
-        const card = row.closest(".card");
-        return {
-          text: (row.querySelector(".task-text").textContent || "").trim(),
-          owner: row.querySelector(".owner").value.trim(),
-          when: row.querySelector(".when").value.trim(),
-          done: row.querySelector(".task-check").checked,
-          tab: section ? section.dataset.section : "",
-          group: card && card.querySelector("h3") ? card.querySelector("h3").textContent.trim() : "",
-        };
-      })
-      .filter((row) => {
-        if (pack.pick) return pack.pick(row);
-        return (pack.tabs && pack.tabs.indexOf(row.tab) !== -1) || (pack.match && pack.match.test(row.text));
-      })
-      .filter((row) => {
-        const key = row.text.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-        if (!key || seen[key]) return false;
-        seen[key] = true;
-        return true;
-      });
-    const open = lines.filter((row) => !row.done);
-    const shown = pack.id === "tracy" ? lines : open.slice(0, 40);
-    const book = window.GGSCrewSlice && store ? window.GGSCrewSlice.readContacts(store) : {};
-    const groups = [];
-    shown.forEach((row) => {
-      const name = row.group || "Job";
-      const last = groups[groups.length - 1];
-      if (!last || last.name !== name) groups.push({ name, rows: [row] });
-      else last.rows.push(row);
+    let lines = harvested.filter((row) => belongs(pack, row, me)).filter((row) => {
+      const key = String(row.text || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, " ")
+        .trim();
+      if (!key || seen[key]) return false;
+      seen[key] = true;
+      return true;
     });
-    function lineHtml(row) {
-      const who = row.owner
-        ? window.GGSCrewSlice
-          ? window.GGSCrewSlice.contactHtml(row.owner, window.GGSCrewSlice.phoneFor(row.owner, book))
-          : esc(row.owner)
-        : "UNASSIGNED";
+    if (pack.mine && slice) {
+      const mine = slice.sliceFor(pack.mine, state, people, sections);
+      const extra = harvested.filter((row) => {
+        if (row.done || String(row.owner || "").trim()) return false;
+        return (mine.roles || []).some((role) => role.test.test(row.text || ""));
+      });
+      extra.forEach((row) => {
+        if (!lines.some((item) => item.key === row.key)) lines.push(row);
+      });
+    }
+    const assigned = lines.filter((row) => !row.done && String(row.owner || "").trim());
+    const gaps = lines.filter((row) => !row.done && !String(row.owner || "").trim());
+    const done = lines.filter((row) => row.done);
+    const book = slice && store ? slice.readContacts(store) : {};
+    const rolesForCue = pack.mine && slice ? slice.sliceFor(pack.mine, state, people, sections).roles : slice ? slice.ROLES.filter((r) => r.id === (pack.id === "food" ? "food" : pack.id === "tracy" ? "production" : pack.id)) : [];
+    const cueNow = slice && rolesForCue.length ? slice.cueAt(rolesForCue, new Date()) : null;
+    const bookWho = function (name) {
+      if (!name) return "UNASSIGNED";
+      return slice ? slice.contactHtml(name, slice.phoneFor(name, book)) : esc(name);
+    };
+    function block(title, rows, limit) {
+      const shown = typeof limit === "number" ? rows.slice(0, limit) : rows;
+      if (!shown.length) return "";
       return (
-        "<li" +
-        (row.done ? ' class="is-done"' : "") +
-        "><strong>" +
-        esc(row.text) +
-        "</strong><span> " +
-        who +
-        (row.when ? " · " + esc(row.when) : "") +
-        "</span></li>"
+        "<h3>" +
+        esc(title) +
+        "</h3><ul class=\"packet-live\">" +
+        shown
+          .map((row) => {
+            return (
+              '<li class="' +
+              (row.done ? "is-done" : "") +
+              '"><label><input type="checkbox" data-packet-key="' +
+              esc(row.key) +
+              '"' +
+              (row.done ? " checked" : "") +
+              "> <strong>" +
+              esc(row.text) +
+              "</strong></label><span>" +
+              bookWho(row.owner) +
+              (row.when ? " · " + esc(row.when) : "") +
+              (row.card ? " · " + esc(row.card) : "") +
+              "</span></li>"
+            );
+          })
+          .join("") +
+        "</ul>"
       );
     }
     sheet.innerHTML =
-      "<h2>" +
+      "<p class=\"eyebrow\">LIVE FROM THE BOARD</p><h2>" +
       esc(pack.label) +
-      "</h2><p>Thursday, September 17, 2026 · Woody's Sherwood Forest · 1111 West Maryland Avenue</p>" +
-      (pack.intro ? "<p>" + esc(pack.intro) + "</p>" : "") +
+      "</h2><p class=\"packet-stats\">" +
+      assigned.length +
+      " assigned open · " +
+      gaps.length +
+      " still need a name · " +
+      done.length +
+      " done</p>" +
+      (cueNow && !cueNow.empty
+        ? "<p><strong>Now:</strong> " + esc(cueNow.place) + " — " + esc(cueNow.do) + "</p>"
+        : "") +
+      "<p>Not a print copy. Check a box and it writes back to every phone.</p>" +
       "<p><strong>Hard stop:</strong> strike at 8:45–9:00 PM. Building cleared by 10:00 PM.</p>" +
-      groups
-        .map((g) => "<h3>" + esc(g.name) + "</h3><ol>" + g.rows.map(lineHtml).join("") + "</ol>")
-        .join("");
+      block("Do these", assigned) +
+      block("Still need a name", gaps) +
+      block("Already done", done, 12);
+    sheet.querySelectorAll("[data-packet-key]").forEach((box) => {
+      box.addEventListener("change", () => togglePacket(box.dataset.packetKey, box.checked));
+    });
   }
 
   function bindRadio() {
