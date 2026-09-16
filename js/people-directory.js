@@ -115,7 +115,7 @@
       duties: [
         "Lead the serving line. Do not plate.",
         "Three volunteers serve with you: Sarah plus two more.",
-        "Tea and lemonade are free while they last. Water is $1 cash — not your station.",
+        "Tea and lemonade are free while they last. Ice chest + scoop for those drinks. Water is $1 cash — not your station.",
         "Strike C is you plus the three servers. 20 minutes.",
       ],
     },
@@ -234,7 +234,7 @@
       duties: [
         "You lead the line. You do not plate.",
         "Three volunteers serve: Sarah is Server 1. Name two more.",
-        "Tea and lemonade are free while they last. Water is a different person — $1 cash only.",
+        "Tea and lemonade are free while they last. Ice chest + scoop for those drinks. Water is a different person — $1 cash only.",
         "Strike C is you plus the three servers. 20 minutes.",
       ],
     },

@@ -89,7 +89,7 @@
       why: "You lead the serving line. Three volunteers serve with you — Sarah plus two more. You do not plate. Water is a different person. Tea and lemonade are free while they last.",
       clock: [
         row("16:30", "arrive", "Arrive. Event t-shirt on. Walk the buffet. Three servers should be with you. Water girl is not your station."),
-        row("16:35", "work", "Ice for tea and lemonade. Set the line. Tea and lemonade signs: free while it lasts. Do not plate pans."),
+        row("16:35", "work", "Ice chest + scoop for tea and lemonade. Set the line. Tea and lemonade signs: free while it lasts. Do not plate pans."),
         row("16:50", "eat", "EAT now. 15 minutes. Then the line owns you."),
         row("17:05", "work", "Brief Sarah and the two other servers. One line. You direct. They serve. You do not plate."),
         row("17:30", "work", "BBQ open. You keep the line moving. Refill pans. You still do not plate guest plates."),

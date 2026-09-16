@@ -85,6 +85,8 @@ body:not(.v5):not(.wifi) .spot-card .eyebrow {
 .spot-top .eyebrow,
 .bar .eyebrow,
 .radio-digest .eyebrow,
+body.nametags .badge-kicker,
+body.nametags .badge-foot,
 body.v5 .eyebrow,
 body.wifi .eyebrow,
 html.night .eyebrow,

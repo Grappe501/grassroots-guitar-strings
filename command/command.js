@@ -21,7 +21,7 @@ const areas=[
  ['Volunteers','16 volunteers: 10 night + 3 arrival + 3 muscle. Ben leads the line. He does not plate. Water is separate.','Volunteers'],
  ['Tickets','Ticket station, payment procedure and reconciliation.','Tickets & Money'],
  ['Campaign','30 min merch set. Pull-ups, push cards, buttons, candy, foldovers.','Campaign & Merch'],
- ['Food & Drinks','8 gal unsweet tea, 6 gal lemonade, 120 bottles water, 12 bags ice.','Food & Drinks'],
+ ['Food & Drinks','8 gal unsweet tea, 6 gal lemonade, 120 bottles water, 12 bags ice. One ice chest + scoop for tea and lemonade.','Food & Drinks'],
  ['Production','Tracy, sound, lights and David acoustic setup.','Sound & Show'],
  ['Breakdown','Same 7 people. Venue furniture stays. 45–60 min.','Breakdown']
 ];

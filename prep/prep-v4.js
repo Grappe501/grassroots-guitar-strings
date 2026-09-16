@@ -78,6 +78,8 @@
         "Glass serving containers / dispensers",
         "Dispensers / spigots",
         "Cups if Ben is not bringing them",
+        "Ice chest for scooping ice into tea and lemonade — not the bottle coolers",
+        "Ice scoop — stays in that tea/lemonade chest",
         "Ice for tea / lemonade — 4 bags (10 lb)",
         "Spare ice — 2 bags (10 lb). 12 bags total tonight",
       ],
