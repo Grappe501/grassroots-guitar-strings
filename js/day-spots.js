@@ -1,6 +1,6 @@
 (function (global) {
   const WEAR =
-    "Event t-shirt we hand you. Wear it from the minute you arrive until you walk out. Closed shoes. Dark comfortable pants. You will stand, carry, and sit on grass or a chair — dress for that, not a dinner party.";
+    "You get a concert t-shirt. Wear it. We want everyone wearing them.";
 
   const SHOWS = {
     dinner: "David acoustic · 5:45–6:15 PM · dinner show",
@@ -28,7 +28,7 @@
       why: "You are there when the doors open and when they close. You are the last one to check everything at the end of the night. Available for setup help, questions, directions, and to fill in where needed.",
       clock: [
         row("10:00", "work", "Available for setup help. If Paul and the dressers need a hand, you are there. Furniture is already placed. Do not rebuild."),
-        row("16:30", "arrive", "Night arrival by 4:30. Event t-shirt on. Open your Spot page. Available for questions and directions from the minute you walk in. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Night arrival by 4:30. Concert t-shirt on. Open your Spot page. Available for questions and directions from the minute you walk in. Sound check is live — stay off the dance floor."),
         row("16:40", "eat", "EAT. 15 minutes. Plate now so you are not hungry at doors."),
         row("16:55", "work", "Walk once. Answer questions. Point people. Fill a gap if a post is empty. Text anyone missing."),
         row("17:15", "work", "FOOD DOORS. You are there when they open. Everything is inside. Concert-only stay in cars until 6:30."),
@@ -57,7 +57,7 @@
       roster: [{ kind: "event", hint: /tickets/i }],
       why: "One body at the table. Production Manager 1 covers so you can watch the acoustic set. After doors, you watch the concert.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Concert-only guests wait in cars until 6:30. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Concert-only guests wait in cars until 6:30. Sound check is live — stay off the dance floor."),
         row("16:35", "work", "Dress the lobby table: cash box, envelopes, pens, $25 sign, kids $5 sign, teacher/first-responder note. No paper tickets. 10 minutes. Venue already placed the table."),
         row("16:45", "eat", "EAT. 15 minutes behind the table."),
         row("17:15", "work", "Food doors. Table is live. Dinner guests check in. Kids $5 with an adult. Cash box never sits open and empty. Envelopes stay on you."),
@@ -86,7 +86,7 @@
       roster: [{ kind: "event", hint: /food service lead/i }],
       why: "You lead the serving line. Three volunteers serve with you — Sarah plus two more. You do not plate. We are taking donations for drinks — water, tea, or lemonade.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Walk the buffet. Three servers should be with you. Drink donations live at merch. Not your station. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Walk the buffet. Three servers should be with you. Drink donations live at merch. Not your station. Sound check is live — stay off the dance floor."),
         row("16:35", "work", "Ice chest + scoop for tea and lemonade. Set the line. Signs: we are taking donations for drinks. You do not plate."),
         row("16:45", "eat", "EAT now. 15 minutes. Then the line owns you."),
         row("17:00", "work", "Brief Sarah and the two other servers. One line. You direct. They serve. You still do not plate."),
@@ -114,7 +114,7 @@
       roster: [{ kind: "event", hint: /server 1/i }],
       why: "You are one of three volunteers on Ben’s serving line. Ben leads. He does not plate. You serve. Drink station is a different person.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Find Ben. You are Server 1 · Sarah. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Find Ben. You are Server 1 · Sarah. Sound check is live — stay off the dance floor."),
         row("16:35", "work", "Help set the line. Pans, utensils, plates at the start. Drinks are donations — water, tea, or lemonade. Do not take the merch drink bag."),
         row("16:45", "eat", "EAT now. 15 minutes."),
         row("17:05", "work", "Stand your spot on the line. Ben briefs. You serve. You do not plate in the back."),
@@ -138,7 +138,7 @@
       roster: [{ kind: "event", hint: /server 2/i }],
       why: "Second volunteer on Ben’s line. Sarah is Server 1. Name this seat today. Drink station is a different person.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Find Ben. You are Server 2. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Find Ben. You are Server 2. Sound check is live — stay off the dance floor."),
         row("16:35", "work", "Help set the line. Drinks are donations — water, tea, or lemonade. Do not take the merch drink bag."),
         row("16:45", "eat", "EAT now. 15 minutes."),
         row("17:05", "work", "Stand your spot. Ben briefs. You serve. You do not plate. You do not sell water."),
@@ -162,7 +162,7 @@
       roster: [{ kind: "event", hint: /server 3/i }],
       why: "Third volunteer on Ben’s line. Name this seat today.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Find Ben. You are Server 3. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Find Ben. You are Server 3. Sound check is live — stay off the dance floor."),
         row("16:35", "work", "Help set the line. Drinks are donations — water, tea, or lemonade. Do not take the merch drink bag."),
         row("16:45", "eat", "EAT now. 15 minutes."),
         row("17:05", "work", "Stand your spot. Ben briefs. You serve. You do not plate. You do not sell water."),
@@ -186,7 +186,7 @@
       roster: [{ kind: "event", hint: /drink station|^water —|\$1 bottles only/i }],
       why: "You work the drink area. Keep tea and lemonade full. Help with ice. Hand out water. Ask for donations. Not on Ben’s serving line. Not merch.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Find the drink area. Tea, lemonade, ice, bottled water. Ask for donations. Not the serving line. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Find the drink area. Tea, lemonade, ice, bottled water. Ask for donations. Not the serving line. Sound check is live — stay off the dance floor."),
         row("16:35", "work", "Ice in. Tea and lemonade full. 120 bottles on ice. Donation sign up. Money bag on you. Scoop stays in the ice chest."),
         row("16:45", "eat", "EAT now. 15 minutes."),
         row("17:15", "work", "Food doors. You are live. Keep tea and lemonade full. Hand out water. Script: we are taking donations for drinks — water, tea, or lemonade."),
@@ -215,7 +215,7 @@
       ],
       why: "30-minute merch set. Drink donations live at this table. Close the table for David so you sit. Merch 2 joins you at 6:00 for the rush. Close again for 45 minutes of the concert.",
       clock: [
-        row("10:00", "arrive", "If you are Setup 3: arrive. Event t-shirt on. Open My Night. Three people dress 8 guest tables only."),
+        row("10:00", "arrive", "If you are Setup 3: arrive. Concert t-shirt on. Open My Night. Three people dress 8 guest tables only."),
         row("10:25", "work", "Tables done. You set merch — 30 minutes. Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, cash envelopes. 4-ft and 6-ft cloths. Conversation cards."),
         row("11:00", "work", "Yard-sign sheet on the same table. First name + phone. No second décor pass."),
         row("12:30", "leave", "Morning work is done. Leave. Eat a real lunch off site. Be back at 4:30."),
@@ -243,7 +243,7 @@
       roster: [{ kind: "event", hint: /merch 2/i }],
       why: "Busiest stretch of the night: acoustic over to showtime. Help the merch table with donations, handouts, and greeting. Keep it fun and lively.",
       clock: [
-        row("18:00", "arrive", "Arrive by 6:00. Event t-shirt on. Open My Night. Find the campaign table. That person owns the table. You are the extra pair of hands for the rush."),
+        row("18:00", "arrive", "Arrive by 6:00. Concert t-shirt on. Open My Night. Find the campaign table. That person owns the table. You are the extra pair of hands for the rush."),
         row("18:10", "work", "Walk the table once. Know shirts, push cards, yard-sign sheet, and the donation bag. Smile. You greet. You do not rebuild the table."),
         row("18:15", "work", "David is done. Table opens. This is the rush. Greet people. Hand out materials. Take drink donations: water, tea, or lemonade. Keep shirts in stacks guests can see."),
         row("18:30", "work", "Concert doors. Busiest 15 minutes. Greet concert-only guests. Hand a card. Point to tickets if they have not checked in. Bag stays on a body, not on the table."),
@@ -287,7 +287,7 @@
       roster: [{ kind: "event", hint: /production manager 1|floater a|relief lead(?! 2)/i }],
       why: "You keep the night on plan. Fill gaps. Point people where to go. Make sure nobody is stuck or needs a break. Your page is the whole run of show.",
       clock: [
-        row("17:30", "arrive", "Arrive by 5:30 if you can. Event t-shirt on. Open your Spot page. You keep the night on plan. Fill gaps. Point people. Ask if anyone needs a break."),
+        row("17:30", "arrive", "Arrive by 5:30 if you can. Concert t-shirt on. Open your Spot page. You keep the night on plan. Fill gaps. Point people. Ask if anyone needs a break."),
         row("17:32", "eat", "EAT now if you have not. 15 minutes. This is your dinner. Then you work David on purpose."),
         row("17:45", "work", "Dinner show. YOU WORK. Take tickets so they can sit. Stand lobby. Listen from the door."),
         row("18:10", "work", "Hand tickets back. Loop: tickets 10, food 10, campaign 10. Ice and trash between."),
@@ -313,7 +313,7 @@
       roster: [{ kind: "event", hint: /production manager 2|floater b|relief lead 2/i }],
       why: "You keep the night on plan. Fill gaps. Point people where to go. Make sure nobody is stuck or needs a break. Offset Production Manager 1. Your page is the whole run of show.",
       clock: [
-        row("17:30", "arrive", "Arrive by 5:30 if you can. Event t-shirt on. Open your Spot page. You keep the night on plan. Offset Production Manager 1. Start on FOOD so you are not stacked on the same post."),
+        row("17:30", "arrive", "Arrive by 5:30 if you can. Concert t-shirt on. Open your Spot page. You keep the night on plan. Offset Production Manager 1. Start on FOOD so you are not stacked on the same post."),
         row("17:32", "eat", "EAT now if you have not. 15 minutes. This is your dinner. Then you work David on purpose."),
         row("17:45", "work", "Dinner show. YOU WORK. 10-minute food restrooms only. Listen from the buffet. Do not plate."),
         row("18:15", "work", "Acoustic clear. Help clear the dance floor. Then loop: food 10, campaign 10, tickets 10. Never stack on Production Manager 1 at the same table."),
@@ -336,7 +336,7 @@
       roster: [{ kind: "grounds", hint: /parking/i }],
       why: "Guests find a space. You miss the dinner show on purpose. You get the whole concert.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Sound check is live — stay off the dance floor."),
         row("16:40", "eat", "EAT now. 15 minutes. Then you will not eat until after 6:45."),
         row("16:55", "work", "Walk the lot once. You are not on a post yet."),
         row("17:00", "work", "On the lot. Dinner guests go in. Concert-only: stay in the car until 6:30. Overflow if it fills."),
@@ -361,7 +361,7 @@
       roster: [{ kind: "grounds", hint: /directions/i }],
       why: "Everything is inside. Dinner guests go in at 5:00. Concert-only stay in the car until 6:30.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Sound check is live — stay off the dance floor."),
         row("16:40", "eat", "EAT. 15 minutes."),
         row("16:55", "work", "Walk the path once."),
         row("17:00", "work", "Stand where the lot meets the walk. Dinner guests: go in. Concert-only: stay in the car until 6:30. Everything is inside."),
@@ -385,7 +385,7 @@
       roster: [{ kind: "grounds", hint: /crowd|lobby/i }],
       why: "Keep the line moving. Doors stay clear. Tickets can work if people are not piled on them.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Sound check is live — stay off the dance floor."),
         row("16:40", "eat", "EAT. 15 minutes."),
         row("16:55", "work", "Walk the lobby once."),
         row("17:15", "work", "Food doors. Lobby line off the doors. Point to tickets. Do not take money. Concert-only wait in cars until 6:30."),
@@ -409,11 +409,11 @@
       roster: [{ kind: "strike", hint: /muscle 1/i }],
       why: "Best night: eat, watch the acoustic set, watch the concert, then carry speakers when Tracy points.",
       clock: [
-        row("16:30", "arrive", "Best night: arrive by 4:30 if you can. Event t-shirt on. Open My Night. EAT. 15 minutes. You are a guest until 8:45."),
+        row("16:30", "arrive", "Best night: arrive by 4:30 if you can. Concert t-shirt on. Open My Night. EAT. 15 minutes. You are a guest until 8:45."),
         row("17:00", "sit", "You have no post. Walk, greet, sit. Do not take over a table."),
         row("17:45", "sit", "SIT the dinner show. Whole set. That is allowed. That is the point."),
         row("19:00", "sit", "SIT the concert. Whole show. Phone on silent."),
-        row("20:40", "arrive", "Be by the stage. Event t-shirt on. Find Tracy."),
+        row("20:40", "arrive", "Be by the stage. Concert t-shirt on. Find Tracy."),
         row("20:45", "strike", "Required if you did not come early: arrive now. Find Tracy. He directs."),
         row("20:46", "strike", "You carry speakers and stands. No empty hands. His vehicle."),
         row("21:30", "done", "Carry is done. Help the walk or go. Building clear 10:00."),
@@ -430,11 +430,11 @@
       roster: [{ kind: "strike", hint: /muscle 2/i }],
       why: "Same deal as muscle 1. Eat and sit both shows. At encore you carry lights and cases.",
       clock: [
-        row("16:30", "arrive", "Best night: arrive by 4:30 if you can. Event t-shirt on. Open My Night. EAT. Then you are a guest until 8:45."),
+        row("16:30", "arrive", "Best night: arrive by 4:30 if you can. Concert t-shirt on. Open My Night. EAT. Then you are a guest until 8:45."),
         row("17:00", "sit", "No post. Walk, greet, sit. Do not take over a table."),
         row("17:45", "sit", "SIT the dinner show. Whole set."),
         row("19:00", "sit", "SIT the concert. Phone on silent."),
-        row("20:40", "arrive", "Be by the stage. Event t-shirt on. Find Tracy."),
+        row("20:40", "arrive", "Be by the stage. Concert t-shirt on. Find Tracy."),
         row("20:45", "strike", "Required arrival if you were not already here. Find Tracy."),
         row("20:46", "strike", "You carry lights and cases. Tracy directs. His vehicle."),
         row("21:30", "done", "Carry is done. Help the walk or go."),
@@ -451,11 +451,11 @@
       roster: [{ kind: "strike", hint: /muscle 3/i }],
       why: "You grab whatever is left so Tracy's vehicle is full and the stage is empty.",
       clock: [
-        row("16:30", "arrive", "Best night: arrive by 4:30 if you can. Event t-shirt on. Open My Night. EAT. Guest until 8:45."),
+        row("16:30", "arrive", "Best night: arrive by 4:30 if you can. Concert t-shirt on. Open My Night. EAT. Guest until 8:45."),
         row("17:00", "sit", "No post. Walk, greet, sit. Do not take over a table."),
         row("17:45", "sit", "SIT the dinner show. Whole set."),
         row("19:00", "sit", "SIT the concert. Phone on silent."),
-        row("20:40", "arrive", "Be by the stage. Event t-shirt on. Find Tracy."),
+        row("20:40", "arrive", "Be by the stage. Concert t-shirt on. Find Tracy."),
         row("20:45", "strike", "Required arrival if you were not already here. Find Tracy."),
         row("20:46", "strike", "Carry remaining production to his vehicle. No empty hands."),
         row("21:30", "done", "Stage is empty. Help the walk or go."),
@@ -473,7 +473,7 @@
       roster: [{ kind: "setup", hint: /setup captain|setup lead/i }],
       why: "You own the path signs from the gate and the 90-minute room. Paul puts the yard signs out. Three dressers. Morning only. Production Manager is a different night seat at 5:30. You are done at 12:30 unless you also claimed a night job.",
       clock: [
-        row("10:00", "arrive", "Arrive. Event t-shirt on. Open My Night. Gather the 3 dressers. Furniture is already placed. Do not rebuild."),
+        row("10:00", "arrive", "Arrive. Concert t-shirt on. Open My Night. Gather the 3 dressers. Furniture is already placed. Do not rebuild."),
         row("10:05", "work", "You put yard signs along the path from the gate to the venue door. Dressers start the 8 guest tables — cloth + simple center — while you plant."),
         row("10:25", "work", "Tables done. Walk the path once. Then Setup 1+2: printed signs 15, lobby cloth 10. Setup 3: 30-minute merch set. 4-ft and 6-ft campaign cloths, two banners + bungees, conversation cards."),
         row("10:40", "work", "Tea and lemonade station. No ice. Ice waits until 4:30."),
@@ -495,7 +495,7 @@
       roster: [{ kind: "event", hint: /kelly support/i }],
       why: "You are the only staff on Kelly. Runner plus vertical photos and video. Photo Lead does not man her.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. Find Kelly. Water in your hand or on her table. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. Find Kelly. Water in your hand or on her table. Sound check is live — stay off the dance floor."),
         row("16:40", "eat", "EAT 10 minutes with her or right behind her. Then you do not leave her."),
         row("17:20", "work", "She works the room. Intros. Move a pull-up if she asks. You do not work tickets, food, or merch."),
         row("17:30", "work", "Buffet. Hold the circle. Do not park her at a table. Vertical photos and video as you go."),
@@ -519,7 +519,7 @@
       roster: [{ kind: "event", hint: /photo lead|photographer|photo \/ video/i }],
       why: "Journalistic photography. Action shots of Kelly and the crowd. You are not parked on her. Support staff mans her.",
       clock: [
-        row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on. Open My Night. You roam. You are not Kelly's minder. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "Arrive by 4:30. Concert t-shirt on. Open My Night. You roam. You are not Kelly's minder. Sound check is live — stay off the dance floor."),
         row("16:40", "eat", "EAT 10 minutes. Then the camera owns you."),
         row("16:50", "work", "Room, merch, buffet set. Journalistic. Energy. Shoot from the edge."),
         row("17:15", "work", "Food doors. Arrivals, lot, lobby, tickets."),
@@ -546,7 +546,7 @@
       roster: [{ kind: "event", hint: /strike|close lead|teardown captain/i }],
       why: "You own the 8:45 pairs and the 10:00 walk. Venue furniture stays. Event Lead can hold this seat too.",
       clock: [
-        row("16:30", "arrive", "If this is your only seat: arrive by 4:30. Event t-shirt on. Open My Night. Walk with Event Lead. Then stay out of posts. Sound check is live — stay off the dance floor."),
+        row("16:30", "arrive", "If this is your only seat: arrive by 4:30. Concert t-shirt on. Open My Night. Walk with Event Lead. Then stay out of posts. Sound check is live — stay off the dance floor."),
         row("16:45", "eat", "If this is your only seat: EAT 15 minutes. Then you are a guest until 8:30."),
         row("17:45", "sit", "Sit David if you are not on another post."),
         row("19:00", "sit", "Sit the concert if you are not on another post."),

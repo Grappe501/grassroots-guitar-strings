@@ -188,7 +188,7 @@
       card.classList.remove("is-strike");
       if (kicker) kicker.textContent = "Be here first";
       if (place) place.textContent = "Arrive 4:30";
-      if (doit) doit.textContent = "Your spot is not named yet. Event t-shirt on. Open this page when you get there. Steve or Event Captain will put you on a seat.";
+      if (doit) doit.textContent = "Your spot is not named yet. Concert t-shirt on. Open this page when you get there. Steve or Event Captain will put you on a seat.";
       if (nextEl) nextEl.textContent = HOUSE;
       return;
     }

@@ -188,7 +188,7 @@
       title: "You are on the list.",
       next: "Your night is one page. Arrive 4:30. Open My Night when Steve names your spot.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night.",
+        "4:30 arrive. Concert t-shirt on. Open My Night.",
         "Do the job on your seat clock. Stay until 10 unless Event Captain sends you.",
       ],
     },
@@ -202,7 +202,7 @@
       title: "You own the morning room.",
       next: "10:00. You put yard signs along the path from the gate to the door. Then you run the 3 dressers.",
       duties: [
-        "10:00 gather the 3 dressers. Event t-shirt on. Open My Night. Furniture is already placed. Do not rebuild.",
+        "10:00 gather the 3 dressers. Concert t-shirt on. Open My Night. Furniture is already placed. Do not rebuild.",
         "10:05 you put yard signs along the path from the gate to the venue door. Dressers start the 8 tables while you plant.",
         "10:25 walk once. Signs should mark the walk from the lot/gate to the door. Then printed signs and lobby if Setup 1+2 need a hand.",
         "10:40 tea and lemonade station. No ice. Ice waits until 4:30.",
@@ -221,7 +221,7 @@
       title: "You are on the list.",
       next: "Your night is one page. Arrive 4:30. Open My Night when Steve names your spot.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night.",
+        "4:30 arrive. Concert t-shirt on. Open My Night.",
         "Do the job on your seat clock. Stay until 10 unless Event Captain sends you.",
       ],
     },
@@ -235,7 +235,7 @@
       title: "You are on the list.",
       next: "Your night is one page. Arrive 4:30. Open My Night when Steve names your spot.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night.",
+        "4:30 arrive. Concert t-shirt on. Open My Night.",
         "Do the job on your seat clock. Stay until 10 unless Event Captain sends you.",
       ],
     },
@@ -249,7 +249,7 @@
       title: "You are on the list.",
       next: "Your night is one page. Arrive 4:30. Open My Night when Steve names your spot.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night.",
+        "4:30 arrive. Concert t-shirt on. Open My Night.",
         "Do the job on your seat clock. Stay until 10 unless Event Captain sends you.",
       ],
     },
@@ -263,7 +263,7 @@
       title: "You are on the list.",
       next: "Your night is one page. Arrive 4:30. Open My Night when Steve names your spot.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night.",
+        "4:30 arrive. Concert t-shirt on. Open My Night.",
         "Do the job on your seat clock. Stay until 10 unless Event Captain sends you.",
       ],
     },
@@ -281,7 +281,7 @@
       owns: "You are at doors when they open and when they close. Last check at the end. Available for questions, directions, and to fill in.",
       duties: [
         "Available for setup help. If the morning crew needs a hand, you are there.",
-        "4:30 night arrival. Event t-shirt on. Open your Spot page. Available for questions and directions from the minute you walk in.",
+        "4:30 night arrival. Concert t-shirt on. Open your Spot page. Available for questions and directions from the minute you walk in.",
         "5:15 food doors. You are there when they open. Concert-only stay in cars until 6:30.",
         "6:30 concert doors. You are there when they open.",
         "Fill in where needed. Answer questions. Point people. The Production Managers walk the loop — you are the person they send people to.",
@@ -299,7 +299,7 @@
       arrival: "10:00 AM",
       owns: "Paul Egan. Path yard signs from the gate. Then the 90-minute room.",
       duties: [
-        "10:00 gather the 3 dressers. Event t-shirts on. Open My Night. Furniture is already placed. Do not rebuild.",
+        "10:00 gather the 3 dressers. Concert t-shirts on. Open My Night. Furniture is already placed. Do not rebuild.",
         "10:05 you put yard signs along the path from the gate to the venue door. Dressers start the 8 tables — cloth + simple center — while you plant.",
         "10:25 Setup 1+2: printed signs 15, lobby ticket cloth 10. Setup 3: 30-minute merch set. 4-ft and 6-ft campaign cloths, two banners + bungees, conversation cards.",
         "10:40 tea and lemonade station. No ice. Ice waits until 4:30.",
@@ -318,7 +318,7 @@
       arrival: "4:30 PM",
       owns: "Lobby, cash, envelopes, reconcile.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night. Venue already placed the 4-ft lobby table. No paper tickets.",
+        "4:30 arrive. Concert t-shirt on. Open My Night. Venue already placed the 4-ft lobby table. No paper tickets.",
         "4:35 dress it: cash box, envelopes, pens, $25 sign, teacher/first-responder note. 10 minutes.",
         "4:40 eat 15 minutes behind the table.",
         "4:30 stay off the dance floor. Sound check.",
@@ -341,7 +341,7 @@
       arrival: "4:30 PM",
       owns: "Ben Hurst. The serving line. Not plates. Not water. Sarah plus two more servers.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night. Walk the buffet. Three servers should be with you. Drink donations live at merch. Not your station.",
+        "4:30 arrive. Concert t-shirt on. Open My Night. Walk the buffet. Three servers should be with you. Drink donations live at merch. Not your station.",
         "4:35 ice chest + scoop for tea and lemonade. Set the line. Signs: we are taking donations for drinks. You do not plate.",
         "4:45 eat 15 minutes. Then the line owns you.",
         "4:00 brief Sarah and the two other servers. One line. You direct. They serve. You still do not plate.",
@@ -400,7 +400,7 @@
       arrival: "5:30 PM if you can",
       owns: "Fill gaps. Point people. Make sure nobody needs a break. Your page is the run of show.",
       duties: [
-        "Arrive by 5:30 if you can. Event t-shirt on. Open your Spot page. That page is the whole run of show.",
+        "Arrive by 5:30 if you can. Concert t-shirt on. Open your Spot page. That page is the whole run of show.",
         "Your job is the plan. Fill gaps. Point people where to go. Ask if anyone needs a break before they leave a post.",
         "Stay offset from Production Manager 2. One of you is always walking.",
         "During David, cover tickets so they can sit. Then loop the room.",
@@ -417,7 +417,7 @@
       arrival: "5:30 PM if you can",
       owns: "Fill gaps. Point people. Make sure nobody needs a break. Offset Production Manager 1.",
       duties: [
-        "Arrive by 5:30 if you can. Event t-shirt on. Open your Spot page. That page is the whole run of show.",
+        "Arrive by 5:30 if you can. Concert t-shirt on. Open your Spot page. That page is the whole run of show.",
         "Your job is the plan. Fill gaps. Point people where to go. Ask if anyone needs a break before they leave a post.",
         "Stay offset from Production Manager 1. Start on FOOD so you are not stacked on the same post.",
         "During David, cover the food line for restroom only. Do not leave the buffet empty.",
@@ -434,7 +434,7 @@
       arrival: "4:30 PM",
       owns: "The only staff on Kelly. Runner plus vertical photos and video.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night. Find Kelly. You are the only staff on her.",
+        "4:30 arrive. Concert t-shirt on. Open My Night. Find Kelly. You are the only staff on her.",
         "4:40 eat 10 minutes with her or right behind her. Sound check is live — stay off the dance floor.",
         "Water in your hand or on her table. Intros. Move a pull-up if she asks. You do not work tickets, food, or merch.",
         "Shoot her all night — pictures and video, all vertical. Post as you go. Tag @KellyGrappeSOS, invite her to collaborate, hashtag #GrappeSOS.",
@@ -455,7 +455,7 @@
       arrival: "4:30 PM",
       owns: "Journalistic photography. Action shots of Kelly and the crowd. Not parked on her.",
       duties: [
-        "4:30 arrive. Event t-shirt on. Open My Night. You roam. You are not Kelly's minder.",
+        "4:30 arrive. Concert t-shirt on. Open My Night. You roam. You are not Kelly's minder.",
         "4:40 eat 10 minutes. Then room and setup shots. Sound check is live — stay off the dance floor.",
         "5:00–5:30 arrivals, lot, lobby, tickets, first plates. Journalistic. Energy.",
         "5:30 BBQ line, hands, faces, volunteers working. Kelly in the room — not parked on her.",
@@ -496,7 +496,7 @@
       arrival: "10:00 AM",
       owns: "Morning only. Dress tables and printed signs. Done at 12:30 unless you also claimed a night seat.",
       duties: [
-        "10:00 arrive. Event t-shirt on. Open My Night. Furniture is already placed. Do not rebuild.",
+        "10:00 arrive. Concert t-shirt on. Open My Night. Furniture is already placed. Do not rebuild.",
         "10:05 walk the room, exits, and lobby. Then dress the 8 guest tables with Setup 2 and Setup 3.",
         "10:25 tables done. You and Setup 2: printed signs 15 minutes, lobby ticket cloth 10.",
         "10:40 help set the tea and lemonade station. No ice. Ice waits until 4:30.",
@@ -512,7 +512,7 @@
       arrival: "10:00 AM",
       owns: "Morning only. Dress tables and printed signs. Done at 12:30 unless you also claimed a night seat.",
       duties: [
-        "10:00 arrive. Event t-shirt on. Open My Night. Furniture is already placed. Do not rebuild.",
+        "10:00 arrive. Concert t-shirt on. Open My Night. Furniture is already placed. Do not rebuild.",
         "10:05 walk the room, exits, and lobby. Then dress the 8 guest tables with Setup 1 and Setup 3.",
         "10:25 tables done. You and Setup 1: printed signs 15 minutes, lobby ticket cloth 10.",
         "10:40 help set the tea and lemonade station. No ice. Ice waits until 4:30.",
