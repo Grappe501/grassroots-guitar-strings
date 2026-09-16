@@ -152,7 +152,7 @@
         "Postcards packed",
         "Cash / checks",
         "Leftover water packed",
-        "Water cash / bag with Event Lead",
+        "Tickets collects merch and drink money",
       ],
     },
     {

@@ -250,8 +250,8 @@
       day: [
         { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lobby · ticket table", do: "You are the only ticket person. Ask a Production Manager if you need a break." },
         { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Lobby · ticket table", do: "Doors rush. Stay on the table. Keep the line moving." },
-        { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Lobby or nearby", do: "Late arrivals. Hold the cash box. Stay unless a Production Manager relieves you." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Lobby · then secure", do: "Reconcile tickets, cash, and envelopes. Then help Strike B or E." },
+        { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Lobby", do: "Late arrivals. Money stays with you. You collect merch and drink donations." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Lobby", do: "Reconcile tickets, merch, and drink donations. Money stays with you." },
       ],
     },
     {
@@ -289,7 +289,7 @@
         { start: "2026-09-17T17:30:00", end: "2026-09-17T19:20:00", place: "Drink station", do: "Keep tea and lemonade full. Help with ice. Hand out water. Ask for donations. Not on the serving line." },
         { start: "2026-09-17T19:20:00", end: "2026-09-17T20:00:00", place: "Concert seats", do: "Sit. Relief 2 has the drink station." },
         { start: "2026-09-17T20:00:00", end: "2026-09-17T20:45:00", place: "Drink station", do: "Back on drinks through the last song." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike", do: "Reconcile the donation bag with Event Captain. Pack leftover water." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike", do: "Tickets collects drink donations. Pack leftover water." },
       ],
     },
     {

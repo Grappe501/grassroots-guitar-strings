@@ -9,7 +9,7 @@ const defaults = {
   ],
   event: [
     "Event Captain — doors open and close, last check, fill in",
-    "Tickets — one person at the lobby table",
+    "Tickets — treasurer. Ticket, merch, and drink money stays with her.",
     "Food service lead — Ben. Line, not plates, not water.",
     "Server 1 — Sarah. Serving line with Ben.",
     "Server 2 — serving line with Ben.",
