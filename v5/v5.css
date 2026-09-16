@@ -205,6 +205,29 @@ body.v5.is-night-only {
   border-color: #8a2f28;
 }
 
+.v5-ros--day li {
+  grid-template-columns: 5.2rem 1fr;
+}
+
+.v5-ros--day li em {
+  grid-column: 2;
+  grid-row: 1;
+  color: #ca913d;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.v5-ros--day li span {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.v5-ros--day li b {
+  grid-row: 1 / span 2;
+  align-self: start;
+}
+
 .v5-link {
   color: #ca913d;
   font-weight: 800;

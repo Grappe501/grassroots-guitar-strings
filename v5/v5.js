@@ -139,6 +139,37 @@
     });
   }
 
+  function paintDay() {
+    const root = document.getElementById("dayClock");
+    const ros = window.GGSRunOfShow;
+    if (!root || !ros || !ros.CLOCK) return;
+    const clock = ros.CLOCK;
+    const idx = clockIndex(clock);
+    const stamp = String(clock.length);
+    if (root.dataset.ros !== stamp || root.children.length !== clock.length) {
+      root.dataset.ros = stamp;
+      root.innerHTML = clock
+        .map(function (block) {
+          return (
+            '<li class="is-' +
+            esc(block.kind) +
+            '"><b>' +
+            esc(hm(block.t)) +
+            "</b><em>" +
+            esc(block.who) +
+            "</em><span>" +
+            esc(block.text) +
+            "</span></li>"
+          );
+        })
+        .join("");
+    }
+    Array.prototype.forEach.call(root.children, function (li, i) {
+      li.classList.toggle("is-now", i === idx);
+      li.classList.toggle("is-past", i < idx);
+    });
+  }
+
   function paintNow(spot) {
     const card = document.getElementById("nowCard");
     const kicker = document.getElementById("nowKicker");
@@ -206,6 +237,7 @@
       if (social) social.textContent = window.GGSDaySpots ? window.GGSDaySpots.SOCIAL : "";
       paintNow(spot);
       paintClock(spot);
+      paintDay();
       const night = document.getElementById("nightBlock");
       if (night) night.hidden = !(spot && spot.clock && spot.clock.length);
     } catch (err) {
