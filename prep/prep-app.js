@@ -72,6 +72,7 @@
     renderCrew();
     renderAttention();
     renderGaps();
+    if (window.GGSPrepV3) window.GGSPrepV3.refresh();
   }
 
   function claim(el) {
@@ -229,6 +230,7 @@
         renderAttention();
         renderGaps();
         updateTabCounts();
+        if (window.GGSPrepV3) window.GGSPrepV3.refresh();
       });
     });
   }
@@ -376,6 +378,9 @@
 
   function showTab(id) {
     if (!id || !document.querySelector('[data-section="' + id + '"]')) return;
+    if (window.GGSPrepV3 && document.body.dataset.mode !== "plan") {
+      window.GGSPrepV3.setMode("plan");
+    }
     prefs.tab = id;
     savePrefs();
     document.querySelectorAll(".tab").forEach((tab) => {
@@ -445,6 +450,9 @@
         me.classList.remove("is-needed");
         savePrefs();
         if (prefs.filter === "mine") applyFilters();
+        const runMe = document.getElementById("runMe");
+        if (runMe && document.activeElement !== runMe) runMe.value = prefs.me;
+        if (window.GGSPrepV3) window.GGSPrepV3.refresh();
       });
     }
     const search = document.getElementById("searchInput");
@@ -468,7 +476,7 @@
       (store ? store.reset() : Promise.resolve()).then(() => location.reload());
     });
     const hash = (location.hash || "").replace("#", "");
-    if (hash) prefs.tab = hash;
+    if (hash && hash !== "run" && hash !== "packet") prefs.tab = hash;
   }
 
   applyNight();
@@ -487,6 +495,7 @@
     renderCrew();
     renderAttention();
     renderGaps();
+    if (window.GGSPrepV3) window.GGSPrepV3.refresh();
   });
   window.addEventListener("ggs-prep-status", (e) => {
     const el = document.getElementById("syncStatus");
@@ -505,6 +514,7 @@
       renderCrew();
       renderAttention();
       renderGaps();
+      if (window.GGSPrepV3) window.GGSPrepV3.refresh();
     }, 0);
   });
   if (store) store.startSync();

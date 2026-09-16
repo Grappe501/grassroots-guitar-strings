@@ -4,22 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#17466b">
-<title>Grassroots & Guitar Strings — Prep v2</title>
-<meta name="description" content="Shared event command board for Grassroots and Guitar Strings. Thursday, September 17, 2026.">
+<title>Grassroots & Guitar Strings — Prep v3</title>
+<meta name="description" content="Day-of command board for Grassroots and Guitar Strings. Thursday, September 17, 2026.">
 <link rel="stylesheet" href="/prep/prep.css">
 <link rel="stylesheet" href="/prep/prep-v3.css">
+<link rel="stylesheet" href="/prep/prep-v3-run.css">
 </head>
 <body>
 <div id="prepApp">
 <header class="topbar">
   <div class="topbar__inner">
     <div>
-      <p class="eyebrow">PREP v2 · SHARED COMMAND BOARD</p>
+      <p class="eyebrow">PREP v3 · RUN THE NIGHT</p>
       <h1>Grassroots &amp; Guitar Strings</h1>
       <p class="subtitle">Thursday, September 17, 2026 · Woody's Sherwood Forest</p>
       <p class="sync-status" id="syncStatus">Connecting to shared board…</p>
     </div>
     <div class="top-actions">
+      <div class="mode-switch" role="group" aria-label="Board mode">
+        <button type="button" class="btn btn--light is-mode" data-mode="plan">Plan</button>
+        <button type="button" class="btn btn--gold is-mode" data-mode="run">Run</button>
+        <button type="button" class="btn btn--light is-mode" data-mode="packet">Packet</button>
+      </div>
       <a class="btn btn--light" href="/command/">Command</a>
       <a class="btn btn--light" href="/volunteers/">People</a>
       <button class="btn btn--light" id="nightBtn" type="button">Night mode</button>
@@ -30,6 +36,31 @@
 </header>
 
 <main class="shell">
+  <section class="gates" id="gatesBand" aria-label="Readiness gates">
+    <p class="eyebrow">Cannot go green until these are named</p>
+    <div class="gate-grid" id="gateGrid"></div>
+  </section>
+
+  <section class="radio-band">
+    <label class="radio-field">Shared radio — what is happening right now
+      <textarea id="radioNote" rows="2" maxlength="400" placeholder="Example: Ben is 15 minutes out. Ticket table is live. Need two more teardown people."></textarea>
+    </label>
+    <p class="radio-by" id="radioBy"></p>
+  </section>
+
+  <section class="room-map" aria-label="Woody's room stations">
+    <p class="eyebrow">Room</p>
+    <div class="room-grid">
+      <button type="button" class="room-spot" data-jump="tickets">Lobby · tickets + QR</button>
+      <button type="button" class="room-spot" data-jump="food">Buffet · 4 tables</button>
+      <button type="button" class="room-spot" data-jump="food">Tea / lemonade / water</button>
+      <button type="button" class="room-spot room-spot--wide" data-jump="setup">Horseshoe · 8 rounds · 64 chairs</button>
+      <button type="button" class="room-spot room-spot--gold" data-jump="production">Dance floor · David acoustic 5:45</button>
+      <button type="button" class="room-spot" data-jump="production">Stage · Tracy sound/lights</button>
+      <button type="button" class="room-spot" data-jump="campaign">Merch + yard signs</button>
+      <button type="button" class="room-spot" data-jump="campaign">Campaign display</button>
+    </div>
+  </section>
   <section class="now-strip" aria-live="polite">
     <article class="now-card now-card--clock">
       <p class="eyebrow">Now</p>
@@ -95,14 +126,38 @@
     <ol id="attentionList"></ol>
   </aside>
 
-  <nav class="tabs" role="tablist" aria-label="Event preparation sections"></nav>
-  <p class="empty-filter" id="emptyFilter" hidden>Nothing matches that filter. Clear search or switch back to All.</p>
-  <div id="tabContent"></div>
+  <div id="planStage">
+    <nav class="tabs" role="tablist" aria-label="Event preparation sections"></nav>
+    <p class="empty-filter" id="emptyFilter" hidden>Nothing matches that filter. Clear search or switch back to All.</p>
+    <div id="tabContent"></div>
+  </div>
+
+  <section id="runStage" class="run-stage" hidden>
+    <p class="run-kicker" id="runKicker">EVENT CLOCK</p>
+    <div class="run-clock" id="runClock">--:--</div>
+    <p class="run-now" id="runNow">Venue access + setup</p>
+    <p class="run-next" id="runNext">Next: room / production check</p>
+    <p class="run-hard" id="runHard">Building clear by 10:00 PM</p>
+    <div class="run-hot" id="runHot"></div>
+    <div class="run-queue" id="runQueue"></div>
+    <label class="run-me">I am
+      <input id="runMe" type="text" autocomplete="name" placeholder="Your name so your jobs show here">
+    </label>
+    <h2 class="run-mine-title">My open work</h2>
+    <div class="run-mine" id="runMine"></div>
+  </section>
+
+  <section id="packetStage" class="packet-stage" hidden>
+    <p class="eyebrow">Print one job, not the whole book</p>
+    <div class="packet-roles" id="packetRoles"></div>
+    <article class="packet-sheet" id="packetSheet"></article>
+  </section>
 </main>
 </div>
 <script src="/js/prep-store.js"></script>
 <script src="/prep/prep-v2.js"></script>
 <script src="/prep/prep-app.js"></script>
 <script src="/prep/prep-enhancements.js"></script>
+<script src="/prep/prep-v3.js"></script>
 </body>
 </html>
