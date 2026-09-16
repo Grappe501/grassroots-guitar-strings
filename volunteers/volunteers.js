@@ -107,6 +107,27 @@ function ensureFoodLine() {
   });
 }
 
+function ensureLeadRows() {
+  const duties = window.GGSLeadDuties;
+  if (!duties || !duties.VOL_SEATS) return;
+  Object.keys(duties.VOL_SEATS).forEach((id) => {
+    const seat = duties.VOL_SEATS[id];
+    if (!state[seat.kind]) state[seat.kind] = [];
+    if (state[seat.kind].some((row) => seat.hint.test(String((row && row.role) || "")))) return;
+    if (!seat.role) return;
+    const row = emptyRow(seat.role, seat.kind);
+    if (seat.kind === "setup" || seat.kind === "strike") state[seat.kind].unshift(row);
+    else state[seat.kind].push(row);
+  });
+}
+
+function applyLeadSeats() {
+  const duties = window.GGSLeadDuties;
+  if (!duties || !duties.applyToVolunteers) return false;
+  if (duties.seedDefaults) duties.seedDefaults();
+  return duties.applyToVolunteers(state);
+}
+
 function ensureMuscle() {
   if (!state.strike) state.strike = [];
   [
@@ -133,6 +154,8 @@ ensureFloaters();
 ensureMuscle();
 ensureGrounds();
 ensureFoodLine();
+ensureLeadRows();
+const bootLeadDirty = applyLeadSeats();
 (function seedNamedSeats() {
   const debi = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
   if (debi && !String(debi.name || "").trim()) debi.name = "Debi Martin";
@@ -213,6 +236,8 @@ function render(kind) {
             const box = row.querySelector(".person-reach");
             if (box) box.innerHTML = name ? reachHtml(name, phone) : "";
             if (store && slice && name && slice.phoneDigits(phone)) slice.saveContact(store, name, phone);
+            const jobId = window.GGSLeadDuties && window.GGSLeadDuties.jobIdForVolunteer(kind, state[kind][+row.dataset.i].role);
+            if (c === "name" && jobId && window.GGSLeadDuties.saveOwner) window.GGSLeadDuties.saveOwner(jobId, name);
           }
         })
       );
@@ -264,7 +289,10 @@ function applyRemote(data) {
   ensureMuscle();
   ensureGrounds();
   ensureFoodLine();
+  ensureLeadRows();
+  const leadDirty = applyLeadSeats();
   ["setup", "event", "strike", "grounds"].forEach(render);
+  if (leadDirty) save();
   counts();
 }
 
@@ -285,7 +313,8 @@ function stayNames() {
 }
 
 function counts() {
-  document.getElementById("setupCount").textContent = state.setup.filter((x) => x.name.trim()).length + " / 3";
+    document.getElementById("setupCount").textContent =
+    state.setup.filter((x) => x.name.trim()).length + " / " + Math.max(4, state.setup.length);
   document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + NEED_EVENT;
   const groundsEl = document.getElementById("groundsCount");
   if (groundsEl) {
@@ -315,6 +344,7 @@ if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {
   });
 }
 ["setup", "event", "strike", "grounds"].forEach(render);
+if (bootLeadDirty) save();
 counts();
 document.querySelectorAll("[data-add]").forEach((b) =>
   b.addEventListener("click", () => {
@@ -338,6 +368,8 @@ document.getElementById("clearBtn").addEventListener("click", () => {
     ensureMuscle();
     ensureGrounds();
     ensureFoodLine();
+    ensureLeadRows();
+    applyLeadSeats();
     save();
     ["setup", "event", "strike", "grounds"].forEach(render);
   }
