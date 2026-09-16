@@ -409,7 +409,8 @@
       section.classList.toggle("is-active", section.dataset.section === id);
     });
     if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
-    window.scrollTo(0, 0);
+    const stage = document.getElementById("planStage");
+    if (stage) stage.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function tick() {

@@ -136,7 +136,7 @@
     if (plan) plan.hidden = prefs.mode !== "plan";
     if (run) run.hidden = prefs.mode !== "run";
     if (packet) packet.hidden = prefs.mode !== "packet";
-    document.querySelectorAll(".now-strip, .ops-bar, .role-row, .dashboard, .crew-band, .attention, .room-map").forEach((el) => {
+    document.querySelectorAll(".now-strip, .ops-bar, .role-row, .dashboard, .crew-band, .attention").forEach((el) => {
       el.hidden = prefs.mode !== "plan";
     });
     const hash = (location.hash || "").replace("#", "");

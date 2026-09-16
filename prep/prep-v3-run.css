@@ -9,8 +9,7 @@
 }
 
 .gates,
-.radio-band,
-.room-map {
+.radio-band {
   background: #fff;
   border: 1px solid #d9d6ce;
   border-radius: 16px;
@@ -82,32 +81,6 @@
   margin: 0.4rem 0 0;
   font-size: 0.78rem;
   color: #687780;
-}
-
-.room-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.45rem;
-  margin-top: 0.55rem;
-}
-
-.room-spot {
-  border: 1px solid #cdd2d5;
-  background: #f7f1df;
-  color: #17466b;
-  border-radius: 12px;
-  padding: 0.7rem 0.65rem;
-  font-weight: 800;
-  text-align: left;
-  cursor: pointer;
-}
-
-.room-spot--wide {
-  grid-column: span 2;
-}
-
-.room-spot--gold {
-  background: #f3c979;
 }
 
 .run-stage {
@@ -281,33 +254,21 @@
 
 html.night .gates,
 html.night .radio-band,
-html.night .room-map,
 html.night .packet-stage {
   background: #122433;
   border-color: #2a4154;
   color: #e7eef4;
 }
 
-html.night .radio-field textarea,
-html.night .room-spot {
+html.night .radio-field textarea {
   background: #0b1c28;
   color: #e7eef4;
   border-color: #3a5366;
 }
 
-@media (max-width: 800px) {
-  .room-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .room-spot--wide {
-    grid-column: span 2;
-  }
-}
-
 @media print {
   .gates,
   .radio-band,
-  .room-map,
   .run-stage,
   .mode-switch {
     display: none !important;
