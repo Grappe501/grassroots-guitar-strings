@@ -510,14 +510,15 @@
     const label = document.getElementById("nowLabel");
     if (now >= strike) {
       if (label) label.textContent = "STRIKE MODE · building clear by 10:00 PM";
-      document.getElementById("nextTitle").textContent = "Strike immediately";
-      document.getElementById("nextMeta").textContent = "Teams A–E · 10:00 PM hard stop";
     } else if (now >= concert) {
       if (label) label.textContent = "Concert is live";
-      document.getElementById("nextTitle").textContent = upcoming[2];
-      document.getElementById("nextMeta").textContent = upcoming[1];
+    } else if (label) {
+      label.textContent = current[1] + " · " + current[2];
+    }
+    if (window.GGSNextAction) {
+      const roster = (store && store.readDoc("volunteers")) || { strike: [] };
+      window.GGSNextAction.paint(state, roster);
     } else {
-      if (label) label.textContent = current[1] + " · " + current[2];
       document.getElementById("nextTitle").textContent = upcoming[2];
       document.getElementById("nextMeta").textContent = upcoming[1];
     }

@@ -32,7 +32,12 @@ function renderStatus(){const el=document.getElementById('statusGrid');el.innerH
 function tabToId(tab){return {'Ben / BBQ':'ben','Setup':'setup','Volunteers':'volunteers','Tickets & Money':'tickets','Campaign & Merch':'campaign','Food & Drinks':'food','Sound & Show':'production','Breakdown':'breakdown'}[tab]||tab.toLowerCase()}
 function renderTimeline(){const now=new Date();document.getElementById('timeline').innerHTML=milestones.map((m,i)=>{const t=new Date(m[0]);const diff=t-now;const cls=diff<0?'past':(diff<3600000&&diff>=0?'current':'');const stateLabel=diff<0?'passed':cls?'next':'upcoming';return `<div class="timeline-row ${cls}"><div class="time">${m[1]}</div><div><strong>${m[2]}</strong><small>${timeDistance(diff)}</small></div><div class="state">${stateLabel}</div></div>`}).join('')}
 function timeDistance(ms){if(ms<0){const n=Math.abs(ms);if(n<60000)return 'just passed';if(n<3600000)return `${Math.floor(n/60000)} min ago`;return `${Math.floor(n/3600000)} hr ago`}if(ms<60000)return 'in less than a minute';if(ms<3600000)return `in ${Math.floor(ms/60000)} min`;return `in ${Math.floor(ms/3600000)} hr ${Math.floor((ms%3600000)/60000)} min`}
-function tick(){const now=new Date();document.getElementById('clock').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const event=new Date('2026-09-17T19:00:00');const diff=event-now;document.getElementById('clockLabel').textContent=diff>0?`Concert starts ${timeDistance(diff)}`:'Event day — use the live timeline';document.getElementById('modeTime').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const d=new Date('2026-09-17T20:45:00');document.getElementById('modeTitle').textContent=now>=d?'STRIKE MODE':'Event operations';document.getElementById('modeNext').textContent=now>=d?'Strike immediately. Building must be clear by 10:00 PM.':'Use the full checklist for assignments, owners and completion.';renderTimeline()}
+function paintNext(){
+  if(!window.GGSNextAction) return;
+  const roster=(window.GGSPrepStore&&window.GGSPrepStore.readDoc('volunteers'))||{strike:[]};
+  window.GGSNextAction.paint(prepState,roster);
+}
+function tick(){const now=new Date();document.getElementById('clock').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const event=new Date('2026-09-17T19:00:00');const diff=event-now;document.getElementById('clockLabel').textContent=diff>0?`Concert starts ${timeDistance(diff)}`:'Event day — use the live timeline';document.getElementById('modeTime').textContent=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});const d=new Date('2026-09-17T20:45:00');document.getElementById('modeTitle').textContent=now>=d?'STRIKE MODE':'Event operations';document.getElementById('modeNext').textContent=now>=d?'Strike immediately. Building must be clear by 10:00 PM.':'Use the full checklist for assignments, owners and completion.';renderTimeline();paintNext()}
 function readiness(){const vals=areas.map(a=>pctForPrefix(tabToId(a[2])));const p=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);document.getElementById('readiness').textContent=p+'%';document.getElementById('readinessBar').style.width=p+'%';document.getElementById('readinessDetail').textContent=`${vals.filter(x=>x>=80).length} of ${vals.length} command areas at 80%+ completion.`}
 function bind(){document.getElementById('eventModeBtn').onclick=()=>document.getElementById('modeOverlay').hidden=false;document.getElementById('closeMode').onclick=()=>document.getElementById('modeOverlay').hidden=true;document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>location.href=`/prep/#${b.dataset.jump}`)}
 function nextActions(){
@@ -55,14 +60,7 @@ function renderGaps(){
   const order=['volunteers','breakdown','ben','production','tickets','setup','campaign','food','overview','timeline','final'];
   const items=order.filter((id)=>counts[id]).map((id)=>`<li><a href="/prep/#${id}">${labels[id]} — ${counts[id]} unassigned</a></li>`);
   list.innerHTML=items.join('')||'<li>Every open task has a name.</li>';
-  const first=order.find((id)=>counts[id]);
-  if(first){
-    document.getElementById('criticalTitle').textContent=labels[first]+' still has unassigned work';
-    document.getElementById('criticalMeta').textContent=rows.length+' open tasks with no owner';
-  } else {
-    document.getElementById('criticalTitle').textContent='Board is covered';
-    document.getElementById('criticalMeta').textContent='Every open task has a name.';
-  }
+  paintNext();
 }
 function applyNight(on){
   document.documentElement.classList.toggle('night',on);
@@ -80,7 +78,7 @@ function renderCrewCall(){
   const book=slice.readContacts(store);
   el.innerHTML=people.length?people.map((name)=>'<div class="crew-call-row">'+slice.contactHtml(name,slice.phoneFor(name,book))+'</div>').join(''):'<p class="muted">Names and numbers land here as people add them.</p>';
 }
-function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness();renderGaps();renderCrewCall()}
+function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness();renderGaps();renderCrewCall();paintNext()}
 renderStatus();readiness();renderGaps();renderCrewCall();bind();tick();setInterval(()=>{tick();readiness();renderGaps();renderCrewCall()},15000);
 const nightOn=localStorage.getItem('ggs-command-night')==='1';
 applyNight(nightOn);
