@@ -124,6 +124,8 @@
         "Candy",
         "Foldover cards",
         "Table conversation cards — bring them",
+        "Campaign tablecloth — 4 ft",
+        "Campaign tablecloth — 6 ft",
       ],
       out: [
         "Literature packed",
@@ -133,6 +135,8 @@
         "QR stands packed",
         "Two banners + bungee cords packed",
         "Table conversation cards returned",
+        "4-ft campaign tablecloth packed",
+        "6-ft campaign tablecloth packed",
       ],
     },
     {

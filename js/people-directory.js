@@ -168,10 +168,10 @@
       next: "Campaign & Merch is your seat. One table. 30-minute set. Shirts, banners, cards, buttons, candy.",
       duties: [
         "Set merch + campaign on one table — 30 minutes.",
-        "T-shirts, two banners + bungee cords, conversation cards, push cards, buttons, candy, foldovers.",
+        "T-shirts, two banners + bungee cords, conversation cards, 1 four-foot and 1 six-foot campaign tablecloth, push cards, buttons, candy, foldovers.",
         "Hang the two banners. Bungee cords go with them.",
         "Yard signs from the same table. First name + phone on one sheet.",
-        "Strike B is 20 minutes. Count what is left. Return conversation cards and both banners.",
+        "Strike B is 20 minutes. Count what is left. Return conversation cards, both banners, and the 4-ft and 6-ft campaign tablecloths.",
       ],
     },
   ];
@@ -250,11 +250,11 @@
       arrival: "After tables / 5:00 PM",
       owns: "Debi Martin. One table. 30-minute set. Signs and shirts.",
       duties: [
-        "Two banners + bungee cords, table conversation cards, push cards, buttons, candy, foldovers, literature, shirts.",
+        "Two banners + bungee cords, table conversation cards, 1 four-foot and 1 six-foot campaign tablecloth, push cards, buttons, candy, foldovers, literature, shirts.",
         "Name who hangs the two banners. That person hangs them at set. Bungees go with the banners.",
         "Yard signs from the same table. First name + phone on one sheet.",
         "Wave Relief for a 10-minute break each hour.",
-        "Strike B is 20 minutes. Return conversation cards and both banners. Count what is left.",
+        "Strike B is 20 minutes. Return conversation cards, both banners, and the 4-ft and 6-ft campaign tablecloths. Count what is left.",
       ],
     },
     {

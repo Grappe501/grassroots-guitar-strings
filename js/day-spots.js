@@ -206,7 +206,7 @@
       why: "30-minute merch set. Close the table for David so you sit. Close it again for 45 minutes of the concert.",
       clock: [
         row("08:00", "arrive", "If you are Setup 3: arrive. Event t-shirt on. Three people dress 8 guest tables only."),
-        row("08:25", "work", "Tables done. You set merch — 30 minutes. Hang two banners with bungee cords. Table conversation cards on the guest tables. Push cards, buttons, candy, foldovers, shirts."),
+        row("08:25", "work", "Tables done. You set merch — 30 minutes. Put the 4-ft and 6-ft campaign tablecloths on. Hang two banners with bungee cords. Table conversation cards on the guest tables. Push cards, buttons, candy, foldovers, shirts."),
         row("09:00", "work", "Yard-sign sheet on the same table. First name + phone. No second décor pass."),
         row("10:30", "leave", "Morning work is done. Leave. Eat a real lunch off site. Be back at 5:00."),
         row("17:00", "arrive", "Night arrival. T-shirt on. Table live. This page stays open."),
@@ -217,7 +217,7 @@
         row("18:30", "work", "Concert doors. Stay. This is a browse window."),
         row("19:15", "sit", "Close the table again. SIT the concert. 45 minutes. Relief will come get you if a line forms."),
         row("20:00", "work", "Table through encore. Start boxing loose shirts so strike is 20 minutes."),
-        row("20:45", "strike", "Strike B. Take down two banners and the bungee cords. Return table conversation cards. Count what is left. Bins to the campaign vehicle. 20 minutes."),
+        row("20:45", "strike", "Strike B. Take down two banners and the bungee cords. Fold the 4-ft and 6-ft campaign tablecloths. Return table conversation cards. Count what is left. Bins to the campaign vehicle. 20 minutes."),
         row("22:00", "done", "Merch is in a vehicle, not a hallway. You may leave."),
       ],
     },
