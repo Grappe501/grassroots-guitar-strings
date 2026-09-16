@@ -344,7 +344,7 @@
         "4:45 eat 15 minutes. Then the line owns you.",
         "4:00 brief Sarah and the two other servers. One line. You direct. They serve. You still do not plate.",
         "4:30 stay off the dance floor. Sound check. Ice should already be in.",
-        "5:30 BBQ open. Keep the line moving. Refill pans. Do not plate guest plates. Drinks are donations — water, tea, or lemonade.",
+        "5:15 BBQ open. Keep the line moving. Refill pans. Do not plate guest plates. Drinks are donations — water, tea, or lemonade.",
         "Stay on the line through dinner. A Production Manager can cover a restroom if they judge it is needed.",
         "6:20 line slows. Drink donation signs stay up. Water, tea, or lemonade.",
         "6:30 line closes. Thank the three servers. Merch keeps taking drink donations. You are off the line.",

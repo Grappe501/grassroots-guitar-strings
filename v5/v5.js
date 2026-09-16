@@ -3,7 +3,7 @@
   const PREFS = "ggs-prep-v3-prefs";
 
   const HOUSE =
-    "Arrive 4:30. Food doors 5:15. Buffet 5:30. David 5:45–6:15. Concert-only stay in cars until 6:30. Concert 7:00–about 8:45. Stay until 10 unless Event Captain sends you.";
+    "Arrive 4:30. Food doors 5:15. Buffet 5:15. David 5:45–6:15. Concert-only stay in cars until 6:30. Concert 7:00–about 8:45. Stay until 10 unless Event Captain sends you.";
 
   function esc(value) {
     return String(value ?? "")
