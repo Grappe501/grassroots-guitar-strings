@@ -168,10 +168,10 @@
       next: "Campaign & Merch is your seat. One table. 30-minute set. Shirts, banners, cards, buttons, candy.",
       duties: [
         "Set merch + campaign on one table — 30 minutes.",
-        "T-shirts, two banners + bungee cords, conversation cards, 1 four-foot and 1 six-foot campaign tablecloth, push cards, buttons, candy, foldovers.",
+        "Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes. Plus conversation cards and the 4-ft and 6-ft cloths.",
         "Hang the two banners. Bungee cords go with them.",
         "Yard signs from the same table. First name + phone on one sheet.",
-        "Strike B is 20 minutes. Count what is left. Return conversation cards, both banners, and the 4-ft and 6-ft campaign tablecloths.",
+        "Strike B is 20 minutes. Pack campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, conversation cards, both cloths.",
       ],
     },
   ];
@@ -275,7 +275,7 @@
       arrival: "8:00 AM if you dress · 3:00 PM for night",
       owns: "Debi Martin. One table. 30-minute set. Signs and shirts.",
       duties: [
-        "If you dress tables: 8:00 with Setup. 8:25 you own merch — 30 minutes. 4-ft and 6-ft campaign tablecloths, two banners + bungees, conversation cards, cards, buttons, candy, shirts.",
+        "If you dress tables: 8:00 with Setup. 8:25 you own merch — 30 minutes. Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes. 4-ft and 6-ft cloths. Conversation cards.",
         "9:00 yard-sign sheet on the same table. First name + phone. Morning done 10:30. Lunch off site. Back 3:00.",
         "If you only work night: 3:00 t-shirt on. Earlier if you can. Open My Night. Table live.",
         "3:15 eat 15 minutes. Sign: back in 10.",
