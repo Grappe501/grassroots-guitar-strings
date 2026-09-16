@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000066">
+<title>Kelly Grappe — 10 lead jobs</title>
+<link rel="stylesheet" href="/css/kelly-brand.css">
+<link rel="stylesheet" href="/css/sign-in.css">
+<link rel="stylesheet" href="/leads/leads.css">
+</head>
+<body>
+<div id="signInGate" class="signin" hidden>
+  <article class="signin__card">
+    <p class="eyebrow">KELLY GRAPPE</p>
+    <h1>Who are you?</h1>
+    <p>Lead meeting board. Name and a phone people can reach tonight.</p>
+    <label>I am
+      <input id="gateName" type="text" autocomplete="name" placeholder="Start typing your name">
+    </label>
+    <label>My phone
+      <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
+    </label>
+    <p class="signin__err" id="gateErr" hidden>Both are required.</p>
+    <button type="button" class="signin__go" id="gateGo">Open the 10 jobs</button>
+  </article>
+</div>
+<div data-needs-identity>
+<header class="lead-top">
+  <p class="eyebrow">KELLY GRAPPE · TOMORROW'S MEETING</p>
+  <h1>Ten lead jobs. Heaviest first.</h1>
+  <p>Cartoon names are placeholders. In the meeting, start at Event Lead and let people claim a seat. Then put volunteers under that lead.</p>
+  <nav>
+    <a href="/v5/">My night</a>
+    <a href="/volunteers/">Volunteers</a>
+    <a href="/command/">Command</a>
+    <button type="button" onclick="print()">Print</button>
+  </nav>
+</header>
+<main class="lead-wrap">
+  <datalist id="leadPeople"></datalist>
+  <div id="leadJobList"></div>
+</main>
+</div>
+<script src="/js/prep-store.js"></script>
+<script src="/js/crew-slice.js"></script>
+<script src="/js/people-directory.js"></script>
+<script src="/js/site-leads.js"></script>
+<script src="/js/sign-in.js"></script>
+<script src="/js/lead-duties.js"></script>
+<script>
+  if (window.GGSPrepStore) window.GGSPrepStore.startSync();
+</script>
+</body>
+</html>

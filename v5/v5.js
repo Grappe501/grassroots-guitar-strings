@@ -105,6 +105,17 @@
     }
   }
 
+  function renderBrief(name) {
+    const card = document.getElementById("briefCard");
+    if (!card || !window.GGSLeadDuties) return;
+    const brief = window.GGSLeadDuties.briefing(name);
+    document.getElementById("briefKicker").textContent = brief.kicker;
+    document.getElementById("briefTitle").textContent = brief.title;
+    document.getElementById("briefNext").textContent = brief.next;
+    const list = document.getElementById("briefDuties");
+    list.innerHTML = (brief.duties || []).map((d) => "<li>" + esc(d) + "</li>").join("");
+  }
+
   function renderNow(name, pack, roles, lead) {
     const cue = slice.cueAt(roles, new Date());
     const card = document.getElementById("nowCard");
@@ -203,12 +214,20 @@
     const roles = leads.rolesFor(name, pack);
     const lead = leads.isLead(name);
     document.getElementById("v5Who").textContent = name;
-    document.getElementById("v5Kicker").textContent = lead ? "SITE LEAD" : leads.isCaptain(roles) ? "CAPTAIN" : "YOUR NIGHT";
-    document.getElementById("v5Role").textContent = roles.length ? roles.map((r) => r.label).join(" · ") : lead ? "Full board access" : "Your jobs only";
+    const brief = window.GGSLeadDuties ? window.GGSLeadDuties.briefing(name) : null;
+    document.getElementById("v5Kicker").textContent = brief && brief.kicker ? brief.kicker : lead ? "SITE LEAD" : leads.isCaptain(roles) ? "CAPTAIN" : "YOUR NIGHT";
+    document.getElementById("v5Role").textContent = brief && brief.job
+      ? brief.job.title + " · " + brief.job.arrival
+      : roles.length
+        ? roles.map((r) => r.label).join(" · ")
+        : lead
+          ? "Day-of lead. Claim a seat on the 10-job list."
+          : "Your jobs only";
     const boardBtn = document.getElementById("boardTab");
     boardBtn.hidden = !lead;
     document.querySelector(".v5-nav").dataset.cols = lead ? "4" : "3";
     if (!lead && tab === "board") setTab("now");
+    renderBrief(name);
     renderNow(name, pack, roles, lead);
     renderJobs(name, pack, roles);
     renderBoard(name);

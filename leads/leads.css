@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  background: #f4f7fc;
+  color: #12124a;
+}
+
+.lead-top {
+  background: #000066;
+  color: #fff;
+  padding: 1.4rem 1.2rem 1.3rem;
+  border-bottom: 4px solid #ca913d;
+}
+
+.lead-top h1 {
+  margin: 0.2rem 0 0.45rem;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+.lead-top p {
+  max-width: 40rem;
+  color: #dbe7ef;
+}
+
+.lead-top nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.lead-top a,
+.lead-top button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  background: #ca913d;
+  color: #07074a;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lead-wrap {
+  width: min(720px, calc(100% - 1.6rem));
+  margin: 1.1rem auto 2.5rem;
+}
+
+.lead-job {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 102, 0.14);
+  border-radius: 16px;
+  padding: 1rem 1.05rem 1.1rem;
+  margin-bottom: 0.85rem;
+}
+
+.lead-job.is-open {
+  border-left: 6px solid #ca913d;
+}
+
+.lead-job.is-claimed {
+  border-left: 6px solid #000066;
+}
+
+.lead-job h2 {
+  margin: 0.15rem 0 0.35rem;
+}
+
+.lead-owns,
+.lead-when,
+.lead-cartoon {
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+}
+
+.lead-cartoon {
+  color: #364272;
+  font-size: 0.9rem;
+}
+
+.lead-job label {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0.7rem 0 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #000066;
+}
+
+.lead-owner {
+  border: 1px solid rgba(0, 0, 102, 0.22);
+  border-radius: 10px;
+  padding: 0.7rem 0.75rem;
+  font: inherit;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.lead-job ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.lead-job li + li {
+  margin-top: 0.35rem;
+}
+
+@media print {
+  .lead-top nav {
+    display: none;
+  }
+  .lead-job {
+    break-inside: avoid;
+  }
+}

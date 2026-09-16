@@ -54,6 +54,7 @@ body.v5 {
   padding: 0.85rem 1rem 1rem;
 }
 
+.v5-brief,
 .v5-now,
 .v5-lead,
 .v5-job,
@@ -65,7 +66,17 @@ body.v5 {
   margin-bottom: 0.75rem;
 }
 
+.v5-brief ul {
+  margin: 0.55rem 0 0.7rem;
+  padding-left: 1.15rem;
+}
+
+.v5-brief li + li {
+  margin-top: 0.35rem;
+}
+
 .v5-now h2,
+.v5-brief h2,
 .v5-lead h2 {
   margin: 0.2rem 0 0.4rem;
   font-size: clamp(1.6rem, 7vw, 2.2rem);

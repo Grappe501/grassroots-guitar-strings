@@ -75,6 +75,26 @@
   color: #ffd0c8;
   font-weight: 800;
 }
+.signin__suggest {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+}
+.signin__suggest[hidden] {
+  display: none !important;
+}
+.signin__suggest button {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #3a5366;
+  border-radius: 10px;
+  background: #07074a;
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+}
 .signin__go {
   width: 100%;
   border: 0;

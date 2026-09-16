@@ -35,6 +35,70 @@
       const el = document.getElementById(id);
       if (el && document.activeElement !== el) el.value = who.phone;
     });
+    paintGate(who.name);
+  }
+
+  function paintGate(name) {
+    const card = document.querySelector(".signin__card");
+    if (!card) return;
+    const dir = global.GGSPeople;
+    const person = dir ? dir.findPerson(name) : null;
+    const h1 = card.querySelector("h1");
+    const p = card.querySelector("h1 + p");
+    const go = document.getElementById("gateGo");
+    const eyebrow = card.querySelector(".eyebrow");
+    if (person) {
+      if (eyebrow) eyebrow.textContent = person.kicker;
+      if (h1) h1.textContent = "Hey " + person.first;
+      if (p) p.textContent = person.gate;
+      if (go) go.textContent = person.go || "Open my board";
+    } else if (h1 && !String(name || "").trim()) {
+      if (eyebrow && /kelly|sign in/i.test(eyebrow.textContent || "KELLY GRAPPE")) eyebrow.textContent = "KELLY GRAPPE";
+      if (h1) h1.textContent = "Who are you?";
+    }
+  }
+
+  function bindNames(input) {
+    if (!input || !global.GGSPeople) return;
+    let list = document.getElementById("crewNameList");
+    if (!list) {
+      list = document.createElement("datalist");
+      list.id = "crewNameList";
+      document.body.appendChild(list);
+    }
+    list.innerHTML = global.GGSPeople.names()
+      .map((n) => '<option value="' + n.replace(/"/g, "") + '"></option>')
+      .join("");
+    input.setAttribute("list", "crewNameList");
+    input.setAttribute("placeholder", "Start typing your name");
+    input.setAttribute("autocomplete", "off");
+    let box = document.getElementById("crewSuggest");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "crewSuggest";
+      box.className = "signin__suggest";
+      input.parentNode.appendChild(box);
+    }
+    function paintSuggest() {
+      const hits = global.GGSPeople.suggestions(input.value).slice(0, 8);
+      const typed = String(input.value || "").trim();
+      box.innerHTML = hits
+        .map((p) => '<button type="button" data-name="' + p.name.replace(/"/g, "") + '">' + p.name + "</button>")
+        .join("");
+      box.hidden = !typed || (hits.length === 1 && hits[0].name === typed) || !hits.length;
+      box.querySelectorAll("[data-name]").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          input.value = btn.dataset.name;
+          box.hidden = true;
+          paintGate(btn.dataset.name);
+          const phone = document.getElementById("gatePhone");
+          if (phone) phone.focus();
+        });
+      });
+      paintGate(input.value);
+    }
+    input.addEventListener("input", paintSuggest);
+    input.addEventListener("focus", paintSuggest);
   }
 
   function applyLock() {
@@ -97,6 +161,7 @@
     const phone = document.getElementById("gatePhone");
     const go = document.getElementById("gateGo");
     const err = document.getElementById("gateErr");
+    bindNames(name);
     fillKnown();
     function submit() {
       const ok = save(name ? name.value : "", phone ? phone.value : "");

@@ -26,7 +26,7 @@
     <h1>Who are you?</h1>
     <p>This is the campaign night board. Sign in once. This phone then shows only your jobs, your place, and your radio.</p>
     <label>I am
-      <input id="gateName" type="text" autocomplete="name" placeholder="Your name">
+      <input id="gateName" type="text" autocomplete="off" placeholder="Start typing your name">
     </label>
     <label>My phone
       <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
@@ -47,6 +47,13 @@
 
   <main class="v5-main">
     <section id="tabNow" class="v5-tab">
+      <article class="v5-brief" id="briefCard">
+        <p class="eyebrow" id="briefKicker">YOUR BRIEFING</p>
+        <h2 id="briefTitle">Your night</h2>
+        <p id="briefNext"></p>
+        <ul id="briefDuties"></ul>
+        <a class="v5-link" href="/leads/">See the 10 lead jobs</a>
+      </article>
       <article class="v5-now" id="nowCard">
         <p class="eyebrow" id="nowKicker">You should be</p>
         <h2 id="nowPlace">Stand by</h2>
@@ -108,8 +115,10 @@
 
 <script src="/js/prep-store.js"></script>
 <script src="/js/crew-slice.js"></script>
+<script src="/js/people-directory.js"></script>
 <script src="/js/site-leads.js"></script>
 <script src="/js/sign-in.js"></script>
+<script src="/js/lead-duties.js"></script>
 <script src="/js/radio-feed.js"></script>
 <script src="/js/radio-night.js"></script>
 <script src="/js/night-social.js"></script>

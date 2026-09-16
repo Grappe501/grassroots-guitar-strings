@@ -1,10 +1,23 @@
 (function (global) {
-  const SITE_LEADS = ["Carol", "Steve", "Kelly", "Ben", "Jay", "Christy", "John"];
+  const SITE_LEADS = [
+    "Steve Grappe",
+    "Carol Egan",
+    "Jay Powell",
+    "Christy Low",
+    "John Duke",
+    "Mark London",
+    "Kelly Grappe",
+    "Kristal Kuykendall",
+    "Ben Hurst",
+    "Sarah Hurst",
+    "Chance Bradford",
+    "Leeann Solice",
+  ];
 
   const NAME_ROLES = [
-    { who: /^ben\b|^benjamin\b/i, id: "food" },
+    { who: /^ben\b|hurst/i, id: "food" },
     { who: /tracy/i, id: "production" },
-    { who: /kelly/i, id: "greeter" },
+    { who: /kelly/i, id: "candidate" },
   ];
 
   function match(name, other) {
@@ -17,6 +30,7 @@
   function isLead(name) {
     const n = String(name || "").trim();
     if (!n) return false;
+    if (match(n, "Kelly Grappe")) return false;
     return SITE_LEADS.some((lead) => match(n, lead));
   }
 
