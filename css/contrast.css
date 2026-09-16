@@ -1,0 +1,237 @@
+/* Site-wide contrast: ink on paper, paper on navy. Last stylesheet wins. */
+
+:root {
+  --ggs-on-light: #12124a;
+  --ggs-on-dark: #e7eef4;
+  --ggs-label-light: #8a4b08;
+  --ggs-label-dark: #ca913d;
+  --ggs-muted-light: #364272;
+  --ggs-muted-dark: #9aafbd;
+}
+
+/* Light islands on dark pages inherit body paper-color. Pin ink. */
+.radio-band.radio-feed,
+.gap-text,
+.lists-stage,
+.lead-job,
+.job,
+.stats article,
+.panel,
+.hero-card,
+.qr-card,
+.status-card,
+.dashboard,
+.card,
+.copy-block {
+  color: var(--ggs-on-light);
+}
+
+.gap-text textarea,
+.radio-compose input,
+.wifi-form input,
+.me-phone-edit input,
+.lead-owner {
+  background: #fff;
+  color: var(--ggs-on-light);
+}
+
+.radio-text {
+  color: var(--ggs-on-light);
+}
+
+.radio-head h2,
+.radio-channel {
+  color: var(--ggs-on-light);
+}
+
+.radio-empty,
+.radio-ptt-hint,
+.radio-people-empty,
+.radio-time {
+  color: #4d6473;
+}
+
+body:not(.v5):not(.wifi) .card .eyebrow,
+body:not(.v5):not(.wifi) .panel .eyebrow,
+body:not(.v5):not(.wifi) .panel-kicker,
+body:not(.v5):not(.wifi) .hero-card .eyebrow,
+body:not(.v5):not(.wifi) .gap-text .eyebrow,
+body:not(.v5):not(.wifi) .section-head .eyebrow,
+body:not(.v5):not(.wifi) .radio-band .eyebrow,
+body:not(.v5):not(.wifi) .lists-stage .eyebrow,
+body:not(.v5):not(.wifi) .gear-card .eyebrow,
+body:not(.v5):not(.wifi) .now-card .eyebrow,
+body:not(.v5):not(.wifi) .ops-bar .eyebrow,
+body:not(.v5):not(.wifi) .crew-band .eyebrow,
+body:not(.v5):not(.wifi) .attention .eyebrow,
+body:not(.v5):not(.wifi) .stats .eyebrow,
+body:not(.v5):not(.wifi) .lead-job .eyebrow {
+  color: var(--ggs-label-light);
+}
+
+.topbar .eyebrow,
+.topbar .panel-kicker,
+.signin .eyebrow,
+.signin__card .eyebrow,
+.v5-top .eyebrow,
+.lead-top .eyebrow,
+.bar .eyebrow,
+.radio-digest .eyebrow,
+body.v5 .eyebrow,
+body.wifi .eyebrow,
+html.night .eyebrow,
+html.night .panel-kicker {
+  color: var(--ggs-label-dark);
+}
+
+/* Dark surfaces */
+html.night,
+html.night body,
+body.v5,
+body.wifi,
+.me-shell,
+.signin,
+.signin__card {
+  color: var(--ggs-on-dark);
+}
+
+html.night .radio-band.radio-feed,
+html.night .radio-feed-list,
+html.night .lists-stage,
+html.night .gear-card,
+html.night .gap-text,
+html.night .card,
+html.night .panel,
+html.night .hero-card,
+html.night .qr-card,
+html.night .status-card,
+html.night .dashboard,
+html.night .now-card,
+html.night .ops-bar,
+html.night .crew-band,
+html.night .attention,
+html.night .empty-filter,
+html.night .mode-card {
+  background: #0a0a4a;
+  border-color: #2a4154;
+  color: var(--ggs-on-dark);
+}
+
+html.night .radio-who,
+html.night .radio-text,
+html.night .radio-head h2,
+html.night .radio-channel,
+html.night .radio-rx-btn {
+  color: var(--ggs-on-dark);
+}
+
+html.night .radio-who {
+  color: var(--ggs-label-dark);
+}
+
+html.night .radio-empty,
+html.night .radio-ptt-hint,
+html.night .radio-people-empty,
+html.night .radio-time,
+html.night .muted,
+html.night .who-extra,
+body.v5 .who-extra,
+body.wifi .wifi-hint,
+body.wifi .wifi-fine {
+  color: var(--ggs-muted-dark);
+}
+
+html.night .radio-compose input,
+html.night .gap-text textarea {
+  background: #07074a;
+  color: var(--ggs-on-dark);
+  border-color: #3a5366;
+}
+
+html.night .radio-person {
+  background: #0a0a4a;
+  color: var(--ggs-on-dark);
+  border-color: #2a4154;
+}
+
+body.v5 .radio-band.radio-feed,
+body.v5 .gap-text {
+  color: var(--ggs-on-light);
+}
+
+body.v5 .radio-band.radio-feed .eyebrow,
+body.v5 .gap-text .eyebrow {
+  color: var(--ggs-label-light);
+}
+
+body.v5 .radio-who {
+  color: var(--who, #000066);
+}
+
+body.v5 .radio-text,
+body.v5 .radio-head h2,
+body.v5 .radio-channel,
+body.v5 .radio-compose input,
+body.v5 .gap-text textarea,
+body.v5 .radio-rx-btn {
+  color: var(--ggs-on-light);
+}
+
+body.v5 .radio-empty,
+body.v5 .radio-ptt-hint,
+body.v5 .radio-people-empty,
+body.v5 .radio-time {
+  color: #4d6473;
+}
+
+body.v5 .v5-brief,
+body.v5 .v5-now,
+body.v5 .v5-lead,
+body.v5 .v5-job,
+body.v5 .v5-sec,
+body.v5 .v5-top,
+body.v5 .v5-nav {
+  color: var(--ggs-on-dark);
+}
+
+body.v5 .v5-top .eyebrow,
+body.v5 .v5-brief .eyebrow,
+body.v5 .v5-now .eyebrow,
+body.v5 .v5-lead .eyebrow {
+  color: var(--ggs-label-dark);
+}
+
+/* Public dark bands */
+.site-footer,
+.host-banner,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer .display-title {
+  color: #fff;
+}
+
+.site-footer .muted,
+.site-footer .lead {
+  color: #c5d2ea;
+}
+
+.site-footer .eyebrow,
+.host-banner__kicker {
+  color: var(--ggs-label-dark);
+}
+
+.site-header {
+  color: var(--ggs-on-light);
+}
+
+.site-nav a,
+.site-nav__join summary,
+.header-utils a,
+.brand-lockup {
+  color: var(--ggs-on-light);
+}
+
+.header-cta {
+  color: #fff !important;
+}

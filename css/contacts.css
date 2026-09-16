@@ -29,6 +29,11 @@
   color: #687780;
   font-size: 0.8rem;
 }
+
+html.night .who-extra,
+body.v5 .who-extra {
+  color: #9aafbd;
+}
 .owner-reach {
   grid-column: 1 / -1;
 }

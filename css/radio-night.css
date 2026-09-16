@@ -16,6 +16,10 @@
   color: #000066;
 }
 
+body.v5 .radio-channel {
+  color: #12124a;
+}
+
 .radio-digest {
   margin: 0 0 0.45rem;
   padding: 0.55rem 0.7rem 0.6rem;

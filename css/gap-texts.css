@@ -13,6 +13,7 @@
   border: 1px solid #dce5ec;
   border-radius: 14px;
   padding: 0.85rem 0.9rem 1rem;
+  color: #12124a;
 }
 
 .gap-text textarea {
@@ -27,6 +28,7 @@
   line-height: 1.4;
   resize: vertical;
   background: #f4f7fc;
+  color: #12124a;
 }
 
 .gap-text-actions {

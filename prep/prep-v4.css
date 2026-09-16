@@ -28,6 +28,7 @@ body.v4 .topbar .eyebrow {
   border: 1px solid #d9d6ce;
   border-radius: 16px;
   margin-bottom: 1rem;
+  color: #12124a;
 }
 
 .radio-head {
@@ -41,6 +42,7 @@ body.v4 .topbar .eyebrow {
 .radio-head h2 {
   margin: 0;
   font-size: 1.15rem;
+  color: #12124a;
 }
 
 .radio-feed-list {
@@ -80,7 +82,7 @@ body.v4 .topbar .eyebrow {
 }
 
 .radio-text {
-  color: var(--who, #12124a);
+  color: #12124a;
   font-weight: 700;
 }
 
@@ -104,6 +106,8 @@ body.v4 .topbar .eyebrow {
   padding: 0.7rem 0.8rem;
   font: inherit;
   font-weight: 700;
+  background: #fff;
+  color: #12124a;
 }
 
 .lists-stage {
@@ -180,11 +184,22 @@ body[data-mode="packet"] #listsStage {
   display: none !important;
 }
 
+html.night .radio-band.radio-feed,
 html.night .radio-feed-list,
 html.night .lists-stage,
 html.night .gear-card {
   background: #0a0a4a;
   border-color: #2a4154;
+  color: #e7eef4;
+}
+
+html.night .radio-who {
+  color: #ca913d;
+}
+
+html.night .radio-text,
+html.night .radio-head h2,
+html.night .radio-channel {
   color: #e7eef4;
 }
 
