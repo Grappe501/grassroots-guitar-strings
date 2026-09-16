@@ -208,7 +208,9 @@ body.v5 .v5-lead,
 body.v5 .v5-job,
 body.v5 .v5-sec,
 body.v5 .v5-top,
-body.v5 .v5-nav {
+body.v5 .v5-nav,
+body.v5 .v5-ros,
+body.v5 .v5-facts {
   color: var(--ggs-on-dark);
 }
 

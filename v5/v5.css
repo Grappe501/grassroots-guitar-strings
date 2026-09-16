@@ -90,9 +90,75 @@ body.v5 {
 
 .v5-next,
 .v5-home,
-.v5-meta {
+.v5-meta,
+.v5-facts {
   color: #ca913d;
   font-weight: 700;
+}
+
+.v5-facts {
+  margin: 0.35rem 0 0.85rem;
+  color: #dbe7ef;
+}
+
+.v5-ros {
+  list-style: none;
+  margin: 0 0 1.1rem;
+  padding: 0;
+}
+
+.v5-ros li {
+  display: grid;
+  grid-template-columns: 4.6rem 1fr;
+  gap: 0.1rem 0.7rem;
+  padding: 0.85rem 0.75rem;
+  margin-bottom: 0.45rem;
+  background: #0a0a4a;
+  border: 1px solid #2a4154;
+  border-radius: 14px;
+}
+
+.v5-ros li b {
+  font-family: "League Spartan", Raleway, sans-serif;
+  color: #ca913d;
+  font-size: 0.95rem;
+}
+
+.v5-ros li em {
+  grid-column: 1;
+  font-style: normal;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9aafbd;
+}
+
+.v5-ros li span {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-weight: 700;
+  color: #e7eef4;
+}
+
+.v5-ros li.is-past {
+  opacity: 0.42;
+}
+
+.v5-ros li.is-now {
+  opacity: 1;
+  background: #12125a;
+  border-color: #ca913d;
+  box-shadow: inset 4px 0 0 #ca913d;
+}
+
+.v5-ros li.is-sit em,
+.v5-ros li.is-eat em {
+  color: #ca913d;
+}
+
+.v5-ros li.is-strike {
+  border-color: #8a2f28;
 }
 
 .v5-link {

@@ -40,33 +40,63 @@
     return mapped;
   }
 
+  function hm(t) {
+    const p = String(t || "").split(":");
+    const h = Number(p[0]);
+    const m = p[1] || "00";
+    if (!Number.isFinite(h)) return t;
+    return (h % 12 || 12) + ":" + m + " " + (h >= 12 ? "PM" : "AM");
+  }
+
+  function kindLabel(kind) {
+    return (
+      {
+        arrive: "Arrive",
+        work: "Do this",
+        eat: "Eat",
+        sit: "Sit",
+        show: "Show",
+        strike: "Strike",
+        leave: "Leave",
+        done: "Done",
+      }[kind] || kind
+    );
+  }
+
+  function atTime(t, now) {
+    const p = String(t || "").split(":");
+    const d = new Date(now.getTime());
+    d.setSeconds(0, 0);
+    d.setHours(Number(p[0]) || 0, Number(p[1]) || 0, 0, 0);
+    return d;
+  }
+
+  function clockIndex(clock) {
+    const now = clockNow();
+    let idx = 0;
+    (clock || []).forEach(function (row, i) {
+      if (now >= atTime(row.t, now)) idx = i;
+    });
+    return idx;
+  }
+
+  function spotFor(name) {
+    return window.GGSDaySpots && window.GGSDaySpots.spotForName(name);
+  }
+
   function spotCue(name) {
-    const spots = window.GGSDaySpots;
-    if (!spots) return null;
-    const spot = spots.spotForName(name);
+    const spot = spotFor(name);
     if (!spot || !spot.clock || !spot.clock.length) return null;
     const now = clockNow();
-    function at(t) {
-      const p = String(t || "").split(":");
-      const d = new Date(now.getTime());
-      d.setSeconds(0, 0);
-      d.setHours(Number(p[0]) || 0, Number(p[1]) || 0, 0, 0);
-      return d;
-    }
-    let current = spot.clock[0];
-    let next = spot.clock[1] || null;
-    spot.clock.forEach(function (row, i) {
-      if (now >= at(row.t)) {
-        current = row;
-        next = spot.clock[i + 1] || null;
-      }
-    });
+    const i = clockIndex(spot.clock);
+    const current = spot.clock[i];
+    const next = spot.clock[i + 1] || null;
     return {
       place: spot.title,
       do: current.text,
       next: next ? next.text : "",
       strike: current.kind === "strike",
-      waiting: now < at(spot.clock[0].t),
+      waiting: now < atTime(spot.clock[0].t, now),
       empty: false,
       spot: spot,
     };
@@ -173,6 +203,10 @@
       const feed = document.getElementById("radioFeed");
       if (feed) window.GGSRadioFeed.render(feed);
     }
+    if (next === "jobs") {
+      const line = document.querySelector("#jobsClock .is-now");
+      if (line) line.scrollIntoView({ block: "center" });
+    }
   }
 
   function renderBrief(name) {
@@ -232,25 +266,68 @@
     bindJobs(box, name);
   }
 
+  function paintDayClock(spot) {
+    const root = document.getElementById("jobsClock");
+    if (!root || !spot || !spot.clock) return;
+    const idx = clockIndex(spot.clock);
+    if (root.dataset.spot !== spot.id || root.children.length !== spot.clock.length) {
+      root.dataset.spot = spot.id;
+      root.innerHTML = spot.clock
+        .map(function (block) {
+          return (
+            '<li class="is-' +
+            esc(block.kind) +
+            '"><b>' +
+            esc(hm(block.t)) +
+            "</b><em>" +
+            esc(kindLabel(block.kind)) +
+            "</em><span>" +
+            esc(block.text) +
+            "</span></li>"
+          );
+        })
+        .join("");
+    }
+    Array.prototype.forEach.call(root.children, function (li, i) {
+      li.classList.toggle("is-now", i === idx);
+      li.classList.toggle("is-past", i < idx);
+    });
+  }
+
   function renderJobs(name, pack, roles) {
+    const spot = spotFor(name);
     const mine = pack.mine;
     const extras = roleOpen(roles).filter((row) => !mine.some((m) => m.key === row.key));
     const captain = leads.isCaptain(roles) || leads.isLead(name);
-    document.getElementById("jobsKicker").textContent = captain ? "YOUR COMMAND" : "YOUR JOBS";
-    document.getElementById("jobsTitle").textContent = captain
-      ? "Your list plus open work in your lane. Tap done. It updates every phone."
-      : "Only jobs with your name. Tap done. It updates every phone.";
+    const facts = document.getElementById("jobsFacts");
+    const clockEl = document.getElementById("jobsClock");
+    if (spot && spot.clock && spot.clock.length) {
+      document.getElementById("jobsKicker").textContent = "YOUR DAY · " + String(spot.title || "").toUpperCase();
+      document.getElementById("jobsTitle").textContent = "Minute by minute. Gold row is now.";
+      facts.hidden = false;
+      facts.textContent = "Arrive " + spot.arrive + " · Eat — " + spot.eat + " · Sit — " + spot.sit;
+      paintDayClock(spot);
+    } else {
+      document.getElementById("jobsKicker").textContent = captain ? "YOUR COMMAND" : "YOUR JOBS";
+      document.getElementById("jobsTitle").textContent = captain
+        ? "Your list plus open work in your lane. Tap done. It updates every phone."
+        : "Only jobs with your name. Tap done. It updates every phone.";
+      facts.hidden = true;
+      facts.textContent = "";
+      clockEl.innerHTML = "";
+      clockEl.removeAttribute("data-spot");
+    }
     const list = document.getElementById("jobsList");
     const open = mine.filter((row) => !row.done);
     const done = mine.filter((row) => row.done);
     const gap = captain ? extras.filter((row) => !String(row.owner || "").trim()) : [];
     const owned = captain ? extras.filter((row) => String(row.owner || "").trim()) : [];
     let html = "";
-    if (open.length) html += "<p class='eyebrow'>ASSIGNED TO YOU</p>" + open.map((row) => jobBtn(row, name)).join("");
-    if (gap.length) html += "<p class='eyebrow'>STILL NEED A NAME</p>" + gap.slice(0, 20).map((row) => jobBtn(row, name)).join("");
-    if (owned.length) html += "<p class='eyebrow'>IN YOUR LANE</p>" + owned.slice(0, 20).map((row) => jobBtn(row, name)).join("");
+    if (open.length) html += "<p class='eyebrow'>BOARD CHECKS ON YOU</p>" + open.map((row) => jobBtn(row, name)).join("");
+    if (gap.length) html += "<p class='eyebrow'>STILL NEED A NAME</p>" + gap.slice(0, 12).map((row) => jobBtn(row, name)).join("");
+    if (owned.length) html += "<p class='eyebrow'>IN YOUR LANE</p>" + owned.slice(0, 12).map((row) => jobBtn(row, name)).join("");
     if (done.length) html += "<p class='eyebrow'>DONE</p>" + done.slice(0, 8).map((row) => jobBtn(row, name)).join("");
-    if (!html) html = '<p class="v5-meta">Nothing on this phone yet. A lead can put your name on a job.</p>';
+    if (!html && !spot) html = '<p class="v5-meta">Nothing on this phone yet. A lead can put your name on a job.</p>';
     list.innerHTML = html;
     bindJobs(list, name);
   }
