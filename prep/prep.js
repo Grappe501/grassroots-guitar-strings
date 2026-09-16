@@ -1,6 +1,6 @@
 const sections = [
   {id:'overview',title:'Overview',intro:'Command board for Thursday. Every task has an owner and timing field so nothing is left floating.',cards:[
-    {title:'Event facts',tasks:['Venue access begins at 8:00 AM','Eight 8-foot round tables with eight chairs each; 64 chairs total — venue already placed from the floor plan','Round tables arranged in a horseshoe with an open dance floor in front of the stage — venue already placed','Four 8-foot rectangular tables at the front entryway for buffet BBQ — venue already placed','One 4-foot table in the lobby for tickets/check-in — venue already placed','BBQ planned for 100 people','Everything is inside. Dinner doors 5:00. Concert-only stay in cars until 6:30.','Buffet opens at 5:30 PM','David acoustic starts at 5:45 PM','Concert doors at 6:30 PM — concert-only come in from the cars','Concert starts promptly at 7:00 PM — same room','Show ends 8:45–9:00 PM. Building cleared by 10:00 PM']},
+    {title:'Event facts',tasks:['Venue access begins at 8:00 AM','Eight 8-foot round tables with eight chairs each; 64 chairs total — venue already placed from the floor plan','Round tables arranged in a horseshoe with an open dance floor in front of the stage — venue already placed','Four 8-foot rectangular tables at the front entryway for buffet BBQ — venue already placed','One 4-foot table in the lobby for tickets/check-in — venue already placed','BBQ planned for 100 people','Everything is inside. Food doors 5:15. Concert-only stay in cars until 6:30.','Buffet opens at 5:30 PM','David acoustic starts at 5:45 PM','Concert doors at 6:30 PM — concert-only come in from the cars','Concert starts promptly at 7:00 PM — same room','Show ends 8:45–9:00 PM. Building cleared by 10:00 PM']},
     {title:'Command priorities',tasks:['Choose one Event Captain','Lock the setup roster','Lock the event/guest-service roster','Recruit a dedicated 10–12+ person teardown crew','Confirm Ben’s food/service-supply list tonight','Confirm Tracy’s production/equipment list','Inventory coolers and bottled water','Confirm ticketing and payment procedure','Assign photography/video','Create the load-out plan before Thursday']}
   ]},
   {id:'ben',title:'Ben / BBQ',intro:'Use this section tonight with Ben. Mark the responsible person beside every confirmation item.',cards:[
@@ -20,7 +20,7 @@ const sections = [
   ]},
   {id:'tickets',title:'Tickets',intro:'The lobby is the controlled arrival point. Keep one person stationed there.',cards:[
     {title:'Lobby setup',tasks:['Bring 4-foot table to lobby','Add tablecloth','No paper tickets. Check-in and $25 door only.','Prepare guest list if applicable','Prepare pens','Prepare cash box/change if cash accepted','Prepare electronic payment method if applicable','Prepare ticket signage','Prepare event information','Prepare campaign QR codes','Prepare backup paper process']},
-    {title:'Ticket operations',tasks:['Assign primary ticket/check-in person','Assign backup ticket person','Confirm walk-up ticket procedure','Confirm guest-list procedure','Confirm cash/payment procedure','Confirm ticket reconciliation procedure','No ticket inventory. Hash marks on one sheet.','Open ticket table at 5:00 PM dinner doors','Maintain ticket station through 6:30 concert doors','Close/reconcile ticket station after arrivals settle']}
+    {title:'Ticket operations',tasks:['Assign primary ticket/check-in person','Assign backup ticket person','Confirm walk-up ticket procedure','Confirm guest-list procedure','Confirm cash/payment procedure','Confirm ticket reconciliation procedure','No ticket inventory. Hash marks on one sheet.','Open ticket table at 5:15 PM food doors','Maintain ticket station through 6:30 concert doors','Close/reconcile ticket station after arrivals settle']}
   ]},
   {id:'campaign',title:'Campaign',intro:'Have campaign materials organized, visible, and easy to hand to people without creating a bottleneck.',cards:[
     {title:'Materials',tasks:['Bring Kelly Craft memorabilia','Bring Kelly Grappe campaign literature','Bring business/contact cards','Bring postcards','Bring door hangers','Bring buttons/stickers/pins as applicable','Prepare campaign QR codes','Prepare volunteer signup information','Prepare donation information','Set up campaign display','Assign campaign-materials owner']},
@@ -43,7 +43,7 @@ const sections = [
     ['Early afternoon','Finish room, campaign, sign, lobby, beverage, and production setup','All setup leads'],
     ['3:00 PM','All volunteers and leads on site. Earlier if they can.','Night crew'],
     ['4:30 PM','SOUND CHECK with David and the band. You should already be here. Stay off the dance floor.','David + Tracy + Captain'],
-    ['5:00 PM','Dinner doors. Concert-only stay in cars.','Ticket + Door teams'],
+    ['5:15 PM','Food doors. Concert-only stay in cars.','Ticket + Door teams'],
     ['5:30 PM','Buffet opens. Ticket station already live.','Food + Ticket + Guest teams'],
     ['5:45 PM','David starts. Acoustic on the dance floor. All inside.','David + Production'],
     ['6:15 PM','Acoustic set wraps; transition room toward concert','Event Captain'],

@@ -51,26 +51,26 @@
     },
     {
       id: "water",
-      title: "$1 water + ice — sold at merch",
+      title: "Drinks + ice — donations at merch",
       inn: [
-        "Bottled water — 120 bottles. Sold at the merch table. $1 cash.",
+        "Bottled water — 120 bottles. Donations at the merch table. Water, tea, or lemonade.",
         "Ice chests / coolers",
         "Ice — 6 bags (10 lb) for bottled water",
         "Money bag",
         "Ones for change",
         "Count sheet + pen",
-        "Water signs printed at HQ — 8.5 x 11 (2+)",
+        "Drink donation signs printed at HQ — 8.5 x 11 (2+)",
       ],
       out: [
         "Leftover water packed",
         "Personal coolers back to owners",
         "Money bag with Event Captain",
-        "Water signs packed",
+        "Drink donation signs packed",
       ],
     },
     {
       id: "drinks",
-      title: "Tea / lemonade",
+      title: "Tea / lemonade — donations",
       inn: [
         "Unsweet tea — 8 gallons",
         "Lemonade — 6 gallons",
@@ -130,7 +130,7 @@
         "Pens",
         "Postcards",
         "Cash envelopes",
-        "Bottled water — 120 bottles. Sold at this table. $1 cash.",
+        "Bottled water — 120 bottles. Drink donations at this table.",
       ],
       out: [
         "Literature packed",

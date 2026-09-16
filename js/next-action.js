@@ -328,14 +328,14 @@
         id: "water",
         label: "Water",
         need: "Need a captain",
-        text: "Can you run water and ice at Woody's Thursday from 5:30? 120 bottles. Sell for $1 cash or give one away. Same person owns ice. Reply YES.",
+        text: "Can you run drinks at Woody's Thursday from 5:30? 120 bottles plus tea and lemonade. We are taking donations. Reply YES.",
       });
     } else if (undone(list, /stock 120 bottled waters on ice/i).length) {
       out.push({
         id: "water",
         label: "Water",
         need: "120 bottles",
-        text: "120 water bottles still need to go on ice at Woody's before guests. $1 cash or complimentary. Can you take the water table?",
+        text: "120 water bottles still need to go on ice at Woody's before guests. Drink donations. Can you take the merch drink bag?",
       });
     }
     return out;

@@ -118,6 +118,36 @@ body {
   border-radius: 8px;
   margin: 0.85rem auto 0;
 }
+.qr--pay {
+  width: 10rem;
+  height: 10rem;
+}
+.times {
+  list-style: none;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: 6.6in;
+}
+.times li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.42rem 0;
+  border-top: 2px solid rgba(202, 145, 61, 0.45);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #e7eef4;
+  text-align: left;
+}
+.times li:last-child { border-bottom: 2px solid rgba(202, 145, 61, 0.45); }
+.times b {
+  color: #ca913d;
+  font-family: "League Spartan", Raleway, sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: -0.03em;
+}
 .cheat {
   background: #000066;
   color: #fff;

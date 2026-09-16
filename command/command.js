@@ -5,7 +5,7 @@ const milestones=[
  ['2026-09-17T14:00:00','2:00 PM','DAB load in'],
  ['2026-09-17T15:00:00','3:00 PM','DAB check. Night crew on site'],
  ['2026-09-17T16:30:00','4:30 PM','Acoustic PA check'],
- ['2026-09-17T17:00:00','5:00 PM','VIP doors — concert-only stay in cars'],
+ ['2026-09-17T17:15:00','5:15 PM','Food doors — concert-only stay in cars'],
  ['2026-09-17T17:30:00','5:30 PM','Buffet opens. Band dinner'],
  ['2026-09-17T17:45:00','5:45 PM','David starts'],
  ['2026-09-17T18:15:00','6:15 PM','Acoustic wraps / transition'],

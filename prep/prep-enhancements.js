@@ -44,17 +44,18 @@
       ['Place QR stations at ticket/lobby, campaign display and high-traffic guest area']
     ]);
     addCard('campaign','Print signs at HQ — 8.5 x 11',[
-      ['Print $1 water signs at HQ'],
+      ['Print drink donation signs at HQ'],
       ['Print $25 concert signs at HQ'],
+      ['Print t-shirt $25 + BBQ $25 + kids $5 + door signs at HQ'],
       ['Print volunteer signs at HQ'],
       ['Print website signs at HQ'],
       ['Bring the printed 8.5 x 11 stack Thursday']
     ],'signs-hq');
-    addCard('food','$1 water — cash only',[
-      ['Print the cash-only $1 water signs at HQ — 8.5 x 11'],
-      ['Water is cash only — no cards, no QR'],
-      ['Money bag + ones for change'],
-      ['Water + ice captain owns this station']
+    addCard('food','Drink donations',[
+      ['Print the drink donation signs at HQ — 8.5 x 11'],
+      ['We are taking donations for drinks — water, tea, or lemonade'],
+      ['Money bag for drink donations'],
+      ['Water + ice lives at merch']
     ]);
   }
   window.addEventListener('ggs-prep-loaded',(e)=>restoreQr(e.detail));

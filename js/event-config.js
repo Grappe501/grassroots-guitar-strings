@@ -7,7 +7,7 @@ const EVENT_CONFIG = {
   tagline: "Live country. Hometown night.",
   date: "Thursday, September 17, 2026",
   dateShort: "Sep 17, 2026",
-  time: "5:00 p.m.",
+  time: "5:15 p.m.",
   concertTime: "7:00 p.m.",
   timezone: "Central",
   venueName: "Woody's Sherwood Forest",
@@ -89,7 +89,7 @@ const TICKET_TIERS = [
     price: 25,
     priceLabel: "$25.00",
     description:
-      "VIP BBQ dinner provided by the Saucy Pig. Dinner doors 5:00. Buffet 5:30–6:30 p.m. All inside.",
+      "VIP BBQ dinner provided by the Saucy Pig. Food doors 5:15. Buffet 5:30–6:30 p.m. All inside.",
     available: true,
   },
   {
@@ -98,7 +98,7 @@ const TICKET_TIERS = [
     price: 50,
     priceLabel: "$50.00",
     description:
-      "VIP BBQ dinner from the Saucy Pig plus concert admission. Dinner doors 5:00. Buffet 5:30. David at 5:45. Concert at 7:00. All inside.",
+      "VIP BBQ dinner from the Saucy Pig plus concert admission. Food doors 5:15. Buffet 5:30. David at 5:45. Concert at 7:00. All inside.",
     available: true,
     featured: true,
   },
@@ -108,7 +108,7 @@ const TICKET_TIERS = [
     price: 250,
     priceLabel: "$250.00",
     description:
-      "VIP BBQ dinner, a commemorative concert t-shirt, and concert admission. Dinner doors 5:00. Concert at 7:00. All inside.",
+      "VIP BBQ dinner, a commemorative concert t-shirt, and concert admission. Food doors 5:15. Concert at 7:00. All inside.",
     available: true,
   },
   {

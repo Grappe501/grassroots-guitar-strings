@@ -10,7 +10,7 @@
     emailSubject: "David Adam Byrnes Live in Sherwood — Sep 17",
     emailBody:
       "I wanted to invite you to see David Adam Byrnes live at Grassroots & Guitar Strings in Sherwood.\n\n" +
-      `Thursday, September 17, 2026 · ${cfg.venueName || "Woody's Sherwood Forest"} · Dinner doors 5:00 p.m. Everything inside.\n\n` +
+      `Thursday, September 17, 2026 · ${cfg.venueName || "Woody's Sherwood Forest"} · Food doors 5:15 p.m. Everything inside.\n\n` +
       "Live country concert, dinner, and a Constitution Day gathering. Watch his videos first: " +
       site +
       "/music/\n\n" +

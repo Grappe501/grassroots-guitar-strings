@@ -14,7 +14,7 @@ const defaults = {
     "Server 1 — Sarah. Serving line with Ben.",
     "Server 2 — serving line with Ben.",
     "Server 3 — serving line with Ben.",
-    "Water — $1 bottles only. Tea and lemonade are free while they last.",
+    "Water — donations for water, tea, or lemonade.",
     "Campaign + merch — one table, 30 min set",
     "Tracy production helper — with Tracy 8:00–10:00 AM through Strike D",
     "Floater A — relief loop all night",
@@ -28,9 +28,9 @@ const defaults = {
     "Sound/lights muscle 3 — 8:45. Carry remaining production to Tracy's vehicle.",
   ],
   grounds: [
-    "Parking — 5:00–7:00. Dinner guests go in. Concert-only stay in cars until 6:30.",
-    "Directions — 5:00–7:00. Lot to door. Everything is inside. Concert-only stay in cars until 6:30.",
-    "Crowd / lobby — 5:00–7:00. Dinner doors at 5:00. Concert-only at 6:30. Keep the line moving. Point to tickets.",
+    "Parking — 5:15–7:00. Food doors at 5:15. Concert-only stay in cars until 6:30.",
+    "Directions — 5:15–7:00. Lot to door. Everything is inside. Concert-only stay in cars until 6:30.",
+    "Crowd / lobby — 5:15–7:00. Food doors at 5:15. Concert-only at 6:30. Keep the line moving. Point to tickets.",
   ],
 };
 const teams = [
@@ -88,13 +88,16 @@ function ensureFoodLine() {
       row.role = "Food service lead — Ben. Line, not plates, not water.";
       if (!String(row.name || "").trim()) row.name = "Ben Hurst";
     }
+    if (/\$1 bottles only|tea and lemonade are free/i.test(String(row.role || ""))) {
+      row.role = "Water — donations for water, tea, or lemonade.";
+    }
   });
   [
     "Food service lead — Ben. Line, not plates, not water.",
     "Server 1 — Sarah. Serving line with Ben.",
     "Server 2 — serving line with Ben.",
     "Server 3 — serving line with Ben.",
-    "Water — $1 bottles only. Tea and lemonade are free while they last.",
+    "Water — donations for water, tea, or lemonade.",
   ].forEach((role) => {
     const key = role.split(" — ")[0];
     const hint = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
