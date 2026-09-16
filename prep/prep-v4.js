@@ -14,7 +14,7 @@
         "Power strips + extension cords",
         "Gaffer / cable tape",
         "Spare batteries",
-        "Bar stool for David",
+        "Bar stool — someone must bring it (venue does not have one)",
         "David water",
       ],
       out: [
@@ -26,6 +26,7 @@
         "Mixer packed",
         "Lights packed",
         "Loaded in Tracy's vehicle",
+        "Bar stool goes home with the person who brought it",
         "Stage floor clear",
       ],
     },
@@ -58,7 +59,7 @@
         "Money bag",
         "Ones for change",
         "Count sheet + pen",
-        "Cash-only water signs (2+)",
+        "Water signs printed at HQ — 8.5 x 11 (2+)",
       ],
       out: [
         "Leftover water packed",
@@ -89,7 +90,7 @@
         "Pens",
         "Contribution envelopes",
         "Guest list if used",
-        "Ticket + $25 door signs",
+        "$25 door signs printed at HQ — 8.5 x 11",
       ],
       out: [
         "Cash reconciled",
@@ -108,8 +109,9 @@
         "Road / entrance signs",
         "Concert T-shirts",
         "Regnet Populis giveaway shirts",
-        "Volunteer print signs",
-        "Website print signs",
+        "Volunteer signs printed at HQ — 8.5 x 11",
+        "Website signs printed at HQ — 8.5 x 11",
+        "Print the full 8.5 x 11 sign stack at HQ",
         "Donate QR + acrylic holders",
       ],
       out: [

@@ -7,12 +7,13 @@
   const state=store?store.readCache():JSON.parse(localStorage.getItem(storageKey)||'{}');
   const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
   const qr=url=>`https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=300&margin=2`;
-  function addCard(sectionId,title,tasks){
+  function addCard(sectionId,title,tasks,slug){
+    const id=slug||sectionId;
     const section=document.querySelector(`[data-section="${sectionId}"] .grid`);
-    if(!section || section.querySelector('[data-qr-card]')) return;
+    if(!section || section.querySelector('[data-qr-card="'+id+'"]')) return;
     const card=document.createElement('article');
-    card.className='card'; card.dataset.qrCard='true';
-    card.innerHTML=`<h3>${title}</h3><div class="task-list">${tasks.map((t,i)=>{const key=`qr:${sectionId}:${i}`,x=state[key]||{};return `<div class="task" data-qr-key="${key}"><label class="check"><input class="task-check" type="checkbox" ${x.done?'checked':''}><span class="checkmark"></span><span class="task-text">${esc(t[0])}</span></label><input class="owner" value="${esc(x.owner||'')}" placeholder="Assigned to…"><input class="when" value="${esc(x.when||'')}" placeholder="When…">${t[1]?`<div class="qr-meta"><img src="${qr(t[1])}" alt="QR code for ${esc(t[0])}"><a href="${esc(t[1])}" target="_blank" rel="noopener">${esc(t[1])}</a></div>`:''}</div>`}).join('')}</div>`;
+    card.className='card'; card.dataset.qrCard=id;
+    card.innerHTML=`<h3>${title}</h3><div class="task-list">${tasks.map((t,i)=>{const key=`qr:${id}:${i}`,x=state[key]||{};return `<div class="task" data-qr-key="${key}"><label class="check"><input class="task-check" type="checkbox" ${x.done?'checked':''}><span class="checkmark"></span><span class="task-text">${esc(t[0])}</span></label><input class="owner" value="${esc(x.owner||'')}" placeholder="Assigned to…"><input class="when" value="${esc(x.when||'')}" placeholder="When…">${t[1]?`<div class="qr-meta"><img src="${qr(t[1])}" alt="QR code for ${esc(t[0])}"><a href="${esc(t[1])}" target="_blank" rel="noopener">${esc(t[1])}</a></div>`:''}</div>`}).join('')}</div>`;
     section.appendChild(card);
     card.querySelectorAll('.task').forEach(row=>row.addEventListener('input',()=>save(row)));
     card.querySelectorAll('.task').forEach(row=>row.addEventListener('change',()=>save(row)));
@@ -42,8 +43,15 @@
       ['Assign QR station owner'],
       ['Place QR stations at ticket/lobby, campaign display and high-traffic guest area']
     ]);
+    addCard('campaign','Print signs at HQ — 8.5 x 11',[
+      ['Print $1 water signs at HQ'],
+      ['Print $25 concert signs at HQ'],
+      ['Print volunteer signs at HQ'],
+      ['Print website signs at HQ'],
+      ['Bring the printed 8.5 x 11 stack Thursday']
+    ],'signs-hq');
     addCard('food','$1 water — cash only',[
-      ['Print the cash-only $1 water signs'],
+      ['Print the cash-only $1 water signs at HQ — 8.5 x 11'],
       ['Water is cash only — no cards, no QR'],
       ['Money bag + ones for change'],
       ['Water + ice captain owns this station']

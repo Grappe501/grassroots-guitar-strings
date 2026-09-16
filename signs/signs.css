@@ -32,17 +32,25 @@ body {
   display: grid;
   gap: 1rem;
   padding: 1rem;
-  max-width: 8.5in;
+  width: 8.5in;
+  max-width: 100%;
   margin: 0 auto;
 }
-.sign {
+.sign,
+.cheat.sign-page {
   background: #17466b;
   color: #fff;
   border: 10px solid #f3c979;
   border-radius: 8px;
   padding: 1.4rem 1.2rem 1.1rem;
   text-align: center;
-  min-height: 5in;
+  width: 8.5in;
+  height: 11in;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .sign--gold {
   background: #f3c979;
@@ -88,9 +96,12 @@ body {
 }
 .cheat {
   background: #fff;
-  border: 1px solid #d9d6ce;
-  border-radius: 12px;
-  padding: 1rem 1.1rem;
+  color: #172532;
+  border: 10px solid #17466b;
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  text-align: left;
+  justify-content: flex-start;
 }
 .cheat h2 { margin: 0 0 0.4rem; }
 .cheat ul { margin: 0; padding-left: 1.2rem; }
@@ -123,9 +134,33 @@ body {
   color: #596a76;
   font-weight: 600;
 }
+@page {
+  size: letter portrait;
+  margin: 0;
+}
 @media print {
+  html, body {
+    background: #fff;
+    width: 8.5in;
+  }
   .bar { display: none; }
-  .sheet { padding: 0; }
-  .sign, .cheat { break-inside: avoid; }
-  .cheat { break-before: page; }
+  .sheet {
+    width: 8.5in;
+    padding: 0;
+    gap: 0;
+    max-width: none;
+  }
+  .sign,
+  .cheat.sign-page,
+  .cheat {
+    width: 8.5in;
+    height: 11in;
+    min-height: 11in;
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+    break-after: page;
+    page-break-after: always;
+    break-inside: avoid;
+  }
 }
