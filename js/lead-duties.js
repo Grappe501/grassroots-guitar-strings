@@ -25,6 +25,18 @@
     kelly: { kind: "event", hint: /kelly support/i },
     photo: { kind: "event", hint: /photo lead/i },
     strike: { kind: "strike", hint: /strike lead/i, role: "Strike Lead — call the walk. Venue furniture stays." },
+    setup1: { kind: "setup", hint: /setup 1/i, role: "Setup 1 — morning dresser" },
+    setup2: { kind: "setup", hint: /setup 2/i, role: "Setup 2 — morning dresser" },
+    server1: { kind: "event", hint: /server 1/i },
+    server2: { kind: "event", hint: /server 2/i },
+    server3: { kind: "event", hint: /server 3/i },
+    water: { kind: "event", hint: /drink station|^water —/i },
+    parking: { kind: "grounds", hint: /parking/i },
+    directions: { kind: "grounds", hint: /directions/i },
+    crowd: { kind: "grounds", hint: /crowd|lobby/i },
+    muscle1: { kind: "strike", hint: /muscle 1/i },
+    muscle2: { kind: "strike", hint: /muscle 2/i },
+    muscle3: { kind: "strike", hint: /muscle 3/i },
   };
 
   function syncSpot(id, owner) {
@@ -152,16 +164,21 @@
 
   function saveOwner(id, owner) {
     if (!store) return;
-    const next = jobs().map((job) => ({
-      id: job.id,
-      owner: job.id === id ? String(owner || job.cartoon).trim() || job.cartoon : job.owner,
-    }));
-    store.saveDoc("lead-jobs", { v: 1, jobs: next });
-    const claimed = next.find((row) => row.id === id);
-    if (claimed && claimed.owner) {
-      syncSpot(id, claimed.owner);
-      syncVolunteer(id, claimed.owner);
+    const name = String(owner || "").trim();
+    const duty = allJobs().find((job) => job.id === id);
+    if (duty && duty.spotId && global.GGSDaySpots) {
+      global.GGSDaySpots.saveOwner(store, duty.spotId, name, { skipLead: true });
     }
+    const leadId = (duty && duty.leadJob) || id;
+    if (jobs().some((job) => job.id === leadId)) {
+      const next = jobs().map((job) => ({
+        id: job.id,
+        owner: job.id === leadId ? name || job.cartoon : job.owner,
+      }));
+      store.saveDoc("lead-jobs", { v: 1, jobs: next });
+      if (name) syncSpot(leadId, name);
+    }
+    if (name) syncVolunteer(leadId, name);
     if (store.flush) store.flush();
   }
 
@@ -175,12 +192,73 @@
   function jobFor(name) {
     if (!name) return null;
     return (
-      jobs().find((job) => {
+      allJobs().find((job) => {
         const owner = ownerName(job);
         if (!owner) return false;
         return dir ? dir.match(owner, name) : false;
       }) || null
     );
+  }
+
+  function signedName() {
+    if (global.GGSSignIn && global.GGSSignIn.identity) {
+      return String(global.GGSSignIn.identity().name || "").trim();
+    }
+    try {
+      return String(JSON.parse(localStorage.getItem("ggs-prep-v3-prefs") || "{}").me || "").trim();
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function wantsAllDuties() {
+    return /(?:\?|&)all=1\b/.test(location.search || "");
+  }
+
+  function allJobs() {
+    const spots = (global.GGSDaySpots && global.GGSDaySpots.SPOTS) || [];
+    const leadList = jobs();
+    const map = global.GGSDaySpots && store ? global.GGSDaySpots.owners(store) : {};
+    const used = {};
+    const fromSpots = spots
+      .filter((spot) => !spot.retired)
+      .map((spot) => {
+        const lead = leadList.find((job) => job.id === spot.leadJob || job.id === spot.id);
+        used[spot.id] = true;
+        if (lead) used[lead.id] = true;
+        const spotWho = String((map && map[spot.id]) || "").trim();
+        const leadWho = lead ? ownerName(lead) : "";
+        const owner = spotWho || leadWho;
+        return {
+          id: spot.id,
+          rank: spot.n,
+          title: spot.title,
+          weight: spot.short,
+          cartoon: lead ? lead.cartoon : "",
+          defaultOwner: lead ? lead.defaultOwner : "",
+          arrival: spot.arrive,
+          owns: spot.why,
+          duties: (lead && lead.duties && lead.duties.length ? lead.duties : (spot.clock || []).map((row) => row.text)),
+          owner: owner,
+          spotId: spot.id,
+          leadJob: spot.leadJob || "",
+        };
+      });
+    const extras = leadList
+      .filter((job) => !used[job.id])
+      .map((job) => Object.assign({}, job, { spotId: "" }));
+    return fromSpots.concat(extras).sort((a, b) => Number(a.rank || 99) - Number(b.rank || 99));
+  }
+
+  function visibleJobs() {
+    const list = allJobs();
+    const me = signedName();
+    if (!me || wantsAllDuties()) return list;
+    const mine = list.filter((job) => {
+      const owner = ownerName(job);
+      return owner && dir && dir.match(owner, me);
+    });
+    return mine.length ? mine : list;
   }
 
   function isCartoon(job) {
@@ -269,12 +347,50 @@
     if (!root || !dir) return;
     if (store && store.isPicking && store.isPicking()) return;
     seedDefaults();
-    root.innerHTML = jobs()
+    const me = signedName();
+    const showing = visibleJobs();
+    const personal = Boolean(me && showing.length === 1 && !wantsAllDuties());
+    const title = document.getElementById("dutyTitle");
+    const intro = document.getElementById("dutyIntro");
+    if (title) title.textContent = personal ? "Your duty." : "Every duty. One board.";
+    if (intro) {
+      intro.textContent = personal
+        ? "This is your job tonight. Open My Night for the minute-by-minute clock."
+        : "Overall view. Name each seat. When someone opens this page, they only see their own duty.";
+    }
+    const view = document.getElementById("dutyViewLink");
+    if (view) {
+      if (personal) {
+        view.hidden = false;
+        view.href = "/leads/?all=1";
+        view.textContent = "See every duty";
+      } else if (me && !wantsAllDuties()) {
+        view.hidden = true;
+      } else if (wantsAllDuties()) {
+        view.hidden = false;
+        view.href = "/leads/";
+        view.textContent = "Just my duty";
+      } else {
+        view.hidden = true;
+      }
+    }
+    root.innerHTML = showing
       .map((job) => {
         const open = isCartoon(job);
+        const who = ownerName(job);
+        const picker = personal
+          ? "<p class=\"lead-when\">This is your duty" + (who ? " · " + esc(who) : "") + ".</p>"
+          : "<label>Who has this seat" +
+            dir.leadSelectHtml(open ? "" : job.owner, {
+              className: "lead-owner",
+              attrs: 'data-job="' + esc(job.id) + '"',
+              blank: "Open — pick a name",
+            }) +
+            "</label>";
         return (
           '<article class="lead-job' +
           (open ? " is-open" : " is-claimed") +
+          (personal ? " is-mine" : "") +
           '"><p class="eyebrow">' +
           job.rank +
           " · " +
@@ -285,15 +401,9 @@
           esc(job.owns) +
           "</p><p class=\"lead-when\">Be there " +
           esc(job.arrival) +
-          '.</p><label>Who has this seat' +
-          dir.leadSelectHtml(open ? "" : job.owner, {
-            className: "lead-owner",
-            attrs: 'data-job="' + esc(job.id) + '"',
-            blank: "Open — pick a name",
-          }) +
-          "</label><p class=\"lead-cartoon\">Was a placeholder: " +
-          esc(job.cartoon) +
-          "</p><ul>" +
+          ".</p>" +
+          picker +
+          "<ul>" +
           job.duties.concat(global.GGSDaySpots && global.GGSDaySpots.SOCIAL ? [global.GGSDaySpots.SOCIAL] : []).map((d) => "<li>" + esc(d) + "</li>").join("") +
           "</ul></article>"
         );
@@ -309,6 +419,8 @@
 
   global.GGSLeadDuties = {
     jobs,
+    allJobs,
+    visibleJobs,
     saveOwner,
     jobFor,
     isCartoon,

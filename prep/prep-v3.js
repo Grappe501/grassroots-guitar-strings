@@ -453,9 +453,10 @@
   bindRadio();
   const hash = (location.hash || "").replace("#", "");
   if (hash === "run" || hash === "packet" || hash === "lists") prefs.mode = hash;
+  else prefs.mode = "lists";
   const listsJump = document.getElementById("listsJump");
   if (listsJump) listsJump.addEventListener("click", () => setMode("lists"));
-  setMode(prefs.mode || "plan");
+  setMode(prefs.mode || "lists");
   refresh();
   setInterval(() => {
     if (prefs.mode === "run") renderRun();

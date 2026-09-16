@@ -32,11 +32,7 @@
     <h1>Woody's Sherwood Forest</h1>
     <p>Join this network before radio or walkie. One tap. Every crew phone.</p>
     <p class="sync-status" id="syncStatus">Connecting to shared board…</p>
-    <nav class="wifi-nav">
-      <a href="/v5/">My night</a>
-      <a href="/prep/?full=1">Full board</a>
-      <a href="/command/">Command</a>
-    </nav>
+    <div data-crew-nav></div>
   </header>
   <main class="wifi-main">
     <section id="wifiReady" hidden>
@@ -69,8 +65,8 @@
   </main>
 </div>
 <script src="/js/prep-store.js?v=pick1"></script>
-<script src="/js/crew-slice.js?v=nohelper1"></script>
-<script src="/js/people-directory.js?v=nohelper1"></script>
+<script src="/js/crew-slice.js?v=stream1"></script>
+<script src="/js/people-directory.js?v=stream1"></script>
 <script src="/js/sign-in.js"></script>
 <script src="/js/wifi-join.js"></script>
 <script>
@@ -83,5 +79,6 @@
     window.GGSPrepStore.startSync();
   }
 </script>
+<script src="/js/crew-nav.js?v=stream1"></script>
 </body>
 </html>

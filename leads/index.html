@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#000066">
-<title>Kelly Grappe — 10 lead jobs</title>
+<title>Duties — Grassroots &amp; Guitar Strings</title>
 <link rel="stylesheet" href="/css/kelly-brand.css">
 <link rel="stylesheet" href="/css/sign-in.css">
 <link rel="stylesheet" href="/leads/leads.css">
@@ -15,7 +15,7 @@
   <article class="signin__card">
     <p class="eyebrow">KELLY GRAPPE</p>
     <h1>Who are you?</h1>
-    <p>Lead meeting board. Name and a phone people can reach tonight.</p>
+    <p>Duties board. Name and a phone people can reach tonight.</p>
     <label>I am
       <input id="gateName" type="text" autocomplete="name" placeholder="Start typing your name">
     </label>
@@ -23,22 +23,17 @@
       <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
     </label>
     <p class="signin__err" id="gateErr" hidden>Both are required.</p>
-    <button type="button" class="signin__go" id="gateGo">Open the 10 jobs</button>
+    <button type="button" class="signin__go" id="gateGo">Open my duty</button>
   </article>
 </div>
 <div data-needs-identity>
 <header class="lead-top">
-  <p class="eyebrow">KELLY GRAPPE · TOMORROW'S MEETING</p>
-  <h1>Ten lead jobs. Heaviest first.</h1>
-  <p>Pick a name for each spot. That name also fills the same seat on the roster. Debbie Martin already has merch.</p>
-  <p>Everyone takes pictures and video. Post them. Tag @KellyGrappeSOS, invite her to collaborate, hashtag #GrappeSOS. We pull tagged posts for the site.</p>
-  <nav>
-    <a href="/spots/">All phone pages</a>
-    <a href="/v5/">My night</a>
-    <a href="/volunteers/">Volunteers</a>
-    <a href="/command/">Command</a>
-    <button type="button" onclick="print()">Print</button>
-  </nav>
+  <p class="eyebrow">KELLY GRAPPE · DUTIES</p>
+  <h1 id="dutyTitle">Every duty. One board.</h1>
+  <p id="dutyIntro">Overall view. Name each seat. When someone opens this page, they only see their own duty.</p>
+  <p>Everyone takes pictures and video. Post them. Tag @KellyGrappeSOS, invite her to collaborate, hashtag #GrappeSOS.</p>
+  <div data-crew-nav></div>
+  <p><a id="dutyViewLink" href="/leads/?all=1" hidden>See every duty</a></p>
 </header>
 <main class="lead-wrap">
   <datalist id="leadPeople"></datalist>
@@ -46,13 +41,14 @@
 </main>
 </div>
 <script src="/js/prep-store.js?v=pick1"></script>
-<script src="/js/crew-slice.js?v=nohelper1"></script>
-<script src="/js/people-directory.js?v=nohelper1"></script>
+<script src="/js/crew-slice.js?v=stream1"></script>
+<script src="/js/people-directory.js?v=stream1"></script>
 <script src="/js/site-leads.js?v=spots1"></script>
-<script src="/js/sign-in.js"></script>
+<script src="/js/sign-in.js?v=stream1"></script>
 <script src="/js/wifi-join.js"></script>
-<script src="/js/day-spots.js?v=nohelper1"></script>
-<script src="/js/lead-duties.js?v=nohelper1"></script>
+<script src="/js/day-spots.js?v=stream1"></script>
+<script src="/js/lead-duties.js?v=stream1"></script>
+<script src="/js/crew-nav.js?v=stream1"></script>
 <script>
   if (window.GGSPrepStore) window.GGSPrepStore.startSync();
   (function () {
