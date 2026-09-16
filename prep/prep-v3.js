@@ -2,8 +2,8 @@
   const store = window.GGSPrepStore;
   const PREFS = "ggs-prep-v3-prefs";
   const milestones = [
-    ["2026-09-17T08:00:00", "8:00 AM", "Venue access + setup"],
-    ["2026-09-17T10:00:00", "10:00 AM", "System line check — band at 4:30"],
+    ["2026-09-17T08:00:00", "8:00 AM", "Venue open. Tracy window"],
+    ["2026-09-17T10:00:00", "10:00 AM", "Setup Lead + dressers arrive"],
     ["2026-09-17T16:30:00", "4:30 PM", "SOUND CHECK + night crew"],
     ["2026-09-17T17:00:00", "5:00 PM", "Dinner doors — concert-only stay in cars"],
     ["2026-09-17T17:30:00", "5:30 PM", "Buffet opens"],

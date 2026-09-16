@@ -44,7 +44,7 @@ const store = window.GGSPrepStore;
 const slice = window.GGSCrewSlice;
 
 function arrivalFor(role, kind) {
-  if (kind === "setup") return "8:00 AM";
+  if (kind === "setup") return "10:00 AM";
   if (/muscle/i.test(role)) return "3:00 PM · required 8:45";
   if (kind === "strike") return "After show";
   if (/parking|directions|crowd/i.test(role)) return "3:00 PM";

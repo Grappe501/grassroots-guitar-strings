@@ -1,6 +1,6 @@
 const milestones=[
  ['2026-09-17T08:00:00','8:00 AM','Venue open. Tracy window 8-10'],
- ['2026-09-17T10:00:00','10:00 AM','Tracy on site — band load-in 2:00'],
+ ['2026-09-17T10:00:00','10:00 AM','Setup Lead + 3 dressers arrive. Tracy on site.'],
  ['2026-09-17T14:00:00','2:00 PM','Band load-in — you tell us'],
  ['2026-09-17T15:00:00','3:00 PM','All volunteers and leads on site'],
  ['2026-09-17T16:30:00','4:30 PM','SOUND CHECK'],
@@ -156,7 +156,7 @@ function renderHouseRos(){
   if(!started){
     if(label) label.textContent='Thursday has not started on this clock yet.';
     if(nowTitle) nowTitle.textContent='Thursday has not started';
-    if(nowNext) nowNext.textContent='First move is 8:00 AM setup. Night crew walks in at 3:00 PM.';
+    if(nowNext) nowNext.textContent='First move is 8:00 AM Tracy. Setup Lead and dressers walk in at 10:00 AM.';
     return;
   }
   if(ended){

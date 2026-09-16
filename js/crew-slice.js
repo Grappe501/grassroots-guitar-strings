@@ -219,8 +219,8 @@
       test: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup|position 8 round|dress 8 guest/i,
       roster: /setup [123]|setup person/i,
       day: [
-        { start: "2026-09-17T08:00:00", end: "2026-09-17T10:30:00", place: "Main room · 8 tables", do: "Dress 8 tables (25 min), signs (15), lobby (10), drinks station (20). Setup 3 then does the 30 min merch set." },
-        { start: "2026-09-17T10:30:00", end: "2026-09-17T15:00:00", place: "Off site unless called", do: "Room is dressed. Come back at 3:00 as Floater A, Floater B, or Campaign." },
+        { start: "2026-09-17T10:00:00", end: "2026-09-17T12:30:00", place: "Main room · 8 tables", do: "Dress 8 tables (25 min), signs (15), lobby (10), drinks station (20). Setup 3 then does the 30 min merch set." },
+        { start: "2026-09-17T12:30:00", end: "2026-09-17T15:00:00", place: "Off site unless called", do: "Room is dressed. Come back at 3:00 as Floater A, Floater B, or Campaign." },
       ],
     },
     {
@@ -295,7 +295,7 @@
       test: /yard sign|merch|qr|literature|regnet|campaign display|t-shirt|pull-up|push card|foldover|buttons — pack|two banners|bungee|conversation card/i,
       roster: /campaign|sign|merch|setup 3|setup person 3/i,
       day: [
-        { start: "2026-09-17T08:30:00", end: "2026-09-17T10:30:00", place: "Campaign table", do: "After the 8 tables: 30 min merch set. Pull-ups, push cards, buttons, candy, foldovers, shirts." },
+        { start: "2026-09-17T10:25:00", end: "2026-09-17T12:30:00", place: "Campaign table", do: "After the 8 tables: 30 min merch set. Pull-ups, push cards, buttons, candy, foldovers, shirts." },
         { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "Merch + campaign table", do: "One table. Hand out signs and shirts. Wave a floater for a 10 min break each hour." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike B · campaign", do: "Pack banners, cards, candy, merch, leftover signs. 20 min." },
       ],
@@ -339,7 +339,7 @@
       test: /floater|relief loop|relief lead|becomes floater|setup person 1|setup person 2/i,
       roster: /floater|relief|setup 1|setup 2|setup person 1|setup person 2/i,
       day: [
-        { start: "2026-09-17T08:00:00", end: "2026-09-17T10:30:00", place: "Main room · 8 tables", do: "Dress the 8 tables and signs with the other two. Then you may leave." },
+        { start: "2026-09-17T10:00:00", end: "2026-09-17T12:30:00", place: "Main room · 8 tables", do: "Dress the 8 tables and signs with the other two. Then you may leave." },
         { start: "2026-09-17T15:00:00", end: "2026-09-17T17:00:00", place: "Whole room", do: "Back on site at 3:00. Ice with food. Walk every post once. Sound check at 4:30 — stay off the floor." },
         { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Relief loop", do: "Every 30 min: tickets 10, food 10, campaign 10. That is the job." },
         { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Doors + loop", do: "Floater A helps tickets at doors. Floater B keeps the loop moving." },
