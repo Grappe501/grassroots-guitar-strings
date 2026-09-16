@@ -1,5 +1,89 @@
 @import url("./global.css");
 
+/* Hosted-by Kelly — full-width bar above the nav */
+.host-banner {
+  display: block;
+  text-decoration: none;
+  background: var(--ggs-blue-deep);
+  color: #fff;
+  border-bottom: 4px solid var(--ggs-gold);
+}
+
+.host-banner:hover,
+.host-banner:focus-visible {
+  color: #fff;
+  background: #0a2233;
+}
+
+.host-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0;
+}
+
+.host-banner__photo {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  border: 2px solid var(--ggs-gold);
+  flex-shrink: 0;
+  background: #13293d;
+}
+
+.host-banner__copy {
+  min-width: 0;
+}
+
+.host-banner__kicker {
+  display: block;
+  font-family: var(--ggs-font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ggs-gold);
+}
+
+.host-banner__title {
+  display: block;
+  font-family: var(--ggs-font-display);
+  font-size: clamp(1.05rem, 3vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  margin-top: 0.12rem;
+}
+
+.host-banner--landing .host-banner__inner {
+  gap: 1.2rem;
+  padding: 1.15rem 0 1.25rem;
+}
+
+.host-banner--landing .host-banner__photo {
+  width: 5.75rem;
+  height: 5.75rem;
+  border-width: 3px;
+}
+
+.host-banner--landing .host-banner__kicker {
+  font-size: 0.78rem;
+}
+
+.host-banner--landing .host-banner__title {
+  font-size: clamp(1.45rem, 5vw, 2.4rem);
+}
+
+@media (max-width: 520px) {
+  .host-banner--landing .host-banner__photo {
+    width: 4.35rem;
+    height: 4.35rem;
+  }
+}
+
 /* Header */
 .site-header {
   position: sticky;

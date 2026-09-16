@@ -48,6 +48,18 @@
     "featured": true
   },
   {
+    "filename": "host/kelly-grappe.jpg",
+    "approximateDate": "2026",
+    "location": "Arkansas State Capitol",
+    "peopleShown": ["Kelly Grappe"],
+    "event": "Official campaign portrait",
+    "caption": "Kelly Grappe for Secretary of State — host banner portrait.",
+    "photographer": "Campaign",
+    "publicationPermission": "campaign public use",
+    "altText": "Kelly Grappe, candidate for Arkansas Secretary of State",
+    "featured": true
+  },
+  {
     "filename": "event-poster.jpg",
     "approximateDate": "2026",
     "location": "N/A",

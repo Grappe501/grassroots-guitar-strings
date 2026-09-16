@@ -43,6 +43,8 @@ const EVENT_CONFIG = {
   publicSiteUrl: "https://grassrootsguitarstrings.netlify.app",
   brandLogo: "/assets/brand/dab-logo-wide.png",
   brandLogoAlt: "David Adam Byrnes",
+  hostPhoto: "/assets/images/host/kelly-grappe.jpg",
+  hostPhotoAlt: "Kelly Grappe, candidate for Arkansas Secretary of State",
   ogImage: "/assets/images/live/live-01.jpg",
   saucyPigName: "The Saucy Pig",
   saucyPigFacebookUrl: "https://www.facebook.com/p/Saucy-Pig-100094120494691/",

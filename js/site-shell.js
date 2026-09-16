@@ -10,6 +10,21 @@
     return norm === here || (norm !== "/" && here.startsWith(norm));
   }
 
+  function hostBannerHtml() {
+    const photo = cfg.hostPhoto || "/assets/images/host/kelly-grappe.jpg";
+    const photoAlt = cfg.hostPhotoAlt || "Kelly Grappe, candidate for Arkansas Secretary of State";
+    return `
+<a class="host-banner" id="host-banner" href="${cfg.kellyUrl}" target="_blank" rel="noopener noreferrer">
+  <span class="container host-banner__inner">
+    <img class="host-banner__photo" src="${photo}" alt="${photoAlt}" width="110" height="110" />
+    <span class="host-banner__copy">
+      <span class="host-banner__kicker">Hosted by</span>
+      <span class="host-banner__title">Kelly Grappe for Secretary of State</span>
+    </span>
+  </span>
+</a>`;
+  }
+
   function headerHtml() {
     const navItems = navLinks
       .map(
@@ -151,7 +166,12 @@
 
   const headerEl = document.getElementById("site-header");
   const footerEl = document.getElementById("site-footer");
-  if (headerEl) headerEl.innerHTML = headerHtml();
+  if (headerEl) {
+    if (!document.getElementById("host-banner")) {
+      headerEl.insertAdjacentHTML("beforebegin", hostBannerHtml());
+    }
+    headerEl.innerHTML = headerHtml();
+  }
   if (footerEl) footerEl.innerHTML = footerHtml();
   showLandingStamp();
 
