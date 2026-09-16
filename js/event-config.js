@@ -21,6 +21,10 @@ const EVENT_CONFIG = {
     "https://maps.google.com/maps?q=1111+West+Maryland+Avenue,+Sherwood,+AR+72120&z=15&output=embed",
   mapsLinkUrl:
     "https://www.google.com/maps/search/?api=1&query=1111+West+Maryland+Avenue+Sherwood+AR+72120",
+  mapsDirectionsUrl:
+    "https://www.google.com/maps/dir/?api=1&destination=1111+West+Maryland+Avenue,+Sherwood,+AR+72120",
+  mapsAppleDirectionsUrl:
+    "https://maps.apple.com/?daddr=1111+West+Maryland+Avenue,+Sherwood,+AR+72120",
   city: "Sherwood",
   state: "Arkansas",
   ticketUrl: "https://goodchange.app/donate/grass-ax",
