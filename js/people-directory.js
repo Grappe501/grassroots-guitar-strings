@@ -189,6 +189,34 @@
         "Do the job on your seat clock. Stay until 10 unless Event Lead sends you.",
       ],
     },
+    {
+      name: "Paul Egan",
+      first: "Paul",
+      phone: "",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
+      go: "Open my board",
+      kicker: "VOLUNTEER",
+      title: "You are on the list.",
+      next: "Pick a seat when Steve names one. Arrive 3:00. Earlier if you can.",
+      duties: [
+        "3:00 arrive. Earlier if you can. Event t-shirt on. Open My Night.",
+        "Do the job on your seat clock. Stay until 10 unless Event Lead sends you.",
+      ],
+    },
+    {
+      name: "Kate Stebbins",
+      first: "Kate",
+      phone: "",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
+      go: "Open my board",
+      kicker: "VOLUNTEER",
+      title: "You are on the list.",
+      next: "Pick a seat when Steve names one. Arrive 3:00. Earlier if you can.",
+      duties: [
+        "3:00 arrive. Earlier if you can. Event t-shirt on. Open My Night.",
+        "Do the job on your seat clock. Stay until 10 unless Event Lead sends you.",
+      ],
+    },
   ];
 
   const JOBS = [

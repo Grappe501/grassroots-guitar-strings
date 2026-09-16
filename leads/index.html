@@ -47,14 +47,23 @@
 </div>
 <script src="/js/prep-store.js?v=pick1"></script>
 <script src="/js/crew-slice.js"></script>
-<script src="/js/people-directory.js?v=julia1"></script>
-<script src="/js/site-leads.js?v=julia1"></script>
+<script src="/js/people-directory.js?v=names2"></script>
+<script src="/js/site-leads.js?v=names2"></script>
 <script src="/js/sign-in.js"></script>
 <script src="/js/wifi-join.js"></script>
 <script src="/js/day-spots.js?v=10am1"></script>
 <script src="/js/lead-duties.js?v=volsync1"></script>
 <script>
   if (window.GGSPrepStore) window.GGSPrepStore.startSync();
+  (function () {
+    const list = document.getElementById("leadPeople");
+    if (!list || !window.GGSPeople || !window.GGSPeople.names) return;
+    list.innerHTML = window.GGSPeople.names()
+      .map(function (n) {
+        return '<option value="' + String(n).replace(/"/g, "") + '"></option>';
+      })
+      .join("");
+  })();
 </script>
 </body>
 </html>

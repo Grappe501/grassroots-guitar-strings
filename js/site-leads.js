@@ -14,6 +14,8 @@
     "Leeann Solice",
     "Debi Martin",
     "Julia Taylor",
+    "Paul Egan",
+    "Kate Stebbins",
   ];
 
   const NAME_ROLES = [

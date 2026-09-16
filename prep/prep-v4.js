@@ -278,6 +278,11 @@
     let me = "";
     if (window.GGSSignIn) me = window.GGSSignIn.identity().name || "";
     if (me) names[me] = true;
+    if (window.GGSPeople && window.GGSPeople.names) {
+      window.GGSPeople.names().forEach((n) => {
+        if (n) names[n] = true;
+      });
+    }
     return Object.keys(names).sort((a, b) => a.localeCompare(b));
   }
 
