@@ -227,14 +227,14 @@
       id: "production",
       label: "Tracy + production",
       priority: 3,
-      test: /tracy|tracy production helper|name the campaign volunteer helper|full sound and light|bar stool|center-floor|load tracy|stay on deck through the last song/i,
-      roster: /tracy production helper|tracy/i,
+      test: /tracy|tracy production helper|name the campaign volunteer helper|sound\/lights muscle|full sound and light|bar stool|center-floor|load tracy|stay on deck through the last song/i,
+      roster: /tracy production helper|tracy|sound\/lights muscle/i,
       day: [
         { start: "2026-09-17T08:00:00", end: "2026-09-17T17:30:00", place: "Stage + dance floor", do: "Sound, lights, power, full check." },
         { start: "2026-09-17T17:45:00", end: "2026-09-17T18:15:00", place: "Center dance floor", do: "David acoustic set. Clear the floor by 6:30 doors." },
         { start: "2026-09-17T18:15:00", end: "2026-09-17T19:00:00", place: "Stage", do: "Concert set. 6:45 hard checkpoint." },
         { start: "2026-09-17T19:00:00", end: "2026-09-17T20:45:00", place: "Stage", do: "Show. Stay on sound and lights." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike D · stage", do: "Pack production. Load Tracy's vehicle." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike D · stage", do: "Pack production. Helper + 3 muscle carry lights and sound out. Tracy directs." },
       ],
     },
     {

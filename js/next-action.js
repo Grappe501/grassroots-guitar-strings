@@ -63,6 +63,7 @@
       ((roster && roster[kind]) || []).forEach((row) => {
         const name = String((row && row.name) || "").trim();
         if (!name) return;
+        if (/muscle/i.test(String((row && row.role) || ""))) return;
         const dup = seen.some((item) =>
           global.GGSCrewSlice ? global.GGSCrewSlice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
         );
@@ -174,6 +175,19 @@
         score: weight(p, "tracy"),
         href: "/prep/#production",
         line: "Tracy still needs the campaign helper named.",
+      });
+    }
+
+    if (
+      undone(list, /name sound\/lights muscle/i).length &&
+      weight(p, "tracy")
+    ) {
+      const openMuscle = undone(list, /name sound\/lights muscle/i).length;
+      facts.push({
+        kind: "tracy",
+        score: weight(p, "tracy") + openMuscle,
+        href: "/prep/#production",
+        line: "Tracy needs " + openMuscle + " more sound/lights muscle named for carry-out.",
       });
     }
 

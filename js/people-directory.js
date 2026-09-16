@@ -181,7 +181,7 @@
       duties: [
         "Walk tickets, food, campaign, and stage every 15 minutes from 5:00.",
         "6:45 hard checkpoint with Production.",
-        "Call strike the moment the show ends. Same 7 people. Venue furniture stays.",
+        "Call strike the moment the show ends. Same 7 people. Send 3 muscle to Tracy for sound/lights carry-out. Venue furniture stays.",
         "Confirm the building is cleared at 10:00.",
         "Do not get stuck at one table. Relief Lead covers gaps.",
       ],
@@ -254,12 +254,12 @@
       weight: "All day with Tracy",
       cartoon: "Scooby",
       arrival: "8:00 AM",
-      owns: "Tracy's helper. Sound, lights, stool, Strike D.",
+      owns: "Tracy's helper all day. At encore, 3 muscle carry lights and sound out.",
       duties: [
         "8:00 AM with Tracy. One system. Do not build a second plot.",
         "Someone brings the bar stool. Acoustic 5:45–6:15. Clear by 6:30.",
         "6:45 checkpoint with Event Lead. Stay through the last song.",
-        "Strike D: pack Tracy's vehicle.",
+        "Strike D: Tracy directs. Helper plus 3 muscle carry speakers, lights, and cases to her vehicle.",
       ],
     },
     {
@@ -316,8 +316,8 @@
       arrival: "8:30 PM focus / stay all night",
       owns: "8:45 pairs and the 10:00 walk. Venue furniture stays.",
       duties: [
-        "Same 7 people. No second teardown crew.",
-        "Pairs: cloths, campaign, food, Tracy, then everyone walks.",
+        "Same 7 people plus 3 Tracy muscle. No second full teardown crew.",
+        "Pairs: cloths, campaign, food, Tracy + helper + 3 muscle, then everyone walks.",
         "Leave the 8 rounds, buffet tables, lobby table, and 64 chairs.",
         "Event Lead can hold this seat too. Split only if two people want it.",
       ],

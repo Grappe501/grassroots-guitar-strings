@@ -26,8 +26,9 @@
       who: /tracy/i,
       pick: function (row) {
         if (row.section === "production") return true;
-        if (row.section === "volunteers" && /tracy production helper/i.test(row.text)) return true;
-        if (row.section === "breakdown" && /shut down sound|shut down lights|disconnect equipment|coil cables|pack microphones|pack stands|pack speakers|pack mixer|pack lighting|account for all production|load tracy|final stage check/i.test(row.text)) return true;
+        if (row.section === "volunteers" && /tracy production helper|sound\/lights muscle/i.test(row.text)) return true;
+        if (row.section === "production" && /sound\/lights muscle/i.test(row.text)) return true;
+        if (row.section === "breakdown" && /shut down sound|shut down lights|disconnect equipment|coil cables|pack microphones|pack stands|pack speakers|pack mixer|pack lighting|account for all production|load tracy|final stage check|sound\/lights muscle/i.test(row.text)) return true;
         return false;
       },
     },

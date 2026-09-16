@@ -15,13 +15,17 @@ const defaults = {
     "Floater A — relief loop all night",
     "Floater B — relief loop + photo if no photographer",
   ],
-  strike: [],
+  strike: [
+    "Sound/lights muscle 1 — 8:45. Carry speakers and stands. Tracy directs.",
+    "Sound/lights muscle 2 — 8:45. Carry lights and cases. Tracy directs.",
+    "Sound/lights muscle 3 — 8:45. Carry remaining production to Tracy's vehicle.",
+  ],
 };
 const teams = [
   "A · Tables / Chairs",
   "B · Campaign / Signs / Merch",
   "C · Food / Drinks / Coolers",
-  "D · Production / Load-out",
+  "D · Tracy + helper + 3 muscle",
   "E · Venue / Final Sweep",
 ];
 const store = window.GGSPrepStore;
@@ -30,6 +34,7 @@ const slice = window.GGSCrewSlice;
 function arrivalFor(role, kind) {
   if (kind === "setup") return "8:00 AM";
   if (kind === "strike") return "After show";
+  if (/muscle/i.test(role)) return "8:45 PM";
   if (/tracy/i.test(role)) return "8:00 AM";
   if (/floater/i.test(role)) return "4:30 PM";
   return "5:00 PM";
@@ -52,6 +57,20 @@ function ensureFloaters() {
   });
 }
 
+function ensureMuscle() {
+  if (!state.strike) state.strike = [];
+  [
+    "Sound/lights muscle 1 — 8:45. Carry speakers and stands. Tracy directs.",
+    "Sound/lights muscle 2 — 8:45. Carry lights and cases. Tracy directs.",
+    "Sound/lights muscle 3 — 8:45. Carry remaining production to Tracy's vehicle.",
+  ].forEach((role, i) => {
+    const hint = new RegExp("muscle " + (i + 1), "i");
+    if (!state.strike.some((row) => hint.test(String(row.role || "")))) {
+      state.strike.push(emptyRow(role, "strike"));
+    }
+  });
+}
+
 let state =
   (store && store.readDoc("volunteers")) ||
   JSON.parse(localStorage.getItem(KEY) || "null") || {
@@ -60,6 +79,7 @@ let state =
     strike: [],
   };
 ensureFloaters();
+ensureMuscle();
 (function seedDebiMerch() {
   const row = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
   if (row && !String(row.name || "").trim()) row.name = "Debi Martin";
@@ -180,6 +200,7 @@ function applyRemote(data) {
     });
   }
   ensureFloaters();
+  ensureMuscle();
   ["setup", "event", "strike"].forEach(render);
   counts();
 }
@@ -190,6 +211,7 @@ function stayNames() {
     (state[kind] || []).forEach((row) => {
       const name = String((row && row.name) || "").trim();
       if (!name) return;
+      if (/muscle/i.test(String((row && row.role) || ""))) return;
       const dup = seen.some((item) =>
         slice ? slice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
       );
@@ -242,8 +264,10 @@ document.getElementById("clearBtn").addEventListener("click", () => {
     state = {
       setup: defaults.setup.map((role) => emptyRow(role, "setup")),
       event: defaults.event.map((role) => emptyRow(role, "event")),
-      strike: [],
+      strike: defaults.strike.map((role) => emptyRow(role, "strike")),
     };
+    ensureFloaters();
+    ensureMuscle();
     save();
     ["setup", "event", "strike"].forEach(render);
   }
