@@ -132,7 +132,7 @@
       eat: "4:50 PM · 15 min before the line opens.",
       sit: "Stay on the line 5:45–6:15. Watch the concert 7:20–8:00.",
       roster: [{ kind: "event", hint: /server 2/i }],
-      why: "Second volunteer on Ben’s line. Sarah is Server 1. Name goes here tomorrow. Water is a different person.",
+      why: "Second volunteer on Ben’s line. Sarah is Server 1. Name this seat today. Water is a different person.",
       clock: [
         row("16:30", "arrive", "Arrive. Event t-shirt on. Find Ben. You are Server 2."),
         row("16:35", "work", "Help set the line. Tea and lemonade are free while they last."),
@@ -154,7 +154,7 @@
       eat: "4:50 PM · 15 min before the line opens.",
       sit: "Stay on the line 5:45–6:15. Watch the concert 7:20–8:00.",
       roster: [{ kind: "event", hint: /server 3/i }],
-      why: "Third volunteer on Ben’s line. Name goes here tomorrow.",
+      why: "Third volunteer on Ben’s line. Name this seat today.",
       clock: [
         row("16:30", "arrive", "Arrive. Event t-shirt on. Find Ben. You are Server 3."),
         row("16:35", "work", "Help set the line. Tea and lemonade are free while they last."),

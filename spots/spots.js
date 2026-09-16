@@ -83,7 +83,7 @@
           ? people.leadSelectHtml(who, {
               className: "spot-owner",
               attrs: 'data-spot="' + spot.id + '"',
-              blank: "Name tomorrow",
+              blank: "Choose today",
             })
           : "") +
         '<a class="spot-go" href="/spots/' +
@@ -122,15 +122,15 @@
       pick.innerHTML = people.leadSelectHtml(who, {
         className: "spot-owner",
         attrs: 'id="spotOwner"',
-        blank: "Name tomorrow",
+        blank: "Choose today",
       });
       const sel = pick.querySelector("select");
       sel.addEventListener("change", function () {
         spots.saveOwner(store, spot.id, sel.value);
-        whoEl.textContent = sel.value ? sel.value + " — this is your page." : "Name goes here tomorrow.";
+        whoEl.textContent = sel.value ? sel.value + " — this is your page." : "Name goes here today.";
       });
     }
-    whoEl.textContent = who ? who + " — this is your page." : "Name goes here tomorrow.";
+    whoEl.textContent = who ? who + " — this is your page." : "Name goes here today.";
     paintNow(spot, live);
   }
 
