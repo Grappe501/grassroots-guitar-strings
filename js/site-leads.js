@@ -16,6 +16,9 @@
     "Julia Taylor",
     "Paul Egan",
     "Kate Stebbins",
+    "Brady McPherson",
+    "Kari McPherson",
+    "Robyn Maynard",
   ];
 
   const NAME_ROLES = [

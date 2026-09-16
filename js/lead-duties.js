@@ -289,7 +289,7 @@
           dir.leadSelectHtml(open ? "" : job.owner, {
             className: "lead-owner",
             attrs: 'data-job="' + esc(job.id) + '"',
-            blank: "Open — pick a lead",
+            blank: "Open — pick a name",
           }) +
           "</label><p class=\"lead-cartoon\">Was a placeholder: " +
           esc(job.cartoon) +

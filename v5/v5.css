@@ -15,7 +15,23 @@ body.v5.is-locked #v5App {
 }
 
 body.v5 {
-  padding-bottom: calc(4.6rem + env(safe-area-inset-bottom));
+  padding-bottom: calc(1.2rem + env(safe-area-inset-bottom));
+}
+
+body.v5.is-night-only {
+  padding-bottom: calc(1.2rem + env(safe-area-inset-bottom));
+}
+
+.v5-facts-card {
+  background: #0a0a4a;
+  border: 1px solid #2a4154;
+  border-radius: 18px;
+  padding: 1rem 1rem 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.v5-facts-card p + p {
+  margin-top: 0.55rem;
 }
 
 .v5-top {
@@ -261,12 +277,7 @@ body.v5 {
 }
 
 .v5-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 40;
-  display: grid;
+  display: none;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
   background: #05053a;

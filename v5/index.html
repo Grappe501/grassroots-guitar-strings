@@ -7,25 +7,21 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Kelly Night">
 <title>Kelly Night — Kelly Grappe</title>
-<meta name="description" content="Kelly Grappe campaign night board. Only what you need. Thursday, September 17, 2026.">
+<meta name="description" content="Your Thursday night, one page. Times, what to wear, what to do next.">
 <link rel="manifest" href="/v5/manifest.json">
 <link rel="stylesheet" href="/css/kelly-brand.css">
 <link rel="stylesheet" href="/css/sign-in.css">
 <link rel="stylesheet" href="/css/contacts.css">
-<link rel="stylesheet" href="/prep/prep-v4.css">
-<link rel="stylesheet" href="/css/radio-night.css">
-<link rel="stylesheet" href="/css/night-social.css">
 <link rel="stylesheet" href="/wifi/wifi.css">
-<link rel="stylesheet" href="/css/gap-texts.css">
-<link rel="stylesheet" href="/v5/v5.css?v=exec1">
+<link rel="stylesheet" href="/v5/v5.css?v=spots1">
 <link rel="stylesheet" href="/css/contrast.css">
 </head>
-<body class="v5 is-locked">
+<body class="v5 is-locked is-night-only">
 <div id="signInGate" class="signin">
   <article class="signin__card">
     <p class="eyebrow">KELLY GRAPPE</p>
     <h1>Who are you?</h1>
-    <p>Start typing your name. We fill your phone. Confirm this is the phone you are on today, then connect to Wi-Fi.</p>
+    <p>Start typing your name. Confirm this is the phone you are on today, then connect to Wi-Fi.</p>
     <label>I am
       <input id="gateName" type="text" autocomplete="off" placeholder="Start typing your name">
     </label>
@@ -33,113 +29,51 @@
       <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
     </label>
     <p class="signin__err" id="gateErr" hidden>Both are required. Use a real number people can call tonight.</p>
-    <button type="button" class="signin__go" id="gateGo">Open my board</button>
+    <button type="button" class="signin__go" id="gateGo">Open my night</button>
   </article>
 </div>
 
 <div id="v5App" data-needs-identity>
   <header class="v5-top">
-    <p class="eyebrow" id="v5Kicker">YOUR SEAT</p>
-    <h1 id="v5Seat">Your job</h1>
+    <p class="eyebrow" id="v5Kicker">YOUR SPOT</p>
+    <h1 id="v5Seat">Your night</h1>
     <p class="v5-who" id="v5Who"></p>
     <p class="v5-role" id="v5Role"></p>
     <p class="v5-sync" id="syncStatus">Connecting…</p>
-    <a class="v5-link" href="/prep/?full=1">Full board</a>
     <button type="button" class="v5-text" data-sign-out>Not me</button>
   </header>
 
   <main class="v5-main">
-    <section id="tabNow" class="v5-tab">
-      <article class="v5-brief" id="briefCard">
-        <p class="eyebrow" id="briefKicker">YOUR BRIEFING</p>
-        <h2 id="briefTitle">Your night</h2>
-        <p id="briefNext"></p>
-        <ul id="briefDuties"></ul>
-        <a class="v5-link" href="/leads/">See the 11 lead jobs</a>
-        <a class="v5-link" href="/band/">Band day of show</a>
-        <a class="v5-link" href="/clock/">Run of show clock</a>
-        <a class="v5-link" href="/spots/">All phone pages</a>
-      </article>
-      <article class="v5-now" id="nowCard">
-        <p class="eyebrow" id="nowKicker">You should be</p>
-        <h2 id="nowPlace">Stand by</h2>
-        <p id="nowDo"></p>
-        <p class="v5-next" id="nowNext"></p>
-      </article>
-      <article class="v5-lead" id="leadNext" hidden>
-        <p class="eyebrow">Next action</p>
-        <h2 id="criticalTitle">Reading the board…</h2>
-        <p id="criticalMeta"></p>
-        <a class="v5-link" id="criticalLink" href="/prep/?full=1">Open</a>
-      </article>
-      <article class="v5-night" id="nightBlock" hidden>
-        <p class="eyebrow">YOUR NIGHT</p>
-        <h2>Do these in order. Gold is now.</h2>
-        <p class="v5-facts" id="nightFacts">Open Jobs for the same list.</p>
-        <ol class="v5-ros" id="nightClock"></ol>
-      </article>
-      <div id="nowJobs"></div>
-      <div class="night-pulse" data-night-pulse></div>
-      <p class="v5-home" id="homeHint">Add this page to your Home Screen. That is your app tonight.</p>
-    </section>
-
-    <section id="tabJobs" class="v5-tab" hidden>
-      <p class="eyebrow" id="jobsKicker">YOUR DAY</p>
-      <h2 id="jobsTitle">Your night. Minute by minute. Gold row is now.</h2>
-      <p class="v5-facts" id="jobsFacts"></p>
-      <ol class="v5-ros" id="jobsClock"></ol>
-      <div id="jobsList"></div>
-    </section>
-
-    <section id="tabRadio" class="v5-tab" hidden>
-      <section class="radio-band radio-feed radio-desk" id="radioDesk" aria-label="Night radio">
-        <div class="radio-desk__main">
-          <p class="eyebrow">NIGHT RADIO</p>
-          <p class="radio-channel" id="radioChannel">All radios</p>
-          <div class="night-pulse" data-night-pulse></div>
-          <div class="radio-feed-list" id="radioFeed" aria-live="polite"></div>
-          <div class="radio-compose">
-            <input id="radioInput" type="text" maxlength="240" autocomplete="off" placeholder="Send a line.">
-            <button type="button" class="btn btn--gold" id="radioSend">Send</button>
-          </div>
-          <div class="radio-ptt">
-            <button type="button" class="radio-talk" id="radioTalk">Hold to talk — ALL</button>
-            <p class="radio-ptt-hint" id="radioTalkHint">Join Wi-Fi first. Then hold to talk.</p>
-          </div>
-        </div>
-        <aside class="radio-people" id="radioPeople" aria-label="Radios on tonight"></aside>
-      </section>
-    </section>
-
-    <section id="tabBoard" class="v5-tab" hidden>
-      <p class="eyebrow">SITE LEAD BOARD</p>
-      <h2>The whole event, one section at a time.</h2>
-      <div id="gapTextList" class="gap-text-grid"></div>
-      <div id="boardList"></div>
-    </section>
+    <article class="v5-now" id="nowCard">
+      <p class="eyebrow" id="nowKicker">You should be</p>
+      <h2 id="nowPlace">Stand by</h2>
+      <p id="nowDo"></p>
+      <p class="v5-next" id="nowNext"></p>
+    </article>
+    <article class="v5-facts-card" id="nightFactsCard">
+      <p class="eyebrow">TONIGHT</p>
+      <p id="nightFacts"></p>
+      <p id="nightWear"></p>
+      <p id="nightShows"></p>
+      <p id="nightSocial"></p>
+    </article>
+    <article class="v5-night" id="nightBlock">
+      <p class="eyebrow">YOUR NIGHT</p>
+      <h2>Do these in order. Gold is now.</h2>
+      <ol class="v5-ros" id="nightClock"></ol>
+    </article>
+    <p class="v5-home" id="homeHint">Add this page to your Home Screen. That is your app tonight.</p>
   </main>
-
-  <nav class="v5-nav" aria-label="Night tabs">
-    <button type="button" class="is-on" data-tab="now">Now</button>
-    <button type="button" data-tab="jobs">Jobs</button>
-    <button type="button" data-tab="radio">Radio</button>
-    <button type="button" id="boardTab" data-tab="board" hidden>Board</button>
-  </nav>
 </div>
 
 <script src="/js/prep-store.js?v=pick1"></script>
 <script src="/js/crew-slice.js?v=arrive430"></script>
-<script src="/js/people-directory.js?v=arrive430"></script>
-<script src="/js/site-leads.js?v=path1"></script>
-<script src="/js/sign-in.js?v=seat2"></script>
-<script src="/js/lead-duties.js?v=path1"></script>
+<script src="/js/people-directory.js?v=spots1"></script>
+<script src="/js/site-leads.js?v=spots1"></script>
+<script src="/js/sign-in.js?v=spots1"></script>
+<script src="/js/lead-duties.js?v=spots1"></script>
 <script src="/js/day-spots.js?v=arrive430"></script>
-<script src="/js/radio-feed.js"></script>
-<script src="/js/radio-night.js"></script>
-<script src="/js/night-social.js"></script>
 <script src="/js/wifi-join.js"></script>
-<script src="/prep/prep-v2.js"></script>
-<script src="/js/next-action.js"></script>
-<script src="/v5/v5.js?v=exec1"></script>
+<script src="/v5/v5.js?v=spots1"></script>
 </body>
 </html>

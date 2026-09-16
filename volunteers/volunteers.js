@@ -212,7 +212,7 @@ function render(kind) {
             i +
             '"><div class="person-name">' +
             (window.GGSPeople
-              ? window.GGSPeople.leadSelectHtml(p.name, { className: "name", blank: "Pick a lead" })
+              ? window.GGSPeople.leadSelectHtml(p.name, { className: "name", blank: "Pick a name" })
               : '<input class="name" value="' + esc(p.name) + '" placeholder="Person name">') +
             '<span class="person-reach">' +
             (name ? reachHtml(name, phone) : "") +
