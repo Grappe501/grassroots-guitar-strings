@@ -217,7 +217,7 @@
       test: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup|position 8 round/i,
       roster: /setup/i,
       day: [
-        { start: "2026-09-17T08:00:00", end: "2026-09-17T16:30:00", place: "Main room · horseshoe", do: "Tables, 64 chairs, buffet, lobby table, signs, campaign display." },
+        { start: "2026-09-17T08:00:00", end: "2026-09-17T16:30:00", place: "Main room · horseshoe", do: "Venue already placed tables, chairs, horseshoe, and dance floor. Dress tables, signs, campaign display, beverages." },
         { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Main room", do: "Room ready for guests. Then hand off to event crew." },
       ],
     },

@@ -17,7 +17,7 @@ const milestones=[
 const areas=[
  ['Venue','Confirm access, room layout, exits and public flow.','Setup'],
  ['Food / BBQ','Ben food and service supply list confirmed.','Ben / BBQ'],
- ['Setup','Tables, chairs, buffet, lobby, beverages and campaign display.','Setup'],
+ ['Setup','Venue already placed tables, chairs, horseshoe, and dance floor. We dress tables, signs, campaign, and beverages.','Setup'],
  ['Volunteers','Setup, event crew and 10–12+ teardown crew assigned.','Volunteers'],
  ['Tickets','Ticket station, payment procedure and reconciliation.','Tickets & Money'],
  ['Campaign','Literature, signs, QR displays and merchandise.','Campaign & Merch'],

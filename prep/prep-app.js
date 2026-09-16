@@ -40,6 +40,37 @@
     return section + ":" + card + ":" + i;
   }
 
+  const VENUE_LAYOUT = {
+    "overview:0:1": { done: true, owner: "Venue", when: "In place on arrival" },
+    "overview:0:2": { done: true, owner: "Venue", when: "In place on arrival" },
+    "overview:0:3": { done: true, owner: "Venue", when: "In place on arrival" },
+    "overview:0:4": { done: true, owner: "Venue", when: "In place on arrival" },
+    "setup:0:3": { done: true, owner: "Venue", when: "In place on arrival" },
+    "setup:0:12": { done: true, owner: "Venue", when: "In place on arrival" },
+    "setup:0:13": { done: true, owner: "Venue", when: "In place on arrival" },
+    "setup:0:14": { done: true, owner: "Venue", when: "In place on arrival" },
+    "setup:0:15": { done: true, owner: "Venue", when: "In place on arrival" },
+    "setup:0:16": { done: true, owner: "Venue", when: "In place on arrival" },
+    "setup:0:17": { done: true, owner: "Venue", when: "In place on arrival" },
+  };
+
+  function seedVenueLayout() {
+    let wrote = false;
+    Object.keys(VENUE_LAYOUT).forEach((k) => {
+      const cur = state[k] || {};
+      const owner = String(cur.owner || "").toLowerCase();
+      if (cur.done && owner.includes("venue")) return;
+      state[k] = Object.assign({}, cur, VENUE_LAYOUT[k]);
+      if (store) store.saveOne(k, state[k]);
+      wrote = true;
+    });
+    if (!wrote) return;
+    restore();
+    progress();
+    applyFilters();
+    renderGaps();
+  }
+
   function savePrefs() {
     localStorage.setItem(PREFS, JSON.stringify(prefs));
     const link = document.getElementById("myPageLink");
@@ -204,6 +235,7 @@
     }).join("");
     bind();
     restore();
+    seedVenueLayout();
     progress();
     applyFilters();
     renderCrew();
@@ -599,6 +631,7 @@
     Object.keys(state).forEach((k) => delete state[k]);
     Object.assign(state, e.detail || {});
     restore();
+    seedVenueLayout();
     progress();
     applyFilters();
     renderCrew();
