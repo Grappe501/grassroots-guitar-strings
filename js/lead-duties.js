@@ -24,7 +24,7 @@
     relief2: { kind: "event", hint: /floater b/i },
     kelly: { kind: "event", hint: /kelly support/i },
     photo: { kind: "event", hint: /photo lead/i },
-    strike: { kind: "strike", hint: /strike lead/i, role: "Strike Lead — call the walk. Venue furniture stays." },
+    strike: { kind: "event", hint: /strike lead|close lead|teardown captain|^strike \/|^strike\b/i, role: "Strike Lead — call the walk. Venue furniture stays." },
     setup1: { kind: "setup", hint: /setup 1/i, role: "Setup 1 — morning dresser" },
     setup2: { kind: "setup", hint: /setup 2/i, role: "Setup 2 — morning dresser" },
     server1: { kind: "event", hint: /server 1/i },
@@ -115,6 +115,11 @@
       const seat = VOL_SEATS[job.id];
       if (!seat) return;
       let name = ownerName(job);
+      if (global.GGSDaySpots && store) {
+        const map = global.GGSDaySpots.owners(store);
+        const spot = global.GGSDaySpots.SPOTS.find((row) => row.leadJob === job.id || row.id === job.id);
+        if (spot && map[spot.id]) name = String(map[spot.id]).trim();
+      }
       const person = dir ? dir.findPerson(name) : null;
       if (person) name = person.name;
       if (!name) return;

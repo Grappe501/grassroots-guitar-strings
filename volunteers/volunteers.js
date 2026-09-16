@@ -205,6 +205,17 @@ const bootLeadDirty = applyLeadSeats();
   const sarah = (state.event || []).find((item) => /server 1/i.test(String(item.role || "")));
   if (sarah && !String(sarah.name || "").trim()) sarah.name = "Sarah Hurst";
 })();
+function pullSpots() {
+  const spots = window.GGSDaySpots;
+  if (!spots || !spots.alignPeople || !store) return false;
+  if (store.saveDoc) store.saveDoc("volunteers", state);
+  spots.alignPeople(store);
+  const next = store.readDoc("volunteers");
+  if (!next) return false;
+  state = next;
+  return true;
+}
+const bootSpotDirty = pullSpots();
 const esc = (x) =>
   String(x ?? "")
     .replaceAll("&", "&amp;")
@@ -277,8 +288,14 @@ function render(kind) {
             const box = row.querySelector(".person-reach");
             if (box) box.innerHTML = name ? reachHtml(name, phone) : "";
             if (store && slice && name && slice.phoneDigits(phone)) slice.saveContact(store, name, phone);
-            const jobId = window.GGSLeadDuties && window.GGSLeadDuties.jobIdForVolunteer(kind, state[kind][+row.dataset.i].role);
-            if (c === "name" && jobId && window.GGSLeadDuties.saveOwner) window.GGSLeadDuties.saveOwner(jobId, name);
+            const role = state[kind][+row.dataset.i].role;
+            const spotId = window.GGSDaySpots && window.GGSDaySpots.spotIdForRole(kind, role);
+            const jobId = window.GGSLeadDuties && window.GGSLeadDuties.jobIdForVolunteer(kind, role);
+            if (c === "name" && spotId && store && window.GGSDaySpots.saveOwner) {
+              window.GGSDaySpots.saveOwner(store, spotId, name);
+            } else if (c === "name" && jobId && window.GGSLeadDuties.saveOwner) {
+              window.GGSLeadDuties.saveOwner(jobId, name);
+            }
           }
         })
       );
@@ -324,8 +341,9 @@ function applyRemote(data) {
   dropTracyHelper();
   const arriveDirty = migrateArrivals();
   const leadDirty = applyLeadSeats();
+  const spotDirty = pullSpots();
   ["setup", "event", "strike", "grounds"].forEach(render);
-  if (leadDirty || arriveDirty) save();
+  if (leadDirty || arriveDirty || spotDirty) save();
   counts();
 }
 
@@ -367,7 +385,7 @@ function counts() {
 }
 
 ["setup", "event", "strike", "grounds"].forEach(render);
-if (bootLeadDirty || bootArriveDirty) save();
+if (bootLeadDirty || bootArriveDirty || bootSpotDirty) save();
 counts();
 document.querySelectorAll("[data-add]").forEach((b) =>
   b.addEventListener("click", () => {

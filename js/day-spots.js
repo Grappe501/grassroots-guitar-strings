@@ -587,44 +587,108 @@
     return "";
   }
 
+  function prettyName(name) {
+    const label = String(name || "").trim();
+    if (!label) return "";
+    if (global.GGSPeople) {
+      const person = global.GGSPeople.findPerson(label);
+      if (person && person.name) return person.name;
+    }
+    return label;
+  }
+
+  function ensureRosterRow(roster, spot, rule, extra) {
+    if (!roster[rule.kind]) roster[rule.kind] = [];
+    let row = roster[rule.kind].find((item) => rule.hint.test(String((item && item.role) || "")));
+    if (row) return { row: row, created: false };
+    row = {
+      role: extra || spot.title,
+      name: "",
+      phone: "",
+      arrival: spot.arrive || "",
+      backup: "",
+      done: false,
+    };
+    roster[rule.kind].push(row);
+    return { row: row, created: true };
+  }
+
   function syncRoster(store, id, name) {
     const spot = byId(id);
     if (!spot || !store) return;
-    const roster = store.readDoc("volunteers");
-    if (!roster) return;
-    const label = String(name || "").trim();
+    const roster = store.readDoc("volunteers") || { setup: [], event: [], strike: [], grounds: [] };
+    const label = prettyName(name);
     const phone = phoneFor(label);
-    (spot.roster || []).forEach((rule) => {
-      const rows = roster[rule.kind] || [];
-      rows.forEach((row) => {
-        if (rule.hint.test(String(row.role || ""))) {
-          row.name = label;
-          if (phone) row.phone = phone;
+    let dirty = false;
+    (spot.roster || []).forEach((rule, i) => {
+      const got = ensureRosterRow(roster, spot, rule, i ? spot.title + " · " + rule.kind : spot.title);
+      if (got.created) dirty = true;
+      if (String(got.row.name || "").trim() !== label) {
+        got.row.name = label;
+        dirty = true;
+      }
+      if (phone && String(got.row.phone || "").trim() !== phone) {
+        got.row.phone = phone;
+        dirty = true;
+      }
+    });
+    if (dirty) store.saveDoc("volunteers", roster);
+  }
+
+  function alignPeople(store) {
+    const current = Object.assign({}, owners(store));
+    if (!store) return current;
+    const roster = store.readDoc("volunteers") || { setup: [], event: [], strike: [], grounds: [] };
+    ["setup", "event", "strike", "grounds"].forEach((kind) => {
+      if (!Array.isArray(roster[kind])) roster[kind] = [];
+    });
+    let spotsDirty = false;
+    let rosterDirty = false;
+    SPOTS.filter((spot) => !spot.retired).forEach((spot) => {
+      let spotName = prettyName(current[spot.id] || "");
+      const rules = spot.roster || [];
+      if (!spotName) {
+        rules.some((rule) => {
+          const hit = (roster[rule.kind] || []).find(
+            (row) => rule.hint.test(String((row && row.role) || "")) && String((row && row.name) || "").trim()
+          );
+          if (!hit) return false;
+          spotName = prettyName(hit.name);
+          return true;
+        });
+        if (spotName) {
+          current[spot.id] = spotName;
+          spotsDirty = true;
+        }
+      }
+      rules.forEach((rule, i) => {
+        const got = ensureRosterRow(roster, spot, rule, i ? spot.title + " · " + rule.kind : spot.title);
+        if (got.created) rosterDirty = true;
+        if (spotName && String(got.row.name || "").trim() !== spotName) {
+          got.row.name = spotName;
+          const phone = phoneFor(spotName);
+          if (phone) got.row.phone = phone;
+          rosterDirty = true;
         }
       });
     });
-    store.saveDoc("volunteers", roster);
+    if (spotsDirty) store.saveDoc("spots", { v: 1, owners: current });
+    if (rosterDirty) store.saveDoc("volunteers", roster);
+    if ((spotsDirty || rosterDirty) && store.flush) store.flush();
+    return current;
   }
 
   function hydrateFromRoster(store) {
-    const roster = store && store.readDoc("volunteers");
-    if (!roster) return owners(store);
-    const current = Object.assign({}, owners(store));
-    let dirty = false;
-    SPOTS.forEach((spot) => {
-      if (current[spot.id]) return;
-      (spot.roster || []).some((rule) => {
-        const hit = (roster[rule.kind] || []).find((row) => rule.hint.test(String(row.role || "")) && String(row.name || "").trim());
-        if (hit) {
-          current[spot.id] = String(hit.name).trim();
-          dirty = true;
-          return true;
-        }
-        return false;
-      });
-    });
-    if (dirty) store.saveDoc("spots", { v: 1, owners: current });
-    return current;
+    return alignPeople(store);
+  }
+
+  function spotIdForRole(kind, role) {
+    const hit = SPOTS.find(
+      (spot) =>
+        !spot.retired &&
+        (spot.roster || []).some((rule) => rule.kind === kind && rule.hint.test(String(role || "")))
+    );
+    return hit ? hit.id : "";
   }
 
   function matchName(a, b) {
@@ -657,6 +721,8 @@
     owners: owners,
     saveOwner: saveOwner,
     hydrateFromRoster: hydrateFromRoster,
+    alignPeople: alignPeople,
+    spotIdForRole: spotIdForRole,
     spotForName: spotForName,
   };
 })(window);
