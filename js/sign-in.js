@@ -74,12 +74,25 @@
     if (name) name.focus();
   }
 
+  function ensurePhoto(gate) {
+    const card = gate.querySelector(".signin__card");
+    if (!card || card.querySelector(".signin__photo")) return;
+    const img = document.createElement("img");
+    img.className = "signin__photo";
+    img.src = "/assets/images/host/kelly-grappe.jpg";
+    img.alt = "Kelly Grappe, candidate for Arkansas Secretary of State";
+    img.width = 720;
+    img.height = 320;
+    card.insertBefore(img, card.firstChild);
+  }
+
   function bind() {
     const gate = document.getElementById("signInGate");
     if (!gate) {
       applyLock();
       return;
     }
+    ensurePhoto(gate);
     const name = document.getElementById("gateName");
     const phone = document.getElementById("gatePhone");
     const go = document.getElementById("gateGo");
