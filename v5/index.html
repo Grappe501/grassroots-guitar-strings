@@ -6,22 +6,22 @@
 <meta name="theme-color" content="#000066">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Kelly Night">
-<title>Kelly Night — Kelly Grappe</title>
-<meta name="description" content="Your Thursday night, one page. Times, what to wear, what to do next.">
+<title>Your night — Grassroots &amp; Guitar Strings</title>
+<meta name="description" content="Your Thursday night. Your name. Your job. Take pictures.">
 <link rel="manifest" href="/v5/manifest.json">
 <link rel="stylesheet" href="/css/kelly-brand.css">
 <link rel="stylesheet" href="/css/sign-in.css">
 <link rel="stylesheet" href="/css/contacts.css">
 <link rel="stylesheet" href="/wifi/wifi.css">
-<link rel="stylesheet" href="/v5/v5.css?v=dayros1">
+<link rel="stylesheet" href="/v5/v5.css?v=hello1">
 <link rel="stylesheet" href="/css/contrast.css">
 </head>
 <body class="v5 is-locked is-night-only">
 <div id="signInGate" class="signin">
   <article class="signin__card">
-    <p class="eyebrow">KELLY GRAPPE</p>
+    <p class="eyebrow">YOUR NIGHT</p>
     <h1>Who are you?</h1>
-    <p>Start typing your name. Confirm this is the phone you are on today, then connect to Wi-Fi.</p>
+    <p>Type your name. Confirm the phone in your hand. That opens your night.</p>
     <label>I am
       <input id="gateName" type="text" autocomplete="off" placeholder="Start typing your name">
     </label>
@@ -29,15 +29,16 @@
       <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
     </label>
     <p class="signin__err" id="gateErr" hidden>Both are required. Use a real number people can call tonight.</p>
-    <button type="button" class="signin__go" id="gateGo">Open my night</button>
+    <button type="button" class="signin__go" id="gateGo">I'm in</button>
   </article>
 </div>
 
 <div id="v5App" data-needs-identity>
   <header class="v5-top">
-    <p class="eyebrow" id="v5Kicker">YOUR SPOT</p>
+    <p class="eyebrow" id="v5Kicker">GRASSROOTS &amp; GUITAR STRINGS</p>
     <h1 id="v5Seat">Your night</h1>
-    <p class="v5-who" id="v5Who"></p>
+    <p class="v5-hello" id="v5Hello">Thank you for volunteering. Tonight is going to be a great night.</p>
+    <p class="v5-who" id="v5Who" hidden></p>
     <p class="v5-role" id="v5Role"></p>
     <p class="v5-sync" id="syncStatus">Connecting…</p>
     <button type="button" class="v5-text" data-sign-out>Not me</button>
@@ -51,6 +52,7 @@
       <p id="nowDo"></p>
       <p class="v5-next" id="nowNext"></p>
     </article>
+    <article id="photos" data-night-photos></article>
     <article class="v5-facts-card" id="nightFactsCard">
       <p class="eyebrow">TONIGHT</p>
       <p id="nightFacts"></p>
@@ -59,7 +61,7 @@
       <p id="nightSocial"></p>
     </article>
     <article class="v5-night" id="nightBlock">
-      <p class="eyebrow">YOUR SPOT</p>
+      <p class="eyebrow">YOUR EVENING</p>
       <h2>Your job, in order. Gold is now.</h2>
       <ol class="v5-ros" id="nightClock"></ol>
     </article>
@@ -76,12 +78,13 @@
 <script src="/js/crew-slice.js?v=stream1"></script>
 <script src="/js/people-directory.js?v=stream1"></script>
 <script src="/js/site-leads.js?v=spots1"></script>
-<script src="/js/sign-in.js?v=spots1"></script>
+<script src="/js/sign-in.js?v=hello1"></script>
 <script src="/js/lead-duties.js?v=spotlist1"></script>
 <script src="/js/day-spots.js?v=spotlist1"></script>
 <script src="/js/run-of-show.js?v=stream1"></script>
 <script src="/js/wifi-join.js"></script>
-<script src="/v5/v5.js?v=stream1"></script>
-<script src="/js/crew-nav.js?v=stream1"></script>
+<script src="/v5/v5.js?v=hello1"></script>
+<script src="/js/crew-nav.js?v=hello1"></script>
+<script src="/js/night-photos.js?v=hello1"></script>
 </body>
 </html>

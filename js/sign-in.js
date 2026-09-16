@@ -58,10 +58,16 @@
     const go = document.getElementById("gateGo");
     const eyebrow = card.querySelector(".eyebrow");
     if (person) {
-      if (eyebrow) eyebrow.textContent = person.kicker;
+      if (eyebrow) eyebrow.textContent = "YOUR NIGHT";
       if (h1) h1.textContent = "Hey " + person.first;
-      if (p) p.textContent = person.gate;
-      if (go) go.textContent = person.go || "Open my board";
+      if (p) p.textContent = "Confirm this is the phone in your hand. That opens your night.";
+      if (go) go.textContent = "I'm in";
+    } else if (String(name || "").trim()) {
+      const first = String(name).trim().split(/\s+/)[0];
+      if (eyebrow) eyebrow.textContent = "YOUR NIGHT";
+      if (h1) h1.textContent = "Hey " + first;
+      if (p) p.textContent = "Confirm this is the phone in your hand. That opens your night.";
+      if (go) go.textContent = "I'm in";
     } else if (h1 && !String(name || "").trim()) {
       if (eyebrow && /kelly|sign in/i.test(eyebrow.textContent || "KELLY GRAPPE")) eyebrow.textContent = "KELLY GRAPPE";
       if (h1) h1.textContent = "Who are you?";
@@ -283,6 +289,8 @@
         }
         if (err) err.hidden = true;
         setVerified(true);
+        const ok = save(name ? name.value : "", phone ? phone.value : "");
+        if (ok && !/^\/v5\/?$/.test(location.pathname || "")) location.href = "/v5/";
       });
     }
     if (no) {

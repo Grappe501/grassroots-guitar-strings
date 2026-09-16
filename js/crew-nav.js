@@ -1,15 +1,16 @@
 (function (global) {
   const LINKS = [
-    { href: "/v5/", label: "My night" },
+    { href: "/v5/", label: "Tonight" },
+    { href: "/v5/#photos", label: "Photos" },
     { href: "/spots/", label: "SPOTS" },
-    { href: "/leads/", label: "Duties" },
     { href: "/volunteers/", label: "Lists" },
-    { href: "/signs/", label: "Signs" },
   ];
 
   function here(href) {
     const path = (location.pathname || "/").replace(/\/+$/, "") || "/";
+    if (href.indexOf("#photos") >= 0) return path === "/v5" && location.hash === "#photos";
     const target = href.replace(/\/+$/, "") || "/";
+    if (target === "/v5") return path === "/v5" && location.hash !== "#photos";
     return path === target || path.indexOf(target + "/") === 0;
   }
 

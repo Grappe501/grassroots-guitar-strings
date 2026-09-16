@@ -211,16 +211,24 @@
         }
       }
       const spot = spotFor(name);
+      const person = window.GGSPeople && (window.GGSPeople.uniquePerson(name) || window.GGSPeople.findPerson(name));
+      const first = person && person.first ? person.first : String(name).trim().split(/\s+/)[0];
       const whoEl = document.getElementById("v5Who");
+      const helloEl = document.getElementById("v5Hello");
       const kickerEl = document.getElementById("v5Kicker");
       const seatEl = document.getElementById("v5Seat");
       const roleEl = document.getElementById("v5Role");
       if (whoEl) whoEl.textContent = name;
-      if (kickerEl) kickerEl.textContent = "YOUR SPOT";
-      if (seatEl) seatEl.textContent = spot ? spot.title : "Your night";
+      if (kickerEl) kickerEl.textContent = "GRASSROOTS & GUITAR STRINGS";
+      if (seatEl) seatEl.textContent = "Hey " + first;
+      if (helloEl) {
+        helloEl.textContent = spot
+          ? "Thank you for volunteering, " + first + ". Tonight is going to be a great night. Your job is " + spot.title + ". Keep things fun and lively. Take pictures."
+          : "Thank you for volunteering, " + first + ". Tonight is going to be a great night. Keep things fun and lively. Take pictures. Your seat gets your name today.";
+      }
       if (roleEl) {
         roleEl.textContent = spot
-          ? "Arrive " + spot.arrive + ". Eat — " + spot.eat + ". Sit — " + spot.sit
+          ? spot.title + " · Arrive " + spot.arrive + ". Eat — " + spot.eat + ". Sit — " + spot.sit
           : "Arrive 4:30. Your spot gets named today.";
       }
       const facts = document.getElementById("nightFacts");
