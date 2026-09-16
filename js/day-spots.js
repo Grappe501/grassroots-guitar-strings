@@ -232,7 +232,7 @@
       why: "30-minute merch set. Close the table for David so you sit. Close it again for 45 minutes of the concert.",
       clock: [
         row("10:00", "arrive", "If you are Setup 3: arrive. Event t-shirt on. Open My Night. Three people dress 8 guest tables only."),
-        row("10:25", "work", "Tables done. You set merch — 30 minutes. Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes. 4-ft and 6-ft cloths. Conversation cards."),
+        row("10:25", "work", "Tables done. You set merch — 30 minutes. Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards. 4-ft and 6-ft cloths. Conversation cards."),
         row("11:00", "work", "Yard-sign sheet on the same table. First name + phone. No second décor pass."),
         row("12:30", "leave", "Morning work is done. Leave. Eat a real lunch off site. Be back at 3:00."),
         row("15:00", "arrive", "Night arrival by 3:00. Earlier if you can. T-shirt on. Open My Night. Table live."),
@@ -245,7 +245,7 @@
         row("19:00", "work", "Concert starts. Stay through the first songs unless Relief has you covered."),
         row("19:15", "sit", "Close the table again. SIT the concert 45 minutes. Relief comes get you if a line forms."),
         row("20:00", "work", "Table through encore. Box loose shirts so strike is 20 minutes."),
-        row("20:45", "strike", "Strike B. Campaign signs, both shirt stacks, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, both cloths, conversation cards. Count. Bins to the campaign vehicle. 20 minutes."),
+        row("20:45", "strike", "Strike B. Campaign signs, both shirt stacks, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, both cloths, conversation cards. Count. Bins to the campaign vehicle. 20 minutes."),
         row("22:00", "done", "Merch is in a vehicle, not a hallway. You may leave."),
       ],
     },

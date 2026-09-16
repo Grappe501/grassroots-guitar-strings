@@ -128,6 +128,7 @@
         "Campaign tablecloth — 6 ft",
         "Sign stakes",
         "Pens",
+        "Postcards",
       ],
       out: [
         "Literature packed",
@@ -146,6 +147,7 @@
         "Sign stakes packed",
         "Pens packed",
         "Bungee cords packed",
+        "Postcards packed",
       ],
     },
     {
