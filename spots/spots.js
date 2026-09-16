@@ -108,7 +108,7 @@
     const whoEl = document.getElementById("spotWho");
     const pick = document.getElementById("spotPick");
     document.title = spot.title + " — Thursday clock";
-    document.getElementById("spotKicker").textContent = "SPOT " + spot.n + " OF 13 · " + spot.short.toUpperCase();
+    document.getElementById("spotKicker").textContent = "SPOT " + spot.n + " OF " + spots.SPOTS.length + " · " + spot.short.toUpperCase();
     document.getElementById("spotTitle").textContent = spot.title;
     document.getElementById("spotWhy").textContent = spot.why;
     document.getElementById("spotArrive").textContent = spot.arrive;

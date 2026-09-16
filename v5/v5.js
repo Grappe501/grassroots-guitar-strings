@@ -158,7 +158,7 @@
     } else {
       link.hidden = false;
       link.href = "/spots/";
-      link.textContent = "The 13 phone pages";
+      link.textContent = "The 17 phone pages";
     }
   }
 

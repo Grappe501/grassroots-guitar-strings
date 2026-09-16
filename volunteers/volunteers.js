@@ -1,5 +1,6 @@
 const KEY = "ggs-volunteers-2026-09-17-v1";
-const NEED_STAY = 7;
+const NEED_STAY = 10;
+const NEED_EVENT = 11;
 const defaults = {
   setup: [
     "Setup 1 → Floater A after 4:30",
@@ -9,7 +10,11 @@ const defaults = {
   event: [
     "Event Captain — clock + venue + strike lead",
     "Tickets — one person; floater covers breaks",
-    "Food + $1 water + ice — one person (Ben is the vendor)",
+    "Food service lead — Ben. Line, not plates, not water.",
+    "Server 1 — Sarah. Serving line with Ben.",
+    "Server 2 — serving line with Ben.",
+    "Server 3 — serving line with Ben.",
+    "Water — $1 bottles only. Tea and lemonade are free while they last.",
     "Campaign + merch — one table, 30 min set",
     "Tracy production helper — 8:00 AM through Strike D",
     "Floater A — relief loop all night",
@@ -74,6 +79,32 @@ function ensureGrounds() {
   });
 }
 
+function ensureFoodLine() {
+  if (!state.event) state.event = [];
+  (state.event || []).forEach((row) => {
+    if (/food \+ \$1 water|one person \(Ben/i.test(String(row.role || ""))) {
+      row.role = "Food service lead — Ben. Line, not plates, not water.";
+      if (!String(row.name || "").trim()) row.name = "Ben Hurst";
+    }
+  });
+  [
+    "Food service lead — Ben. Line, not plates, not water.",
+    "Server 1 — Sarah. Serving line with Ben.",
+    "Server 2 — serving line with Ben.",
+    "Server 3 — serving line with Ben.",
+    "Water — $1 bottles only. Tea and lemonade are free while they last.",
+  ].forEach((role) => {
+    const key = role.split(" — ")[0];
+    const hint = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+    if (!state.event.some((row) => hint.test(String(row.role || "")))) {
+      const row = emptyRow(role, "event");
+      if (/food service lead/i.test(role)) row.name = "Ben Hurst";
+      if (/server 1/i.test(role)) row.name = "Sarah Hurst";
+      state.event.push(row);
+    }
+  });
+}
+
 function ensureMuscle() {
   if (!state.strike) state.strike = [];
   [
@@ -99,9 +130,14 @@ let state =
 ensureFloaters();
 ensureMuscle();
 ensureGrounds();
-(function seedDebiMerch() {
-  const row = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
-  if (row && !String(row.name || "").trim()) row.name = "Debi Martin";
+ensureFoodLine();
+(function seedNamedSeats() {
+  const debi = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
+  if (debi && !String(debi.name || "").trim()) debi.name = "Debi Martin";
+  const ben = (state.event || []).find((item) => /food service lead/i.test(String(item.role || "")));
+  if (ben && !String(ben.name || "").trim()) ben.name = "Ben Hurst";
+  const sarah = (state.event || []).find((item) => /server 1/i.test(String(item.role || "")));
+  if (sarah && !String(sarah.name || "").trim()) sarah.name = "Sarah Hurst";
 })();
 const esc = (x) =>
   String(x ?? "")
@@ -222,6 +258,7 @@ function applyRemote(data) {
   ensureFloaters();
   ensureMuscle();
   ensureGrounds();
+  ensureFoodLine();
   ["setup", "event", "strike", "grounds"].forEach(render);
   counts();
 }
@@ -232,7 +269,7 @@ function stayNames() {
     (state[kind] || []).forEach((row) => {
       const name = String((row && row.name) || "").trim();
       if (!name) return;
-      if (/muscle/i.test(String((row && row.role) || ""))) return;
+      if (/muscle|food service lead/i.test(String((row && row.role) || ""))) return;
       const dup = seen.some((item) =>
         slice ? slice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
       );
@@ -244,7 +281,7 @@ function stayNames() {
 
 function counts() {
   document.getElementById("setupCount").textContent = state.setup.filter((x) => x.name.trim()).length + " / 3";
-  document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + NEED_STAY;
+  document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + NEED_EVENT;
   const groundsEl = document.getElementById("groundsCount");
   if (groundsEl) {
     groundsEl.textContent = (state.grounds || []).filter((x) => String(x.name || "").trim()).length + " / 3";
@@ -253,10 +290,10 @@ function counts() {
   document.getElementById("strikeCount").textContent = n + " / " + NEED_STAY;
   document.getElementById("strikeAlert").textContent =
     n >= NEED_STAY
-      ? "13 unique people: 7 night + 3 arrival (parking/directions/crowd) + 3 Tracy muscle. Kelly Support and Photo are extra only if they are not already one of the 7."
-      : "Night crew is " +
+      ? "16 volunteers: 10 night + 3 arrival + 3 Tracy muscle. Ben leads the serving line — he does not plate and he is not water. Sarah is Server 1. Name 2 more servers and the water person."
+      : "Night volunteers are " +
         (NEED_STAY - n) +
-        " short of 7. Also name 3 arrival people and 3 Tracy muscle. Setup 1+2 become floaters. Setup 3 becomes campaign.";
+        " short of 10 (3 servers + water + the old 6 posts). Ben leads the line and is not counted here. Also name 3 arrival people and 3 Tracy muscle.";
   if (window.GGSNextAction && window.GGSNextAction.paintTexts) {
     window.GGSNextAction.paintTexts(store ? store.readCache() : {}, state);
   }
@@ -295,6 +332,7 @@ document.getElementById("clearBtn").addEventListener("click", () => {
     ensureFloaters();
     ensureMuscle();
     ensureGrounds();
+    ensureFoodLine();
     save();
     ["setup", "event", "strike", "grounds"].forEach(render);
   }

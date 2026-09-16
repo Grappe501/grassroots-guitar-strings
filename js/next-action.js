@@ -1,5 +1,5 @@
 (function (global) {
-  const NEED_STAY = 7;
+  const NEED_STAY = 10;
   const MARK = {
     open: "2026-09-17T08:00:00",
     eventMode: "2026-09-17T16:30:00",
@@ -63,7 +63,7 @@
       ((roster && roster[kind]) || []).forEach((row) => {
         const name = String((row && row.name) || "").trim();
         if (!name) return;
-        if (/muscle/i.test(String((row && row.role) || ""))) return;
+        if (/muscle|food service lead/i.test(String((row && row.role) || ""))) return;
         const dup = seen.some((item) =>
           global.GGSCrewSlice ? global.GGSCrewSlice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
         );
@@ -157,7 +157,7 @@
         kind: "strike",
         score: weight(p, "strike") + short,
         href: "/volunteers/",
-        line: "Night crew is " + short + " short of 7. Same people stay through 10.",
+        line: "Night volunteers are " + short + " short of 10. Ben leads the line and is not in that 10. Same people stay through 10.",
       });
     }
 
@@ -188,6 +188,16 @@
         score: weight(p, "tracy") + openMuscle,
         href: "/prep/#production",
         line: "Tracy needs " + openMuscle + " more sound/lights muscle named for carry-out.",
+      });
+    }
+
+    if (undone(list, /name server 2|name server 3|name water volunteer/i).length) {
+      const openLine = undone(list, /name server 2|name server 3|name water volunteer/i).length;
+      facts.push({
+        kind: "setup",
+        score: weight(p, "setup") + openLine,
+        href: "/volunteers/",
+        line: "Name " + openLine + " food seats: Server 2, Server 3, and/or water. Sarah is Server 1. Ben leads the line.",
       });
     }
 
