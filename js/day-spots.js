@@ -28,7 +28,7 @@
       why: "You own the night. You also sit both shows — short — so you are a guest too.",
       clock: [
         row("16:30", "arrive", "Arrive by 4:30. Event t-shirt on before you talk to anyone. Open My Night. Phone on silent, vibrate on. Sound check is live — stay off the dance floor."),
-        row("16:35", "work", "Walk 8 guest tables, lobby, buffet, merch, lot. Confirm every night post is walking in: tickets, Ben + 3 servers, drink station, campaign, both floaters, Kelly Support, Photo, 3 arrival. Text anyone missing."),
+        row("16:35", "work", "Walk 8 guest tables, lobby, buffet, merch, lot. Confirm every night post is walking in: tickets, Ben + 3 servers, drink station, campaign, both floaters, Kelly Support, Photo, parking, crowd. Text anyone missing."),
         row("16:45", "eat", "EAT. 15 minutes. Plate now so you are not hungry at doors."),
         row("17:00", "work", "Ice with Ben if it is not in. 12 bags in chests, not in a car. Drink station has tea, lemonade, 120 bottles, and the donation bag."),
         row("17:15", "work", "Food doors. Tell every night person: you stay until 10. Everything is inside. Concert-only stay in cars until 6:30. Ben does not plate. We are taking donations for drinks — water, tea, or lemonade."),
@@ -339,6 +339,7 @@
       n: 13,
       title: "Directions",
       short: "Lot to door",
+      retired: true,
       arrive: "4:30 PM · path at 5:00",
       eat: "4:40 PM · 15 min.",
       sit: "Stay on your post 5:45–6:45. Watch the whole 7:00 concert.",

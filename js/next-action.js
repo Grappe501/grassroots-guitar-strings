@@ -188,13 +188,13 @@
       });
     }
 
-    if (undone(list, /name parking volunteer|name directions volunteer|name crowd\/lobby volunteer/i).length) {
-      const openGrounds = undone(list, /name parking volunteer|name directions volunteer|name crowd\/lobby volunteer/i).length;
+    if (undone(list, /name parking volunteer|name crowd\/lobby volunteer/i).length) {
+      const openGrounds = undone(list, /name parking volunteer|name crowd\/lobby volunteer/i).length;
       facts.push({
         kind: "setup",
         score: weight(p, "setup") + openGrounds,
         href: "/volunteers/",
-        line: "Name " + openGrounds + " arrival people: parking, directions, crowd.",
+        line: "Name " + openGrounds + " arrival people: parking and crowd.",
       });
     }
 

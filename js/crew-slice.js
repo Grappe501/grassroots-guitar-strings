@@ -253,10 +253,10 @@
     },
     {
       id: "grounds",
-      label: "Parking / directions / crowd",
+      label: "Parking / crowd",
       priority: 3,
-      test: /parking|directions volunteer|crowd \/ lobby|lot to door|overflow if the lot/i,
-      roster: /parking|directions|crowd \/ lobby/i,
+      test: /parking|crowd \/ lobby|overflow if the lot/i,
+      roster: /parking|crowd \/ lobby/i,
       day: [
         { start: "2026-09-17T17:15:00", end: "2026-09-17T18:30:00", place: "Lot + door + lobby", do: "Food doors at 5:15. Everything is inside. Concert-only stay in cars until 6:30. Keep the line moving." },
         { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Doors rush", do: "Concert doors. No pile-up at the ticket table. Then you may stand down unless Event Lead keeps you." },

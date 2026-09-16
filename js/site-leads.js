@@ -11,7 +11,6 @@
     "Ben Hurst",
     "Sarah Hurst",
     "Chance Bradford",
-    "Leeann Solice",
     "Debbie Martin",
     "Julia Taylor",
     "Paul Egan",

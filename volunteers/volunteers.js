@@ -28,7 +28,6 @@ const defaults = {
   ],
   grounds: [
     "Parking — 5:15–7:00. Food doors at 5:15. Concert-only stay in cars until 6:30.",
-    "Directions — 5:15–7:00. Lot to door. Everything is inside. Concert-only stay in cars until 6:30.",
     "Crowd / lobby — 5:15–7:00. Food doors at 5:15. Concert-only at 6:30. Keep the line moving. Point to tickets.",
   ],
 };
@@ -91,6 +90,11 @@ function dropTracyHelper() {
     if (!state[kind]) return;
     state[kind] = state[kind].filter((row) => !/tracy production helper|assist tracy|campaign volunteer helper/i.test(String((row && row.role) || "")));
   });
+}
+
+function dropDirections() {
+  if (!state.grounds) return;
+  state.grounds = state.grounds.filter((row) => !/^directions\b/i.test(String((row && row.role) || "")));
 }
 
 function ensureFloaters() {
@@ -195,6 +199,7 @@ ensureGrounds();
 ensureFoodLine();
 ensureLeadRows();
 dropTracyHelper();
+dropDirections();
 const bootArriveDirty = migrateArrivals();
 const bootLeadDirty = applyLeadSeats();
 (function seedNamedSeats() {
@@ -339,6 +344,7 @@ function applyRemote(data) {
   ensureFoodLine();
   ensureLeadRows();
   dropTracyHelper();
+dropDirections();
   const arriveDirty = migrateArrivals();
   const leadDirty = applyLeadSeats();
   const spotDirty = pullSpots();
@@ -369,16 +375,16 @@ function counts() {
   document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + NEED_EVENT;
   const groundsEl = document.getElementById("groundsCount");
   if (groundsEl) {
-    groundsEl.textContent = (state.grounds || []).filter((x) => String(x.name || "").trim()).length + " / 3";
+    groundsEl.textContent = (state.grounds || []).filter((x) => String(x.name || "").trim()).length + " / 2";
   }
   const n = stayNames().length;
   document.getElementById("strikeCount").textContent = n + " / " + NEED_STAY;
   document.getElementById("strikeAlert").textContent =
     n >= NEED_STAY
-      ? "16 volunteers: 10 night + 3 arrival + 3 Tracy muscle. Ben leads the serving line — he does not plate. Drink station is separate. Sarah is Server 1. Name 2 more servers and the drink station."
+      ? "15 volunteers: 10 night + 2 arrival + 3 Tracy muscle. Ben leads the serving line — he does not plate. Drink station is separate. Sarah is Server 1. Name 2 more servers and the drink station."
       : "Night volunteers are " +
         (NEED_STAY - n) +
-        " short of 10 (3 servers + drink station + the old 6 posts). Ben leads the line and is not counted here. Also name 3 arrival people and 3 Tracy muscle.";
+        " short of 10 (3 servers + drink station + the old 6 posts). Ben leads the line and is not counted here. Also name 2 arrival people and 3 Tracy muscle.";
   if (window.GGSNextAction && window.GGSNextAction.paintTexts) {
     window.GGSNextAction.paintTexts(store ? store.readCache() : {}, state);
   }
@@ -411,6 +417,7 @@ document.getElementById("clearBtn").addEventListener("click", () => {
     ensureFoodLine();
     ensureLeadRows();
     dropTracyHelper();
+    dropDirections();
     applyLeadSeats();
     save();
     ["setup", "event", "strike", "grounds"].forEach(render);

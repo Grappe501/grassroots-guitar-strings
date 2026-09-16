@@ -149,6 +149,7 @@
     {
       name: "Leeann Solice",
       first: "Leeann",
+      retired: true,
       phone: "512-789-1552",
       gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my night",
@@ -549,10 +550,15 @@
     return PEOPLE.find((p) => match(p.name, n)) || null;
   }
 
+  function attending() {
+    return PEOPLE.filter((p) => !p.retired);
+  }
+
   function suggestions(q) {
+    const pool = attending();
     const s = norm(q);
-    if (!s) return PEOPLE.slice();
-    return PEOPLE.filter((p) => norm(p.name).indexOf(s) === 0 || norm(p.first).indexOf(s) === 0 || norm(p.name).indexOf(s) >= 0);
+    if (!s) return pool.slice();
+    return pool.filter((p) => norm(p.name).indexOf(s) === 0 || norm(p.first).indexOf(s) === 0 || norm(p.name).indexOf(s) >= 0);
   }
 
   function uniquePerson(q) {
@@ -560,12 +566,12 @@
     if (s.length < 2) return null;
     const hits = suggestions(q);
     if (hits.length === 1) return hits[0];
-    const exact = PEOPLE.filter((p) => norm(p.first) === s || norm(p.name) === s);
+    const exact = attending().filter((p) => norm(p.first) === s || norm(p.name) === s);
     return exact.length === 1 ? exact[0] : null;
   }
 
   function names() {
-    return PEOPLE.map((p) => p.name);
+    return attending().map((p) => p.name);
   }
 
   function esc(value) {

@@ -32,7 +32,6 @@
     server3: { kind: "event", hint: /server 3/i },
     water: { kind: "event", hint: /drink station|^water —/i },
     parking: { kind: "grounds", hint: /parking/i },
-    directions: { kind: "grounds", hint: /directions/i },
     crowd: { kind: "grounds", hint: /crowd|lobby/i },
     muscle1: { kind: "strike", hint: /muscle 1/i },
     muscle2: { kind: "strike", hint: /muscle 2/i },
