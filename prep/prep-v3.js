@@ -3,8 +3,8 @@
   const PREFS = "ggs-prep-v3-prefs";
   const milestones = [
     ["2026-09-17T08:00:00", "8:00 AM", "Venue access + setup"],
-    ["2026-09-17T10:00:00", "10:00 AM", "Room / production check"],
-    ["2026-09-17T16:30:00", "4:30 PM", "Shift to event mode"],
+    ["2026-09-17T10:00:00", "10:00 AM", "System line check — band at 4:30"],
+    ["2026-09-17T16:30:00", "4:30 PM", "SOUND CHECK + night crew"],
     ["2026-09-17T17:00:00", "5:00 PM", "Event crew in position"],
     ["2026-09-17T17:30:00", "5:30 PM", "BBQ / social hour"],
     ["2026-09-17T17:45:00", "5:45 PM", "David acoustic set"],

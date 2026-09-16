@@ -13,10 +13,11 @@
     beat("09:00", "Setup 3", "Merch set done. Yard-sign sheet on the same table. First name + phone.", "work"),
     beat("09:15", "Tracy helper", "Power mapped. Dance floor cables taped. Spare batteries at the mixer.", "work"),
     beat("09:30", "Tracy helper", "Bar stool staged for David. One vocal mic and stand ready.", "work"),
-    beat("10:00", "Setup + Tracy", "Room should be dressed. Full sound and light check. Morning crew may leave after this.", "work"),
+    beat("10:00", "Tracy + helper", "System ready. Line check and lights. Band sound check is 4:30 — do not wait for the band this morning.", "work"),
     beat("10:30", "Setup 1–3", "Morning work is done. Leave. Eat a real lunch off site. Back at 4:30 in your night seat.", "leave"),
     beat("12:00", "Tracy helper", "Lunch off site, 45 minutes, only if Tracy can hold the system.", "eat"),
-    beat("16:30", "Night crew", "Night crew back. Event t-shirts on. Ice now — not later. 12 bags.", "arrive"),
+    beat("16:30", "David + band + Tracy", "SOUND CHECK. Acoustic and concert. Band is plugged in now, not at 5:00.", "show"),
+    beat("16:30", "Night crew", "Night crew back. Event t-shirts on. Ice now — not later. 12 bags. Stay off the dance floor — sound check.", "arrive"),
     beat("16:32", "Ben + 3 servers", "Ice chest + scoop for tea and lemonade. Line set. Free-while-it-lasts signs up. Ben does not plate.", "work"),
     beat("16:35", "Water", "120 bottles on ice. $1 cash-only signs. Money bag on you. Not the serving line.", "work"),
     beat("16:40", "Floater A + B", "Walk every post once. Then start the relief loop.", "work"),
@@ -85,5 +86,27 @@
     return row.t + ":" + i + ":" + String(row.who || "").slice(0, 24);
   }
 
-  global.GGSRunOfShow = { CLOCK: CLOCK, hm: hm, idFor: idFor };
+  const BAND = [
+    beat("08:00", "Tracy · lights · sound", "Venue open. Load one system. Furniture is already placed — do not move tables or the dance floor.", "arrive"),
+    beat("08:10", "Tracy · helper", "Unload speakers, mixer, mics, stands, lights. Tape as you go. One plot only.", "work"),
+    beat("09:00", "Tracy · helper", "Power mapped. Dance-floor cables taped. Lights hung and aimed.", "work"),
+    beat("09:30", "Tracy · helper", "Acoustic ready: bar stool, one vocal mic, stand. Concert mics staged, not live.", "work"),
+    beat("10:00", "Tracy · helper", "System line check. Lights focused. Band is not required this morning.", "work"),
+    beat("10:30", "Tracy", "Morning build is done. Hold the system or take lunch if a body stays on it.", "leave"),
+    beat("12:00", "Tracy · helper", "Lunch off site, 45 minutes, only if the system can hold.", "eat"),
+    beat("16:30", "David + band + Tracy", "SOUND CHECK. You are on site and plugged in. Acoustic patch and concert patch. Not 5:00. Not after BBQ starts.", "show"),
+    beat("16:50", "David + band", "Sound check is done. Stage quiet. Eat if you want — BBQ opens at 5:30.", "eat"),
+    beat("17:30", "Band", "BBQ is open. Guests in the room. Stay off the dance floor until 5:45.", "work"),
+    beat("17:45", "David + Tracy", "Acoustic dinner set. 30 minutes. Center of the dance floor. Stool, one mic, his amp only.", "show"),
+    beat("18:15", "Tracy · helper · David", "Acoustic over. Clear the floor. Stool away. Concert system up. 15 minutes.", "work"),
+    beat("18:30", "Band", "Concert doors. Last quiet minutes at the board or backstage. Not a second sound check.", "show"),
+    beat("18:45", "Tracy + David", "Hard checkpoint. Every concert input live. Show at 7:00.", "work"),
+    beat("19:00", "David + band", "Concert starts. Full system. About 8:45 last song.", "show"),
+    beat("20:40", "Tracy muscle 1–3", "Three carriers at the stage. Find Tracy. Event t-shirts on.", "arrive"),
+    beat("20:45", "Tracy · helper · muscle", "Show over. Strike. Tracy directs. His vehicle. Venue tables and chairs stay.", "strike"),
+    beat("21:30", "Tracy + muscle", "Stage empty. Cases in the vehicle.", "strike"),
+    beat("22:00", "Tracy", "Building clear. Production is gone.", "done"),
+  ];
+
+  global.GGSRunOfShow = { CLOCK: CLOCK, BAND: BAND, hm: hm, idFor: idFor };
 })(window);

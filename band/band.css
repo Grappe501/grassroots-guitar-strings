@@ -1,0 +1,16 @@
+body.band .band-check {
+  border-left: 6px solid #ca913d;
+}
+
+body.band .band-check h2 {
+  margin: 0.15rem 0 0.4rem;
+  color: #000066;
+}
+
+body.band .ros-note p + p {
+  margin-top: 0.45rem;
+}
+
+body.band .ros-now.is-show {
+  border-left: 6px solid #ca913d;
+}

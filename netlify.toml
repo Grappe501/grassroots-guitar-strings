@@ -27,6 +27,11 @@
   status = 301
 
 [[redirects]]
+  from = "/band"
+  to = "/band/"
+  status = 302
+
+[[redirects]]
   from = "/run"
   to = "/clock/"
   status = 302
