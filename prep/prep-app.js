@@ -127,7 +127,14 @@
       }
       return;
     }
-    el.querySelector(".owner").value = name;
+    const owner = el.querySelector(".owner");
+    if (owner && owner.tagName === "SELECT" && name && ![].some.call(owner.options, (opt) => opt.value === name)) {
+      const opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name;
+      owner.appendChild(opt);
+    }
+    if (owner) owner.value = name;
     saveRow(el);
     const phone = document.getElementById("mePhone");
     if (phone && !(prefs.phone || "").trim()) {
@@ -146,9 +153,11 @@
       (x.done ? " checked" : "") +
       '><span class="checkmark"></span><span class="task-text">' +
       esc(label) +
-      '</span></label><input class="owner" value="' +
-      esc(x.owner || "") +
-      '" list="ownerNames" autocomplete="off" placeholder="Assigned to…"><span class="owner-reach"></span><input class="when" value="' +
+      "</span></label>" +
+      (window.GGSPeople
+        ? window.GGSPeople.leadSelectHtml(x.owner || "", { includeVenue: true })
+        : '<input class="owner" value="' + esc(x.owner || "") + '" placeholder="Assigned to…">') +
+      '<span class="owner-reach"></span><input class="when" value="' +
       esc(x.when || "") +
       '" placeholder="' +
       esc(whenPlaceholder) +

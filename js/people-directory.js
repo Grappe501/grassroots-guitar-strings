@@ -151,6 +151,22 @@
       next: "Ten lead jobs. Steve starts at the top. Claim the one you want.",
       duties: ["Read /leads/.", "Show up ready to own one lane and the people under it."],
     },
+    {
+      name: "Debi Martin",
+      first: "Debi",
+      phone: "",
+      gate: "You own the merch table. Phone goes in tomorrow. Confirm when we have it, then connect to Wi-Fi.",
+      go: "Open my board",
+      kicker: "MERCH",
+      title: "You own the merch table.",
+      next: "Campaign & Merch is your seat. One table. 30-minute set. Shirts, banners, cards, buttons, candy.",
+      duties: [
+        "Set merch + campaign on one table — 30 minutes.",
+        "T-shirts, pull-ups, push cards, buttons, candy, foldovers.",
+        "Yard signs from the same table. First name + phone on one sheet.",
+        "Strike B is 20 minutes. Count what is left.",
+      ],
+    },
   ];
 
   const JOBS = [
@@ -221,8 +237,9 @@
       title: "Campaign & Merch Lead",
       weight: "Medium",
       cartoon: "Wonder Woman",
+      defaultOwner: "Debi Martin",
       arrival: "After tables / 5:00 PM",
-      owns: "One table. 30-minute set. Signs and shirts.",
+      owns: "Debi Martin. One table. 30-minute set. Signs and shirts.",
       duties: [
         "Pull-up banners, push cards, buttons, candy, foldovers, literature, shirts.",
         "Yard signs from the same table. First name + phone on one sheet.",
@@ -346,6 +363,39 @@
     return PEOPLE.map((p) => p.name);
   }
 
+  function esc(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  function leadSelectHtml(selected, extra) {
+    const cfg = extra || {};
+    const sel = String(selected || "").trim();
+    const cls = cfg.className || "owner";
+    const attrs = cfg.attrs || "";
+    const blank = cfg.blank != null ? cfg.blank : "Unassigned";
+    const seen = {};
+    const opts = ['<option value="">' + esc(blank) + "</option>"];
+    if (cfg.includeVenue) {
+      seen.Venue = true;
+      opts.push('<option value="Venue"' + (sel === "Venue" ? " selected" : "") + ">Venue</option>");
+    }
+    names()
+      .slice()
+      .sort((a, b) => a.localeCompare(b))
+      .forEach((n) => {
+        seen[n] = true;
+        opts.push('<option value="' + esc(n) + '"' + (sel === n ? " selected" : "") + ">" + esc(n) + "</option>");
+      });
+    if (sel && !seen[sel]) {
+      opts.push('<option value="' + esc(sel) + '" selected>' + esc(sel) + "</option>");
+    }
+    return "<select class=\"" + esc(cls) + "\" " + attrs + ">" + opts.join("") + "</select>";
+  }
+
   function prettyPhone(phone) {
     if (global.GGSCrewSlice) return global.GGSCrewSlice.displayPhone(phone);
     return String(phone || "").trim();
@@ -365,7 +415,7 @@
     });
   }
 
-  global.GGSPeople = { PEOPLE, JOBS, findPerson, uniquePerson, suggestions, names, match, prettyPhone, seedContacts };
+  global.GGSPeople = { PEOPLE, JOBS, findPerson, uniquePerson, suggestions, names, match, prettyPhone, seedContacts, leadSelectHtml };
   function bootSeed() {
     seedContacts();
   }

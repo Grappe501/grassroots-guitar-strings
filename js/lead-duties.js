@@ -8,7 +8,8 @@
     const saved = doc && Array.isArray(doc.jobs) ? doc.jobs : [];
     return base.map((job) => {
       const hit = saved.find((row) => row && row.id === job.id) || {};
-      const owner = String(hit.owner || job.cartoon).trim() || job.cartoon;
+      let owner = String(hit.owner || "").trim();
+      if (!owner || (dir && dir.match(owner, job.cartoon))) owner = job.defaultOwner || job.cartoon;
       return Object.assign({}, job, { owner: owner });
     });
   }
@@ -79,10 +80,27 @@
       .replaceAll('"', "&quot;");
   }
 
+  function seedDefaults() {
+    if (!store || !dir) return;
+    const doc = store.readDoc("lead-jobs") || {};
+    const saved = Array.isArray(doc.jobs) ? doc.jobs.slice() : [];
+    let dirty = false;
+    dir.JOBS.forEach((job) => {
+      if (!job.defaultOwner) return;
+      const hit = saved.find((row) => row && row.id === job.id);
+      const current = hit ? String(hit.owner || "").trim() : "";
+      if (current && !dir.match(current, job.cartoon)) return;
+      if (hit) hit.owner = job.defaultOwner;
+      else saved.push({ id: job.id, owner: job.defaultOwner });
+      dirty = true;
+    });
+    if (dirty) store.saveDoc("lead-jobs", { v: 1, jobs: saved });
+  }
+
   function renderBoard() {
     const root = document.getElementById("leadJobList");
     if (!root || !dir) return;
-    const people = dir.names();
+    seedDefaults();
     root.innerHTML = jobs()
       .map((job) => {
         const open = isCartoon(job);
@@ -93,17 +111,19 @@
           job.rank +
           " · " +
           esc(job.weight) +
-          '</p><h2>' +
+          "</p><h2>" +
           esc(job.title) +
           "</h2><p class=\"lead-owns\">" +
           esc(job.owns) +
           "</p><p class=\"lead-when\">Be there " +
           esc(job.arrival) +
-          '.</p><label>Who has this seat<input class="lead-owner" data-job="' +
-          esc(job.id) +
-          '" list="leadPeople" value="' +
-          esc(job.owner) +
-          '"></label><p class="lead-cartoon">Placeholder until the meeting: ' +
+          '.</p><label>Who has this seat' +
+          dir.leadSelectHtml(open ? "" : job.owner, {
+            className: "lead-owner",
+            attrs: 'data-job="' + esc(job.id) + '"',
+            blank: "Open — pick a lead",
+          }) +
+          "</label><p class=\"lead-cartoon\">Was a placeholder: " +
           esc(job.cartoon) +
           "</p><ul>" +
           job.duties.map((d) => "<li>" + esc(d) + "</li>").join("") +
@@ -111,8 +131,6 @@
         );
       })
       .join("");
-    const list = document.getElementById("leadPeople");
-    if (list) list.innerHTML = people.map((n) => '<option value="' + esc(n) + '"></option>').join("");
     root.querySelectorAll(".lead-owner").forEach((input) => {
       input.addEventListener("change", function () {
         saveOwner(input.dataset.job, input.value);
@@ -122,6 +140,7 @@
   }
 
   global.GGSLeadDuties = { jobs, saveOwner, jobFor, isCartoon, briefing, renderBoard };
+  global.addEventListener("ggs-prep-loaded", seedDefaults);
   if (document.getElementById("leadJobList")) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderBoard);
     else renderBoard();

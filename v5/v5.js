@@ -62,8 +62,15 @@
   }
 
   function jobBtn(row, name) {
+    const pick = window.GGSPeople
+      ? window.GGSPeople.leadSelectHtml(row.owner || "", {
+          className: "v5-owner",
+          attrs: 'data-own="' + esc(row.key) + '"',
+          includeVenue: true,
+        })
+      : "";
     return (
-      '<button type="button" class="v5-job' +
+      '<div class="v5-job-wrap"><button type="button" class="v5-job' +
       (row.done ? " is-done" : "") +
       '" data-key="' +
       esc(row.key) +
@@ -74,7 +81,9 @@
       (row.owner && row.owner !== name ? " · " + esc(row.owner) : "") +
       "</span><em>" +
       (row.done ? "Done" : "Mark done") +
-      "</em></button>"
+      "</em></button>" +
+      pick +
+      "</div>"
     );
   }
 
@@ -83,6 +92,23 @@
     root.querySelectorAll("[data-key]").forEach((btn) => {
       btn.addEventListener("click", function () {
         toggle(btn.dataset.key, name);
+      });
+    });
+    root.querySelectorAll("[data-own]").forEach((sel) => {
+      sel.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+      sel.addEventListener("change", function (e) {
+        e.stopPropagation();
+        if (!store) return;
+        const current = state()[sel.dataset.own] || {};
+        store.saveOne(sel.dataset.own, {
+          owner: sel.value,
+          when: current.when || "",
+          done: !!current.done,
+          extra: current.extra || "",
+        });
+        render();
       });
     });
   }

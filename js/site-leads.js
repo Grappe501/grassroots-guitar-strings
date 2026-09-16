@@ -12,12 +12,14 @@
     "Sarah Hurst",
     "Chance Bradford",
     "Leeann Solice",
+    "Debi Martin",
   ];
 
   const NAME_ROLES = [
     { who: /^ben\b|hurst/i, id: "food" },
     { who: /tracy/i, id: "production" },
     { who: /kelly/i, id: "candidate" },
+    { who: /debi|martin/i, id: "campaign" },
   ];
 
   function match(name, other) {

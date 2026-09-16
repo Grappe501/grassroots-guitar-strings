@@ -60,6 +60,10 @@ let state =
     strike: [],
   };
 ensureFloaters();
+(function seedDebiMerch() {
+  const row = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
+  if (row && !String(row.name || "").trim()) row.name = "Debi Martin";
+})();
 const esc = (x) =>
   String(x ?? "")
     .replaceAll("&", "&amp;")
@@ -87,9 +91,11 @@ function render(kind) {
             kind +
             '" data-i="' +
             i +
-            '"><div class="person-name"><input class="name" value="' +
-            esc(p.name) +
-            '" placeholder="Person name"><span class="person-reach">' +
+            '"><div class="person-name">' +
+            (window.GGSPeople
+              ? window.GGSPeople.leadSelectHtml(p.name, { className: "name", blank: "Pick a lead" })
+              : '<input class="name" value="' + esc(p.name) + '" placeholder="Person name">') +
+            '<span class="person-reach">' +
             (name ? reachHtml(name, phone) : "") +
             '</span></div><input class="phone" type="tel" inputmode="tel" value="' +
             esc(p.phone) +
@@ -117,7 +123,8 @@ function render(kind) {
     : '<div class="empty">No people assigned yet. Add someone above.</div>';
   el.querySelectorAll(".person").forEach((row) => {
     ["name", "phone", "role", "arrival", "backup"].forEach((c) =>
-      row.querySelector("." + c).addEventListener("input", () => {
+      ["input", "change"].forEach((evt) =>
+      row.querySelector("." + c).addEventListener(evt, () => {
         state[kind][+row.dataset.i][c] = row.querySelector("." + c).value;
         save();
         if (c === "name" || c === "phone") {
@@ -127,7 +134,8 @@ function render(kind) {
           if (box) box.innerHTML = name ? reachHtml(name, phone) : "";
           if (store && slice && name && slice.phoneDigits(phone)) slice.saveContact(store, name, phone);
         }
-      }),
+      })
+      )
     );
     row.querySelector(".remove").addEventListener("click", () => {
       state[kind].splice(+row.dataset.i, 1);

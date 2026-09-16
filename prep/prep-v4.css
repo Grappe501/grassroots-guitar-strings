@@ -213,6 +213,23 @@ html.night .radio-line {
   border-color: #2a4154;
 }
 
+select.owner {
+  width: 100%;
+  border: 1px solid #cdd2d5;
+  border-radius: 8px;
+  padding: 0.55rem 0.6rem;
+  font: inherit;
+  font-weight: 700;
+  background: #fff;
+  color: #12124a;
+}
+
+html.night select.owner {
+  background: #07074a;
+  color: #e7eef4;
+  border-color: #3a5366;
+}
+
 @media (max-width: 800px) {
   .radio-line {
     grid-template-columns: 6.2rem minmax(0, 1fr);
