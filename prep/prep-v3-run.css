@@ -5,7 +5,7 @@
 }
 
 .mode-switch .is-active-mode {
-  outline: 3px solid rgba(243, 201, 121, 0.7);
+  outline: 3px solid rgba(202, 145, 61, 0.7);
 }
 
 .gates,
@@ -73,7 +73,7 @@
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
-  color: #172532;
+  color: #12124a;
   resize: vertical;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .run-stage {
-  background: #0f3048;
+  background: #07074a;
   color: #fff;
   border-radius: 20px;
   padding: 1.4rem 1.2rem 2rem;
@@ -126,7 +126,7 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #f3c979;
+  color: #ca913d;
 }
 
 .run-me input {
@@ -138,7 +138,7 @@
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
-  color: #172532;
+  color: #12124a;
 }
 
 .run-kicker {
@@ -146,7 +146,7 @@
   letter-spacing: 0.18em;
   font-size: 0.75rem;
   font-weight: 800;
-  color: #f3c979;
+  color: #ca913d;
 }
 
 .run-clock {
@@ -158,7 +158,7 @@
 
 .run-now {
   margin: 0.2rem 0 0;
-  font-family: Georgia, "Palatino Linotype", serif;
+  font-family: "League Spartan", Raleway, sans-serif;
   font-size: clamp(1.6rem, 5vw, 2.6rem);
   line-height: 1.15;
 }
@@ -187,8 +187,8 @@
 }
 
 .run-cue.is-now {
-  background: #f3c979;
-  color: #172532;
+  background: #ca913d;
+  color: #12124a;
 }
 
 .run-mine-title {
@@ -213,7 +213,7 @@
   border-radius: 14px;
   padding: 0.95rem 1rem;
   background: #fff;
-  color: #0f3048;
+  color: #07074a;
   font: inherit;
   font-weight: 800;
   text-align: left;
@@ -222,7 +222,7 @@
 
 .run-task em {
   font-style: normal;
-  color: #17466b;
+  color: #000066;
   white-space: nowrap;
 }
 
@@ -264,7 +264,7 @@
 
 .packet-stats {
   font-weight: 800;
-  color: #17466b;
+  color: #000066;
 }
 
 .packet-live {
@@ -289,7 +289,7 @@
 }
 
 html.night .packet-stats {
-  color: #f3c979;
+  color: #ca913d;
 }
 
 html.night .packet-live li {
@@ -299,13 +299,13 @@ html.night .packet-live li {
 html.night .gates,
 html.night .radio-band,
 html.night .packet-stage {
-  background: #122433;
+  background: #0a0a4a;
   border-color: #2a4154;
   color: #e7eef4;
 }
 
 html.night .radio-field textarea {
-  background: #0b1c28;
+  background: #07074a;
   color: #e7eef4;
   border-color: #3a5366;
 }

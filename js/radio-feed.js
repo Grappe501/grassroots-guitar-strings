@@ -1,7 +1,7 @@
 (function (global) {
   const PALETTE = [
-    "#c0172a",
-    "#17466b",
+    "#000066",
+    "#ca913d",
     "#2f6f4e",
     "#8a4b08",
     "#6b3fa0",

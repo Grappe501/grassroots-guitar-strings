@@ -127,7 +127,7 @@
     if (!root) return;
     const people = livePeople();
     const now = Date.now();
-    const color = global.GGSRadioFeed ? global.GGSRadioFeed.colorFor : function () { return "#17466b"; };
+    const color = global.GGSRadioFeed ? global.GGSRadioFeed.colorFor : function () { return "#000066"; };
     const buttons = [
       '<button type="button" class="radio-person is-all' +
         (selected === "all" ? " is-active" : "") +

@@ -1,8 +1,8 @@
 body {
   margin: 0;
-  background: #0b1c28;
+  background: #07074a;
   color: #e7eef4;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: Raleway, ui-sans-serif, system-ui, sans-serif;
 }
 
 .wifi-top,
@@ -22,7 +22,7 @@ body {
 
 .eyebrow {
   margin: 0;
-  color: #f3c979;
+  color: #ca913d;
   font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -36,7 +36,7 @@ body {
 }
 
 .wifi-nav a {
-  color: #0f3048;
+  color: #07074a;
   background: #fff;
   text-decoration: none;
   font-weight: 800;
@@ -45,7 +45,7 @@ body {
 }
 
 .sync-status {
-  color: #f3c979;
+  color: #ca913d;
   font-weight: 700;
 }
 
@@ -54,7 +54,7 @@ body {
 }
 
 .wifi-main section {
-  background: #122433;
+  background: #0a0a4a;
   border: 1px solid #2a4154;
   border-radius: 16px;
   padding: 1rem;
@@ -73,12 +73,12 @@ body {
 }
 
 .wifi-join {
-  background: #f3c979;
-  color: #172532;
+  background: #ca913d;
+  color: #12124a;
 }
 
 .wifi-save {
-  background: #17466b;
+  background: #000066;
   color: #fff;
   margin-top: 0.5rem;
 }
@@ -107,7 +107,7 @@ body {
   border: 0;
   border-radius: 8px;
   padding: 0.35rem 0.55rem;
-  background: #1d5a86;
+  background: #0a0a7a;
   color: #fff;
   cursor: pointer;
 }
@@ -120,7 +120,7 @@ body {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #f3c979;
+  color: #ca913d;
 }
 
 .wifi-form input {
@@ -133,7 +133,7 @@ body {
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
-  color: #172532;
+  color: #12124a;
 }
 
 .wifi-banner {

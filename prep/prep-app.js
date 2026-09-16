@@ -89,7 +89,7 @@
     const btn = document.getElementById("nightBtn");
     if (btn) btn.textContent = prefs.night ? "Day mode" : "Night mode";
     const theme = document.querySelector('meta[name="theme-color"]');
-    if (theme) theme.setAttribute("content", prefs.night ? "#0b1c28" : "#17466b");
+    if (theme) theme.setAttribute("content", prefs.night ? "#07074a" : "#000066");
   }
 
   function rowState(el) {

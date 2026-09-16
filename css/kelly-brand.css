@@ -1,0 +1,31 @@
+@import url("./tokens.css");
+
+html {
+  font-family: var(--ggs-font-body);
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--ggs-font-body);
+}
+
+h1,
+h2,
+h3,
+.display-title,
+.v5-top h1,
+.v5-now h2,
+.signin__card h1,
+.sign h1,
+.topbar h1 {
+  font-family: var(--ggs-font-display);
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-family: var(--ggs-font-ui);
+  letter-spacing: 0.16em;
+}

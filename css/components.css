@@ -12,7 +12,7 @@
 .host-banner:hover,
 .host-banner:focus-visible {
   color: #fff;
-  background: #0a2233;
+  background: #07074a;
 }
 
 .host-banner__inner {
@@ -31,7 +31,7 @@
   object-position: 50% 18%;
   border: 2px solid var(--ggs-gold);
   flex-shrink: 0;
-  background: #13293d;
+  background: #0a0a4a;
 }
 
 .host-banner__copy {
@@ -157,7 +157,7 @@
 
 .site-nav a.is-active,
 .site-nav a:hover {
-  background: rgba(243, 201, 121, 0.35);
+  background: rgba(202, 145, 61, 0.35);
 }
 
 .site-nav__join {
@@ -289,7 +289,7 @@
   border-radius: calc(var(--ggs-radius) + 4px);
   overflow: hidden;
   box-shadow: var(--ggs-shadow);
-  border: 3px solid rgba(243, 201, 121, 0.55);
+  border: 3px solid rgba(202, 145, 61, 0.55);
   background: linear-gradient(145deg, var(--ggs-blue) 0%, #0a2840 100%);
   min-height: 280px;
   display: grid;
@@ -411,7 +411,7 @@
   border: 1px solid var(--ggs-border);
   border-radius: var(--ggs-radius);
   padding: 1.25rem;
-  box-shadow: 0 4px 18px rgba(15, 48, 72, 0.06);
+  box-shadow: 0 4px 18px rgba(7, 7, 74, 0.06);
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
@@ -558,7 +558,7 @@
   margin-top: 2rem;
   padding: 1.5rem;
   border-radius: var(--ggs-radius);
-  background: linear-gradient(135deg, rgba(23, 70, 107, 0.08), rgba(243, 201, 121, 0.25));
+  background: linear-gradient(135deg, rgba(0, 0, 102, 0.08), rgba(202, 145, 61, 0.25));
   border: 1px solid var(--ggs-border);
   text-align: center;
 }
@@ -708,7 +708,7 @@
   padding: 1.25rem 1.35rem;
   border-radius: var(--ggs-radius);
   border: 1px solid var(--ggs-border);
-  background: rgba(23, 70, 107, 0.05);
+  background: rgba(0, 0, 102, 0.05);
 }
 
 .event-facts p {
@@ -741,12 +741,12 @@
   border-radius: var(--ggs-radius);
   border: 1px solid var(--ggs-border);
   background: #fff;
-  box-shadow: 0 4px 18px rgba(15, 48, 72, 0.06);
+  box-shadow: 0 4px 18px rgba(7, 7, 74, 0.06);
 }
 
 .ticket-tier--featured {
-  border-color: rgba(243, 201, 121, 0.85);
-  box-shadow: 0 6px 22px rgba(243, 201, 121, 0.22);
+  border-color: rgba(202, 145, 61, 0.85);
+  box-shadow: 0 6px 22px rgba(202, 145, 61, 0.22);
 }
 
 .ticket-tier__head {
@@ -960,7 +960,7 @@
 }
 
 .ink-stamp__kicker {
-  font-family: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  font-family: "League Spartan", Raleway, sans-serif;
   font-size: clamp(1.05rem, 3.6vw, 1.5rem);
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -985,7 +985,7 @@
 }
 
 .ink-stamp__free {
-  font-family: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  font-family: "League Spartan", Raleway, sans-serif;
   font-size: clamp(2.4rem, 8vw, 3.6rem);
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -1038,7 +1038,7 @@
 
 .service-sign {
   --sign-navy: #12344d;
-  --sign-gold: #d8b45b;
+  --sign-gold: #ca913d;
   --sign-cream: #fff8e8;
   position: relative;
   width: min(88vw, 22rem);
@@ -1107,7 +1107,7 @@
 
 .service-sign__free {
   margin-top: 0.2rem;
-  font-family: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  font-family: "League Spartan", Raleway, sans-serif;
   font-size: clamp(2.2rem, 7vw, 3.2rem);
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -1135,7 +1135,7 @@
   align-content: center;
   gap: 1.1rem;
   padding: 1.25rem;
-  background: rgba(15, 48, 72, 0.58);
+  background: rgba(7, 7, 74, 0.58);
   backdrop-filter: blur(5px);
   cursor: pointer;
 }

@@ -36,18 +36,18 @@ body[data-mode="packet"] .role-row {
   border: 1px solid #d9d6ce;
   border-radius: 16px;
   padding: 1rem 1.1rem;
-  box-shadow: 0 5px 20px rgba(15, 48, 72, 0.07);
+  box-shadow: 0 5px 20px rgba(7, 7, 74, 0.07);
 }
 
 .now-card--clock {
-  background: #0f3048;
+  background: #07074a;
   color: #fff;
-  border-color: #0f3048;
+  border-color: #07074a;
 }
 
 .now-card--clock .eyebrow,
 .now-card--clock #nowLabel {
-  color: #f3c979;
+  color: #ca913d;
 }
 
 #nowClock {
@@ -64,13 +64,13 @@ body[data-mode="packet"] .role-row {
 }
 
 .now-card--next {
-  border-left: 6px solid #f3c979;
+  border-left: 6px solid #ca913d;
 }
 
 .now-card .big-number {
   font-size: 2.4rem;
   font-weight: 900;
-  color: #17466b;
+  color: #000066;
 }
 
 .ops-bar {
@@ -104,7 +104,7 @@ body[data-mode="packet"] .role-row {
   text-transform: none;
   letter-spacing: 0;
   font-weight: 600;
-  color: #172532;
+  color: #12124a;
 }
 
 .me-field input.is-needed {
@@ -117,7 +117,7 @@ body[data-mode="packet"] .role-row {
   letter-spacing: 0;
   text-transform: none;
   font-weight: 800;
-  color: #17466b;
+  color: #000066;
 }
 
 .filter-row {
@@ -132,7 +132,7 @@ body[data-mode="packet"] .role-row {
   margin: 0;
   font-size: 0.85rem;
   font-weight: 800;
-  color: #17466b;
+  color: #000066;
 }
 
 .chip,
@@ -141,7 +141,7 @@ body[data-mode="packet"] .role-row {
 .claim {
   border: 1px solid #cdd2d5;
   background: #fff;
-  color: #17466b;
+  color: #000066;
   border-radius: 999px;
   padding: 0.45rem 0.75rem;
   font-weight: 800;
@@ -151,9 +151,9 @@ body[data-mode="packet"] .role-row {
 .chip.is-active,
 .role.is-active,
 .role:hover {
-  background: #17466b;
+  background: #000066;
   color: #fff;
-  border-color: #17466b;
+  border-color: #000066;
 }
 
 .crew-pill {
@@ -199,7 +199,7 @@ body[data-mode="packet"] .role-row {
 .attention button {
   border: 0;
   background: none;
-  color: #17466b;
+  color: #000066;
   font: inherit;
   font-weight: 700;
   text-align: left;
@@ -236,12 +236,12 @@ body[data-mode="packet"] .role-row {
 
 html.night,
 html.night body {
-  background: #0b1c28;
+  background: #07074a;
   color: #e7eef4;
 }
 
 html.night .topbar {
-  background: #07141d;
+  background: #05053a;
 }
 
 html.night .now-card,
@@ -252,19 +252,19 @@ html.night .crew-band,
 html.night .attention,
 html.night .tab,
 html.night .empty-filter {
-  background: #122433;
+  background: #0a0a4a;
   border-color: #2a4154;
   color: #e7eef4;
 }
 
 html.night .now-card--clock {
-  background: #07141d;
+  background: #05053a;
 }
 
 html.night .tab.is-active {
-  background: #f3c979;
-  color: #122433;
-  border-color: #f3c979;
+  background: #ca913d;
+  color: #0a0a4a;
+  border-color: #ca913d;
 }
 
 html.night .owner,
@@ -281,7 +281,7 @@ html.night .role,
 html.night .claim,
 html.night .small-btn,
 html.night .crew-pill {
-  background: #0b1c28;
+  background: #07074a;
   color: #e7eef4;
   border-color: #3a5366;
 }
@@ -292,7 +292,7 @@ html.night .task {
 }
 
 html.night .tabs {
-  background: #0b1c28;
+  background: #07074a;
 }
 
 html.night .subtitle,

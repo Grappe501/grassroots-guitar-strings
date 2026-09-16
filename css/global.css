@@ -22,7 +22,7 @@ body {
   font-size: 1.05rem;
   line-height: 1.65;
   color: var(--ggs-ink);
-  background: linear-gradient(180deg, var(--ggs-cream) 0%, var(--ggs-white) 28%, #eef4f8 100%);
+  background: linear-gradient(180deg, var(--ggs-cream) 0%, var(--ggs-white) 28%, #e8f0fa 100%);
   min-height: 100vh;
 }
 
@@ -70,7 +70,7 @@ main {
 }
 
 .section--band {
-  background: rgba(23, 70, 107, 0.04);
+  background: rgba(0, 0, 102, 0.04);
   border-block: 1px solid var(--ggs-border);
 }
 

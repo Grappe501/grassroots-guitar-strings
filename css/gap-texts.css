@@ -26,7 +26,7 @@
   font-weight: 700;
   line-height: 1.4;
   resize: vertical;
-  background: #fffdf8;
+  background: #f4f7fc;
 }
 
 .gap-text-actions {
@@ -46,23 +46,23 @@
 }
 
 .gap-copy {
-  background: #17466b;
+  background: #000066;
   color: #fff;
 }
 
 .gap-sms {
-  background: #f3c979;
-  color: #172532;
+  background: #ca913d;
+  color: #12124a;
 }
 
 html.night .gap-text {
-  background: #122433;
+  background: #0a0a4a;
   border-color: #2a4154;
   color: #e7eef4;
 }
 
 html.night .gap-text textarea {
-  background: #0b1c28;
+  background: #07074a;
   color: #e7eef4;
   border-color: #3a5366;
 }

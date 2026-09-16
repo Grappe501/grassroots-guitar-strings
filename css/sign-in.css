@@ -5,7 +5,7 @@
   display: grid;
   place-items: center;
   padding: 1.2rem;
-  background: #0f3048;
+  background: #07074a;
   color: #fff;
 }
 .signin[hidden] {
@@ -13,14 +13,14 @@
 }
 .signin__card {
   width: min(28rem, 100%);
-  background: #122433;
+  background: #0a0a4a;
   border: 1px solid #3a5366;
   border-radius: 18px;
   padding: 1.3rem 1.2rem 1.2rem;
 }
 .signin__card .eyebrow {
   margin: 0;
-  color: #f3c979;
+  color: #ca913d;
   letter-spacing: 0.14em;
   font-weight: 900;
   font-size: 0.72rem;
@@ -42,7 +42,7 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #f3c979;
+  color: #ca913d;
 }
 .signin__card input {
   width: 100%;
@@ -53,7 +53,7 @@
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
-  color: #172532;
+  color: #12124a;
   background: #fff;
 }
 .signin__err {
@@ -65,8 +65,8 @@
   border: 0;
   border-radius: 999px;
   padding: 0.85rem 1rem;
-  background: #f3c979;
-  color: #0f3048;
+  background: #ca913d;
+  color: #07074a;
   font: inherit;
   font-weight: 900;
   cursor: pointer;
