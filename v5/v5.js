@@ -139,7 +139,10 @@
     document.getElementById("briefTitle").textContent = brief.title;
     document.getElementById("briefNext").textContent = brief.next;
     const list = document.getElementById("briefDuties");
-    list.innerHTML = (brief.duties || []).map((d) => "<li>" + esc(d) + "</li>").join("");
+    const social = window.GGSDaySpots && window.GGSDaySpots.SOCIAL;
+    const duties = (brief.duties || []).slice();
+    if (social && !duties.some((d) => /#GrappeSOS/.test(d))) duties.push(social);
+    list.innerHTML = duties.map((d) => "<li>" + esc(d) + "</li>").join("");
     const day = window.GGSDaySpots && window.GGSDaySpots.spotForName(name);
     let link = card.querySelector("[data-day-spot]");
     if (!link) {

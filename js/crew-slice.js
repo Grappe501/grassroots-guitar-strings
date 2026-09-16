@@ -304,7 +304,7 @@
       test: /press flesh|candidate|kelly support/i,
       roster: /kelly grappe|candidate/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "The room · guests", do: "Press flesh. Do not run a table. Only Kelly Support mans you. Photo Lead roams." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T20:45:00", place: "The room · guests", do: "Press flesh. Do not run a table. Collaborate on posts tagged @KellyGrappeSOS #GrappeSOS. Only Kelly Support mans you. Photo Lead roams." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T21:15:00", place: "Thank-yous", do: "One last round of thanks. Then you may leave. Crew closes." },
       ],
     },

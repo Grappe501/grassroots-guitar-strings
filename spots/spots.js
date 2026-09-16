@@ -116,6 +116,8 @@
     document.getElementById("spotSit").textContent = spot.sit;
     document.getElementById("spotWear").textContent = spots.WEAR;
     document.getElementById("spotShows").textContent = spots.SHOWS.dinner + " · " + spots.SHOWS.concert;
+    const socialEl = document.getElementById("spotSocial");
+    if (socialEl) socialEl.textContent = spots.SOCIAL;
     if (pick && people) {
       pick.innerHTML = people.leadSelectHtml(who, {
         className: "spot-owner",

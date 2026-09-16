@@ -7,6 +7,9 @@
     concert: "Concert · 7:00–about 8:45 PM",
   };
 
+  const SOCIAL =
+    "Take pictures and video all night. Post to your social media. Tag @KellyGrappeSOS and invite her to collaborate on the post. Hashtag every photo and video #GrappeSOS. We download tagged posts to put on the site.";
+
   function row(t, kind, text) {
     return { t: t, kind: kind, text: text };
   }
@@ -29,7 +32,7 @@
         row("16:35", "work", "Walk 8 guest tables, lobby, buffet, merch, lot. 5 minutes. Do not fix furniture."),
         row("16:40", "work", "Confirm the 7 night people are on site. Text anyone missing. Name the 3 arrival people if the lot is empty."),
         row("16:50", "work", "Ice check with Food. 12 bags should be going in, not still in a car."),
-        row("17:00", "work", "Tell every night person: you stay until 10. Floaters cover breaks. Arrival people own lot, path, lobby until 6:45."),
+        row("17:00", "work", "Tell every night person: you stay until 10. Take pictures. Post. Tag @KellyGrappeSOS, invite her to collaborate, hashtag #GrappeSOS. Floaters cover breaks. Arrival people own lot, path, lobby until 6:45."),
         row("17:10", "eat", "EAT. Plate now. 15 minutes. Sit in the back. Do not start a meeting with food in your hand."),
         row("17:25", "work", "On your feet. Walk tickets, food, campaign, lot. One sentence each: you good?"),
         row("17:30", "work", "BBQ opens. Smile. Do not plate for guests. Ben serves. You keep walking."),
@@ -345,6 +348,12 @@
     },
   ];
 
+  SPOTS.forEach((spot) => {
+    if (spot.clock.some((block) => /#GrappeSOS/.test(block.text))) return;
+    const first = spot.clock[0];
+    spot.clock.splice(1, 0, row(first ? first.t : "17:00", "work", SOCIAL));
+  });
+
   function byId(id) {
     return SPOTS.find((spot) => spot.id === id) || null;
   }
@@ -442,6 +451,7 @@
   global.GGSDaySpots = {
     WEAR: WEAR,
     SHOWS: SHOWS,
+    SOCIAL: SOCIAL,
     SPOTS: SPOTS,
     byId: byId,
     owners: owners,

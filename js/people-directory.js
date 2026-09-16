@@ -89,6 +89,7 @@
         "Kelly Support is your runner and your vertical camera. They stay with you.",
         "Photo Lead is separate. They roam. They are not on you all night.",
         "If someone tries to park you at a table, send them to Event Lead.",
+        "When people tag @KellyGrappeSOS and #GrappeSOS, collaborate on the post so we can pull the photos.",
       ],
     },
     {
@@ -305,6 +306,7 @@
         "You also shoot pictures and video of her — all vertical.",
         "Do not park her at tickets, food, or merch. Photo Lead does not man her.",
         "If she needs a minute, you hold the circle.",
+        "You still post. Tag @KellyGrappeSOS, invite her to collaborate, hashtag #GrappeSOS.",
       ],
     },
     {
@@ -320,6 +322,7 @@
         "Action shots: Kelly in the room, the crowd, dance floor, BBQ, arrivals, volunteers working.",
         "Journalistic frames. Energy. One closing group shot, then help the walk.",
         "If this seat is empty, Floater B grabs roam shots between loops. Still not Kelly Support.",
+        "Post as you go. Tag @KellyGrappeSOS, invite her to collaborate, hashtag #GrappeSOS.",
       ],
     },
     {

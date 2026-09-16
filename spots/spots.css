@@ -57,8 +57,14 @@ body.spot {
   font-size: 1.35rem;
 }
 
+.spot-facts--social,
+.spot-social {
+  border-left: 6px solid #ca913d;
+}
+
 .spot-facts p,
-.spot-card p {
+.spot-card p,
+.spot-social {
   margin: 0.35rem 0 0;
 }
 

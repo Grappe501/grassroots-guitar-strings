@@ -126,7 +126,7 @@
           "</label><p class=\"lead-cartoon\">Was a placeholder: " +
           esc(job.cartoon) +
           "</p><ul>" +
-          job.duties.map((d) => "<li>" + esc(d) + "</li>").join("") +
+          job.duties.concat(global.GGSDaySpots && global.GGSDaySpots.SOCIAL ? [global.GGSDaySpots.SOCIAL] : []).map((d) => "<li>" + esc(d) + "</li>").join("") +
           "</ul></article>"
         );
       })
