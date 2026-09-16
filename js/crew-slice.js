@@ -205,7 +205,7 @@
       test: /event captain|choose event captain|hard checkpoint|announce teardown/i,
       roster: /event captain/i,
       day: [
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Main room", do: "10 volunteers plus Ben on posts. Ice is going in. Floaters start the relief loop." },
+        { start: "2026-09-17T15:00:00", end: "2026-09-17T17:00:00", place: "Main room", do: "Everyone is on site by 3:00. Ice can go in now. Walk every post. Sound check at 4:30 — stay off the dance floor." },
         { start: "2026-09-17T17:00:00", end: "2026-09-17T18:45:00", place: "Whole room", do: "Walk stations every 15 min. Tickets, food, campaign, stage each have one body." },
         { start: "2026-09-17T18:45:00", end: "2026-09-17T19:00:00", place: "Stage + lobby", do: "Hard checkpoint. Every post still has a person. Concert at 7:00." },
         { start: "2026-09-17T19:00:00", end: "2026-09-17T20:45:00", place: "Show floor", do: "Stay visible. Floaters give breaks. Call strike the moment the show ends." },
@@ -220,7 +220,7 @@
       roster: /setup [123]|setup person/i,
       day: [
         { start: "2026-09-17T08:00:00", end: "2026-09-17T10:30:00", place: "Main room · 8 tables", do: "Dress 8 tables (25 min), signs (15), lobby (10), drinks station (20). Setup 3 then does the 30 min merch set." },
-        { start: "2026-09-17T10:30:00", end: "2026-09-17T16:30:00", place: "Off site unless called", do: "Room is dressed. Come back at 4:30 as Floater A, Floater B, or Campaign." },
+        { start: "2026-09-17T10:30:00", end: "2026-09-17T15:00:00", place: "Off site unless called", do: "Room is dressed. Come back at 3:00 as Floater A, Floater B, or Campaign." },
       ],
     },
     {
@@ -268,7 +268,7 @@
       test: /buffet|serving line|food service|server [123]|tea and lemonade|unsweet|pulled pork/i,
       roster: /food service lead|server [123]/i,
       day: [
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:30:00", place: "Serving line", do: "Ben leads. Three servers. Do not plate. Tea and lemonade free while they last. Water is someone else." },
+        { start: "2026-09-17T15:00:00", end: "2026-09-17T17:30:00", place: "Serving line", do: "On site at 3:00. Set the line. Ice now. Do not plate. Tea and lemonade free while they last. Water is someone else." },
         { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Serving line", do: "Serve. Ben directs. Relief 2 gives 10 min restroom only." },
         { start: "2026-09-17T19:20:00", end: "2026-09-17T20:00:00", place: "Concert seats", do: "Line is closed. Sit the concert. Water girl stays up." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike C · food", do: "Ben plus three servers. Coolers, leftover, trash. 20 min." },
@@ -281,7 +281,7 @@
       test: /\$1 water|\$1 bottles|water girl|money bag for \$1/i,
       roster: /\$1 bottles only|water — \$1/i,
       day: [
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:30:00", place: "Bottle station", do: "120 bottles on ice. $1 cash only. Tea and lemonade are free at the line — not your bag." },
+        { start: "2026-09-17T15:00:00", end: "2026-09-17T17:30:00", place: "Bottle station", do: "On site at 3:00. 120 bottles on ice. $1 cash only. Tea and lemonade are free at the line — not your bag." },
         { start: "2026-09-17T17:30:00", end: "2026-09-17T19:20:00", place: "Bottle station", do: "Sell $1 water. Stay through David. You are not on the serving line." },
         { start: "2026-09-17T19:20:00", end: "2026-09-17T20:00:00", place: "Concert seats", do: "Sit. Relief 2 has the bag." },
         { start: "2026-09-17T20:00:00", end: "2026-09-17T20:45:00", place: "Bottle station", do: "Back on water through the last song." },
@@ -340,7 +340,7 @@
       roster: /floater|relief|setup 1|setup 2|setup person 1|setup person 2/i,
       day: [
         { start: "2026-09-17T08:00:00", end: "2026-09-17T10:30:00", place: "Main room · 8 tables", do: "Dress the 8 tables and signs with the other two. Then you may leave." },
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Whole room", do: "Back on site. Ice with food. Walk every post once." },
+        { start: "2026-09-17T15:00:00", end: "2026-09-17T17:00:00", place: "Whole room", do: "Back on site at 3:00. Ice with food. Walk every post once. Sound check at 4:30 — stay off the floor." },
         { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Relief loop", do: "Every 30 min: tickets 10, food 10, campaign 10. That is the job." },
         { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Doors + loop", do: "Floater A helps tickets at doors. Floater B keeps the loop moving." },
         { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Show floor", do: "Quiet relief. Trash. One floater always walking so someone can take a break." },

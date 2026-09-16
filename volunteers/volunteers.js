@@ -45,12 +45,12 @@ const slice = window.GGSCrewSlice;
 
 function arrivalFor(role, kind) {
   if (kind === "setup") return "8:00 AM";
+  if (/muscle/i.test(role)) return "3:00 PM · required 8:45";
   if (kind === "strike") return "After show";
-  if (/muscle/i.test(role)) return "8:45 PM";
-  if (/parking|directions|crowd/i.test(role)) return "5:00 PM";
+  if (/parking|directions|crowd/i.test(role)) return "3:00 PM";
   if (/tracy/i.test(role)) return "8:00–10:00 AM";
-  if (/floater/i.test(role)) return "4:30 PM";
-  return "5:00 PM";
+  if (/floater/i.test(role)) return "3:00 PM";
+  return "3:00 PM";
 }
 
 function emptyRow(role, kind) {
