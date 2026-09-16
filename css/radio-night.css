@@ -16,6 +16,44 @@
   color: #17466b;
 }
 
+.radio-digest {
+  margin: 0 0 0.45rem;
+  padding: 0.55rem 0.7rem 0.6rem;
+  border-radius: 12px;
+  background: #17466b;
+  color: #fff;
+}
+
+.radio-digest .eyebrow {
+  margin: 0 0 0.25rem;
+  color: #f3c979;
+}
+
+.radio-digest-text {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.radio-earlier {
+  margin-top: 0.45rem;
+  border: 0;
+  background: transparent;
+  color: #f3c979;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+}
+
+html.night .radio-digest,
+.me-shell .radio-digest {
+  background: #0b1c28;
+  border: 1px solid #3a5366;
+}
+
 .radio-people {
   display: flex;
   flex-direction: column;

@@ -67,37 +67,102 @@
     return String((typeof getName === "function" ? getName() : "") || "").trim();
   }
 
+  const WINDOW_MS = 10 * 60 * 1000;
+  let showEarlier = false;
+  let lastDoc = "";
+
+  function whenMs(row) {
+    const t = row && row.at ? Date.parse(row.at) : NaN;
+    return Number.isFinite(t) ? t : 0;
+  }
+
+  function recentLines(lines, now) {
+    const cut = (now || Date.now()) - WINDOW_MS;
+    return (lines || []).filter((row) => whenMs(row) >= cut);
+  }
+
+  function digestText(lines) {
+    if (!lines.length) return "No radio in the last 10 minutes. You are caught up.";
+    const bits = [];
+    lines.forEach((row) => {
+      const by = String(row.by || "Radio").trim().split(/\s+/)[0] || "Radio";
+      const text = String(row.text || "").trim();
+      if (!text) return;
+      const last = bits[bits.length - 1];
+      if (last && last.by === by) last.parts.push(text);
+      else bits.push({ by: by, parts: [text] });
+    });
+    return bits.map((b) => b.by + ": " + b.parts.join(" · ") + ".").join(" ");
+  }
+
+  function ensureDigest(feed) {
+    let el = document.getElementById("radioDigest");
+    if (el) return el;
+    el = document.createElement("div");
+    el.id = "radioDigest";
+    el.className = "radio-digest";
+    feed.parentNode.insertBefore(el, feed);
+    return el;
+  }
+
+  function lineHtml(row) {
+    const by = String(row.by || "Unknown").trim() || "Unknown";
+    const color = colorFor(by);
+    const when = row.at ? new Date(row.at).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "";
+    return (
+      '<div class="radio-line" style="--who:' +
+      color +
+      '"><span class="radio-who">' +
+      esc(by) +
+      '</span><span class="radio-text">' +
+      esc(row.text || "") +
+      '</span><span class="radio-time">' +
+      esc(when) +
+      "</span></div>"
+    );
+  }
+
   function renderFeed(root) {
     if (!root) return;
-    const lines = readMessages();
-    if (!lines.length) {
-      const dm = (channelFn() || "all") !== "all";
+    const doc = activeDoc();
+    if (doc !== lastDoc) {
+      showEarlier = false;
+      lastDoc = doc;
+    }
+    const all = readMessages();
+    const recent = recentLines(all);
+    const older = all.length - recent.length;
+    const digest = ensureDigest(root);
+    const dm = (channelFn() || "all") !== "all";
+    digest.innerHTML =
+      '<p class="eyebrow">LAST 10 MIN</p><p class="radio-digest-text">' +
+      esc(digestText(recent)) +
+      "</p>" +
+      (older
+        ? '<button type="button" class="radio-earlier" id="radioEarlier">' +
+          (showEarlier ? "Last 10 minutes only" : "Show " + older + " earlier line" + (older === 1 ? "" : "s")) +
+          "</button>"
+        : "");
+    const earlier = document.getElementById("radioEarlier");
+    if (earlier) {
+      earlier.addEventListener("click", function () {
+        showEarlier = !showEarlier;
+        renderFeed(root);
+      });
+    }
+    const lines = showEarlier ? all : recent;
+    if (!all.length) {
       root.innerHTML = dm
         ? '<p class="radio-empty">Private thread. Only the two of you see this.</p>'
         : '<p class="radio-empty">No traffic yet. Type a line and hit Send.</p>';
       return;
     }
+    if (!lines.length) {
+      root.innerHTML = '<p class="radio-empty">Nothing in the last 10 minutes. Catch up above, or show earlier traffic.</p>';
+      return;
+    }
     const stick = root.scrollHeight - root.scrollTop < root.clientHeight + 40;
-    root.innerHTML = lines
-      .map((row) => {
-        const by = String(row.by || "Unknown").trim() || "Unknown";
-        const color = colorFor(by);
-        const when = row.at
-          ? new Date(row.at).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
-          : "";
-        return (
-          '<div class="radio-line" style="--who:' +
-          color +
-          '"><span class="radio-who">' +
-          esc(by) +
-          '</span><span class="radio-text">' +
-          esc(row.text || "") +
-          '</span><span class="radio-time">' +
-          esc(when) +
-          "</span></div>"
-        );
-      })
-      .join("");
+    root.innerHTML = lines.map(lineHtml).join("");
     if (stick) root.scrollTop = root.scrollHeight;
   }
 
@@ -166,6 +231,8 @@
     render: renderFeed,
     colorFor,
     readMessages,
+    recentLines,
+    digestText,
     setChannelSource,
     activeDoc,
   };
