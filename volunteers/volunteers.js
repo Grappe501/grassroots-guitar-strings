@@ -14,7 +14,7 @@ const defaults = {
     "Server 1 — Sarah. Serving line with Ben.",
     "Server 2 — serving line with Ben.",
     "Server 3 — serving line with Ben.",
-    "Water — donations for water, tea, or lemonade.",
+    "Drink station — tea, lemonade, ice, water, donations.",
     "Campaign + merch — one table, 30 min set",
     "Tracy production helper — with Tracy 8:00–10:00 AM through Strike D",
     "Floater A — relief loop all night",
@@ -103,8 +103,8 @@ function ensureFoodLine() {
       row.role = "Food service lead — Ben. Line, not plates, not water.";
       if (!String(row.name || "").trim()) row.name = "Ben Hurst";
     }
-    if (/\$1 bottles only|tea and lemonade are free/i.test(String(row.role || ""))) {
-      row.role = "Water — donations for water, tea, or lemonade.";
+    if (/\$1 bottles only|tea and lemonade are free|^water —|water — donations/i.test(String(row.role || ""))) {
+      row.role = "Drink station — tea, lemonade, ice, water, donations.";
     }
   });
   [
@@ -112,7 +112,7 @@ function ensureFoodLine() {
     "Server 1 — Sarah. Serving line with Ben.",
     "Server 2 — serving line with Ben.",
     "Server 3 — serving line with Ben.",
-    "Water — donations for water, tea, or lemonade.",
+    "Drink station — tea, lemonade, ice, water, donations.",
   ].forEach((role) => {
     const key = role.split(" — ")[0];
     const hint = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
@@ -344,10 +344,10 @@ function counts() {
   document.getElementById("strikeCount").textContent = n + " / " + NEED_STAY;
   document.getElementById("strikeAlert").textContent =
     n >= NEED_STAY
-      ? "16 volunteers: 10 night + 3 arrival + 3 Tracy muscle. Ben leads the serving line — he does not plate and he is not water. Sarah is Server 1. Name 2 more servers and the water person."
+      ? "16 volunteers: 10 night + 3 arrival + 3 Tracy muscle. Ben leads the serving line — he does not plate. Drink station is separate. Sarah is Server 1. Name 2 more servers and the drink station."
       : "Night volunteers are " +
         (NEED_STAY - n) +
-        " short of 10 (3 servers + water + the old 6 posts). Ben leads the line and is not counted here. Also name 3 arrival people and 3 Tracy muscle.";
+        " short of 10 (3 servers + drink station + the old 6 posts). Ben leads the line and is not counted here. Also name 3 arrival people and 3 Tracy muscle.";
   if (window.GGSNextAction && window.GGSNextAction.paintTexts) {
     window.GGSNextAction.paintTexts(store ? store.readCache() : {}, state);
   }
