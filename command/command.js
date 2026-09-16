@@ -70,8 +70,18 @@ function applyNight(on){
   if(btn) btn.textContent=on?'Day mode':'Night mode';
   localStorage.setItem('ggs-command-night',on?'1':'0');
 }
-function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness();renderGaps()}
-renderStatus();readiness();renderGaps();bind();tick();setInterval(()=>{tick();readiness();renderGaps()},15000);
+function renderCrewCall(){
+  const el=document.getElementById('crewCall');
+  if(!el||!window.GGSCrewSlice) return;
+  const store=window.GGSPrepStore;
+  const slice=window.GGSCrewSlice;
+  const roster=(store&&store.readDoc('volunteers'))||{setup:[],event:[],strike:[]};
+  const people=slice.peopleFrom(prepState,roster,window.GGS_PREP_SECTIONS||[]);
+  const book=slice.readContacts(store);
+  el.innerHTML=people.length?people.map((name)=>'<div class="crew-call-row">'+slice.contactHtml(name,slice.phoneFor(name,book))+'</div>').join(''):'<p class="muted">Names and numbers land here as people add them.</p>';
+}
+function applyPrep(data){Object.keys(prepState).forEach((k)=>delete prepState[k]);Object.assign(prepState,data||{});renderStatus();readiness();renderGaps();renderCrewCall()}
+renderStatus();readiness();renderGaps();renderCrewCall();bind();tick();setInterval(()=>{tick();readiness();renderGaps();renderCrewCall()},15000);
 const nightOn=localStorage.getItem('ggs-command-night')==='1';
 applyNight(nightOn);
 const nightBtn=document.getElementById('nightBtn');

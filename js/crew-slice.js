@@ -25,6 +25,131 @@
     return "/me/?who=" + encodeURIComponent(String(name || "").trim());
   }
 
+  function esc(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  function phoneDigits(phone) {
+    const raw = String(phone || "").trim();
+    if (!raw) return "";
+    const plus = raw[0] === "+";
+    const digits = raw.replace(/\D/g, "");
+    if (digits.length < 7) return "";
+    if (plus) return "+" + digits;
+    if (digits.length === 11 && digits[0] === "1") return "+1" + digits.slice(1);
+    if (digits.length === 10) return "+1" + digits;
+    return digits;
+  }
+
+  function telHref(phone) {
+    const digits = phoneDigits(phone);
+    return digits ? "tel:" + digits : "";
+  }
+
+  function smsHref(phone) {
+    const digits = phoneDigits(phone);
+    return digits ? "sms:" + digits : "";
+  }
+
+  function displayPhone(phone) {
+    const digits = String(phone || "").replace(/\D/g, "");
+    const ten = digits.length === 11 && digits[0] === "1" ? digits.slice(1) : digits;
+    if (ten.length === 10) return "(" + ten.slice(0, 3) + ") " + ten.slice(3, 6) + "-" + ten.slice(6);
+    return String(phone || "").trim();
+  }
+
+  function contactHtml(name, phone, opts) {
+    const extra = opts && opts.extra ? String(opts.extra) : "";
+    const showPage = !opts || opts.page !== false;
+    const tel = telHref(phone);
+    const sms = smsHref(phone);
+    if (!tel) {
+      return (
+        '<span class="who-contact is-bare">' +
+        (showPage
+          ? '<a class="who-page" href="' + pageUrl(name) + '">' + esc(name) + "</a>"
+          : '<span class="who-call">' + esc(name) + "</span>") +
+        (extra ? '<span class="who-extra">' + esc(extra) + "</span>" : "") +
+        "</span>"
+      );
+    }
+    return (
+      '<span class="who-contact">' +
+      '<a class="who-call" href="' +
+      tel +
+      '">' +
+      esc(name) +
+      "</a>" +
+      '<a class="who-num" href="' +
+      tel +
+      '">' +
+      esc(displayPhone(phone)) +
+      "</a>" +
+      '<a class="who-sms" href="' +
+      sms +
+      '">Text</a>' +
+      (showPage ? '<a class="who-page" href="' + pageUrl(name) + '">Page</a>' : "") +
+      (extra ? '<span class="who-extra">' + esc(extra) + "</span>" : "") +
+      "</span>"
+    );
+  }
+
+  function readContacts(store) {
+    const people = {};
+    const doc = (store && store.readDoc("contacts")) || {};
+    const src = doc.people && typeof doc.people === "object" && !Array.isArray(doc.people) ? doc.people : doc;
+    Object.keys(src || {}).forEach((key) => {
+      if (key === "people") return;
+      const value = src[key];
+      if (typeof value === "string" && value.trim()) people[key] = value.trim();
+    });
+    const roster = (store && store.readDoc("volunteers")) || {};
+    ["setup", "event", "strike"].forEach((kind) => {
+      (roster[kind] || []).forEach((row) => {
+        const name = String(row.name || "").trim();
+        const phone = String(row.phone || "").trim();
+        if (!name || !phone) return;
+        const key = Object.keys(people).find((item) => nameMatch(item, name)) || name;
+        if (!people[key]) people[key] = phone;
+      });
+    });
+    return people;
+  }
+
+  function phoneFor(name, contacts) {
+    const map = contacts || {};
+    const hit = Object.keys(map).find((key) => nameMatch(key, name));
+    return hit ? map[hit] : "";
+  }
+
+  function saveContact(store, name, phone) {
+    if (!store) return;
+    const cleanName = String(name || "").trim();
+    if (!cleanName) return;
+    const cleanPhone = String(phone || "").trim();
+    const people = readContacts(store);
+    const key = Object.keys(people).find((item) => nameMatch(item, cleanName)) || cleanName;
+    if (cleanPhone) people[key] = cleanPhone;
+    else delete people[key];
+    store.saveDoc("contacts", { people: people });
+    const roster = store.readDoc("volunteers");
+    if (!roster) return;
+    let changed = false;
+    ["setup", "event", "strike"].forEach((kind) => {
+      (roster[kind] || []).forEach((row) => {
+        if (nameMatch(row.name, cleanName) && String(row.phone || "") !== cleanPhone) {
+          row.phone = cleanPhone;
+          changed = true;
+        }
+      });
+    });
+    if (changed) store.saveDoc("volunteers", roster);
+  }
+
   function harvest(state, sections) {
     const rows = [];
     (sections || []).forEach((s) => {
@@ -248,6 +373,11 @@
       const name = String(row.owner || "").trim();
       if (name) names[name] = true;
     });
+    Object.keys(state || {}).forEach((key) => {
+      if (key.indexOf("_doc:") === 0) return;
+      const name = String((state[key] && state[key].owner) || "").trim();
+      if (name) names[name] = true;
+    });
     ["setup", "event", "strike"].forEach((kind) => {
       ((roster && roster[kind]) || []).forEach((row) => {
         const name = String(row.name || "").trim();
@@ -279,5 +409,14 @@
     peopleFrom,
     sliceFor,
     ROLES,
+    esc,
+    phoneDigits,
+    telHref,
+    smsHref,
+    displayPhone,
+    contactHtml,
+    readContacts,
+    phoneFor,
+    saveContact,
   };
 })(window);

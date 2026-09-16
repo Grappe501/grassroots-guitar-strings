@@ -23,9 +23,11 @@
     return String(params.get("who") || "").trim();
   }
 
-  function setWho(name) {
+  function setWho(name, phone) {
     const clean = String(name || "").trim();
-    writePrefs({ me: clean });
+    const number = String(phone || "").trim();
+    writePrefs({ me: clean, phone: number || readPrefs().phone || "" });
+    if (store && number && slice.phoneDigits(number)) slice.saveContact(store, clean, number);
     const url = slice.pageUrl(clean);
     if (clean && location.pathname + location.search !== url) {
       history.replaceState(null, "", url);
@@ -61,14 +63,46 @@
     gate.hidden = false;
     board.hidden = true;
     document.getElementById("whoTitle").textContent = "Who are you?";
+    const book = store && slice ? slice.readContacts(store) : {};
     const list = document.getElementById("whoList");
     list.innerHTML = people.length
-      ? people.map((n) => '<button type="button" data-who="' + esc(n) + '">' + esc(n) + "</button>").join("")
+      ? people
+          .map((n) => {
+            const phone = slice.phoneFor(n, book);
+            return (
+              '<div class="who-pick">' +
+              '<button type="button" data-who="' +
+              esc(n) +
+              '">' +
+              esc(n) +
+              "</button>" +
+              (phone
+                ? '<a class="who-num" href="' +
+                  slice.telHref(phone) +
+                  '">' +
+                  esc(slice.displayPhone(phone)) +
+                  '</a><a class="who-sms" href="' +
+                  slice.smsHref(phone) +
+                  '">Text</a>'
+                : "") +
+              "</div>"
+            );
+          })
+          .join("")
       : "";
     list.querySelectorAll("[data-who]").forEach((btn) => {
       btn.addEventListener("click", () => {
-        setWho(btn.dataset.who);
-        render();
+        const bookNow = store && slice ? slice.readContacts(store) : {};
+        const known = slice.phoneFor(btn.dataset.who, bookNow);
+        document.getElementById("whoInput").value = btn.dataset.who;
+        if (known) {
+          document.getElementById("whoPhone").value = known;
+          setWho(btn.dataset.who, known);
+          render();
+          return;
+        }
+        document.getElementById("whoNeedPhone").hidden = false;
+        document.getElementById("whoPhone").focus();
       });
     });
   }
@@ -82,6 +116,12 @@
     if (!name) return;
 
     document.getElementById("whoTitle").textContent = name;
+    const book = slice.readContacts(store);
+    const myPhone = slice.phoneFor(name, book) || readPrefs().phone || "";
+    const reach = document.getElementById("meReach");
+    if (reach) reach.innerHTML = slice.contactHtml(name, myPhone, { page: false });
+    const boardPhone = document.getElementById("boardPhone");
+    if (boardPhone && document.activeElement !== boardPhone) boardPhone.value = myPhone;
     const pack = slice.sliceFor(name, state, roster, sections);
     const now = new Date();
     const cue = slice.cueAt(pack.roles, now);
@@ -196,18 +236,42 @@
 
   document.getElementById("whoGo").addEventListener("click", () => {
     const typed = document.getElementById("whoInput").value;
+    const number = document.getElementById("whoPhone").value;
+    const need = document.getElementById("whoNeedPhone");
     if (String(typed || "").trim().length < 2) return;
-    setWho(typed);
+    if (!slice.phoneDigits(number)) {
+      need.hidden = false;
+      document.getElementById("whoPhone").focus();
+      return;
+    }
+    need.hidden = true;
+    setWho(typed, number);
     render();
   });
   document.getElementById("whoInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") document.getElementById("whoGo").click();
+  });
+  document.getElementById("whoPhone").addEventListener("keydown", (e) => {
     if (e.key === "Enter") document.getElementById("whoGo").click();
   });
   document.getElementById("switchBtn").addEventListener("click", () => {
     writePrefs({ me: "" });
     history.replaceState(null, "", "/me/");
     document.getElementById("whoInput").value = "";
+    document.getElementById("whoPhone").value = "";
     render();
+  });
+  const boardPhone = document.getElementById("boardPhone");
+  let phoneTimer = null;
+  boardPhone.addEventListener("input", () => {
+    clearTimeout(phoneTimer);
+    phoneTimer = setTimeout(() => {
+      const me = currentName();
+      if (!me) return;
+      writePrefs({ phone: boardPhone.value });
+      if (store && slice.phoneDigits(boardPhone.value)) slice.saveContact(store, me, boardPhone.value);
+      render();
+    }, 250);
   });
 
   const box = document.getElementById("radioNote");

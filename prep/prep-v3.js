@@ -91,17 +91,24 @@
     if (!el) return;
     const list = gates();
     const ready = list.every((g) => g.ok);
+    const book = window.GGSCrewSlice && store ? window.GGSCrewSlice.readContacts(store) : {};
     el.innerHTML = list
-      .map(
-        (g) =>
+      .map((g) => {
+        const named = g.ok && g.detail && !/\d+\s*\/\s*\d+/.test(g.detail) && g.detail !== "named";
+        const detail =
+          named && window.GGSCrewSlice
+            ? window.GGSCrewSlice.contactHtml(g.detail, window.GGSCrewSlice.phoneFor(g.detail, book), { page: true })
+            : esc(g.detail);
+        return (
           '<article class="gate' +
           (g.ok ? " is-ok" : " is-hot") +
           '"><strong>' +
           esc(g.label) +
           "</strong><span>" +
-          esc(g.detail) +
-          "</span></article>",
-      )
+          detail +
+          "</span></article>"
+        );
+      })
       .join("");
     document.getElementById("gatesBand").classList.toggle("is-ready", ready);
   }
@@ -265,21 +272,28 @@
       })
       .filter((row) => pack.tabs.indexOf(row.tab) !== -1 || pack.match.test(row.text));
     const open = lines.filter((row) => !row.done);
+    const book = window.GGSCrewSlice && store ? window.GGSCrewSlice.readContacts(store) : {};
     sheet.innerHTML =
       "<h2>" +
       esc(pack.label) +
       "</h2><p>Thursday, September 17, 2026 · Woody's Sherwood Forest · 1111 West Maryland Avenue</p><p><strong>Hard stop:</strong> strike at 8:45–9:00 PM. Building cleared by 10:00 PM.</p><ol>" +
       open
         .slice(0, 24)
-        .map(
-          (row) =>
+        .map((row) => {
+          const who = row.owner
+            ? window.GGSCrewSlice
+              ? window.GGSCrewSlice.contactHtml(row.owner, window.GGSCrewSlice.phoneFor(row.owner, book))
+              : esc(row.owner)
+            : "UNASSIGNED";
+          return (
             "<li><strong>" +
             esc(row.text) +
             "</strong><span> " +
-            esc(row.owner || "UNASSIGNED") +
+            who +
             (row.when ? " · " + esc(row.when) : "") +
-            "</span></li>",
-        )
+            "</span></li>"
+          );
+        })
         .join("") +
       "</ol>";
   }

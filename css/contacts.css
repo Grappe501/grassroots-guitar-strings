@@ -1,0 +1,38 @@
+.who-contact {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+}
+.who-call,
+.who-num,
+.who-sms,
+.who-page {
+  text-decoration: none;
+  font-weight: 800;
+}
+.who-call,
+.who-num {
+  color: inherit;
+}
+.who-num {
+  white-space: nowrap;
+}
+.who-sms,
+.who-page {
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  background: #f3c979;
+  color: #172532;
+}
+.who-extra {
+  color: #687780;
+  font-size: 0.8rem;
+}
+.owner-reach {
+  grid-column: 1 / -1;
+}
+.me-field input[type="tel"] {
+  letter-spacing: 0;
+  text-transform: none;
+}

@@ -20,7 +20,7 @@
   ];
   const criticalHints = /teardown|strike|event captain|tracy|ben food|ticket|10–12|10-12|load-out|photographer|cooler captain/i;
 
-  let prefs = { me: "", filter: "all", night: false, tab: "overview", q: "" };
+  let prefs = { me: "", phone: "", filter: "all", night: false, tab: "overview", q: "" };
   try {
     prefs = Object.assign(prefs, JSON.parse(localStorage.getItem(PREFS) || "{}"));
   } catch (err) {
@@ -81,6 +81,7 @@
     renderCrew();
     renderAttention();
     renderGaps();
+    paintOwnerReach();
     if (window.GGSPrepV3) window.GGSPrepV3.refresh();
   }
 
@@ -109,7 +110,7 @@
       esc(label) +
       '</span></label><input class="owner" value="' +
       esc(x.owner || "") +
-      '" placeholder="Assigned to…"><input class="when" value="' +
+      '" placeholder="Assigned to…"><span class="owner-reach"></span><input class="when" value="' +
       esc(x.when || "") +
       '" placeholder="' +
       esc(whenPlaceholder) +
@@ -313,6 +314,21 @@
     });
   }
 
+  function contacts() {
+    return window.GGSCrewSlice && store ? window.GGSCrewSlice.readContacts(store) : {};
+  }
+
+  function paintOwnerReach() {
+    if (!window.GGSCrewSlice) return;
+    const book = contacts();
+    document.querySelectorAll(".task").forEach((row) => {
+      const reach = row.querySelector(".owner-reach");
+      if (!reach) return;
+      const name = (row.querySelector(".owner").value || "").trim();
+      reach.innerHTML = name ? window.GGSCrewSlice.contactHtml(name, window.GGSCrewSlice.phoneFor(name, book)) : "";
+    });
+  }
+
   function renderCrew() {
     const names = {};
     allTasks().forEach((row) => {
@@ -322,25 +338,22 @@
     const list = Object.entries(names).sort((a, b) => b[1] - a[1]);
     const el = document.getElementById("crewList");
     if (!el) return;
+    const book = contacts();
     el.innerHTML = list.length
       ? list
-          .map(
-            ([name, n]) =>
-              '<button type="button" class="crew-pill" data-crew="' +
-              esc(name) +
-              '">' +
-              esc(name) +
-              " · " +
-              n +
-              "</button>",
-          )
+          .map(([name, n]) => {
+            const phone = window.GGSCrewSlice ? window.GGSCrewSlice.phoneFor(name, book) : "";
+            return (
+              '<span class="crew-pill">' +
+              (window.GGSCrewSlice
+                ? window.GGSCrewSlice.contactHtml(name, phone, { extra: n + " jobs" })
+                : esc(name) + " · " + n) +
+              "</span>"
+            );
+          })
           .join("")
       : '<span class="muted">Names appear here as people get assigned.</span>';
-    el.querySelectorAll("[data-crew]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        location.href = window.GGSCrewSlice ? window.GGSCrewSlice.pageUrl(btn.dataset.crew) : "/me/?who=" + encodeURIComponent(btn.dataset.crew);
-      });
-    });
+    paintOwnerReach();
   }
 
   function renderAttention() {
@@ -457,6 +470,31 @@
         const runMe = document.getElementById("runMe");
         if (runMe && document.activeElement !== runMe) runMe.value = prefs.me;
         if (window.GGSPrepV3) window.GGSPrepV3.refresh();
+      });
+      me.addEventListener("change", () => {
+        const phone = document.getElementById("mePhone");
+        if (store && window.GGSCrewSlice && (prefs.me || "").trim() && phone && window.GGSCrewSlice.phoneDigits(phone.value)) {
+          window.GGSCrewSlice.saveContact(store, prefs.me, phone.value);
+        }
+      });
+    }
+    const phone = document.getElementById("mePhone");
+    if (phone) {
+      phone.value = prefs.phone || "";
+      let phoneTimer = null;
+      const pushPhone = () => {
+        prefs.phone = phone.value;
+        savePrefs();
+        if (store && window.GGSCrewSlice && (prefs.me || "").trim() && window.GGSCrewSlice.phoneDigits(phone.value)) {
+          window.GGSCrewSlice.saveContact(store, prefs.me, phone.value);
+        }
+        renderCrew();
+      };
+      phone.addEventListener("input", () => {
+        prefs.phone = phone.value;
+        savePrefs();
+        clearTimeout(phoneTimer);
+        phoneTimer = setTimeout(pushPhone, 250);
       });
     }
     const search = document.getElementById("searchInput");

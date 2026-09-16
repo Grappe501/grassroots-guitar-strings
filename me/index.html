@@ -9,6 +9,7 @@
 <title>My page — Grassroots & Guitar Strings</title>
 <meta name="description" content="Your slice of Grassroots and Guitar Strings. Where you should be, and only your jobs.">
 <link rel="stylesheet" href="/me/me.css">
+<link rel="stylesheet" href="/css/contacts.css">
 </head>
 <body>
 <header class="me-top">
@@ -28,11 +29,19 @@
     <label>I am
       <input id="whoInput" type="text" autocomplete="name" placeholder="Your name">
     </label>
+    <label>My phone
+      <input id="whoPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
+    </label>
+    <p class="muted" id="whoNeedPhone" hidden>Add your number so anyone can tap your name and call or text you Thursday.</p>
     <button class="btn btn--gold" id="whoGo" type="button">Open my page</button>
     <div class="who-list" id="whoList"></div>
   </section>
 
   <section id="meBoard" hidden>
+    <div class="me-reach" id="meReach"></div>
+    <label class="me-phone-edit">My day-of number
+      <input id="boardPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can tap">
+    </label>
     <article class="here-card" id="hereCard">
       <p class="eyebrow" id="hereKicker">You should be</p>
       <h2 id="herePlace">Stand by</h2>
