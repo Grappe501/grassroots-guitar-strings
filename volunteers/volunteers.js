@@ -3,8 +3,8 @@ const NEED_STAY = 10;
 const NEED_EVENT = 11;
 const defaults = {
   setup: [
-    "Setup 1 → Floater A after 4:30",
-    "Setup 2 → Floater B after 4:30",
+    "Setup 1 — morning dresser",
+    "Setup 2 — morning dresser",
     "Setup 3 → Campaign + merch (30 min set)",
   ],
   event: [
@@ -49,7 +49,7 @@ function arrivalFor(role, kind) {
   if (kind === "strike") return "After show";
   if (/parking|directions|crowd/i.test(role)) return "4:30 PM";
   if (/tracy/i.test(role)) return "8:00–10:00 AM";
-  if (/floater/i.test(role)) return "4:30 PM";
+  if (/floater|relief/i.test(role)) return "5:30 PM if you can";
   return "4:30 PM";
 }
 
@@ -58,8 +58,23 @@ function migrateArrivals() {
   ["setup", "event", "strike", "grounds"].forEach((kind) => {
     (state[kind] || []).forEach((row) => {
       if (/tracy/i.test(String(row.role || ""))) return;
-      if (kind === "setup") return;
+      if (kind === "setup") {
+        if (/setup 1.*floater/i.test(String(row.role || ""))) {
+          row.role = "Setup 1 — morning dresser";
+          dirty = true;
+        }
+        if (/setup 2.*floater/i.test(String(row.role || ""))) {
+          row.role = "Setup 2 — morning dresser";
+          dirty = true;
+        }
+        return;
+      }
       const a = String(row.arrival || "");
+      if (/floater|relief/i.test(String(row.role || "")) && /4:30|3:00|10:00/.test(a)) {
+        row.arrival = "5:30 PM if you can";
+        dirty = true;
+        return;
+      }
       if (!/3:00/.test(a)) return;
       row.arrival = /muscle/i.test(String(row.role || "")) ? "4:30 PM · required 8:45" : "4:30 PM";
       dirty = true;

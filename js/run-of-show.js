@@ -27,7 +27,7 @@
     beat("16:30", "Tracy muscle", "Come at 4:30 if you can. Eat. You are a guest until 8:45. Required at 8:45.", "arrive"),
     beat("16:32", "Ben + 3 servers", "Set the line now. Stay off the dance floor. Ben does not plate.", "work"),
     beat("16:35", "Drink station", "Ice in. Tea and lemonade full. Water on ice. Ask for donations. Stay off the dance floor.", "work"),
-    beat("16:40", "Floater A + B", "Walk posts now. Quiet loop. Stay off the dance floor.", "work"),
+    beat("17:30", "Relief 1 + 2", "Arrive by 5:30 if you can. Night relief only. No morning. No setup. Eat if you have not. Then cover David.", "arrive"),
     beat("17:15", "Event Captain", "Food doors. Dinner guests come in. Everything is inside. Concert-only stay in cars until GA doors 6:30. Tell every night person: you stay until 10. Take pictures. Tag @KellyGrappeSOS. Hashtag #GrappeSOS.", "work"),
     beat("17:15", "Parking", "On the lot. Food doors. Concert-only: stay in the car until 6:30. Overflow if it fills.", "work"),
     beat("17:15", "Directions", "Lot meets the walk. Everything is inside. Food doors now. Concert-only stay in the car until 6:30.", "work"),

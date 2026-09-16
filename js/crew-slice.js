@@ -221,7 +221,7 @@
       roster: /setup [123]|setup person/i,
       day: [
         { start: "2026-09-17T10:00:00", end: "2026-09-17T12:30:00", place: "Gate path + 8 tables", do: "Setup Lead plants yard signs from the gate to the door. Dressers do 8 tables (25 min), printed signs (15), lobby (10), drinks station (20). Setup 3 then does the 30 min merch set." },
-        { start: "2026-09-17T12:30:00", end: "2026-09-17T16:30:00", place: "Off site unless called", do: "Room is dressed. Come back at 4:30 as Floater A, Floater B, or Campaign." },
+        { start: "2026-09-17T12:30:00", end: "2026-09-17T16:30:00", place: "Off site unless called", do: "Room is dressed. You are done unless you also claimed a night seat. Relief arrives at 5:30." },
       ],
     },
     {
@@ -337,12 +337,10 @@
       id: "floater",
       label: "Floater / relief",
       priority: 2,
-      test: /floater|relief loop|relief lead|becomes floater|setup person 1|setup person 2/i,
-      roster: /floater|relief|setup 1|setup 2|setup person 1|setup person 2/i,
+      test: /floater|relief loop|relief lead/i,
+      roster: /floater|relief lead/i,
       day: [
-        { start: "2026-09-17T10:00:00", end: "2026-09-17T12:30:00", place: "Main room · 8 tables", do: "Dress the 8 tables and signs with the other two. Then you may leave." },
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Whole room", do: "Back on site at 4:30. Ice with food. Walk every post once. Sound check is live — stay off the floor." },
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Relief loop", do: "Every 30 min: tickets 10, food 10, campaign 10. That is the job." },
+        { start: "2026-09-17T17:30:00", end: "2026-09-17T18:30:00", place: "Relief loop", do: "Arrive by 5:30 if you can. Night only. No morning. No setup. Eat if you have not. Then cover David." },
         { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Doors + loop", do: "Floater A helps tickets at doors. Floater B keeps the loop moving." },
         { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Show floor", do: "Quiet relief. Trash. One floater always walking so someone can take a break." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Strike", do: "Pair up. Venue furniture stays. Clear by 10." },
