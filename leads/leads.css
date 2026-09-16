@@ -8,7 +8,7 @@ body {
   background: #000066;
   color: #fff;
   padding: 1.4rem 1.2rem 1.3rem;
-  border-bottom: 4px solid #ca913d;
+  border-bottom: 1px solid #ca913d;
 }
 
 .lead-top h1 {
@@ -31,7 +31,7 @@ body {
 .lead-top a,
 .lead-top button {
   border: 0;
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 0.5rem 0.85rem;
   background: #ca913d;
   color: #07074a;
@@ -49,7 +49,7 @@ body {
 .lead-job {
   background: #fff;
   border: 1px solid rgba(0, 0, 102, 0.14);
-  border-radius: 16px;
+  border-radius: 4px;
   padding: 1rem 1.05rem 1.1rem;
   margin-bottom: 0.85rem;
 }
@@ -96,7 +96,7 @@ body {
 
 .lead-owner {
   border: 1px solid rgba(0, 0, 102, 0.22);
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 0.7rem 0.75rem;
   font: inherit;
   font-weight: 800;

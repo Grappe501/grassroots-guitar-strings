@@ -248,9 +248,9 @@
       test: /ticket|cash|envelope|reconcile|payment|guest list/i,
       roster: /ticket|check-in/i,
       day: [
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lobby · ticket table", do: "You are the only ticket person. Wave Floater A when you need 10 min." },
-        { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Lobby · ticket table", do: "Doors rush. Floater A stands with you. Keep the line moving." },
-        { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Lobby or nearby", do: "Late arrivals. Hold the cash box. Floater covers a real break." },
+        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:30:00", place: "Lobby · ticket table", do: "You are the only ticket person. Ask a Production Manager if you need a break." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T19:15:00", place: "Lobby · ticket table", do: "Doors rush. Stay on the table. Keep the line moving." },
+        { start: "2026-09-17T19:15:00", end: "2026-09-17T20:45:00", place: "Lobby or nearby", do: "Late arrivals. Hold the cash box. Stay unless a Production Manager relieves you." },
         { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Lobby · then secure", do: "Reconcile tickets, cash, and envelopes. Then help Strike B or E." },
       ],
     },

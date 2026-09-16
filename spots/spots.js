@@ -33,9 +33,9 @@
     return (
       {
         arrive: "Arrive",
-        work: "Do this",
-        eat: "Eat",
-        sit: "Sit",
+        work: "On post",
+        eat: "Meal",
+        sit: "Watch",
         show: "Show",
         strike: "Strike",
         leave: "You may leave",
@@ -74,9 +74,9 @@
         esc(spot.title) +
         "</a></h2><p>Arrive " +
         esc(spot.arrive) +
-        "</p><p>Eat — " +
+        "</p><p>Meal — " +
         esc(spot.eat) +
-        "</p><p>Sit — " +
+        "</p><p>After dinner — " +
         esc(spot.sit) +
         "</p>" +
         (people

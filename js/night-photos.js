@@ -45,9 +45,9 @@
 
   function html() {
     return (
-      '<p class="eyebrow">PHOTOS · EVERYONE</p>' +
-      "<h2>Take pictures all night.</h2>" +
-      "<p>Keep it fun and lively. Snap the room, the line, David, Kelly, a laugh. Then get the photo off your phone in one tap.</p>" +
+      '<p class="eyebrow">Photos</p>' +
+      "<h2>Upload pictures</h2>" +
+      "<p>Capture the room, the line, the set, and guests. Send files from this page.</p>" +
       '<div class="night-photos__actions">' +
       '<label class="night-photos__add">Add photos<input type="file" accept="image/*" multiple data-photo-files></label>' +
       '<a class="night-photos__btn" href="' +
@@ -68,14 +68,17 @@
     const style = document.createElement("style");
     style.id = "nightPhotosCss";
     style.textContent =
-      ".night-photos{background:#0a0a4a;border:1px solid #ca913d;border-radius:18px;padding:1rem 1rem 1.1rem;margin:0.75rem 0;color:#e7eef4}" +
-      ".night-photos h2{margin:0.2rem 0 0.45rem;font-size:clamp(1.4rem,6vw,1.9rem);color:#fff}" +
-      ".night-photos p{margin:0;font-weight:700;color:#dbe7ef}" +
-      ".night-photos__actions{display:flex;flex-wrap:wrap;gap:0.45rem;margin:0.75rem 0 0.5rem}" +
-      ".night-photos__add,.night-photos__btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:0.7rem 1rem;background:#ca913d;color:#07074a;font:inherit;font-weight:800;text-decoration:none;cursor:pointer}" +
+      ".night-photos{background:#141824;border:1px solid #2a3142;border-radius:4px;padding:0.95rem 1rem;margin:0.75rem 0;color:#e8ecf2}" +
+      "body.spot .night-photos{background:#fff;border-color:#d5dae3;color:#151821}" +
+      ".night-photos h2{margin:0.15rem 0 0.4rem;font-size:1.15rem;font-weight:650;color:inherit}" +
+      ".night-photos p{margin:0;font-weight:500;color:inherit}" +
+      ".night-photos__actions{display:flex;flex-wrap:wrap;gap:0.4rem;margin:0.7rem 0 0.45rem}" +
+      ".night-photos__add,.night-photos__btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:4px;padding:0.5rem 0.8rem;background:#000066;color:#fff;font:inherit;font-weight:600;text-decoration:none;cursor:pointer}" +
       ".night-photos__add input{position:absolute;width:1px;height:1px;opacity:0}" +
-      ".night-photos__btn--ghost{background:transparent;color:#ca913d;box-shadow:inset 0 0 0 2px #ca913d}" +
-      ".night-photos__hint{color:#ca913d;font-size:0.92rem}" +
+      ".night-photos__btn--ghost{background:transparent;color:#000066;box-shadow:inset 0 0 0 1px #000066}" +
+      "body.v5 .night-photos__btn--ghost{color:#ca913d;box-shadow:inset 0 0 0 1px #ca913d}" +
+      ".night-photos__hint{color:#5a6170;font-size:0.88rem}" +
+      "body.v5 .night-photos__hint{color:#ca913d}" +
       "@media print{.night-photos{display:none}}";
     document.head.appendChild(style);
   }

@@ -10,7 +10,7 @@
       const hit = saved.find((row) => row && row.id === job.id) || {};
       let owner = String(hit.owner || "").trim();
       if (dir && dir.canonName) owner = dir.canonName(owner);
-      if (!owner || (dir && dir.match(owner, job.cartoon))) owner = job.defaultOwner || job.cartoon;
+      if (!owner || (dir && dir.match(owner, job.cartoon))) owner = job.defaultOwner || "";
       return Object.assign({}, job, { owner: owner });
     });
   }
@@ -179,7 +179,7 @@
     if (jobs().some((job) => job.id === leadId)) {
       const next = jobs().map((job) => ({
         id: job.id,
-        owner: job.id === leadId ? name || job.cartoon : job.owner,
+        owner: job.id === leadId ? name || job.defaultOwner || "" : job.owner,
       }));
       store.saveDoc("lead-jobs", { v: 1, jobs: next });
       if (name) syncSpot(leadId, name);

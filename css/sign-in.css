@@ -17,7 +17,7 @@
   width: min(28rem, 100%);
   background: #0a0a4a;
   border: 1px solid #3a5366;
-  border-radius: 18px;
+  border-radius: 4px;
   padding: 0 0 1.2rem;
   overflow: hidden;
 }
@@ -63,7 +63,7 @@
 .signin__card input {
   width: 100%;
   border: 1px solid #3a5366;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 0.75rem 0.8rem;
   font: inherit;
   font-weight: 700;
@@ -88,7 +88,7 @@
   width: 100%;
   text-align: left;
   border: 1px solid #3a5366;
-  border-radius: 10px;
+  border-radius: 4px;
   background: #07074a;
   color: #fff;
   font: inherit;
@@ -114,7 +114,7 @@
 .signin__go {
   width: 100%;
   border: 0;
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 0.85rem 1rem;
   font: inherit;
   font-weight: 900;

@@ -37,11 +37,12 @@
     const style = document.createElement("style");
     style.id = "crewNavCss";
     style.textContent =
-      ".crew-nav{display:flex;flex-wrap:wrap;gap:0.4rem;margin:0.75rem 0 0}" +
-      ".crew-nav a{border:0;border-radius:999px;padding:0.45rem 0.8rem;background:#ca913d;color:#07074a;font:inherit;font-weight:800;text-decoration:none}" +
-      ".crew-nav a[aria-current=page]{background:#fff;color:#000066}" +
+      ".crew-nav{display:flex;flex-wrap:wrap;gap:0;margin:0.7rem 0 0;border-bottom:1px solid rgba(255,255,255,0.18)}" +
+      ".crew-nav a{border:0;border-radius:0;padding:0.55rem 0.75rem;background:transparent;color:#d5dbe6;font:inherit;font-weight:600;text-decoration:none;border-bottom:2px solid transparent}" +
+      ".crew-nav a[aria-current=page]{color:#fff;border-bottom-color:#ca913d}" +
       ".top-actions .crew-nav{margin:0}" +
-      ".v5-top .crew-nav a,.wifi-nav.crew-nav a,.bar .crew-nav a{background:#ca913d;color:#07074a}" +
+      ".v5-top .crew-nav a,.wifi-nav.crew-nav a,.bar .crew-nav a{background:transparent;color:#d5dbe6}" +
+      "body.spot .crew-nav a,body.ops .crew-nav a{color:#c5cdd8}" +
       "@media print{.crew-nav{display:none}}";
     document.head.appendChild(style);
   }

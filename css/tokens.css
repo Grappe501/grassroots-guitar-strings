@@ -26,7 +26,7 @@
   --ggs-muted: var(--kelly-slate);
   --ggs-border: rgba(0, 0, 102, 0.16);
   --ggs-shadow: 0 12px 40px rgba(0, 0, 102, 0.1);
-  --ggs-radius: 14px;
+  --ggs-radius: 4px;
   --ggs-font-display: "League Spartan", "Segoe UI", sans-serif;
   --ggs-font-body: Raleway, "Segoe UI", system-ui, sans-serif;
   --ggs-font-ui: Raleway, "Segoe UI", system-ui, sans-serif;

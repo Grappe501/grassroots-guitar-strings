@@ -50,9 +50,9 @@
     return (
       {
         arrive: "Arrive",
-        work: "Do this",
-        eat: "Eat",
-        sit: "Sit",
+        work: "On post",
+        eat: "Meal",
+        sit: "Watch",
         show: "Show",
         strike: "Strike",
         leave: "Leave",
@@ -231,13 +231,13 @@
       if (helloEl) {
         helloEl.textContent = spot
           ? spot.ros
-            ? "Thank you for volunteering, " + first + ". Tonight is going to be a great night. You are " + spot.title + ". Fill gaps. Point people where to go. Make sure nobody needs a break. Keep the plan. Take pictures."
-            : "Thank you for volunteering, " + first + ". Tonight is going to be a great night. Your job is " + spot.title + ". Keep things fun and lively. Take pictures."
-          : "Thank you for volunteering, " + first + ". Tonight is going to be a great night. Keep things fun and lively. Take pictures. Your seat gets your name today.";
+            ? "Checked in, " + first + ". You are " + spot.title + ". Fill gaps, point people, and keep the plan. Take pictures."
+            : "Checked in, " + first + ". Assignment: " + spot.title + ". Take pictures."
+          : "Checked in, " + first + ". Your seat is named on SPOTS. Take pictures.";
       }
       if (roleEl) {
         roleEl.textContent = spot
-          ? spot.title + " · Arrive " + spot.arrive + ". Eat — " + spot.eat + ". Sit — " + spot.sit
+          ? spot.title + " · Arrive " + spot.arrive + ". Meal — " + spot.eat + ". After dinner — " + spot.sit
           : "Arrive 4:30. Your spot gets named today.";
       }
       const facts = document.getElementById("nightFacts");
@@ -264,7 +264,7 @@
       const nightH2 = night && night.querySelector("h2");
       if (spot && spot.ros) {
         if (nightEyebrow) nightEyebrow.textContent = "THE PLAN";
-        if (nightH2) nightH2.textContent = "The whole night, in order. Gold is now. Fill gaps. Point people. Keep it on plan.";
+        if (nightH2) nightH2.textContent = "House run of show. Fill gaps. Point people. Keep the plan.";
       }
     } catch (err) {
       const seatEl = document.getElementById("v5Seat");

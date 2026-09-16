@@ -62,13 +62,13 @@
       if (eyebrow) eyebrow.textContent = "YOUR NIGHT";
       if (h1) h1.textContent = "Hey " + person.first;
       if (p) p.textContent = "Confirm this is the phone in your hand. That opens your night.";
-      if (go) go.textContent = "I'm in";
+      if (go) go.textContent = "Continue";
     } else if (String(name || "").trim()) {
       const first = String(name).trim().split(/\s+/)[0];
       if (eyebrow) eyebrow.textContent = "YOUR NIGHT";
       if (h1) h1.textContent = "Hey " + first;
       if (p) p.textContent = "Confirm this is the phone in your hand. That opens your night.";
-      if (go) go.textContent = "I'm in";
+      if (go) go.textContent = "Continue";
     } else if (h1 && !String(name || "").trim()) {
       if (eyebrow && /kelly|sign in/i.test(eyebrow.textContent || "KELLY GRAPPE")) eyebrow.textContent = "KELLY GRAPPE";
       if (h1) h1.textContent = "Who are you?";

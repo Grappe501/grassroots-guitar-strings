@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --ops-navy: #000066;
+  --ops-gold: #ca913d;
+  --ops-bg: #f4f5f7;
+  --ops-ink: #151821;
+  --ops-muted: #5a6170;
+  --ops-line: #d5dae3;
+  --ops-card: #ffffff;
+  --ops-radius: 4px;
+  --ops-font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --ops-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+
+body.spot,
+body.v5,
+body.ops,
+.lead-top,
+.topbar,
+.signin__card,
+.crew-nav,
+.night-photos {
+  font-family: var(--ops-font);
+  letter-spacing: 0;
+  word-spacing: 0;
+}
+
+body.spot,
+body.ops {
+  background: var(--ops-bg);
+  color: var(--ops-ink);
+}
+
+h1,
+h2,
+h3,
+.spot-top h1,
+.v5-top h1,
+.lead-top h1,
+.topbar h1,
+.signin__card h1 {
+  font-family: var(--ops-font);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  word-spacing: 0;
+}
+
+.eyebrow {
+  font-family: var(--ops-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+button,
+.spot-go,
+.crew-nav a,
+.signin__go,
+.signin__verify-actions button,
+.night-photos__add,
+.night-photos__btn,
+.toolbar button,
+.lead-top a,
+.lead-top button,
+.topbar nav a {
+  border-radius: var(--ops-radius) !important;
+  font-weight: 600 !important;
+}
+
+.spot-facts,
+.spot-now,
+.spot-card,
+.lead-job,
+.v5-facts-card,
+.v5-now,
+.v5-night,
+.night-photos,
+.signin__card,
+.stats article,
+.panel,
+.v5-ros li {
+  border-radius: var(--ops-radius) !important;
+  box-shadow: none !important;
+}

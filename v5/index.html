@@ -10,10 +10,11 @@
 <meta name="description" content="Your Thursday night. Your name. Your job. Take pictures.">
 <link rel="manifest" href="/v5/manifest.json">
 <link rel="stylesheet" href="/css/kelly-brand.css">
+<link rel="stylesheet" href="/css/ops-v6.css?v=v6">
 <link rel="stylesheet" href="/css/sign-in.css">
 <link rel="stylesheet" href="/css/contacts.css">
 <link rel="stylesheet" href="/wifi/wifi.css">
-<link rel="stylesheet" href="/v5/v5.css?v=hello1">
+<link rel="stylesheet" href="/v5/v5.css?v=v6">
 <link rel="stylesheet" href="/css/contrast.css">
 </head>
 <body class="v5 is-locked is-night-only">
@@ -21,7 +22,7 @@
   <article class="signin__card">
     <p class="eyebrow">YOUR NIGHT</p>
     <h1>Who are you?</h1>
-    <p>Type your name. Confirm the phone in your hand. That opens your night.</p>
+    <p>Enter your name and the phone in your hand. That opens your assignment.</p>
     <label>I am
       <input id="gateName" type="text" autocomplete="off" placeholder="Start typing your name">
     </label>
@@ -29,7 +30,7 @@
       <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
     </label>
     <p class="signin__err" id="gateErr" hidden>Both are required. Use a real number people can call tonight.</p>
-    <button type="button" class="signin__go" id="gateGo">I'm in</button>
+    <button type="button" class="signin__go" id="gateGo">Continue</button>
   </article>
 </div>
 
@@ -37,7 +38,7 @@
   <header class="v5-top">
     <p class="eyebrow" id="v5Kicker">GRASSROOTS &amp; GUITAR STRINGS</p>
     <h1 id="v5Seat">Your night</h1>
-    <p class="v5-hello" id="v5Hello">Thank you for volunteering. Tonight is going to be a great night.</p>
+    <p class="v5-hello" id="v5Hello">Your assignment opens after you confirm your name and phone.</p>
     <p class="v5-who" id="v5Who" hidden></p>
     <p class="v5-role" id="v5Role"></p>
     <p class="v5-sync" id="syncStatus">Connecting…</p>
@@ -62,29 +63,29 @@
     </article>
     <article class="v5-night" id="nightBlock">
       <p class="eyebrow">YOUR EVENING</p>
-      <h2>Your job, in order. Gold is now.</h2>
+      <h2>Your assignment, in order. Highlighted row is current.</h2>
       <ol class="v5-ros" id="nightClock"></ol>
     </article>
     <article class="v5-night" id="dayBlock">
       <p class="eyebrow">THE WHOLE DAY</p>
-      <h2>Minute by minute for the house. Gold is now.</h2>
+      <h2>House run of show. Highlighted row is current.</h2>
       <ol class="v5-ros v5-ros--day" id="dayClock"></ol>
     </article>
     <p class="v5-home" id="homeHint">Add this page to your Home Screen. That is your app tonight.</p>
   </main>
 </div>
 
-<script src="/js/prep-store.js?v=pick1"></script>
-<script src="/js/crew-slice.js?v=captain1"></script>
-<script src="/js/people-directory.js?v=shirt1"></script>
-<script src="/js/site-leads.js?v=drop1"></script>
-<script src="/js/sign-in.js?v=debbie1"></script>
-<script src="/js/lead-duties.js?v=pm1"></script>
-<script src="/js/day-spots.js?v=shirt1"></script>
-<script src="/js/run-of-show.js?v=shirt1"></script>
+<script src="/js/prep-store.js?v=v6"></script>
+<script src="/js/crew-slice.js?v=v6"></script>
+<script src="/js/people-directory.js?v=v6"></script>
+<script src="/js/site-leads.js?v=v6"></script>
+<script src="/js/sign-in.js?v=v6"></script>
+<script src="/js/lead-duties.js?v=v6"></script>
+<script src="/js/day-spots.js?v=v6"></script>
+<script src="/js/run-of-show.js?v=v6"></script>
 <script src="/js/wifi-join.js"></script>
-<script src="/v5/v5.js?v=shirt1"></script>
-<script src="/js/crew-nav.js?v=hello1"></script>
-<script src="/js/night-photos.js?v=hello1"></script>
+<script src="/v5/v5.js?v=v6"></script>
+<script src="/js/crew-nav.js?v=v6"></script>
+<script src="/js/night-photos.js?v=v6"></script>
 </body>
 </html>
