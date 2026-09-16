@@ -51,68 +51,20 @@
     return queryWho() || String(readPrefs().me || "").trim();
   }
 
-  function renderGate(people) {
-    const gate = document.getElementById("whoGate");
+  function renderGate() {
     const board = document.getElementById("meBoard");
-    const name = currentName();
-    if (name) {
-      gate.hidden = true;
-      board.hidden = false;
-      return;
-    }
-    gate.hidden = false;
-    board.hidden = true;
-    document.getElementById("whoTitle").textContent = "Who are you?";
-    const book = store && slice ? slice.readContacts(store) : {};
-    const list = document.getElementById("whoList");
-    list.innerHTML = people.length
-      ? people
-          .map((n) => {
-            const phone = slice.phoneFor(n, book);
-            return (
-              '<div class="who-pick">' +
-              '<button type="button" data-who="' +
-              esc(n) +
-              '">' +
-              esc(n) +
-              "</button>" +
-              (phone
-                ? '<a class="who-num" href="' +
-                  slice.telHref(phone) +
-                  '">' +
-                  esc(slice.displayPhone(phone)) +
-                  '</a><a class="who-sms" href="' +
-                  slice.smsHref(phone) +
-                  '">Text</a>'
-                : "") +
-              "</div>"
-            );
-          })
-          .join("")
-      : "";
-    list.querySelectorAll("[data-who]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const bookNow = store && slice ? slice.readContacts(store) : {};
-        const known = slice.phoneFor(btn.dataset.who, bookNow);
-        document.getElementById("whoInput").value = btn.dataset.who;
-        if (known) {
-          document.getElementById("whoPhone").value = known;
-          setWho(btn.dataset.who, known);
-          render();
-          return;
-        }
-        document.getElementById("whoNeedPhone").hidden = false;
-        document.getElementById("whoPhone").focus();
-      });
-    });
+    const signed = window.GGSSignIn ? window.GGSSignIn.identity().ok : !!currentName();
+    if (board) board.hidden = !signed;
+    if (window.GGSSignIn) window.GGSSignIn.applyLock();
   }
 
   function render() {
     const state = store ? store.readCache() : {};
     const roster = (store && store.readDoc("volunteers")) || { setup: [], event: [], strike: [] };
     const people = slice.peopleFrom(state, roster, sections);
+    renderGate();
+    if (window.GGSSignIn && !window.GGSSignIn.identity().ok) return;
     const name = currentName();
-    renderGate(people);
     if (!name) return;
 
     document.getElementById("whoTitle").textContent = name;
@@ -232,33 +184,22 @@
     share.textContent = "Keep this page on your phone: " + location.origin + slice.pageUrl(name);
   }
 
-  document.getElementById("whoGo").addEventListener("click", () => {
-    const typed = document.getElementById("whoInput").value;
-    const number = document.getElementById("whoPhone").value;
-    const need = document.getElementById("whoNeedPhone");
-    if (String(typed || "").trim().length < 2) return;
-    if (!slice.phoneDigits(number)) {
-      need.hidden = false;
-      document.getElementById("whoPhone").focus();
-      return;
-    }
-    need.hidden = true;
-    setWho(typed, number);
-    render();
-  });
-  document.getElementById("whoInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") document.getElementById("whoGo").click();
-  });
-  document.getElementById("whoPhone").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") document.getElementById("whoGo").click();
-  });
+  if (document.getElementById("whoGo")) {
+    document.getElementById("whoGo").addEventListener("click", () => {
+      const typed = document.getElementById("whoInput").value;
+      const number = document.getElementById("whoPhone").value;
+      if (window.GGSSignIn) window.GGSSignIn.save(typed, number);
+      else setWho(typed, number);
+      render();
+    });
+  }
   document.getElementById("switchBtn").addEventListener("click", () => {
-    writePrefs({ me: "" });
+    if (window.GGSSignIn) window.GGSSignIn.signOut();
+    else writePrefs({ me: "", phone: "" });
     history.replaceState(null, "", "/me/");
-    document.getElementById("whoInput").value = "";
-    document.getElementById("whoPhone").value = "";
     render();
   });
+  window.addEventListener("ggs-signed-in", render);
   const boardPhone = document.getElementById("boardPhone");
   let phoneTimer = null;
   boardPhone.addEventListener("input", () => {
@@ -277,12 +218,13 @@
       feed: "#radioFeed",
       input: "#radioInput",
       send: "#radioSend",
-      need: "#whoInput",
+      need: "#gateName",
       getName: currentName,
     });
   }
 
   if (queryWho()) writePrefs({ me: queryWho() });
+  if (window.GGSSignIn) window.GGSSignIn.applyLock();
 
   window.addEventListener("ggs-prep-loaded", render);
   window.addEventListener("ggs-prep-status", (e) => {

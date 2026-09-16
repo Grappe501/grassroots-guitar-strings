@@ -581,6 +581,7 @@
         if (store && window.GGSCrewSlice && (prefs.me || "").trim() && phone && window.GGSCrewSlice.phoneDigits(phone.value)) {
           window.GGSCrewSlice.saveContact(store, prefs.me, phone.value);
         }
+        if (window.GGSSignIn) window.GGSSignIn.save(prefs.me, phone ? phone.value : prefs.phone);
       });
     }
     const phone = document.getElementById("mePhone");
@@ -600,6 +601,9 @@
         savePrefs();
         clearTimeout(phoneTimer);
         phoneTimer = setTimeout(pushPhone, 250);
+      });
+      phone.addEventListener("change", () => {
+        if (window.GGSSignIn) window.GGSSignIn.save(prefs.me, phone.value);
       });
     }
     const search = document.getElementById("searchInput");

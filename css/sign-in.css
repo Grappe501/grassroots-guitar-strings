@@ -1,0 +1,79 @@
+.signin {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  background: #0f3048;
+  color: #fff;
+}
+.signin[hidden] {
+  display: none !important;
+}
+.signin__card {
+  width: min(28rem, 100%);
+  background: #122433;
+  border: 1px solid #3a5366;
+  border-radius: 18px;
+  padding: 1.3rem 1.2rem 1.2rem;
+}
+.signin__card .eyebrow {
+  margin: 0;
+  color: #f3c979;
+  letter-spacing: 0.14em;
+  font-weight: 900;
+  font-size: 0.72rem;
+}
+.signin__card h1 {
+  margin: 0.35rem 0 0.45rem;
+  font-size: clamp(1.7rem, 6vw, 2.2rem);
+  line-height: 1.1;
+}
+.signin__card p {
+  margin: 0 0 0.85rem;
+  color: #dbe7ef;
+}
+.signin__card label {
+  display: grid;
+  gap: 0.3rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f3c979;
+}
+.signin__card input {
+  width: 100%;
+  border: 1px solid #3a5366;
+  border-radius: 10px;
+  padding: 0.75rem 0.8rem;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #172532;
+  background: #fff;
+}
+.signin__err {
+  color: #ffd0c8;
+  font-weight: 800;
+}
+.signin__go {
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1rem;
+  background: #f3c979;
+  color: #0f3048;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+body.is-locked {
+  overflow: hidden;
+}
+body.is-locked [data-needs-identity] {
+  visibility: hidden;
+}

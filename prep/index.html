@@ -10,10 +10,26 @@
 <link rel="stylesheet" href="/prep/prep-v3.css">
 <link rel="stylesheet" href="/prep/prep-v3-run.css">
 <link rel="stylesheet" href="/prep/prep-v4.css">
+<link rel="stylesheet" href="/css/sign-in.css">
 <link rel="stylesheet" href="/css/contacts.css">
 </head>
 <body class="v4">
-<div id="prepApp">
+<div id="signInGate" class="signin" hidden>
+  <article class="signin__card">
+    <p class="eyebrow">SIGN IN</p>
+    <h1>Who are you?</h1>
+    <p>Name and a day-of number first. Radio, assignments, and call/text all use this so we know who is who.</p>
+    <label>I am
+      <input id="gateName" type="text" autocomplete="name" placeholder="Your name">
+    </label>
+    <label>My phone
+      <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
+    </label>
+    <p class="signin__err" id="gateErr" hidden>Both are required. Use a real number people can call tonight.</p>
+    <button type="button" class="signin__go" id="gateGo">Open the board</button>
+  </article>
+</div>
+<div id="prepApp" data-needs-identity>
 <header class="topbar">
   <div class="topbar__inner">
     <div>
@@ -83,6 +99,7 @@
     <label class="me-field">I am
       <input id="meInput" type="text" autocomplete="name" placeholder="Your name">
       <a class="my-page-link" id="myPageLink" href="/me/" hidden>Open my phone page</a>
+      <button type="button" class="my-page-link" data-sign-out>Not me</button>
     </label>
     <label class="me-field">My phone
       <input id="mePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Day-of number">
@@ -184,9 +201,10 @@
 </main>
 </div>
 <script src="/js/prep-store.js"></script>
+<script src="/js/crew-slice.js"></script>
+<script src="/js/sign-in.js"></script>
 <script src="/js/radio-feed.js"></script>
 <script src="/prep/prep-v2.js"></script>
-<script src="/js/crew-slice.js"></script>
 <script src="/prep/prep-app.js"></script>
 <script src="/prep/prep-enhancements.js"></script>
 <script src="/prep/prep-v3.js"></script>

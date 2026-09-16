@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17466b"><title>Grassroots & Guitar Strings — Volunteer Command</title><link rel="stylesheet" href="/volunteers/volunteers.css">
+<link rel="stylesheet" href="/css/sign-in.css">
 <link rel="stylesheet" href="/css/contacts.css">
 </head>
 <body>
+<div id="signInGate" class="signin" hidden>
+  <article class="signin__card">
+    <p class="eyebrow">SIGN IN</p>
+    <h1>Who are you?</h1>
+    <p>Name and a day-of number first. Assignments and call/text use this so we know who is who.</p>
+    <label>I am
+      <input id="gateName" type="text" autocomplete="name" placeholder="Your name">
+    </label>
+    <label>My phone
+      <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
+    </label>
+    <p class="signin__err" id="gateErr" hidden>Both are required. Use a real number people can call tonight.</p>
+    <button type="button" class="signin__go" id="gateGo">Open people</button>
+  </article>
+</div>
+<div data-needs-identity>
 <header class="topbar"><div class="wrap"><p class="eyebrow">VOLUNTEER COMMAND</p><h1>People make the event work.</h1><p class="subtitle">Assign every critical position before Thursday, September 17.</p><nav><a href="/command/">Command Center</a><a href="/prep/">Prep v4</a><a href="/signs/">Signs</a><a href="/me/">My page</a></nav></div></header>
 <main class="wrap">
 <section class="stats"><article><span>Setup</span><strong id="setupCount">0 / 3</strong><small>8:00 AM</small></article><article><span>Event crew</span><strong id="eventCount">0 / 13</strong><small>5:00 PM</small></article><article class="danger"><span>Teardown</span><strong id="strikeCount">0 / 10</strong><small>Need 10 minimum · 12+ preferred</small></article></section>
@@ -14,4 +31,9 @@
 <section class="panel"><div class="panelhead"><div><p class="eyebrow">5:00 PM</p><h2>Event operations</h2></div><button data-add="event">+ Add person</button></div><div id="eventList"></div></section>
 <section class="panel panel--danger"><div class="panelhead"><div><p class="eyebrow">8:45–9:00 PM</p><h2>Strike Team — 10:00 PM hard stop</h2></div><button data-add="strike">+ Add person</button></div><p class="note">These people should know before the show that they are staying through teardown. Assign them to a strike team so nobody is guessing after the concert.</p><div class="teams"><div><b>A · Tables / Chairs</b></div><div><b>B · Campaign / Signs / Merch</b></div><div><b>C · Food / Drinks / Coolers</b></div><div><b>D · Production / Load-out</b></div><div><b>E · Venue / Final Sweep</b></div></div><div id="strikeList"></div></section>
 <section class="panel"><p class="eyebrow">QUICK RULES</p><h2>Assignment standards</h2><ul><li>Every person gets one primary job.</li><li>Every critical position gets a backup when possible.</li><li>Teardown volunteers are recruited before event day.</li><li>At 8:45–9:00 PM, Strike Captain calls the teams immediately.</li><li>Event Captain confirms the building is cleared and secured by 10:00 PM.</li></ul></section>
-</main><script src="/js/prep-store.js"></script><script src="/js/crew-slice.js"></script><script src="/volunteers/volunteers.js"></script></body></html>
+</main></div>
+<script src="/js/prep-store.js"></script>
+<script src="/js/crew-slice.js"></script>
+<script src="/js/sign-in.js"></script>
+<script src="/volunteers/volunteers.js"></script>
+</body></html>
