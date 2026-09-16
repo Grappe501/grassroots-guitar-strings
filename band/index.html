@@ -30,14 +30,27 @@
   <article class="ros-note">
     <p class="eyebrow">THE TWO SETS</p>
     <p><b>Acoustic dinner set</b> — 5:45–6:15 PM. Center of the dance floor. Stool, one vocal mic, his amp only.</p>
-    <p><b>Concert</b> — 7:00 PM to about 8:45 PM. Full system. Doors at 6:30.</p>
+    <p><b>Between shows</b> — 45 minutes. Acoustic ends 6:15. Concert is 7:00. Band goes to the green room. Doors at 6:30.</p>
+    <p><b>Concert</b> — 7:00 PM to about 8:45 PM. Full system. Be back at the stage by 6:50.</p>
+  </article>
+  <article class="ros-note band-check" id="greenRoom">
+    <p class="eyebrow">GREEN ROOM</p>
+    <h2 id="greenRoomTitle">Not set yet</h2>
+    <p id="greenRoomBody">Call Tommy at Woody’s and ask what room the band can have from 6:15–7:00 — and after sound check if he has something earlier.</p>
+    <p><a class="band-call" href="tel:5018358909">Call Woody’s — ask for Tommy</a></p>
+    <p class="band-call-note">Sherwood Forest desk · 501-835-8909. Ask for Tommy. Do not invent a room until he names one.</p>
+    <label class="band-room-label">Room Tommy gave us
+      <input id="greenRoomInput" type="text" maxlength="80" placeholder="Type the room after you hang up">
+    </label>
+    <button type="button" id="greenRoomSave">Save the room</button>
   </article>
   <article class="ros-note">
     <p class="eyebrow">WHAT YOU OWN</p>
     <p><b>8:00 AM</b> — Tracy and helper load lights and sound. One system. Venue already placed tables, chairs, and the dance floor. Do not rebuild the room.</p>
     <p><b>10:00 AM</b> — System line check and lights. The band is not required this morning.</p>
     <p><b>4:30 PM</b> — Sound check. This is the band call.</p>
-    <p><b>5:45 / 7:00</b> — The two shows. Fifteen minutes between acoustic end and concert system up.</p>
+    <p><b>5:45–6:15</b> — Acoustic. Then 45 minutes in the green room.</p>
+    <p><b>6:50 / 7:00</b> — Back at the stage. Concert.</p>
     <p><b>8:45 PM</b> — Strike. Tracy directs. Three people carry. His vehicle. Building clear 10:00.</p>
   </article>
   <article class="ros-note">
@@ -52,6 +65,7 @@
   </article>
   <ol class="ros-list" id="bandList"></ol>
 </main>
+<script src="/js/prep-store.js"></script>
 <script src="/js/run-of-show.js"></script>
 <script src="/band/band.js"></script>
 </body>

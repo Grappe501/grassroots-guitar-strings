@@ -242,7 +242,7 @@
         row("16:30", "show", "SOUND CHECK. David and the band. Acoustic patch and concert patch. Ice is not your job. Stay on the system."),
         row("17:15", "eat", "EAT now. 15 minutes. You will miss the dinner show on purpose."),
         row("17:45", "show", "David acoustic. You and Tracy. 30 minutes. Center of the dance floor. Do not sit."),
-        row("18:15", "work", "Clear acoustic. Stool away. Floor clear. Floater B helps. Concert system up."),
+        row("18:15", "work", "Clear acoustic. Stool away. Floor clear. Floater B helps. Concert system up. Band is in the green room until 6:50."),
         row("18:45", "work", "Checkpoint with Event Lead. You stay through the last song."),
         row("19:00", "sit", "Concert. Sit a stool at FOH. That is your show. Watch the board, enjoy the band."),
         row("20:45", "strike", "Strike D. Tracy directs. 3 muscle report to you. No empty hands. His vehicle."),

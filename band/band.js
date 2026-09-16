@@ -116,7 +116,47 @@
     }
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", paint);
-  else paint();
+  function greenDoc() {
+    const store = window.GGSPrepStore;
+    const doc = store && store.readDoc("green-room");
+    return doc && typeof doc === "object" ? doc : {};
+  }
+
+  function paintGreen() {
+    const room = String(greenDoc().room || "").trim();
+    const title = document.getElementById("greenRoomTitle");
+    const body = document.getElementById("greenRoomBody");
+    const input = document.getElementById("greenRoomInput");
+    if (title) title.textContent = room ? room : "Not set yet";
+    if (body) {
+      body.textContent = room
+        ? "Band green room from 6:15–7:00, and after sound check if they want it. Back at the stage by 6:50."
+        : "Call Tommy at Woody’s and ask what room the band can have from 6:15–7:00 — and after sound check if he has something earlier.";
+    }
+    if (input && !input.value) input.value = room;
+  }
+
+  function saveGreen() {
+    const store = window.GGSPrepStore;
+    const input = document.getElementById("greenRoomInput");
+    const room = input ? String(input.value || "").trim() : "";
+    if (!store) return;
+    store.saveDoc("green-room", { v: 1, room: room });
+    if (store.flush) store.flush();
+    paintGreen();
+  }
+
+  function start() {
+    const store = window.GGSPrepStore;
+    if (store && store.startSync) store.startSync();
+    paint();
+    paintGreen();
+    const save = document.getElementById("greenRoomSave");
+    if (save) save.addEventListener("click", saveGreen);
+  }
+
+  window.addEventListener("ggs-prep-loaded", paintGreen);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
   setInterval(paint, 15000);
 })();
