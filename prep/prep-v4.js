@@ -92,12 +92,12 @@
         "No paper tickets — door is check-in and $25 cash only",
         "Cash box / change",
         "Pens",
-        "Contribution envelopes",
+        "Cash envelopes",
         "Guest list if used",
         "$25 door signs printed at HQ — 8.5 x 11",
       ],
       out: [
-        "Cash reconciled",
+        "Cash / checks",
         "Envelopes secured",
         "Door money counted — no ticket stubs",
         "Cash box with Event Captain",
@@ -129,6 +129,7 @@
         "Sign stakes",
         "Pens",
         "Postcards",
+        "Cash envelopes",
       ],
       out: [
         "Literature packed",
@@ -148,6 +149,7 @@
         "Pens packed",
         "Bungee cords packed",
         "Postcards packed",
+        "Cash / checks",
       ],
     },
     {

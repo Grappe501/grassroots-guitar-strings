@@ -168,10 +168,10 @@
       next: "Campaign & Merch is your seat. One table. 30-minute set. Shirts, banners, cards, buttons, candy.",
       duties: [
         "Set merch + campaign on one table — 30 minutes.",
-        "Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards. Plus conversation cards and the 4-ft and 6-ft cloths.",
+        "Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, cash envelopes. Plus conversation cards and the 4-ft and 6-ft cloths.",
         "Hang the two banners. Bungee cords go with them.",
         "Yard signs from the same table. First name + phone on one sheet.",
-        "Strike B is 20 minutes. Pack campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, conversation cards, both cloths.",
+        "Strike B is 20 minutes. Pack campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, cash / checks, conversation cards, both cloths.",
       ],
     },
   ];
@@ -275,7 +275,7 @@
       arrival: "10:00 AM if you dress · 3:00 PM for night",
       owns: "Debi Martin. One table. 30-minute set. Signs and shirts.",
       duties: [
-        "If you dress tables: 10:00 with Setup. 10:25 you own merch — 30 minutes. Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards. 4-ft and 6-ft cloths. Conversation cards.",
+        "If you dress tables: 10:00 with Setup. 10:25 you own merch — 30 minutes. Campaign signs, campaign T-shirts, concert T-shirts, push cards, foldover business cards, pull-up banner, hanging banners, pens, pins, sign stakes, postcards, cash envelopes. 4-ft and 6-ft cloths. Conversation cards.",
         "11:00 yard-sign sheet on the same table. First name + phone. Morning done 12:30. Lunch off site. Back 3:00.",
         "If you only work night: 3:00 t-shirt on. Earlier if you can. Open My Night. Table live.",
         "3:15 eat 15 minutes. Sign: back in 10.",
@@ -285,7 +285,7 @@
         "6:15 table back up. 6:30 concert-door browse window. Stay.",
         "7:15 close again. Sit the concert 45 minutes. Relief comes get you if a line forms.",
         "8:00 table through encore. Box loose shirts so strike is 20 minutes.",
-        "8:45 Strike B. Campaign signs, both shirt stacks, push cards, foldovers, pull-up, hanging banners, pens, pins, stakes, postcards, cloths, conversation cards. Count. Bins to the campaign vehicle.",
+        "8:45 Strike B. Campaign signs, both shirt stacks, push cards, foldovers, pull-up, hanging banners, pens, pins, stakes, postcards, cash / checks, cloths, conversation cards. Count. Bins to the campaign vehicle.",
       ],
     },
     {
