@@ -197,21 +197,24 @@ function render(kind) {
         .join("")
     : '<div class="empty">No people assigned yet. Add someone above.</div>';
   el.querySelectorAll(".person").forEach((row) => {
-    ["name", "phone", "role", "arrival", "backup"].forEach((c) =>
-      ["input", "change"].forEach((evt) =>
-      row.querySelector("." + c).addEventListener(evt, () => {
-        state[kind][+row.dataset.i][c] = row.querySelector("." + c).value;
-        save();
-        if (c === "name" || c === "phone") {
-          const name = row.querySelector(".name").value.trim();
-          const phone = row.querySelector(".phone").value.trim();
-          const box = row.querySelector(".person-reach");
-          if (box) box.innerHTML = name ? reachHtml(name, phone) : "";
-          if (store && slice && name && slice.phoneDigits(phone)) slice.saveContact(store, name, phone);
-        }
-      })
-      )
-    );
+    ["name", "phone", "role", "arrival", "backup"].forEach((c) => {
+      const field = row.querySelector("." + c);
+      if (!field) return;
+      const evts = field.tagName === "SELECT" ? ["change"] : ["input", "change"];
+      evts.forEach((evt) =>
+        field.addEventListener(evt, () => {
+          state[kind][+row.dataset.i][c] = field.value;
+          save();
+          if (c === "name" || c === "phone") {
+            const name = row.querySelector(".name").value.trim();
+            const phone = row.querySelector(".phone").value.trim();
+            const box = row.querySelector(".person-reach");
+            if (box) box.innerHTML = name ? reachHtml(name, phone) : "";
+            if (store && slice && name && slice.phoneDigits(phone)) slice.saveContact(store, name, phone);
+          }
+        })
+      );
+    });
     row.querySelector(".remove").addEventListener("click", () => {
       state[kind].splice(+row.dataset.i, 1);
       save();

@@ -121,6 +121,7 @@
   function renderBoard() {
     const root = document.getElementById("leadJobList");
     if (!root || !dir) return;
+    if (store && store.isPicking && store.isPicking()) return;
     seedDefaults();
     root.innerHTML = jobs()
       .map((job) => {

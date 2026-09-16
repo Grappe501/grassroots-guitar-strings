@@ -664,6 +664,7 @@
   setInterval(tick, 30000);
 
   window.addEventListener("ggs-prep-loaded", (e) => {
+    if (store && store.isPicking && store.isPicking()) return;
     Object.keys(state).forEach((k) => delete state[k]);
     Object.assign(state, e.detail || {});
     restore();

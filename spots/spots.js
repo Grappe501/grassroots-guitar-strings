@@ -175,6 +175,7 @@
   }
 
   function start() {
+    if (store && store.isPicking && store.isPicking()) return;
     if (store && store.startSync) store.startSync();
     if (document.getElementById("spotHub")) renderHub();
     if (document.body.getAttribute("data-spot")) renderPage();

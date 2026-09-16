@@ -435,6 +435,7 @@
 
   function render() {
     try {
+      if (store && store.isPicking && store.isPicking()) return;
       if (window.GGSSignIn) window.GGSSignIn.applyLock();
       const name = meName();
       if (!name) return;

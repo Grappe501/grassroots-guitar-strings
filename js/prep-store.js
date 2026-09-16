@@ -6,7 +6,15 @@
   let timer = null;
   let pollTimer = null;
   let inflight = null;
+  let lastEmit = "";
   const dirty = new Set();
+
+  function isPicking() {
+    const el = document.activeElement;
+    if (!el) return false;
+    const tag = String(el.tagName || "").toLowerCase();
+    return tag === "select" || tag === "input" || tag === "textarea";
+  }
 
   function readCache() {
     try {
@@ -34,6 +42,9 @@
   }
 
   function emit(state) {
+    const snap = JSON.stringify(state || {});
+    if (snap === lastEmit) return;
+    lastEmit = snap;
     global.dispatchEvent(new CustomEvent("ggs-prep-loaded", { detail: state }));
   }
 
@@ -186,5 +197,6 @@
     startSync,
     setPoll,
     flush,
+    isPicking,
   };
 })(window);
