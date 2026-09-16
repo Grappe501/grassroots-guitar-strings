@@ -19,7 +19,17 @@
   const packets = [
     { id: "captain", label: "Event Captain", match: /event captain|choose event captain|hard stop|load-out|announce teardown/i, tabs: ["overview", "volunteers", "timeline", "final"] },
     { id: "setup", label: "Setup crew", match: /setup person|tables|chairs|horseshoe|tablecloth|lobby ticket setup/i, tabs: ["setup"] },
-    { id: "tracy", label: "Tracy + helper", match: /tracy|sound|speaker|microphone|stage light|extension cord|acoustic/i, tabs: ["production", "setup"] },
+    {
+      id: "tracy",
+      label: "Tracy + helper",
+      intro: "Tracy owns lights, sound, and electrical. One campaign volunteer stays with her from 8:00 AM load-in through Strike D. The venue already placed tables, chairs, and the dance floor — do not rebuild them. Photo/video is a different person.",
+      pick: function (row) {
+        if (row.tab === "production") return true;
+        if (row.tab === "volunteers" && /tracy production helper/i.test(row.text)) return true;
+        if (row.tab === "breakdown" && /shut down sound|shut down lights|disconnect equipment|coil cables|pack microphones|pack stands|pack speakers|pack mixer|pack lighting|account for all production|load tracy|final stage check/i.test(row.text)) return true;
+        return false;
+      },
+    },
     { id: "tickets", label: "Tickets + money", match: /ticket|cash|envelope|reconcile|payment/i, tabs: ["tickets"] },
     { id: "food", label: "Food + drinks", match: /bbq|buffet|tea|lemonade|cooler|pulled pork|ben |\$1 water|money bag/i, tabs: ["ben", "food"] },
     { id: "campaign", label: "Campaign + merch", match: /yard sign|merch|qr|literature|regnet|campaign display/i, tabs: ["campaign"] },
@@ -74,7 +84,9 @@
     const setup = namedCount(people.setup);
     const tickets = namedRole(people.event, /primary ticket|check-in/i);
     const photo = namedRole(people.event, /photo|video/i);
-    const tracy = namedRole(people.event, /david\/performer|venue\/facilit/i) || (taskNamed(/campaign volunteer helper|confirm tracy/i) ? "named" : "");
+    const tracy =
+      namedRole(people.event, /tracy/i) ||
+      (taskNamed(/tracy production helper|name the campaign volunteer helper|campaign volunteer to assist tracy/i) ? "named" : "");
     const strike = namedCount(people.strike);
     return [
       { id: "captain", label: "Event Captain", ok: !!captain, detail: captain || "Need a name" },
@@ -262,43 +274,66 @@
       });
     });
     const pack = packets.find((p) => p.id === prefs.packet) || packets[0];
+    const seen = {};
     const lines = Array.from(document.querySelectorAll(".task[data-key]"))
       .map((row) => {
         const section = row.closest("[data-section]");
+        const card = row.closest(".card");
         return {
-          text: row.querySelector(".task-text").textContent,
+          text: (row.querySelector(".task-text").textContent || "").trim(),
           owner: row.querySelector(".owner").value.trim(),
           when: row.querySelector(".when").value.trim(),
           done: row.querySelector(".task-check").checked,
           tab: section ? section.dataset.section : "",
+          group: card && card.querySelector("h3") ? card.querySelector("h3").textContent.trim() : "",
         };
       })
-      .filter((row) => pack.tabs.indexOf(row.tab) !== -1 || pack.match.test(row.text));
+      .filter((row) => {
+        if (pack.pick) return pack.pick(row);
+        return (pack.tabs && pack.tabs.indexOf(row.tab) !== -1) || (pack.match && pack.match.test(row.text));
+      })
+      .filter((row) => {
+        const key = row.text.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+        if (!key || seen[key]) return false;
+        seen[key] = true;
+        return true;
+      });
     const open = lines.filter((row) => !row.done);
+    const shown = pack.id === "tracy" ? lines : open.slice(0, 40);
     const book = window.GGSCrewSlice && store ? window.GGSCrewSlice.readContacts(store) : {};
+    const groups = [];
+    shown.forEach((row) => {
+      const name = row.group || "Job";
+      const last = groups[groups.length - 1];
+      if (!last || last.name !== name) groups.push({ name, rows: [row] });
+      else last.rows.push(row);
+    });
+    function lineHtml(row) {
+      const who = row.owner
+        ? window.GGSCrewSlice
+          ? window.GGSCrewSlice.contactHtml(row.owner, window.GGSCrewSlice.phoneFor(row.owner, book))
+          : esc(row.owner)
+        : "UNASSIGNED";
+      return (
+        "<li" +
+        (row.done ? ' class="is-done"' : "") +
+        "><strong>" +
+        esc(row.text) +
+        "</strong><span> " +
+        who +
+        (row.when ? " · " + esc(row.when) : "") +
+        "</span></li>"
+      );
+    }
     sheet.innerHTML =
       "<h2>" +
       esc(pack.label) +
-      "</h2><p>Thursday, September 17, 2026 · Woody's Sherwood Forest · 1111 West Maryland Avenue</p><p><strong>Hard stop:</strong> strike at 8:45–9:00 PM. Building cleared by 10:00 PM.</p><ol>" +
-      open
-        .slice(0, 24)
-        .map((row) => {
-          const who = row.owner
-            ? window.GGSCrewSlice
-              ? window.GGSCrewSlice.contactHtml(row.owner, window.GGSCrewSlice.phoneFor(row.owner, book))
-              : esc(row.owner)
-            : "UNASSIGNED";
-          return (
-            "<li><strong>" +
-            esc(row.text) +
-            "</strong><span> " +
-            who +
-            (row.when ? " · " + esc(row.when) : "") +
-            "</span></li>"
-          );
-        })
-        .join("") +
-      "</ol>";
+      "</h2><p>Thursday, September 17, 2026 · Woody's Sherwood Forest · 1111 West Maryland Avenue</p>" +
+      (pack.intro ? "<p>" + esc(pack.intro) + "</p>" : "") +
+      "<p><strong>Hard stop:</strong> strike at 8:45–9:00 PM. Building cleared by 10:00 PM.</p>" +
+      groups
+        .map((g) => "<h3>" + esc(g.name) + "</h3><ol>" + g.rows.map(lineHtml).join("") + "</ol>")
+        .join("");
   }
 
   function bindRadio() {

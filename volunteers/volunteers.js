@@ -15,6 +15,7 @@ const defaults = {
     "David/performer support",
     "Venue/facilities",
     "Runner/floater",
+    "Tracy production helper — stays through Strike D",
   ],
   strike: [],
 };
@@ -135,13 +136,23 @@ function applyRemote(data) {
   const active = document.activeElement;
   if (active && active.closest && active.closest(".person")) return;
   state = data;
+  if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {
+    state.event.push({
+      role: "Tracy production helper — stays through Strike D",
+      name: "",
+      phone: "",
+      arrival: "8:00 AM",
+      backup: "",
+      done: false,
+    });
+  }
   ["setup", "event", "strike"].forEach(render);
   counts();
 }
 
 function counts() {
   document.getElementById("setupCount").textContent = state.setup.filter((x) => x.name.trim()).length + " / 3";
-  document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / 13";
+  document.getElementById("eventCount").textContent = state.event.filter((x) => x.name.trim()).length + " / " + Math.max(14, state.event.length);
   const n = state.strike.filter((x) => x.name.trim()).length;
   document.getElementById("strikeCount").textContent = n + " / 10";
   document.getElementById("strikeAlert").textContent =
@@ -152,6 +163,16 @@ function counts() {
         : "Teardown is short by " + (10 - n) + ". Recruit 10 people minimum; target 12+ so the building can be cleared by 10:00 PM.";
 }
 
+if (!state.event.some((row) => /tracy/i.test(String(row.role || "")))) {
+  state.event.push({
+    role: "Tracy production helper — stays through Strike D",
+    name: "",
+    phone: "",
+    arrival: "8:00 AM",
+    backup: "",
+    done: false,
+  });
+}
 ["setup", "event", "strike"].forEach(render);
 counts();
 document.querySelectorAll("[data-add]").forEach((b) =>

@@ -244,12 +244,22 @@
   margin: 0 0 0.4rem;
 }
 
+.packet-sheet h3 {
+  margin: 1rem 0 0.35rem;
+  font-size: 1.05rem;
+}
+
 .packet-sheet ol {
   padding-left: 1.2rem;
 }
 
 .packet-sheet li {
   margin: 0.45rem 0;
+}
+
+.packet-sheet li.is-done {
+  opacity: 0.55;
+  text-decoration: line-through;
 }
 
 html.night .gates,

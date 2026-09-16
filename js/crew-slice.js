@@ -225,8 +225,8 @@
       id: "production",
       label: "Tracy + production",
       priority: 3,
-      test: /tracy|sound|speaker|microphone|mixer|stage light|extension cord|acoustic|bar stool/i,
-      roster: /david\/performer|tracy/i,
+      test: /tracy|tracy production helper|name the campaign volunteer helper|full sound and light|bar stool|center-floor|load tracy|stay on deck through the last song/i,
+      roster: /tracy production helper|tracy/i,
       day: [
         { start: "2026-09-17T08:00:00", end: "2026-09-17T17:30:00", place: "Stage + dance floor", do: "Sound, lights, power, full check." },
         { start: "2026-09-17T17:45:00", end: "2026-09-17T18:15:00", place: "Center dance floor", do: "David acoustic set. Clear the floor by 6:30 doors." },
