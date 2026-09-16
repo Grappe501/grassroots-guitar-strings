@@ -207,7 +207,17 @@
     else document.body.insertBefore(a, document.body.firstChild);
   }
 
-  global.GGSWifi = { readWifi, saveWifi, joinNow, paintJoin, wifiUri };
+  function joinFromGate() {
+    const cfg = readWifi();
+    if (cfg.ssid && cfg.password) {
+      joinNow(cfg);
+      return true;
+    }
+    location.href = "/wifi/";
+    return false;
+  }
+
+  global.GGSWifi = { readWifi, saveWifi, joinNow, joinFromGate, paintJoin, wifiUri };
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       if (document.getElementById("wifiPage")) bindPage();

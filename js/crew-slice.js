@@ -123,7 +123,9 @@
   function phoneFor(name, contacts) {
     const map = contacts || {};
     const hit = Object.keys(map).find((key) => nameMatch(key, name));
-    return hit ? map[hit] : "";
+    if (hit) return map[hit];
+    const person = global.GGSPeople ? global.GGSPeople.findPerson(name) : null;
+    return person && person.phone ? person.phone : "";
   }
 
   function saveContact(store, name, phone) {

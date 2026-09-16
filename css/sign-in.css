@@ -96,16 +96,48 @@
   padding: 0.55rem 0.7rem;
   cursor: pointer;
 }
+.signin__verify {
+  margin: 0 0 0.75rem;
+}
+.signin__verify p {
+  margin: 0 0 0.55rem;
+  color: #e7eef4;
+  font-weight: 800;
+}
+.signin__verify-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+.signin__verify-actions button,
+.signin__wifi,
 .signin__go {
   width: 100%;
   border: 0;
   border-radius: 999px;
   padding: 0.85rem 1rem;
-  background: #ca913d;
-  color: #07074a;
   font: inherit;
   font-weight: 900;
   cursor: pointer;
+}
+#gateYes,
+.signin__go {
+  background: #ca913d;
+  color: #07074a;
+}
+.signin__ghost {
+  background: #07074a;
+  color: #e7eef4;
+  border: 1px solid #3a5366 !important;
+}
+.signin__wifi {
+  background: #000066;
+  color: #e7eef4;
+  border: 2px solid #ca913d;
+  margin-bottom: 0.45rem;
+}
+.signin__go {
+  margin: 0;
 }
 body.is-locked {
   overflow: hidden;

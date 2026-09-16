@@ -3,7 +3,8 @@
     {
       name: "Steve Grappe",
       first: "Steve",
-      gate: "Your board is ready. Add the phone people can reach you on tonight, then open your briefing.",
+      phone: "501-690-3824",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "MEETING LEAD",
       title: "You run tomorrow from the top.",
@@ -18,7 +19,8 @@
     {
       name: "Carol Egan",
       first: "Carol",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "847-791-8601",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "You are already in the system.",
@@ -32,7 +34,8 @@
     {
       name: "Jay Powell",
       first: "Jay",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "501-690-0839",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -42,7 +45,8 @@
     {
       name: "Christy Low",
       first: "Christy",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "870-275-1178",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -52,7 +56,8 @@
     {
       name: "John Duke",
       first: "John",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "501-516-2108",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -62,7 +67,8 @@
     {
       name: "Mark London",
       first: "Mark",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "541-591-2198",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -72,7 +78,8 @@
     {
       name: "Kelly Grappe",
       first: "Kelly",
-      gate: "This is your candidate board. Add your phone. You do not run a station tonight.",
+      phone: "501-690-8227",
+      gate: "Confirm this is the phone you are on today. You do not run a station tonight.",
       go: "Open my night",
       kicker: "CANDIDATE",
       title: "Press flesh. That is the job.",
@@ -87,7 +94,8 @@
     {
       name: "Kristal Kuykendall",
       first: "Kristal",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "479-244-5026",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -97,7 +105,8 @@
     {
       name: "Ben Hurst",
       first: "Ben",
-      gate: "Food is your lane. Add your phone, then read the Food & Drinks seat.",
+      phone: "501-517-1690",
+      gate: "Food is your lane. Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "FOOD",
       title: "You are the kitchen. A lead still owns our side.",
@@ -112,7 +121,8 @@
     {
       name: "Sarah Hurst",
       first: "Sarah",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "501-265-3446",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -122,7 +132,8 @@
     {
       name: "Chance Bradford",
       first: "Chance",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "901-496-5949",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -132,7 +143,8 @@
     {
       name: "Leeann Solice",
       first: "Leeann",
-      gate: "You are on the day-of lead list. Add your phone, then read your briefing.",
+      phone: "512-789-1552",
+      gate: "Confirm this is the phone you are on today, then connect to Wi-Fi.",
       go: "Open my board",
       kicker: "DAY-OF LEAD",
       title: "Pick a lane tomorrow.",
@@ -321,9 +333,43 @@
     return PEOPLE.filter((p) => norm(p.name).indexOf(s) === 0 || norm(p.first).indexOf(s) === 0 || norm(p.name).indexOf(s) >= 0);
   }
 
+  function uniquePerson(q) {
+    const s = norm(q);
+    if (s.length < 2) return null;
+    const hits = suggestions(q);
+    if (hits.length === 1) return hits[0];
+    const exact = PEOPLE.filter((p) => norm(p.first) === s || norm(p.name) === s);
+    return exact.length === 1 ? exact[0] : null;
+  }
+
   function names() {
     return PEOPLE.map((p) => p.name);
   }
 
-  global.GGSPeople = { PEOPLE, JOBS, findPerson, suggestions, names, match };
+  function prettyPhone(phone) {
+    if (global.GGSCrewSlice) return global.GGSCrewSlice.displayPhone(phone);
+    return String(phone || "").trim();
+  }
+
+  function seedContacts() {
+    const store = global.GGSPrepStore;
+    const slice = global.GGSCrewSlice;
+    if (!store || !slice) return;
+    const book = slice.readContacts(store);
+    PEOPLE.forEach((p) => {
+      if (!p.phone) return;
+      const key = Object.keys(book).find((item) => match(item, p.name));
+      if (key && book[key]) return;
+      slice.saveContact(store, p.name, p.phone);
+      book[p.name] = p.phone;
+    });
+  }
+
+  global.GGSPeople = { PEOPLE, JOBS, findPerson, uniquePerson, suggestions, names, match, prettyPhone, seedContacts };
+  function bootSeed() {
+    seedContacts();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootSeed);
+  else bootSeed();
+  global.addEventListener("ggs-prep-loaded", seedContacts);
 })(window);

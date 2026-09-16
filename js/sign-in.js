@@ -15,12 +15,22 @@
     return next;
   }
 
+  function digits(raw) {
+    if (global.GGSCrewSlice) return String(global.GGSCrewSlice.phoneDigits(raw) || "").replace(/\D/g, "");
+    return String(raw || "").replace(/\D/g, "");
+  }
+
   function identity() {
     const prefs = readPrefs();
     const name = String(prefs.me || "").trim();
     const raw = String(prefs.phone || "").trim();
-    const phone = global.GGSCrewSlice ? global.GGSCrewSlice.phoneDigits(raw) : raw.replace(/\D/g, "");
-    return { name, phone: raw, ok: name.length >= 2 && String(phone || "").length >= 7 };
+    return { name, phone: raw, ok: name.length >= 2 && digits(raw).length >= 7 };
+  }
+
+  function pretty(phone) {
+    if (global.GGSPeople) return global.GGSPeople.prettyPhone(phone);
+    if (global.GGSCrewSlice) return global.GGSCrewSlice.displayPhone(phone);
+    return String(phone || "").trim();
   }
 
   function fillKnown() {
@@ -58,7 +68,68 @@
     }
   }
 
-  function bindNames(input) {
+  function ensureExtras(card) {
+    if (card.querySelector("#gateVerify")) return;
+    const go = document.getElementById("gateGo");
+    const wrap = document.createElement("div");
+    wrap.id = "gateVerify";
+    wrap.className = "signin__verify";
+    wrap.hidden = true;
+    wrap.innerHTML =
+      '<p id="gateVerifyText">Is this the phone you are on today?</p>' +
+      '<div class="signin__verify-actions">' +
+      '<button type="button" id="gateYes">Yes, this phone</button>' +
+      '<button type="button" id="gateNo" class="signin__ghost">Different number</button>' +
+      "</div>";
+    const wifi = document.createElement("button");
+    wifi.type = "button";
+    wifi.id = "gateWifi";
+    wifi.className = "signin__wifi";
+    wifi.hidden = true;
+    wifi.textContent = "Connect to Wi-Fi";
+    if (go) {
+      go.parentNode.insertBefore(wrap, go);
+      go.parentNode.insertBefore(wifi, go);
+    } else {
+      card.appendChild(wrap);
+      card.appendChild(wifi);
+    }
+  }
+
+  function setVerified(on) {
+    const card = document.querySelector(".signin__card");
+    if (card) card.classList.toggle("is-verified", !!on);
+    const wifi = document.getElementById("gateWifi");
+    const go = document.getElementById("gateGo");
+    if (wifi) wifi.hidden = !on;
+    if (go) go.hidden = !on;
+  }
+
+  function showVerify(phone) {
+    const box = document.getElementById("gateVerify");
+    const text = document.getElementById("gateVerifyText");
+    if (!box) return;
+    const shown = pretty(phone) || String(phone || "").trim();
+    if (text) {
+      text.textContent = shown
+        ? "Is " + shown + " the phone you are on today?"
+        : "Is this the phone you are on today?";
+    }
+    box.hidden = !shown;
+    if (!shown) setVerified(false);
+  }
+
+  function applyPerson(person, nameInput, phoneInput, suggestBox) {
+    if (!person) return;
+    nameInput.value = person.name;
+    if (person.phone) phoneInput.value = pretty(person.phone);
+    if (suggestBox) suggestBox.hidden = true;
+    paintGate(person.name);
+    setVerified(false);
+    showVerify(phoneInput.value);
+  }
+
+  function bindNames(input, phoneInput) {
     if (!input || !global.GGSPeople) return;
     let list = document.getElementById("crewNameList");
     if (!list) {
@@ -80,22 +151,28 @@
       input.parentNode.appendChild(box);
     }
     function paintSuggest() {
-      const hits = global.GGSPeople.suggestions(input.value).slice(0, 8);
       const typed = String(input.value || "").trim();
+      const unique = global.GGSPeople.uniquePerson(typed);
+      if (unique) {
+        applyPerson(unique, input, phoneInput, box);
+        return;
+      }
+      const hits = global.GGSPeople.suggestions(typed).slice(0, 8);
       box.innerHTML = hits
         .map((p) => '<button type="button" data-name="' + p.name.replace(/"/g, "") + '">' + p.name + "</button>")
         .join("");
-      box.hidden = !typed || (hits.length === 1 && hits[0].name === typed) || !hits.length;
+      box.hidden = !typed || !hits.length;
       box.querySelectorAll("[data-name]").forEach((btn) => {
         btn.addEventListener("click", function () {
-          input.value = btn.dataset.name;
-          box.hidden = true;
-          paintGate(btn.dataset.name);
-          const phone = document.getElementById("gatePhone");
-          if (phone) phone.focus();
+          const person = global.GGSPeople.findPerson(btn.dataset.name);
+          applyPerson(person, input, phoneInput, box);
         });
       });
       paintGate(input.value);
+      setVerified(false);
+      const person = global.GGSPeople.findPerson(typed);
+      if (person && person.phone && !String(phoneInput.value || "").trim()) phoneInput.value = pretty(person.phone);
+      showVerify(phoneInput.value);
     }
     input.addEventListener("input", paintSuggest);
     input.addEventListener("focus", paintSuggest);
@@ -135,6 +212,8 @@
     const phone = document.getElementById("gatePhone");
     if (name) name.value = "";
     if (phone) phone.value = "";
+    setVerified(false);
+    showVerify("");
     if (name) name.focus();
   }
 
@@ -157,26 +236,85 @@
       return;
     }
     ensurePhoto(gate);
+    const card = gate.querySelector(".signin__card");
+    if (card) ensureExtras(card);
     const name = document.getElementById("gateName");
     const phone = document.getElementById("gatePhone");
     const go = document.getElementById("gateGo");
     const err = document.getElementById("gateErr");
-    bindNames(name);
+    const yes = document.getElementById("gateYes");
+    const no = document.getElementById("gateNo");
+    const wifi = document.getElementById("gateWifi");
+    bindNames(name, phone);
     fillKnown();
+    if (name && phone && global.GGSPeople) {
+      const person = global.GGSPeople.uniquePerson(name.value) || global.GGSPeople.findPerson(name.value);
+      if (person) applyPerson(person, name, phone, document.getElementById("crewSuggest"));
+    } else if (phone && digits(phone.value).length >= 7) {
+      showVerify(phone.value);
+    }
+    setVerified(false);
+    function ready() {
+      return String((name && name.value) || "").trim().length >= 2 && digits((phone && phone.value) || "").length >= 7;
+    }
     function submit() {
+      if (!card || !card.classList.contains("is-verified")) {
+        if (err) {
+          err.textContent = "Confirm this is the phone you are on today.";
+          err.hidden = false;
+        }
+        return;
+      }
       const ok = save(name ? name.value : "", phone ? phone.value : "");
       if (err) err.hidden = ok;
       if (!ok && name && !(name.value || "").trim()) name.focus();
       else if (!ok && phone) phone.focus();
     }
+    if (yes) {
+      yes.addEventListener("click", function () {
+        if (!ready()) {
+          if (err) {
+            err.textContent = "Name and a real phone first.";
+            err.hidden = false;
+          }
+          return;
+        }
+        if (err) err.hidden = true;
+        setVerified(true);
+      });
+    }
+    if (no) {
+      no.addEventListener("click", function () {
+        setVerified(false);
+        if (phone) {
+          phone.value = "";
+          phone.focus();
+        }
+        showVerify("");
+      });
+    }
+    if (wifi) {
+      wifi.addEventListener("click", function () {
+        if (!card.classList.contains("is-verified") || !ready()) return;
+        save(name.value, phone.value);
+        if (global.GGSWifi && global.GGSWifi.joinFromGate) global.GGSWifi.joinFromGate();
+        else location.href = "/wifi/";
+      });
+    }
     if (go) go.addEventListener("click", submit);
+    if (phone) {
+      phone.addEventListener("input", function () {
+        setVerified(false);
+        showVerify(phone.value);
+      });
+    }
     [name, phone].forEach((el) => {
       if (!el) return;
       el.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          submit();
-        }
+        if (e.key !== "Enter") return;
+        e.preventDefault();
+        if (!card.classList.contains("is-verified") && ready()) setVerified(true);
+        else submit();
       });
     });
     document.querySelectorAll("[data-sign-out]").forEach((btn) => {
