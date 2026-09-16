@@ -16,6 +16,7 @@ const defaults = {
     "Server 3 — serving line with Ben.",
     "Drink station — tea, lemonade, ice, water, donations.",
     "Campaign + merch — one table, 30 min set",
+    "Merch 2 — rush helper. Acoustic over to 7:00. Donations, handouts, greet.",
     "Floater A — relief loop all night",
     "Floater B — relief loop + roam shots if no Photo Lead",
     "Kelly Support — runner plus vertical photos on Kelly",
@@ -48,6 +49,7 @@ function arrivalFor(role, kind) {
   if (/parking|directions|crowd/i.test(role)) return "4:30 PM";
   if (/tracy/i.test(role)) return "8:00–10:00 AM";
   if (/floater|relief/i.test(role)) return "5:30 PM if you can";
+  if (/merch 2/i.test(role)) return "6:00 PM";
   return "4:30 PM";
 }
 
@@ -73,6 +75,11 @@ function migrateArrivals() {
         dirty = true;
         return;
       }
+      if (/merch 2/i.test(String(row.role || "")) && /4:30|5:30|10:00/.test(a)) {
+        row.arrival = "6:00 PM";
+        dirty = true;
+        return;
+      }
       if (!/3:00/.test(a)) return;
       row.arrival = /muscle/i.test(String(row.role || "")) ? "4:30 PM · required 8:45" : "4:30 PM";
       dirty = true;
@@ -95,6 +102,17 @@ function dropTracyHelper() {
 function dropDirections() {
   if (!state.grounds) return;
   state.grounds = state.grounds.filter((row) => !/^directions\b/i.test(String((row && row.role) || "")));
+}
+
+function ensureMerch2() {
+  if (!state.event) state.event = [];
+  const role = "Merch 2 — rush helper. Acoustic over to 7:00. Donations, handouts, greet.";
+  if (!state.event.some((row) => /merch 2/i.test(String(row.role || "")))) {
+    const after = state.event.findIndex((row) => /campaign \+ merch/i.test(String(row.role || "")));
+    const row = emptyRow(role, "event");
+    if (after >= 0) state.event.splice(after + 1, 0, row);
+    else state.event.push(row);
+  }
 }
 
 function ensureFloaters() {
@@ -194,6 +212,7 @@ let state =
     grounds: defaults.grounds.map((role) => emptyRow(role, "event")),
   };
 ensureFloaters();
+ensureMerch2();
 ensureMuscle();
 ensureGrounds();
 ensureFoodLine();
@@ -203,7 +222,7 @@ dropDirections();
 const bootArriveDirty = migrateArrivals();
 const bootLeadDirty = applyLeadSeats();
 (function seedNamedSeats() {
-  const debi = (state.event || []).find((item) => /campaign|merch/i.test(String(item.role || "")));
+  const debi = (state.event || []).find((item) => /campaign \+ merch/i.test(String(item.role || "")));
   if (debi && (!String(debi.name || "").trim() || /debi martin/i.test(String(debi.name || "")))) debi.name = "Debbie Martin";
   const ben = (state.event || []).find((item) => /food service lead/i.test(String(item.role || "")));
   if (ben && !String(ben.name || "").trim()) ben.name = "Ben Hurst";
@@ -339,12 +358,13 @@ function applyRemote(data) {
   state = data;
   if (!state.grounds) state.grounds = [];
   ensureFloaters();
+  ensureMerch2();
   ensureMuscle();
   ensureGrounds();
   ensureFoodLine();
   ensureLeadRows();
   dropTracyHelper();
-dropDirections();
+  dropDirections();
   const arriveDirty = migrateArrivals();
   const leadDirty = applyLeadSeats();
   const spotDirty = pullSpots();
@@ -359,7 +379,7 @@ function stayNames() {
     (state[kind] || []).forEach((row) => {
       const name = String((row && row.name) || "").trim();
       if (!name) return;
-      if (/muscle|food service lead/i.test(String((row && row.role) || ""))) return;
+      if (/muscle|food service lead|merch 2/i.test(String((row && row.role) || ""))) return;
       const dup = seen.some((item) =>
         slice ? slice.nameMatch(item, name) : item.toLowerCase() === name.toLowerCase()
       );
@@ -412,6 +432,7 @@ document.getElementById("clearBtn").addEventListener("click", () => {
       grounds: defaults.grounds.map((role) => emptyRow(role, "event")),
     };
     ensureFloaters();
+    ensureMerch2();
     ensureMuscle();
     ensureGrounds();
     ensureFoodLine();
