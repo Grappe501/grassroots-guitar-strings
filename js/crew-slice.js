@@ -208,11 +208,12 @@
       test: /event captain|choose event captain|hard checkpoint|announce teardown/i,
       roster: /event captain/i,
       day: [
-        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:00:00", place: "Main room", do: "Volunteers arrive at 4:30. Ice can go in now. Walk every post. Sound check is live — stay off the dance floor." },
-        { start: "2026-09-17T17:00:00", end: "2026-09-17T18:45:00", place: "Whole room", do: "Walk stations every 15 min. Tickets, food, campaign, stage each have one body." },
-        { start: "2026-09-17T18:45:00", end: "2026-09-17T19:00:00", place: "Stage + lobby", do: "Hard checkpoint. Every post still has a person. Concert at 7:00." },
-        { start: "2026-09-17T19:00:00", end: "2026-09-17T20:45:00", place: "Show floor", do: "Stay visible. Floaters give breaks. Call strike the moment the show ends." },
-        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Whole building", do: "Same 7 strike. Venue furniture stays. Clear by 10:00 PM." },
+        { start: "2026-09-17T10:00:00", end: "2026-09-17T12:30:00", place: "Setup", do: "Available for setup help if the morning crew needs a hand." },
+        { start: "2026-09-17T16:30:00", end: "2026-09-17T17:15:00", place: "Whole room", do: "Available for questions, directions, and to fill in. Night crew arrives at 4:30." },
+        { start: "2026-09-17T17:15:00", end: "2026-09-17T17:30:00", place: "Doors", do: "Food doors. You are there when they open." },
+        { start: "2026-09-17T18:30:00", end: "2026-09-17T18:45:00", place: "Doors", do: "Concert doors. You are there when they open." },
+        { start: "2026-09-17T20:30:00", end: "2026-09-17T20:45:00", place: "Doors", do: "You are there when the house closes." },
+        { start: "2026-09-17T20:45:00", end: "2026-09-17T22:00:00", place: "Whole building", do: "Last one to check everything. You leave last." },
       ],
     },
     {

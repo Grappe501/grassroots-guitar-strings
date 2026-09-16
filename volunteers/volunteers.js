@@ -8,7 +8,7 @@ const defaults = {
     "Setup 3 → Campaign + merch (30 min set)",
   ],
   event: [
-    "Event Captain — clock + venue + strike lead",
+    "Event Captain — doors open and close, last check, fill in",
     "Tickets — one person; a Production Manager covers breaks",
     "Food service lead — Ben. Line, not plates, not water.",
     "Server 1 — Sarah. Serving line with Ben.",
