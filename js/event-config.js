@@ -45,6 +45,7 @@ const EVENT_CONFIG = {
   brandLogoAlt: "David Adam Byrnes",
   hostPhoto: "/assets/images/host/kelly-grappe.jpg",
   hostPhotoAlt: "Kelly Grappe, candidate for Arkansas Secretary of State",
+  instagramReelUrl: "https://www.instagram.com/reel/DdQFXTzslqK/",
   ogImage: "/assets/images/live/live-01.jpg",
   saucyPigName: "The Saucy Pig",
   saucyPigFacebookUrl: "https://www.facebook.com/p/Saucy-Pig-100094120494691/",
