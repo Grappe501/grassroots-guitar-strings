@@ -115,15 +115,17 @@ body.nametags {
 .badge-first {
   margin: 0;
   flex: 1;
+  max-width: 1.9in;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "League Spartan", Raleway, sans-serif;
-  font-size: 0.36in;
-  line-height: 0.9;
+  font-size: 0.28in;
+  font-weight: 800;
+  line-height: 0.92;
   letter-spacing: -0.03em;
   color: #fff;
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .badge.is-blank .badge-first {
