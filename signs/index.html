@@ -1,57 +1,18 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#000066">
-<title>Signs — Grassroots &amp; Guitar Strings</title>
-<link rel="stylesheet" href="/css/kelly-brand.css">
-<link rel="stylesheet" href="/signs/signs.css">
-<link rel="stylesheet" href="/css/contrast.css">
-<style>
-.sign-download{margin:1.25rem 0 2rem;padding:1rem;border:3px solid #d8ad42;border-radius:12px;background:#fff8df}.sign-download h2{margin:.1rem 0 .4rem}.sign-download__actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.8rem}.sign-download button,.sign-download a{display:inline-block;padding:.85rem 1.15rem;border:0;border-radius:8px;background:#000066;color:#fff;text-decoration:none;font-weight:800;cursor:pointer}.sign-download button:first-child{background:#d8ad42;color:#111}.sign-download small{display:block;margin-top:.6rem}.print-all-frame{width:100%;height:0;border:0;position:absolute;left:-99999px}
-</style>
-</head>
-<body>
-<div class="bar"><p>Letter-size posters for a live night at Woody's. Print the stack at HQ.</p><span data-crew-nav></span></div>
-<div class="hub">
-<p class="kicker">KELLY GRAPPE PRESENTS</p><h1>Grassroots &amp; Guitar Strings</h1>
-<p>These are show posters, not office memos. Same navy and gold. Print 8 1/2 &times; 11 at HQ Thursday.</p>
-<section class="sign-download" aria-label="Download all signs">
-<h2>ALL SIGNS — ONE BUTTON</h2>
-<p>Open every event sign in one print packet. In the print window choose <strong>Save as PDF</strong> to download one PDF, or choose your printer to print the entire stack.</p>
-<div class="sign-download__actions"><button type="button" id="allSignsBtn">DOWNLOAD / PRINT ALL SIGNS</button><a href="/prep/?full=1#lists">BACK TO PREP LISTS</a></div>
-<small>Packet: doors, $25 concert, kids, BBQ, T-shirts, water, drinks, name tags, volunteer, and website signs.</small>
-</section>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000066"><title>Signs — Grassroots &amp; Guitar Strings</title><link rel="stylesheet" href="/css/kelly-brand.css"><link rel="stylesheet" href="/signs/signs.css"><link rel="stylesheet" href="/css/contrast.css"><style>.sign-download{margin:1.25rem 0 2rem;padding:1rem;border:3px solid #d8ad42;border-radius:12px;background:#fff8df}.sign-download h2{margin:.1rem 0 .4rem}.sign-download__actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.8rem}.sign-download button,.sign-download a{display:inline-block;padding:.85rem 1.15rem;border:0;border-radius:8px;background:#000066;color:#fff;text-decoration:none;font-weight:800;cursor:pointer}.sign-download button:first-child{background:#d8ad42;color:#111}.sign-download small{display:block;margin-top:.6rem}</style></head><body>
+<div class="bar"><p>Letter-size posters and certificates for the live night at Woody's. Print the stack at HQ.</p><span data-crew-nav></span></div><div class="hub"><p class="kicker">KELLY GRAPPE PRESENTS</p><h1>Grassroots &amp; Guitar Strings</h1><p>Day-of print center. Navy and gold event system. Open any item individually or print the full stack.</p>
+<section class="sign-download"><h2>ALL SIGNS — ONE BUTTON</h2><p>Open the complete event sign packet. In the print window choose <strong>Save as PDF</strong> to download, or choose your printer.</p><div class="sign-download__actions"><button type="button" id="allSignsBtn">DOWNLOAD / PRINT ALL SIGNS</button><a href="/prep/?full=1#lists">BACK TO PREP LISTS</a></div><small>Includes entrance direction signs and the half-page free-shirt certificate sheet.</small></section>
 <ul class="hub-list">
+<li><a href="/signs/middle-entrance/"><strong>MIDDLE ENTRANCE</strong>Please use middle entrance<span>Two matching 8½ × 11 directional signs.</span></a></li>
+<li><a href="/signs/free-shirts/"><strong>FREE SHIRT CERTIFICATES</strong>Regnat Populus + Concert T-shirt<span>Official two-up half-page sheet. Cut in half. Redeem at merchandise table.</span></a></li>
 <li><a href="/signs/doors/"><strong>LIVE TONIGHT</strong>Front door times<span>Dinner 5:15. Show doors 6:30. Band 7:00.</span></a></li>
 <li><a href="/signs/concert-25/"><strong>GET IN THE SHOW</strong>$25 at the door<span>David Adam Byrnes live. Lobby table + line.</span></a></li>
 <li><a href="/signs/kids/"><strong>LITTLE PICKERS</strong>Kids $5 with an adult<span>Lobby table + line.</span></a></li>
 <li><a href="/signs/bbq/"><strong>PLATE UP</strong>BBQ $25<span>GoodChange QR — same donate link as shirts.</span></a></li>
 <li><a href="/signs/tshirt/"><strong>WEAR THE NIGHT</strong>T-shirts $25<span>Price + GoodChange donate QR.</span></a></li>
-<li><a href="/signs/water/"><strong>POUR ONE</strong>Drink donations<span>Tea, lemonade, water. Pass the jar.</span></a></li>
-<li><a href="/signs/drinks/"><strong>SWEET TEA</strong>Drink donations at the pitchers<span>Same message. Post at tea and lemonade.</span></a></li>
-<li><a href="/signs/nametags/"><strong>NAME TAGS</strong>Crew badges<span>Nine 2 1/4 × 3 3/8 vertical tags a page. First name only.</span></a></li>
-<li><a href="/signs/volunteer/"><strong>STAY AFTER THE SONG</strong>Volunteer with the campaign<span>QR to get-involved.</span></a></li>
-<li><a href="/signs/website/"><strong>TAKE US HOME</strong>Go to the website<span>QR to kellygrappe.com.</span></a></li>
-</ul></div>
-<script>
-(function(){
-var pages=["doors","concert-25","kids","bbq","tshirt","water","drinks","nametags","volunteer","website"];
-var btn=document.getElementById("allSignsBtn");
-btn.addEventListener("click",async function(){
- btn.disabled=true;btn.textContent="BUILDING PRINT PACKET…";
- try{
-  var docs=await Promise.all(pages.map(function(p){return fetch("/signs/"+p+"/").then(function(r){return r.text();});}));
-  var w=window.open("","_blank");
-  if(!w){throw new Error("Popup blocked");}
-  var bodies=docs.map(function(html,i){var m=html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);var body=m?m[1]:html;body=body.replace(/<script[\s\S]*?<\/script>/gi,"");return '<section class="packet-page">'+body+'</section>';}).join("");
-  w.document.open();w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Grassroots & Guitar Strings — All Signs</title><base href="'+location.origin+'/"><link rel="stylesheet" href="/css/kelly-brand.css"><link rel="stylesheet" href="/signs/signs.css"><style>@page{size:letter;margin:0}.packet-page{break-after:page;page-break-after:always;min-height:10.5in}.packet-page:last-child{break-after:auto;page-break-after:auto}@media print{.bar,.no-print{display:none!important}}</style></head><body>'+bodies+'</body></html>');w.document.close();
-  setTimeout(function(){w.focus();w.print();},900);
- }catch(e){alert("Could not build the packet. Your browser may be blocking the print window. Allow pop-ups for this site and try again.");}
- finally{btn.disabled=false;btn.textContent="DOWNLOAD / PRINT ALL SIGNS";}
-});
-})();
-</script>
-<script src="/js/crew-nav.js?v=hello1"></script><script src="/js/night-photos.js?v=hello1"></script>
-</body></html>
+<li><a href="/signs/water/"><strong>POUR ONE</strong>Drink donations<span>Tea, lemonade, water.</span></a></li>
+<li><a href="/signs/drinks/"><strong>SWEET TEA</strong>Drink donations at the pitchers<span>Post at tea and lemonade.</span></a></li>
+<li><a href="/signs/nametags/"><strong>NAME TAGS</strong>Crew badges<span>Nine vertical tags a page. First name only.</span></a></li>
+<li><a href="/signs/volunteer/"><strong>STAY AFTER THE SONG</strong>Volunteer<span>QR to get-involved.</span></a></li>
+<li><a href="/signs/website/"><strong>TAKE US HOME</strong>Website<span>QR to kellygrappe.com.</span></a></li></ul></div>
+<script>(function(){var pages=["middle-entrance","free-shirts","doors","concert-25","kids","bbq","tshirt","water","drinks","nametags","volunteer","website"];var btn=document.getElementById("allSignsBtn");btn.addEventListener("click",async function(){btn.disabled=true;btn.textContent="BUILDING PRINT PACKET…";try{var docs=await Promise.all(pages.map(function(p){return fetch("/signs/"+p+"/").then(function(r){return r.text();});}));var w=window.open("","_blank");if(!w)throw new Error("Popup blocked");var bodies=docs.map(function(html){var m=html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);var body=m?m[1]:html;body=body.replace(/<script[\s\S]*?<\/script>/gi,"");return '<section class="packet-page">'+body+'</section>';}).join("");w.document.open();w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Grassroots & Guitar Strings — All Signs</title><base href="'+location.origin+'/"><link rel="stylesheet" href="/css/kelly-brand.css"><link rel="stylesheet" href="/signs/signs.css"><style>@page{size:letter;margin:0}.packet-page{break-after:page;page-break-after:always;min-height:10.5in}.packet-page:last-child{break-after:auto;page-break-after:auto}@media print{.bar{display:none!important}}</style></head><body>'+bodies+'</body></html>');w.document.close();setTimeout(function(){w.focus();w.print();},900);}catch(e){alert("Could not build the packet. Allow pop-ups for this site and try again.");}finally{btn.disabled=false;btn.textContent="DOWNLOAD / PRINT ALL SIGNS";}});})();</script><script src="/js/crew-nav.js?v=hello1"></script><script src="/js/night-photos.js?v=hello1"></script></body></html>
