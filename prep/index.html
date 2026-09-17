@@ -29,198 +29,42 @@
 <body class="v4">
 <div id="signInGate" class="signin" hidden>
   <article class="signin__card">
-    <p class="eyebrow">SIGN IN</p>
-    <h1>Who are you?</h1>
+    <p class="eyebrow">SIGN IN</p><h1>Who are you?</h1>
     <p>Name and a day-of number first. Radio, assignments, and call/text all use this so we know who is who.</p>
-    <label>I am
-      <input id="gateName" type="text" autocomplete="name" placeholder="Your name">
-    </label>
-    <label>My phone
-      <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text">
-    </label>
+    <label>I am <input id="gateName" type="text" autocomplete="name" placeholder="Your name"></label>
+    <label>My phone <input id="gatePhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Number people can call or text"></label>
     <p class="signin__err" id="gateErr" hidden>Both are required. Use a real number people can call tonight.</p>
     <button type="button" class="signin__go" id="gateGo">Open the board</button>
   </article>
 </div>
 <div id="prepApp" data-needs-identity>
-<header class="topbar">
-  <div class="topbar__inner">
-    <div>
-      <p class="eyebrow">KELLY GRAPPE · FULL BOARD</p>
-      <h1>Kelly Grappe</h1>
-      <p class="subtitle">Grassroots &amp; Guitar Strings · Thursday, September 17, 2026 · Woody's Sherwood Forest</p>
-      <p class="sync-status" id="syncStatus">Connecting to shared board…</p>
-    </div>
-    <div class="top-actions">
-      <div data-crew-nav></div>
-      <button class="btn btn--gold" type="button" data-mode="lists">LISTS</button>
-      <button class="btn btn--light" id="nightBtn" type="button">Night mode</button>
-      <button class="btn btn--light" id="printBtn" type="button">Print</button>
-      <button class="btn btn--gold" id="resetBtn" type="button">Reset checklist</button>
-    </div>
-  </div>
-</header>
+<header class="topbar"><div class="topbar__inner"><div>
+<p class="eyebrow">KELLY GRAPPE · FULL BOARD</p><h1>Kelly Grappe</h1>
+<p class="subtitle">Grassroots &amp; Guitar Strings · Thursday, September 17, 2026 · Woody's Sherwood Forest</p>
+<p class="sync-status" id="syncStatus">Connecting to shared board…</p></div>
+<div class="top-actions"><div data-crew-nav></div>
+<button class="btn btn--gold" type="button" data-mode="lists">LISTS</button>
+<a class="btn btn--gold" href="/signs/">SIGNS</a>
+<a class="btn btn--light" href="/v5/">MY NIGHT</a>
+<a class="btn btn--light" href="/command/">COMMAND</a>
+<button class="btn btn--light" id="nightBtn" type="button">Night mode</button>
+<button class="btn btn--light" id="printBtn" type="button">Print</button>
+<button class="btn btn--gold" id="resetBtn" type="button">Reset checklist</button></div></div></header>
 
 <main class="shell">
-  <section id="packetStage" class="packet-stage" hidden>
-    <p class="eyebrow">YOUR PACKET</p>
-    <div class="packet-roles" id="packetRoles"></div>
-    <article class="packet-sheet" id="packetSheet"></article>
-  </section>
-  <section class="gates" id="gatesBand" aria-label="Readiness gates">
-    <p class="eyebrow">Cannot go green until these are named</p>
-    <div class="gate-grid" id="gateGrid"></div>
-  </section>
-
-  <section class="radio-band radio-feed radio-desk" id="radioDesk" aria-label="Night radio">
-    <div class="radio-desk__main">
-      <div class="radio-head">
-        <div>
-          <p class="eyebrow">NIGHT RADIO</p>
-          <h2>Text or walkie. All, or one person.</h2>
-        </div>
-        <p class="radio-by" id="radioBy">Signed-in phones appear on the right.</p>
-      </div>
-      <p class="radio-channel" id="radioChannel">All radios</p>
-      <div class="night-pulse" data-night-pulse></div>
-      <div class="radio-feed-list" id="radioFeed" aria-live="polite"></div>
-      <div class="radio-compose">
-        <input id="radioInput" type="text" maxlength="240" autocomplete="off" placeholder="Ben is 15 out. Ticket table is live. Need two more teardown people.">
-        <button type="button" class="btn btn--gold" id="radioSend">Send</button>
-      </div>
-      <div class="radio-ptt">
-        <button type="button" class="radio-talk" id="radioTalk">Hold to talk — ALL</button>
-        <p class="radio-ptt-hint" id="radioTalkHint">Tap Talk once to open the mic. Then hold like a walkie. Headset optional.</p>
-      </div>
-    </div>
-    <aside class="radio-people" id="radioPeople" aria-label="Radios on tonight"></aside>
-  </section>
-
-  <section class="now-strip" aria-live="polite">
-    <article class="now-card now-card--clock">
-      <p class="eyebrow">Now</p>
-      <div id="nowClock">--:--</div>
-      <p id="nowLabel">Loading event clock…</p>
-    </article>
-    <article class="now-card now-card--next">
-      <p class="eyebrow">Next action</p>
-      <h2 id="nextTitle">Reading the live board…</h2>
-      <p id="nextMeta">Clock + checklist</p>
-    </article>
-    <article class="now-card now-card--gap">
-      <p class="eyebrow">Needs an owner</p>
-      <div class="big-number" id="gapCount">0</div>
-      <p id="gapLabel">Open tasks with no name yet</p>
-    </article>
-  </section>
-
-  <section class="ops-bar">
-    <p class="me-signed" id="meSigned"></p>
-    <a class="my-page-link" id="myPageLink" href="/v5/" hidden>Open my night</a>
-    <button type="button" class="my-page-link" data-sign-out>Not me</button>
-    <label class="search-field">Find a task
-      <input id="searchInput" type="search" placeholder="Type tea, signs, Tracy, strike… jumps to that job">
-    </label>
-    <div class="filter-row" role="group" aria-label="Task filters">
-      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
-      <button type="button" class="chip" data-filter="open" aria-pressed="false">Open</button>
-      <button type="button" class="chip" data-filter="owner" aria-pressed="false">Needs owner</button>
-      <button type="button" class="chip" data-filter="mine" aria-pressed="false">Mine</button>
-      <button type="button" class="chip" data-filter="done" aria-pressed="false">Done</button>
-    </div>
-    <p class="filter-status" id="filterStatus">All tasks</p>
-  </section>
-
-  <datalist id="ownerNames"></datalist>
-
-  <section class="role-row" aria-label="Jump to a job">
-    <button type="button" class="role" data-jump="overview">Captain</button>
-    <button type="button" class="role" data-jump="ben">Ben / BBQ</button>
-    <button type="button" class="role" data-jump="setup">Setup</button>
-    <button type="button" class="role" data-jump="production">Tracy</button>
-    <button type="button" class="role" data-jump="tickets">Tickets</button>
-    <button type="button" class="role" data-jump="campaign">Campaign</button>
-    <button type="button" class="role" data-jump="food">Food</button>
-    <button type="button" class="role" data-jump="volunteers">People</button>
-    <button type="button" class="role" data-jump="breakdown">Strike</button>
-    <button type="button" class="role" id="listsJump">Load in / out</button>
-  </section>
-
-  <section class="dashboard v3-dash">
-    <div class="stat"><span class="stat__label">Overall</span><strong id="progressPct">0%</strong></div>
-    <div class="progress"><div id="progressBar"></div></div>
-    <div class="stat"><span class="stat__label">Done</span><strong id="progressCount">0 / 0</strong></div>
-    <div class="stat"><span class="stat__label">Showing</span><strong id="visibleCount">0</strong></div>
-    <div class="critical"><strong>Hard stop:</strong> show ends about 8:45–9:00 PM. Strike starts immediately. Building cleared by 10:00 PM.</div>
-  </section>
-
-  <section class="crew-band" id="crewBand">
-    <p class="eyebrow">Who is on the board</p>
-    <div class="crew-list" id="crewList"><span class="muted">Names appear here as people get assigned.</span></div>
-  </section>
-
-  <aside class="attention" id="attention">
-    <p class="eyebrow">Attention</p>
-    <h2>Do these next</h2>
-    <ol id="attentionList"></ol>
-  </aside>
-
-  <div id="planStage">
-    <nav class="tabs" role="tablist" aria-label="Event preparation sections"></nav>
-    <p class="empty-filter" id="emptyFilter" hidden>Nothing matches that filter. Clear search or switch back to All.</p>
-    <div id="tabContent"></div>
-  </div>
-
-  <section id="runStage" class="run-stage" hidden>
-    <p class="run-kicker" id="runKicker">EVENT CLOCK</p>
-    <div class="run-clock" id="runClock">--:--</div>
-    <p class="run-now" id="runNow">Venue access + setup</p>
-    <p class="run-next" id="runNext">Next: room / production check</p>
-    <p class="run-hard" id="runHard">Building clear by 10:00 PM</p>
-    <div class="run-hot" id="runHot"></div>
-    <div class="run-queue" id="runQueue"></div>
-    <h2 class="run-mine-title">My open work</h2>
-    <div class="run-mine" id="runMine"></div>
-  </section>
-
-  <section id="listsStage" class="lists-stage" hidden>
-    <div class="lists-head">
-      <article class="lists-stat">
-        <p class="eyebrow">Load in</p>
-        <strong id="gearInCount">0 / 0</strong>
-        <div class="progress"><div id="gearInBar"></div></div>
-        <p>Must be on site before guests.</p>
-      </article>
-      <article class="lists-stat">
-        <p class="eyebrow">Load out</p>
-        <strong id="gearOutCount">0 / 0</strong>
-        <div class="progress"><div id="gearOutBar"></div></div>
-        <p>Must leave with us. Building clear by 10:00 PM.</p>
-      </article>
-    </div>
-    <p class="eyebrow">MASTER GEAR</p>
-    <h2>Overall item checklist, by section</h2>
-    <p>This is not the job board. This is what physically comes in and what physically goes out. Venue already placed tables, chairs, and the dance floor.</p>
-    <div class="gear-board" id="gearBoard"></div>
-  </section>
-
-</main>
-</div>
-<script src="/js/prep-store.js?v=v6"></script>
-<script src="/js/crew-slice.js?v=tix1"></script>
-<script src="/js/people-directory.js?v=bbq1"></script>
-<script src="/js/sign-in.js?v=v6"></script>
-<script src="/js/wifi-join.js"></script>
-<script src="/js/radio-feed.js"></script>
-<script src="/js/radio-night.js"></script>
-<script src="/js/night-social.js"></script>
-<script src="/prep/prep-v2.js?v=v6"></script>
-<script src="/js/next-action.js?v=v6"></script>
-<script src="/prep/prep-app.js?v=v6"></script>
-<script src="/prep/prep-enhancements.js"></script>
-<script src="/prep/prep-v3.js?v=v6"></script>
-<script src="/prep/prep-v4.js?v=v6"></script>
-<script src="/js/crew-nav.js?v=events1"></script>
-<script src="/js/night-photos.js?v=v6"></script>
-</body>
-</html>
+<section id="packetStage" class="packet-stage" hidden><p class="eyebrow">YOUR PACKET</p><div class="packet-roles" id="packetRoles"></div><article class="packet-sheet" id="packetSheet"></article></section>
+<section class="gates" id="gatesBand" aria-label="Readiness gates"><p class="eyebrow">Cannot go green until these are named</p><div class="gate-grid" id="gateGrid"></div></section>
+<section class="radio-band radio-feed radio-desk" id="radioDesk" aria-label="Night radio"><div class="radio-desk__main"><div class="radio-head"><div><p class="eyebrow">NIGHT RADIO</p><h2>Text or walkie. All, or one person.</h2></div><p class="radio-by" id="radioBy">Signed-in phones appear on the right.</p></div><p class="radio-channel" id="radioChannel">All radios</p><div class="night-pulse" data-night-pulse></div><div class="radio-feed-list" id="radioFeed" aria-live="polite"></div><div class="radio-compose"><input id="radioInput" type="text" maxlength="240" autocomplete="off" placeholder="Ben is 15 out. Ticket table is live. Need two more teardown people."><button type="button" class="btn btn--gold" id="radioSend">Send</button></div><div class="radio-ptt"><button type="button" class="radio-talk" id="radioTalk">Hold to talk — ALL</button><p class="radio-ptt-hint" id="radioTalkHint">Tap Talk once to open the mic. Then hold like a walkie. Headset optional.</p></div></div><aside class="radio-people" id="radioPeople" aria-label="Radios on tonight"></aside></section>
+<section class="now-strip" aria-live="polite"><article class="now-card now-card--clock"><p class="eyebrow">Now</p><div id="nowClock">--:--</div><p id="nowLabel">Loading event clock…</p></article><article class="now-card now-card--next"><p class="eyebrow">Next action</p><h2 id="nextTitle">Reading the live board…</h2><p id="nextMeta">Clock + checklist</p></article><article class="now-card now-card--gap"><p class="eyebrow">Needs an owner</p><div class="big-number" id="gapCount">0</div><p id="gapLabel">Open tasks with no name yet</p></article></section>
+<section class="ops-bar"><p class="me-signed" id="meSigned"></p><a class="my-page-link" id="myPageLink" href="/v5/" hidden>Open my night</a><button type="button" class="my-page-link" data-sign-out>Not me</button><label class="search-field">Find a task <input id="searchInput" type="search" placeholder="Type tea, signs, Tracy, strike… jumps to that job"></label><div class="filter-row" role="group" aria-label="Task filters"><button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button><button type="button" class="chip" data-filter="open" aria-pressed="false">Open</button><button type="button" class="chip" data-filter="owner" aria-pressed="false">Needs owner</button><button type="button" class="chip" data-filter="mine" aria-pressed="false">Mine</button><button type="button" class="chip" data-filter="done" aria-pressed="false">Done</button></div><p class="filter-status" id="filterStatus">All tasks</p></section>
+<datalist id="ownerNames"></datalist>
+<section class="role-row" aria-label="Jump to a job"><button type="button" class="role" data-jump="overview">Captain</button><button type="button" class="role" data-jump="ben">Ben / BBQ</button><button type="button" class="role" data-jump="setup">Setup</button><button type="button" class="role" data-jump="production">Tracy</button><button type="button" class="role" data-jump="tickets">Tickets</button><button type="button" class="role" data-jump="campaign">Campaign</button><button type="button" class="role" data-jump="food">Food</button><button type="button" class="role" data-jump="volunteers">People</button><button type="button" class="role" data-jump="breakdown">Strike</button><button type="button" class="role" id="listsJump">Load in / out</button><a class="role" href="/signs/">Signs</a></section>
+<section class="dashboard v3-dash"><div class="stat"><span class="stat__label">Overall</span><strong id="progressPct">0%</strong></div><div class="progress"><div id="progressBar"></div></div><div class="stat"><span class="stat__label">Done</span><strong id="progressCount">0 / 0</strong></div><div class="stat"><span class="stat__label">Showing</span><strong id="visibleCount">0</strong></div><div class="critical"><strong>Hard stop:</strong> show ends about 8:45–9:00 PM. Strike starts immediately. Building cleared by 10:00 PM.</div></section>
+<section class="crew-band" id="crewBand"><p class="eyebrow">Who is on the board</p><div class="crew-list" id="crewList"><span class="muted">Names appear here as people get assigned.</span></div></section>
+<aside class="attention" id="attention"><p class="eyebrow">Attention</p><h2>Do these next</h2><ol id="attentionList"></ol></aside>
+<div id="planStage"><nav class="tabs" role="tablist" aria-label="Event preparation sections"></nav><p class="empty-filter" id="emptyFilter" hidden>Nothing matches that filter. Clear search or switch back to All.</p><div id="tabContent"></div></div>
+<section id="runStage" class="run-stage" hidden><p class="run-kicker" id="runKicker">EVENT CLOCK</p><div class="run-clock" id="runClock">--:--</div><p class="run-now" id="runNow">Venue access + setup</p><p class="run-next" id="runNext">Next: room / production check</p><p class="run-hard" id="runHard">Building clear by 10:00 PM</p><div class="run-hot" id="runHot"></div><div class="run-queue" id="runQueue"></div><h2 class="run-mine-title">My open work</h2><div class="run-mine" id="runMine"></div></section>
+<section id="listsStage" class="lists-stage" hidden><div class="lists-head"><article class="lists-stat"><p class="eyebrow">Load in</p><strong id="gearInCount">0 / 0</strong><div class="progress"><div id="gearInBar"></div></div><p>Must be on site before guests.</p></article><article class="lists-stat"><p class="eyebrow">Load out</p><strong id="gearOutCount">0 / 0</strong><div class="progress"><div id="gearOutBar"></div></div><p>Must leave with us. Building clear by 10:00 PM.</p></article></div><p class="eyebrow">MASTER GEAR</p><h2>Overall item checklist, by section</h2><p>This is not the job board. This is what physically comes in and what physically goes out. Venue already placed tables, chairs, and the dance floor.</p><p><a class="btn btn--gold" href="/signs/">OPEN ALL PRINTABLE SIGNS</a></p><div class="gear-board" id="gearBoard"></div></section>
+</main></div>
+<script src="/js/prep-store.js?v=v6"></script><script src="/js/crew-slice.js?v=tix1"></script><script src="/js/people-directory.js?v=bbq1"></script><script src="/js/sign-in.js?v=v6"></script><script src="/js/wifi-join.js"></script><script src="/js/radio-feed.js"></script><script src="/js/radio-night.js"></script><script src="/js/night-social.js"></script><script src="/prep/prep-v2.js?v=v6"></script><script src="/js/next-action.js?v=v6"></script><script src="/prep/prep-app.js?v=v6"></script><script src="/prep/prep-enhancements.js"></script><script src="/prep/prep-v3.js?v=v6"></script><script src="/prep/prep-v4.js?v=v6"></script><script src="/js/crew-nav.js?v=events1"></script><script src="/js/night-photos.js?v=v6"></script>
+</body></html>
