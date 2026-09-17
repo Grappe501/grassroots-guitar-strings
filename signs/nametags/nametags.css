@@ -39,10 +39,34 @@ body.nametags {
   flex-wrap: wrap;
 }
 
+.badge-sheet-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 8.5in;
+  max-width: 100%;
+  margin: 0.8rem auto;
+}
+
+.badge-sheet-wrap .download-jpg {
+  width: 8.5in;
+  max-width: 100%;
+  margin-top: 0.55rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  min-height: 44px;
+  background: #ca913d;
+  color: #12124a;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .badge-sheet {
   width: 8.5in;
   height: 11in;
-  margin: 0.8rem auto;
+  margin: 0;
   background: #fff;
   box-shadow: 0 8px 24px rgba(0, 0, 102, 0.12);
   display: grid;
@@ -155,8 +179,14 @@ body.nametags {
     width: 8.5in;
   }
 
-  .nametags .bar {
-    display: none;
+  .nametags .bar,
+  .badge-sheet-wrap .download-jpg {
+    display: none !important;
+  }
+
+  .badge-sheet-wrap {
+    width: 8.5in;
+    margin: 0;
   }
 
   .badge-sheet {
@@ -166,7 +196,7 @@ body.nametags {
     break-after: page;
   }
 
-  .badge-sheet:last-child {
+  .badge-sheet-wrap:last-child .badge-sheet {
     page-break-after: auto;
     break-after: auto;
   }

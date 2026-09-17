@@ -52,8 +52,22 @@
   }
 
   root.innerHTML = pages
-    .map(function (page) {
-      return '<section class="badge-sheet">' + page.map(badge).join("") + "</section>";
+    .map(function (page, index) {
+      var id = "nametag-sheet-" + (index + 1);
+      return (
+        '<div class="badge-sheet-wrap">' +
+        '<section class="badge-sheet" id="' +
+        id +
+        '">' +
+        page.map(badge).join("") +
+        "</section>" +
+        '<button type="button" class="download-jpg" data-download-jpg="#' +
+        id +
+        '" data-filename="ggs-nametags-' +
+        (index + 1) +
+        '">Download JPG</button>' +
+        "</div>"
+      );
     })
     .join("");
 })();
