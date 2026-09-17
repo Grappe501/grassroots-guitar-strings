@@ -3,12 +3,13 @@
     { href: "/v5/", label: "Tonight" },
     { href: "/v5/#photos", label: "Photos" },
     { href: "/spots/", label: "SPOTS" },
-    { href: "/volunteers/", label: "Lists" },
+    { href: "/prep/#lists", label: "Events" },
   ];
 
   function here(href) {
     const path = (location.pathname || "/").replace(/\/+$/, "") || "/";
     if (href.indexOf("#photos") >= 0) return path === "/v5" && location.hash === "#photos";
+    if (href.indexOf("#lists") >= 0) return path === "/prep";
     const target = href.replace(/\/+$/, "") || "/";
     if (target === "/v5") return path === "/v5" && location.hash !== "#photos";
     return path === target || path.indexOf(target + "/") === 0;
