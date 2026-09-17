@@ -62,7 +62,10 @@
       <a href="${cfg.davidUrl}" target="_blank" rel="noopener noreferrer">DavidAdamByrnes.com<span class="sr-only"> (opens in new tab)</span></a>
       <a href="${cfg.kellyUrl}" target="_blank" rel="noopener noreferrer">KellyGrappe.com<span class="sr-only"> (opens in new tab)</span></a>
     </div>
-    <a class="header-cta" href="${cfg.ticketUrl}" data-track="ticket_button_clicked">Get Tickets</a>
+    <div class="header-ctas">
+      <a class="header-cta header-cta--volunteer" href="/volunteer/">Volunteer</a>
+      <a class="header-cta" href="${cfg.ticketUrl}" data-track="ticket_button_clicked">Get Tickets</a>
+    </div>
     <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-drawer">Menu</button>
   </div>
   <div class="container mobile-drawer" id="mobile-drawer" hidden>${mobileNav}</div>

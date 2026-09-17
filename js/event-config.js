@@ -264,6 +264,7 @@ const NAV_LINKS = [
   { href: "/tickets/", label: "Tickets" },
   { href: "/celebration/", label: "The Evening" },
   { href: "/details/", label: "Event Details" },
+  { href: "/volunteer/", label: "Volunteer" },
 ];
 
 const JOIN_LINKS = [

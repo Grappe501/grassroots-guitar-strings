@@ -208,6 +208,13 @@
   font-weight: 600;
 }
 
+.header-ctas {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
 .header-cta {
   display: inline-flex;
   align-items: center;
@@ -226,6 +233,16 @@
 .header-cta:hover {
   background: var(--ggs-blue-deep);
   color: #fff !important;
+}
+
+.header-cta--volunteer {
+  background: #ca913d;
+  color: #12124a !important;
+}
+
+.header-cta--volunteer:hover {
+  background: #d4a04e;
+  color: #12124a !important;
 }
 
 .menu-toggle {

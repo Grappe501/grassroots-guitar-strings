@@ -4,6 +4,7 @@
     { href: "/v5/#photos", label: "Photos" },
     { href: "/spots/", label: "SPOTS" },
     { href: "/prep/#lists", label: "Events" },
+    { href: "/volunteer/", label: "Volunteer", button: true },
   ];
 
   function here(href) {
@@ -23,6 +24,7 @@
           '<a href="' +
           link.href +
           '"' +
+          (link.button ? ' class="crew-nav-button"' : "") +
           (here(link.href) ? ' aria-current="page"' : "") +
           ">" +
           link.label +
@@ -44,6 +46,8 @@
       ".top-actions .crew-nav{margin:0}" +
       ".v5-top .crew-nav a,.wifi-nav.crew-nav a,.bar .crew-nav a{background:transparent;color:#d5dbe6}" +
       "body.spot .crew-nav a,body.ops .crew-nav a{color:#c5cdd8}" +
+      ".crew-nav a.crew-nav-button,.bar .crew-nav a.crew-nav-button,.v5-top .crew-nav a.crew-nav-button{margin-left:.35rem;border-radius:999px;padding:.45rem .9rem;background:#ca913d;color:#12124a;font-weight:800;border-bottom:0}" +
+      ".crew-nav a.crew-nav-button[aria-current=page]{background:#ca913d;color:#12124a;border-bottom:0}" +
       "@media print{.crew-nav{display:none}}";
     document.head.appendChild(style);
   }
