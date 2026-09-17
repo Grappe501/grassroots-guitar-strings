@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="/css/kelly-brand.css">
 <link rel="stylesheet" href="/signs/signs.css">
 <link rel="stylesheet" href="/css/contrast.css">
+<style>
+  .sheet-tools{display:flex;justify-content:center;margin:.55rem 0 1.1rem}
+  .sheet-tools button{border:0;border-radius:999px;padding:.75rem 1.15rem;min-height:44px;background:#ca913d;color:#12124a;font:inherit;font-weight:900;cursor:pointer}
+  @media print{.sheet-tools{display:none!important}}
+</style>
 </head>
 <body>
 <div class="bar">
@@ -15,11 +20,11 @@
   <span>
     <span data-crew-nav></span>
     <button type="button" onclick="print()">Print signs</button>
-    <button type="button" data-download-jpg=".sign" data-filename="ggs-pour-one">Download JPG</button>
+    <button type="button" data-download-jpg="#waterSignA, #waterSignB" data-filename="ggs-pour-one">Download JPG</button>
   </span>
 </div>
 <div class="sheet">
-  <article class="sign">
+  <article class="sign" id="waterSignA">
     <p class="kicker">KELLY GRAPPE</p>
     <p class="show">GRASSROOTS<br>&amp; GUITAR STRINGS</p>
     <hr class="rule">
@@ -27,10 +32,16 @@
     <p class="price">DONATIONS</p>
     <p class="note">Pass the jar. We are taking donations.</p>
     <p class="note">Sweet tea · lemonade · cold water</p>
+    <p class="note">Scan to pay on GoodChange.</p>
+    <img class="qr qr--pay" src="https://quickchart.io/qr?text=https%3A%2F%2Fgoodchange.app%2Fdonate%2Fgrass-ax&amp;size=300&amp;margin=1" alt="QR code to GoodChange donate">
+    <p class="note">goodchange.app/donate/grass-ax</p>
     <p class="foot">SEP 17 · SHERWOOD</p>
     <p class="fine">Paid for by The Committee to Elect Kelly Grappe</p>
   </article>
-  <article class="sign">
+  <div class="sheet-tools">
+    <button type="button" data-download-jpg="#waterSignA" data-filename="ggs-pour-one">Download JPG</button>
+  </div>
+  <article class="sign" id="waterSignB">
     <p class="kicker">KELLY GRAPPE</p>
     <p class="show">GRASSROOTS<br>&amp; GUITAR STRINGS</p>
     <hr class="rule">
@@ -38,10 +49,16 @@
     <p class="price">DONATIONS</p>
     <p class="note">Pass the jar. We are taking donations.</p>
     <p class="note">Sweet tea · lemonade · cold water</p>
+    <p class="note">Scan to pay on GoodChange.</p>
+    <img class="qr qr--pay" src="https://quickchart.io/qr?text=https%3A%2F%2Fgoodchange.app%2Fdonate%2Fgrass-ax&amp;size=300&amp;margin=1" alt="QR code to GoodChange donate">
+    <p class="note">goodchange.app/donate/grass-ax</p>
     <p class="foot">SEP 17 · SHERWOOD</p>
     <p class="fine">Paid for by The Committee to Elect Kelly Grappe</p>
   </article>
-  <article class="cheat sign-page">
+  <div class="sheet-tools">
+    <button type="button" data-download-jpg="#waterSignB" data-filename="ggs-pour-one">Download JPG</button>
+  </div>
+  <article class="cheat sign-page" id="waterSellerCard">
     <p class="kicker">KELLY GRAPPE</p>
     <p class="show">GRASSROOTS<br>&amp; GUITAR STRINGS</p>
     <hr class="rule">
@@ -51,14 +68,18 @@
       <li>No set price. Thank them. Do not chase a dollar.</li>
       <li>Cash goes in the money bag. Keep the bag on you.</li>
       <li>Say: “We are taking donations for drinks — water, tea, or lemonade.”</li>
+      <li>Scan to pay: goodchange.app/donate/grass-ax</li>
       <li>Count the bag with Event Captain at strike.</li>
     </ul>
     <p class="foot">SEP 17 · SHERWOOD</p>
   </article>
+  <div class="sheet-tools">
+    <button type="button" data-download-jpg="#waterSellerCard" data-filename="ggs-drinks-seller-card">Download JPG</button>
+  </div>
 </div>
 <script src="/js/crew-nav.js?v=vol1"></script>
 <script src="/js/night-photos.js?v=hello1"></script>
 <script src="/signs/art.js?v=stream1"></script>
-<script src="/signs/download-jpg.js?v=3"></script>
+<script src="/signs/download-jpg.js?v=4"></script>
 </body>
 </html>
