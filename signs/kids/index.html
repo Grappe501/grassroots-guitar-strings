@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="/css/kelly-brand.css">
 <link rel="stylesheet" href="/signs/signs.css">
 <link rel="stylesheet" href="/css/contrast.css">
+<style>
+  .sheet-tools{display:flex;justify-content:center;margin:.55rem 0 1.1rem}
+  .sheet-tools button{border:0;border-radius:999px;padding:.75rem 1.15rem;min-height:44px;background:#ca913d;color:#12124a;font:inherit;font-weight:900;cursor:pointer}
+  @media print{.sheet-tools{display:none!important}}
+</style>
 </head>
 <body>
 <div class="bar">
@@ -15,11 +20,11 @@
   <span>
     <span data-crew-nav></span>
     <button type="button" onclick="print()">Print signs</button>
-    <button type="button" data-download-jpg=".sign" data-filename="ggs-little-pickers">Download JPG</button>
+    <button type="button" data-download-jpg="#kidsSignA, #kidsSignB" data-filename="ggs-little-pickers">Download JPG</button>
   </span>
 </div>
 <div class="sheet">
-  <article class="sign">
+  <article class="sign" id="kidsSignA">
     <p class="kicker">KELLY GRAPPE</p>
     <p class="show">GRASSROOTS<br>&amp; GUITAR STRINGS</p>
     <hr class="rule">
@@ -27,10 +32,16 @@
     <p class="price">$5</p>
     <p class="note">WITH AN ADULT</p>
     <p class="note">Kids come in with a paying adult and stay for the music.</p>
+    <p class="note">Scan to pay on GoodChange.</p>
+    <img class="qr qr--pay" src="https://quickchart.io/qr?text=https%3A%2F%2Fgoodchange.app%2Fdonate%2Fcommi-h8&amp;size=300&amp;margin=1" alt="QR code to GoodChange donate">
+    <p class="note">goodchange.app/donate/commi-h8</p>
     <p class="foot">SEP 17 · SHERWOOD</p>
     <p class="fine">Paid for by The Committee to Elect Kelly Grappe</p>
   </article>
-  <article class="sign">
+  <div class="sheet-tools">
+    <button type="button" data-download-jpg="#kidsSignA" data-filename="ggs-little-pickers">Download JPG</button>
+  </div>
+  <article class="sign" id="kidsSignB">
     <p class="kicker">KELLY GRAPPE</p>
     <p class="show">GRASSROOTS<br>&amp; GUITAR STRINGS</p>
     <hr class="rule">
@@ -38,13 +49,19 @@
     <p class="price">$5</p>
     <p class="note">WITH AN ADULT</p>
     <p class="note">Kids come in with a paying adult and stay for the music.</p>
+    <p class="note">Scan to pay on GoodChange.</p>
+    <img class="qr qr--pay" src="https://quickchart.io/qr?text=https%3A%2F%2Fgoodchange.app%2Fdonate%2Fcommi-h8&amp;size=300&amp;margin=1" alt="QR code to GoodChange donate">
+    <p class="note">goodchange.app/donate/commi-h8</p>
     <p class="foot">SEP 17 · SHERWOOD</p>
     <p class="fine">Paid for by The Committee to Elect Kelly Grappe</p>
   </article>
+  <div class="sheet-tools">
+    <button type="button" data-download-jpg="#kidsSignB" data-filename="ggs-little-pickers">Download JPG</button>
+  </div>
 </div>
 <script src="/js/crew-nav.js?v=vol1"></script>
 <script src="/js/night-photos.js?v=hello1"></script>
 <script src="/signs/art.js?v=stream1"></script>
-<script src="/signs/download-jpg.js?v=3"></script>
+<script src="/signs/download-jpg.js?v=4"></script>
 </body>
 </html>
