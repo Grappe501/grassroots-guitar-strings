@@ -57,9 +57,9 @@
         return '<section class="packet-page">'+body+'</section>';
       }).join("");
       w.document.open();
-      w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Grassroots & Guitar Strings — All Signs</title><base href="'+location.origin+'/"><link rel="stylesheet" href="/css/kelly-brand.css"><link rel="stylesheet" href="/signs/signs.css"><style>@page{size:letter;margin:0}.packet-page{break-after:page;page-break-after:always;min-height:10.5in}.packet-page:last-child{break-after:auto;page-break-after:auto}@media print{.bar,.voucher-tools{display:none!important}}</style></head><body>'+bodies+'</body></html>');
+      w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Grassroots & Guitar Strings — All Signs</title><base href="'+location.origin+'/"><link rel="stylesheet" href="/css/kelly-brand.css"><link rel="stylesheet" href="/signs/signs.css"><link rel="stylesheet" href="/signs/nametags/nametags.css"><style>@page{size:letter;margin:0}.packet-page{break-after:page;page-break-after:always;min-height:10.5in}.packet-page:last-child{break-after:auto;page-break-after:auto}@media print{.bar,.voucher-tools{display:none!important}}</style></head><body>'+bodies+'<script src="/js/people-directory.js?v=packet1"><\/script><script src="/signs/nametags/nametags.js?v=packet1"><\/script></body></html>');
       w.document.close();
-      setTimeout(function(){w.focus();w.print();},900);
+      setTimeout(function(){w.focus();w.print();},1200);
     }catch(e){
       alert("Could not build the packet. Allow pop-ups for this site and try again.");
     }finally{
